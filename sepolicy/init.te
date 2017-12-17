@@ -1,0 +1,2 @@
+#This is in Android 8.0, but not 8.1
+domain_trans(init, rootfs, adbd)
