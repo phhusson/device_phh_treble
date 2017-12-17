@@ -11,3 +11,5 @@ BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/phh/treble/sepolicy
 DEVICE_PACKAGE_OVERLAYS += device/phh/treble/overlay
 
 $(call inherit-product, vendor/hardware_overlay/overlay.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
