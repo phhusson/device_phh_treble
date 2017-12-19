@@ -32,7 +32,12 @@ for part in a ab;do
 					extra_packages+=' phh-su'
 				fi
 
-				target="treble_${arch}_${part}${apps_suffix}${su_suffix}"
+				part_suffix='a'
+				if [ "$part" == 'ab' ];then
+					part_suffix='b'
+				fi
+
+				target="treble_${arch}_${part_suffix}${apps_suffix}${su_suffix}"
 
 				cat > ${target}.mk << EOF
 include build/make/target/product/treble_common.mk
