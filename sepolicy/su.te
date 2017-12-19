@@ -1,0 +1,47 @@
+type phhsu_daemon, domain;
+type phhsu_exec, exec_type, file_type;
+
+typeattribute phhsu_daemon coredomain;
+permissive phhsu_daemon;
+
+tmpfs_domain(phhsu_daemon);
+domain_auto_trans(init, phhsu_exec, phhsu_daemon);
+file_type_auto_trans(phhsu_daemon, device, phhsu_daemon);
+
+allow { appdomain shell } phhsu_daemon:unix_stream_socket { connectto write read };
+allow { appdomain shell } phhsu_daemon:sock_file { write read };
+allow { appdomain shell } phhsu_exec:file { getattr read open execute execute_no_trans };
+
+create_pty(shell)
+allowxperm shell devpts:chr_file ioctl TCSETSF;
+allowxperm untrusted_app untrusted_app_devpts:chr_file ioctl TCSETSF;
+
+allow servicemanager phhsu_daemon:dir { search read };
+allow servicemanager phhsu_daemon:file { open read };
+allow servicemanager phhsu_daemon:process { getattr };
+allow servicemanager phhsu_daemon:binder { call transfer };
+
+typeattribute phhsu_daemon mlstrustedobject;
+typeattribute phhsu_daemon mlstrustedsubject;
+
+allow shell su_exec:file getattr;
+typeattribute su mlstrustedsubject;
+
+allow phhsu_daemon { system_api_service app_api_service system_server_service }:service_manager find;
+
+allow system_server phhsu_daemon:fd use;
+allow system_server phhsu_daemon:binder { call };
+
+# Add su to various domains
+net_domain(su)
+
+# grant su access to vndbinder
+vndbinder_use(su)
+
+allow phhsu_daemon toolbox_exec:file { read open execute_no_trans };
+allow phhsu_daemon untrusted_app_devpts:chr_file { getattr };
+allow phhsu_daemon zygote_exec:file { execute read open execute_no_trans getattr };
+
+allow phhsu_daemon phhsu_daemon:capability { setuid setgid dac_override chown};
+
+allow appdomain phhsu_daemon:dir { search };
