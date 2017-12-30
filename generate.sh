@@ -40,6 +40,7 @@ for part in a ab;do
 				target="treble_${arch}_${part_suffix}${apps_suffix}${su_suffix}"
 
 				cat > ${target}.mk << EOF
+\$(call inherit-product, device/phh/treble/base-pre.mk)
 include build/make/target/product/treble_common.mk
 \$(call inherit-product, device/phh/treble/base.mk)
 $apps_script
