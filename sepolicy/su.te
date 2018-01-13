@@ -29,9 +29,10 @@ typeattribute su mlstrustedsubject;
 
 allow phhsu_daemon { system_api_service app_api_service system_server_service }:service_manager find;
 
-allow system_server phhsu_daemon:fd use;
-allow system_server phhsu_daemon:binder { call transfer };
-allow system_server shell_devpts:chr_file { read write };
+allow { system_server halclientdomain coredomain -installd } phhsu_daemon:fd use;
+allow { system_server halclientdomain coredomain -installd } phhsu_daemon:binder { call transfer };
+allow { system_server halclientdomain coredomain -installd } phhsu_daemon:fifo_file { read write };
+allow { system_server halclientdomain coredomain -installd } shell_devpts:chr_file { read write };
 
 # Add su to various domains
 net_domain(su)
@@ -46,3 +47,10 @@ allow phhsu_daemon zygote_exec:file { execute read open execute_no_trans getattr
 allow phhsu_daemon phhsu_daemon:capability { setuid setgid dac_override chown};
 
 allow appdomain phhsu_daemon:dir { search };
+allow domain phhsu_daemon:process { sigchld };
+
+allow hwservicemanager phhsu_daemon:process { getattr };
+allow hwservicemanager phhsu_daemon:dir { search };
+allow hwservicemanager phhsu_daemon:file { open read };
+
+allow phhsu_daemon { property_type -serialno_prop -firstboot_prop }:file { read };
