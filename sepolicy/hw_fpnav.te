@@ -1,0 +1,55 @@
+#SELinux policy for the Huawei fingerprint daemon
+type hw_fpnav, domain;
+type hw_fpnav_exec, exec_type, file_type;
+
+typeattribute hw_fpnav coredomain;
+
+#We need both app_domain to execute app_process, and access to /dev/input
+#This is not possible in current SELinux rules
+#So set to permissive
+#It is possible to fix, but it requires to have two separate contexts, one for app_process calls
+#One for reading /dev/input
+#app_domain(hw_fpnav);
+permissive hw_fpnav;
+
+tmpfs_domain(hw_fpnav);
+domain_auto_trans(init, hw_fpnav_exec, hw_fpnav);
+
+
+binder_use(hw_fpnav);
+hwbinder_use(hw_fpnav);
+
+get_prop(hw_fpnav, hwservicemanager_prop)
+
+allow hw_fpnav hwservicemanager:hwservice_manager { list };
+#We just want access to hw_ext_fingerprint, but this type is not known in the framework
+#So just ask for all hw services...
+allow hw_fpnav { hwservice_manager_type -hidl_base_hwservice -default_android_hwservice }:hwservice_manager { find };
+
+allow hw_fpnav zygote_exec:file rx_file_perms;
+allow hw_fpnav shell_exec:file rx_file_perms;
+allow hw_fpnav system_file:file rx_file_perms;
+
+allow hw_fpnav ashmem_device:chr_file execute;
+
+allow hw_fpnav hw_fpnav:process { share execmem setexec setcurrent };
+
+allow hw_fpnav input_device:dir r_dir_perms;
+allow hw_fpnav input_device:chr_file rw_file_perms;
+
+allow hw_fpnav dalvikcache_data_file:dir { search getattr };
+allow hw_fpnav dalvikcache_data_file:file r_file_perms;
+allow hw_fpnav dalvikcache_data_file:lnk_file r_file_perms;
+
+#dontaudit hw_fpnav dalvikcache_data_file:file rwx_file_perms;
+#dontaudit hw_fpnav dalvikcache_data_file:dir rw_dir_perms;
+#dontaudit hw_fpnav service_manager_type:service_manager find;
+#dontaudit hw_fpnav hidl_base_hwservice:hwservice_manager find;
+
+binder_call(hw_fpnav, binderservicedomain);
+binder_call(hw_fpnav, halserverdomain);
+allow hw_fpnav devpts:chr_file { getattr read write };
+
+allow hw_fpnav statusbar_service:service_manager find;
+allow hw_fpnav input_service:service_manager find;
+allow system_server hw_fpnav:fd use;

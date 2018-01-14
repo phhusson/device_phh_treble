@@ -1,1 +1,2 @@
 /system/bin/phh-su                   u:object_r:phhsu_exec:s0
+/system/bin/hw-fpnav                 u:object_r:hw_fpnav_exec:s0
