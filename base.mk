@@ -20,4 +20,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 #from /system/etc/prop.default, then /vendor/build.prop, then /system/build.prop
 #So we need to set our props in prop.default
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-	ro.build.version.sdk=$(PLATFORM_SDK_VERSION)
+	ro.build.version.sdk=$(PLATFORM_SDK_VERSION) \
+	ro.build.version.codename=$(PLATFORM_VERSION_CODENAME) \
+	ro.build.version.all_codenames=$(PLATFORM_VERSION_ALL_CODENAMES) \
+	ro.build.fingerprint=$(BUILD_FINGERPRINT)
