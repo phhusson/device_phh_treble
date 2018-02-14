@@ -23,4 +23,12 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 	ro.build.version.sdk=$(PLATFORM_SDK_VERSION) \
 	ro.build.version.codename=$(PLATFORM_VERSION_CODENAME) \
 	ro.build.version.all_codenames=$(PLATFORM_VERSION_ALL_CODENAMES) \
-	ro.build.fingerprint=$(BUILD_FINGERPRINT)
+	ro.build.fingerprint=$(BUILD_FINGERPRINT) \
+	ro.build.version.release=$(PLATFORM_VERSION)
+
+#VNDK config files
+PRODUCT_COPY_FILES += \
+	device/phh/treble/vndk.rc:system/etc/init/vndk.rc \
+	device/phh/treble/ld.config.26.txt:system/etc/ld.config.26.txt \
+	device/phh/treble/ld.config.27.txt:system/etc/ld.config.27.txt \
+

@@ -1,0 +1,19 @@
+on property:ro.vendor.vndk.version=26.0.0
+	export LD_CONFIG_FILE /system/etc/ld.config.26.txt
+
+on property:ro.vendor.vndk.version=26.1.0
+	export LD_CONFIG_FILE /system/etc/ld.config.26.txt
+
+on property:ro.vendor.vndk.version=27.0.0
+	export LD_CONFIG_FILE /system/etc/ld.config.27.txt
+
+on property:ro.vendor.vndk.version=27.1.0
+	export LD_CONFIG_FILE /system/etc/ld.config.27.txt
+
+on property:ro.vendor.product.device=mido
+	export LD_CONFIG_FILE /system/etc/ld.config.27.txt
+
+#Both 27 and 26 exist for this device
+#Assume 27
+on property:ro.vendor.product.device=sailfish
+	export LD_CONFIG_FILE /system/etc/ld.config.27.txt
