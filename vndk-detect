@@ -1,0 +1,10 @@
+#!/system/bin/sh
+
+grep -oE 'init_[0-9_]+' /vendor/etc/selinux/nonplat_sepolicy.cil | \
+	uniq | \
+	sort -n | \
+	head -n 1 | \
+	sed -E 's/.*init_([0-9]+).*/\1/g' | \
+while read version;do
+	setprop persist.sys.vndk $version
+done

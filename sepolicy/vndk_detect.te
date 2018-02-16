@@ -1,0 +1,11 @@
+type vndk_detect, coredomain, domain;
+type vndk_detect_exec, exec_type, file_type;
+
+init_daemon_domain(vndk_detect);
+allow vndk_detect sepolicy_file:file r_file_perms;
+set_prop(vndk_detect,system_prop);
+
+allow vndk_detect shell_exec:file rx_file_perms;
+allow vndk_detect toolbox_exec:file rx_file_perms;
+#/system/bin/grep
+allow vndk_detect system_file:file rx_file_perms;

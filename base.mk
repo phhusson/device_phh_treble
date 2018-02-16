@@ -28,6 +28,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 #VNDK config files
 PRODUCT_COPY_FILES += \
+	device/phh/treble/vndk-detect:system/bin/vndk-detect \
 	device/phh/treble/vndk.rc:system/etc/init/vndk.rc \
 	device/phh/treble/ld.config.26.txt:system/etc/ld.config.26.txt \
 	device/phh/treble/ld.config.27.txt:system/etc/ld.config.27.txt \
