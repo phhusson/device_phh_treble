@@ -9,3 +9,8 @@ allow vndk_detect shell_exec:file rx_file_perms;
 allow vndk_detect toolbox_exec:file rx_file_perms;
 #/system/bin/grep
 allow vndk_detect system_file:file rx_file_perms;
+
+#mount -o bind /system/bin/adbd /sbin/adbd
+allow vndk_detect adbd_exec:file { getattr };
+allow vndk_detect rootfs:file { mounton getattr };
+allow vndk_detect self:capability { sys_admin };

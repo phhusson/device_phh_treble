@@ -8,3 +8,5 @@ grep -oE 'init_[0-9_]+' /vendor/etc/selinux/nonplat_sepolicy.cil | \
 while read version;do
 	setprop persist.sys.vndk $version
 done
+
+mount -o bind /system/bin/adbd /sbin/adbd
