@@ -25,6 +25,11 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 	ro.build.version.all_codenames=$(PLATFORM_VERSION_ALL_CODENAMES) \
 	ro.build.version.release=$(PLATFORM_VERSION)
 
+ifdef ANDROID_PRODUCT_OUT
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+	ro.build.fingerprint=$(shell cat $(ANDROID_PRODUCT_OUT)/build_fingerprint.txt)
+endif
+
 #VNDK config files
 PRODUCT_COPY_FILES += \
 	device/phh/treble/vndk-detect:system/bin/vndk-detect \
