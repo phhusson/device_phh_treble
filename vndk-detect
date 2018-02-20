@@ -10,3 +10,6 @@ while read version;do
 done
 
 mount -o bind /system/bin/adbd /sbin/adbd
+if getprop ro.hardware |grep -q kirin970;then
+	setprop persist.sys.bt_acl_bypass true
+fi
