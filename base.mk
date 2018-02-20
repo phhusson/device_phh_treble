@@ -32,3 +32,9 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/ld.config.26.txt:system/etc/ld.config.26.txt \
 	device/phh/treble/ld.config.27.txt:system/etc/ld.config.27.txt \
 
+
+# NFC:
+#   Provide default libnfc-nci.conf file for devices that does not have one in
+#   vendor/etc
+PRODUCT_COPY_FILES += \
+	device/phh/treble/nfc/libnfc-nci.conf:system/etc/libnfc-nci.conf
