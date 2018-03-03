@@ -1,5 +1,10 @@
 #!/bin/bash
 
+rom_script=''
+if [ -n "$1" ];then
+	rom_script='$(call inherit-product, device/phh/treble/'$1'.mk)'
+fi
+
 echo 'PRODUCT_MAKEFILES := \' > AndroidProducts.mk
 
 for part in a ab;do
@@ -44,6 +49,7 @@ for part in a ab;do
 include build/make/target/product/treble_common.mk
 \$(call inherit-product, device/phh/treble/base.mk)
 $apps_script
+$rom_script
 
 PRODUCT_NAME := $target
 PRODUCT_DEVICE := phhgsi_arm64_$part
