@@ -43,3 +43,6 @@ PRODUCT_COPY_FILES += \
 #   vendor/etc
 PRODUCT_COPY_FILES += \
 	device/phh/treble/nfc/libnfc-nci.conf:system/etc/libnfc-nci.conf
+
+PRODUCT_PACKAGES += \
+	treble-environ-rc
