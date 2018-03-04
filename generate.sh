@@ -9,7 +9,7 @@ echo 'PRODUCT_MAKEFILES := \' > AndroidProducts.mk
 
 for part in a ab;do
 	for apps in vanilla gapps foss;do
-		for arch in arm64;do
+		for arch in arm64 arm;do
 			for su in yes no;do
 				apps_suffix=""
 				apps_script=""
@@ -52,7 +52,7 @@ $apps_script
 $rom_script
 
 PRODUCT_NAME := $target
-PRODUCT_DEVICE := phhgsi_arm64_$part
+PRODUCT_DEVICE := phhgsi_${arch}_$part
 PRODUCT_BRAND := Android
 PRODUCT_MODEL := Phh-Treble $apps_name
 
