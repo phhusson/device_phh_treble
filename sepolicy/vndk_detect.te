@@ -11,6 +11,10 @@ allow vndk_detect toolbox_exec:file rx_file_perms;
 allow vndk_detect system_file:file rx_file_perms;
 
 #mount -o bind /system/bin/adbd /sbin/adbd
-allow vndk_detect adbd_exec:file { getattr };
+allow vndk_detect adbd_exec:file { getattr read };
 allow vndk_detect rootfs:file { mounton getattr };
 allow vndk_detect self:capability { sys_admin };
+
+#mount -o bind /system/etc/usb_audio_policy_configuration.xml /vendor/etc/usb_audio_policy_configuration.xml
+allow init vendor_configs_file:file { getattr mounton };
+

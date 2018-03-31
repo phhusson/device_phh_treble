@@ -1,3 +1,4 @@
 on post-fs
 	exec - root -- /system/bin/vndk-detect
+	mount none /system/etc/usb_audio_policy_configuration.xml /vendor/etc/usb_audio_policy_configuration.xml bind
 	export LD_CONFIG_FILE /system/etc/ld.config.${persist.sys.vndk}.txt

@@ -33,6 +33,9 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/ld.config.26.txt:system/etc/ld.config.26.txt \
 	device/phh/treble/ld.config.27.txt:system/etc/ld.config.27.txt \
 
+#USB Audio
+PRODUCT_COPY_FILES += \
+	frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:system/etc/usb_audio_policy_configuration.xml
 
 # NFC:
 #   Provide default libnfc-nci.conf file for devices that does not have one in
