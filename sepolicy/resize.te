@@ -1,0 +1,6 @@
+allow update_engine { toolbox_exec system_file }:file rx_file_perms;
+allow update_engine labeledfs:filesystem remount;
+
+allow update_engine sysfs_fs_ext4_features:dir r_dir_perms;
+allow update_engine sysfs_fs_ext4_features:file r_file_perms;
+allow update_engine self:capability { sys_resource };
