@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<carrier_config_list>
+    <carrier_config>
+        <!-- Flag indicating if the phone is a world phone -->
+        <boolean name="world_phone_bool" value="true" />
+        <!-- Flag indicating if dtmf tone type is enabled -->
+        <bool name="dtmf_type_enabled_bool">true</bool>
+        <!-- Show cdma auto network mode in (global) roaming -->
+        <boolean name="show_cdma_choices_bool" value="true" />
+    </carrier_config>
+</carrier_config_list>
