@@ -44,7 +44,8 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/nfc/libnfc-nci.conf:system/etc/libnfc-nci.conf
 
 PRODUCT_COPY_FILES += \
-	device/phh/treble/resize-system.sh:system/bin/resize-system.sh
+	device/phh/treble/rw-system.sh:system/bin/rw-system.sh \
+	device/phh/treble/fixSPL/getSPL.arm:system/bin/getSPL
 
 PRODUCT_PACKAGES += \
 	treble-environ-rc
