@@ -9,8 +9,11 @@ fi
 img="$(find /dev/block -type l |grep by-name |grep /kernel$(getprop ro.boot.slot_suffix) |head -n 1)"
 [ -z "$img" ] && img="$(find /dev/block -type l |grep by-name |grep /boot$(getprop ro.boot.slot_suffix) |head -n 1)"
 
-mount -o remount,rw /system
-resize2fs $(grep ' /system ' /proc/mounts |cut -d ' ' -f 1)
+if mount -o remount,rw /system;then
+	resize2fs $(grep ' /system ' /proc/mounts |cut -d ' ' -f 1)
+elif mount -o remount,rw /;then
+	resize2fs /dev/root
+fi
 if [ -n "$img" -a ! -f /system/rewrite-spl-done ];then
 	done=1
 	v="$(getSPL $img android)"
@@ -33,3 +36,4 @@ if [ -n "$img" -a ! -f /system/rewrite-spl-done ];then
 	fi
 fi
 mount -o remount,ro /system
+mount -o remount,ro /
