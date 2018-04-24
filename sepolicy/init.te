@@ -1,2 +1,6 @@
 #This is in Android 8.0, but not 8.1
 domain_trans(init, rootfs, adbd)
+
+#This is used on Huawei devices to f2fs data partition
+allow init userdata_block_device:blk_file relabelto;
+allow init userdata_block_device:lnk_file relabelto;
