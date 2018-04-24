@@ -24,6 +24,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 	ro.build.version.codename=$(PLATFORM_VERSION_CODENAME) \
 	ro.build.version.all_codenames=$(PLATFORM_VERSION_ALL_CODENAMES) \
 	ro.build.version.release=$(PLATFORM_VERSION) \
+	ro.build.version.security_patch=$(PLATFORM_SECURITY_PATCH) \
 	ro.adb.secure=0
 
 #VNDK config files
