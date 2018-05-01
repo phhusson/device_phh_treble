@@ -34,11 +34,9 @@ allow system_server phhsu_daemon:binder { call transfer };
 allow system_server shell_devpts:chr_file { read write };
 
 # Add su to various domains
-net_domain(su)
+net_domain(phhsu_daemon)
 
-# grant su access to vndbinder
-vndbinder_use(su)
-hwbinder_use(su)
+hwbinder_use(phhsu_daemon)
 
 allow phhsu_daemon toolbox_exec:file { read open execute_no_trans };
 allow phhsu_daemon untrusted_app_devpts:chr_file { getattr };
