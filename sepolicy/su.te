@@ -38,6 +38,7 @@ net_domain(su)
 
 # grant su access to vndbinder
 vndbinder_use(su)
+hwbinder_use(su)
 
 allow phhsu_daemon toolbox_exec:file { read open execute_no_trans };
 allow phhsu_daemon untrusted_app_devpts:chr_file { getattr };
