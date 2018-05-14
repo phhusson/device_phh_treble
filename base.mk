@@ -48,5 +48,8 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/rw-system.sh:system/bin/rw-system.sh \
 	device/phh/treble/fixSPL/getSPL.arm:system/bin/getSPL
 
+PRODUCT_COPY_FILES += \
+	device/phh/treble/empty:system/phh/empty
+
 PRODUCT_PACKAGES += \
 	treble-environ-rc
