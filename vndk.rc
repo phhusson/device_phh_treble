@@ -3,3 +3,9 @@ on post-fs
 	exec - root -- /system/bin/rw-system.sh
 	mount none /system/etc/usb_audio_policy_configuration.xml /vendor/etc/usb_audio_policy_configuration.xml bind
 	export LD_CONFIG_FILE /system/etc/ld.config.${persist.sys.vndk}.txt
+
+service phh_service_cleaner /system/bin/service-cleaner.sh
+    disabled
+
+on property:sys.boot_completed=1
+    start phh_service_cleaner

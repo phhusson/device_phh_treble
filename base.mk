@@ -49,7 +49,8 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/fixSPL/getSPL.arm:system/bin/getSPL
 
 PRODUCT_COPY_FILES += \
-	device/phh/treble/empty:system/phh/empty
+	device/phh/treble/empty:system/phh/empty \
+	device/phh/treble/service-cleaner.sh:system/bin/service-cleaner.sh
 
 PRODUCT_PACKAGES += \
 	treble-environ-rc
