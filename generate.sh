@@ -15,6 +15,7 @@ for part in a ab;do
 				apps_script=""
 				apps_name=""
 				extra_packages=""
+                vndk="vndk.mk"
 				if [ "$apps" == "gapps" ];then
 					apps_suffix="g"
 					apps_script='$(call inherit-product, device/phh/treble/gapps.mk)'
@@ -35,6 +36,9 @@ for part in a ab;do
 					apps_script=''
 					apps_name="vanilla"
 				fi
+                if [ "$arch" == "arm" ];then
+                    vndk="vndk32.mk"
+                fi
 
 				su_suffix='N'
 				if [ "$su" == "yes" ];then
@@ -52,6 +56,7 @@ for part in a ab;do
 				cat > ${target}.mk << EOF
 \$(call inherit-product, device/phh/treble/base-pre.mk)
 include build/make/target/product/treble_common.mk
+\$(call inherit-product, vendor/vndk/${vndk})
 \$(call inherit-product, device/phh/treble/base.mk)
 $apps_script
 $rom_script
