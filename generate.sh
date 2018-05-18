@@ -24,7 +24,7 @@ for part in a ab;do
 				if [ "$apps" == "gapps-go" ];then
 					apps_suffix="o"
 					apps_script='$(call inherit-product, device/phh/treble/gapps-go.mk)'
-					app_name="Go"
+					apps_name="Go"
 				fi
 				if [ "$apps" == "foss" ];then
 					apps_suffix="f"
