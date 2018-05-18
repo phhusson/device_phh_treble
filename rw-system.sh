@@ -49,6 +49,10 @@ if grep vendor.huawei.hardware.biometrics.fingerprint /vendor/manifest.xml;then
     mount -o bind system/phh/huawei/fingerprint.kl /vendor/usr/keylayout/fingerprint.kl
 fi
 
+if ! grep android.hardware.biometrics.fingerprint /vendor/manifest.xml;then
+    mount -o bind system/phh/empty /system/etc/permissions/android.hardware.fingerprint.xml
+fi
+
 #Disable trustkernel keystore, because it doesn't work for the moment
 #Found on MTK devices
 mount -o bind /system/phh/empty /vendor/lib/hw/keystore.trustkernel.so || true
