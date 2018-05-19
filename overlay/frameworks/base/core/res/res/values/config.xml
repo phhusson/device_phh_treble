@@ -13,4 +13,6 @@
 	<string-array translatable="false" name="config_tether_bluetooth_regexs">
 		<item>"bt-pan"</item>
 	</string-array>
+
+	<bool name="config_enableAutoPowerModes">true</bool>
 </resources>
