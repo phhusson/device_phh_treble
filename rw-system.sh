@@ -3,35 +3,36 @@
 set -e
 
 fixSPL() {
+    if [ "$(getprop ro.product.cpu.abi)" == "armeabi-v7a" ];then
+	    setprop ro.keymaster.mod 'AOSP on ARM32'
+    else
+	    setprop ro.keymaster.mod 'AOSP on ARM64'
+    fi
     img="$(find /dev/block -type l |grep by-name |grep /kernel$(getprop ro.boot.slot_suffix) |head -n 1)"
     [ -z "$img" ] && img="$(find /dev/block -type l |grep by-name |grep /boot$(getprop ro.boot.slot_suffix) |head -n 1)"
     if [ -n "$img" ];then
         #Rewrite SPL/Android version if needed
         Arelease="$(getSPL $img android)"
-        setprop ro.keymaster.xxx.release $Arelease
+        setprop ro.keymaster.xxx.release "$Arelease"
         setprop ro.keymaster.xxx.security_patch "$(getSPL $img spl)"
 
-        #Only Android 8.0 needs this
-        if ! echo "$Arelease" |grep -qF 8.0;then
-            return 0
-        fi
-
-        for f in /vendor/lib64/hw/android.hardware.keymaster@3.0-impl-qti.so /system/lib64/vndk-26/libsoftkeymasterdevice.so;do
+        for f in /vendor/lib64/hw/android.hardware.keymaster@3.0-impl-qti.so /system/lib64/vndk-26/libsoftkeymasterdevice.so /vendor/bin/teed;do
             [ ! -f $f ] && continue
+            ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
             b="$(basename "$f")"
 
-            mkdir -p /dev/phh/
-            cp $f /dev/phh/$b
-            sed -i -e 's/ro.build.version.release/ro.keymaster.xxx.release/g' -e 's/ro.build.version.security_patch/ro.keymaster.xxx.security_patch/g' /dev/phh/$b
-            if echo $f |grep vendor;then
-                chcon u:object_r:vendor_file:s0 /dev/phh/$b
-            else
-                chcon u:object_r:system_file:s0 /dev/phh/$b
-            fi
-            chmod 0644 /dev/phh/$b
-            mount -o bind /dev/phh/$b $f
+            mkdir -p /mnt/phh/
+            cp -a $f /mnt/phh/$b
+            sed -i \
+		    -e 's/ro.build.version.release/ro.keymaster.xxx.release/g' \
+		    -e 's/ro.build.version.security_patch/ro.keymaster.xxx.security_patch/g' \
+		    -e 's/ro.product.model/ro.keymaster.mod/g' \
+		    /mnt/phh/$b
+            chcon "$ctxt" /mnt/phh/$b
+            mount -o bind /mnt/phh/$b $f
         done
-        setprop ctl.restart keymaster-3-0
+        [ "$(getprop init.svc.keymaster-3-0)" == "running" ] && setprop ctl.restart keymaster-3-0
+        [ "$(getprop init.svc.teed)" == "running" ] && setprop ctl.restart teed
     fi
 }
 
@@ -56,8 +57,3 @@ fi
 if ! grep android.hardware.ir /vendor/manifest.xml;then
     mount -o bind system/phh/empty /system/etc/permissions/android.hardware.consumerir.xml
 fi
-
-#Disable trustkernel keystore, because it doesn't work for the moment
-#Found on MTK devices
-mount -o bind /system/phh/empty /vendor/lib/hw/keystore.trustkernel.so || true
-mount -o bind /system/phh/empty /vendor/lib64/hw/keystore.trustkernel.so || true
