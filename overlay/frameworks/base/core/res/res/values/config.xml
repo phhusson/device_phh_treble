@@ -15,4 +15,5 @@
 	</string-array>
 
 	<bool name="config_enableAutoPowerModes">true</bool>
+	<bool name="config_intrusiveNotificationLed">true</bool>
 </resources>
