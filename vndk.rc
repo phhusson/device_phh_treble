@@ -10,3 +10,6 @@ service phh_service_cleaner /system/bin/service-cleaner.sh
 
 on property:sys.boot_completed=1
     start phh_service_cleaner
+    write /sys/class/hw_power/charger/direct_charger/iin_thermal 4500
+    write /sys/class/hw_power/charger/charge_data/iin_thermal 2000
+
