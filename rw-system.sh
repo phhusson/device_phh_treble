@@ -41,12 +41,12 @@ fixSPL() {
 }
 
 if mount -o remount,rw /system;then
-	resize2fs $(grep ' /system ' /proc/mounts |cut -d ' ' -f 1)
+	resize2fs $(grep ' /system ' /proc/mounts |cut -d ' ' -f 1) || true
 elif mount -o remount,rw /;then
-	resize2fs /dev/root
+	resize2fs /dev/root || true
 fi
-mount -o remount,ro /system
-mount -o remount,ro /
+mount -o remount,ro /system || true
+mount -o remount,ro / || true
 
 fixSPL
 
