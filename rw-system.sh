@@ -31,8 +31,12 @@ fixSPL() {
             chcon "$ctxt" /mnt/phh/$b
             mount -o bind /mnt/phh/$b $f
         done
-        [ "$(getprop init.svc.keymaster-3-0)" == "running" ] && setprop ctl.restart keymaster-3-0
-        [ "$(getprop init.svc.teed)" == "running" ] && setprop ctl.restart teed
+        if [ "$(getprop init.svc.keymaster-3-0)" == "running" ];then
+		setprop ctl.restart keymaster-3-0
+	fi
+        if [ "$(getprop init.svc.teed)" == "running" ];then
+		setprop ctl.restart teed
+	fi
     fi
 }
 
