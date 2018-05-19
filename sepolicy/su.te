@@ -29,6 +29,7 @@ typeattribute su mlstrustedsubject;
 
 allow phhsu_daemon { system_api_service app_api_service system_server_service }:service_manager find;
 
+allow system_server phhsu_daemon:fifo_file { read write };
 allow system_server phhsu_daemon:fd use;
 allow system_server phhsu_daemon:binder { call transfer };
 allow system_server shell_devpts:chr_file { read write };
