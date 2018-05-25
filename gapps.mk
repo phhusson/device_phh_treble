@@ -1,3 +1,9 @@
+PRODUCT_COPY_FILES += \
+	device/phh/treble/empty-permission.xml:system/etc/permissions/com.google.android.camera2.xml \
+	device/phh/treble/empty-permission.xml:system/etc/permissions/com.google.android.camera.experimental2015.xml \
+	device/phh/treble/empty-permission.xml:system/etc/permissions/com.google.android.camera.experimental2016.xml \
+	device/phh/treble/empty-permission.xml:system/etc/permissions/com.google.android.camera.experimental2017.xml
+
 GAPPS_VARIANT := nano
 DONT_DEXPREOPT_PREBUILTS := true
 WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
