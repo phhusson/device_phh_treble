@@ -19,3 +19,8 @@ if getprop ro.vendor.build.fingerprint |grep -qiE '(huawei|honor|hi3660)' || [ -
 	FOUND_HUAWEI=1
 	setprop persist.sys.overlay.huawei.backlight true
 fi
+
+if getprop ro.hardware |grep -qiE qcom;then
+	FOUND_QCOM=1
+	setprop persist.sys.overlay.devinputjack true
+fi
