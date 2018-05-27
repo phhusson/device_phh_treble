@@ -17,7 +17,7 @@ fi
 
 if getprop ro.vendor.build.fingerprint |grep -qiE '(huawei|honor|hi3660)' || [ -n "$FOUND_HUAWEI" ];then
 	FOUND_HUAWEI=1
-	setprop persist.sys.overlay.huawei.backlight true
+	setprop persist.sys.overlay.huawei true
 fi
 
 if [ -n "$FOUND_HUAWEI" ];then
