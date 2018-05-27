@@ -10,7 +10,7 @@ while read version;do
 done
 
 mount -o bind /system/bin/adbd /sbin/adbd
-if ( getprop ro.hardware | grep -q kirin970 ) || ( getprop ro.hardware | grep -q hi6250 );then
+if ( getprop ro.hardware | grep -qE '(kirin970|hi3660|hi6250|hi3670)' );then
 	FOUND_HUAWEI=1
 	setprop persist.sys.bt_acl_bypass true
 fi
@@ -18,6 +18,10 @@ fi
 if getprop ro.vendor.build.fingerprint |grep -qiE '(huawei|honor|hi3660)' || [ -n "$FOUND_HUAWEI" ];then
 	FOUND_HUAWEI=1
 	setprop persist.sys.overlay.huawei.backlight true
+fi
+
+if [ -n "$FOUND_HUAWEI" ];then
+	setprop debug.hwui.profile true
 fi
 
 if getprop ro.hardware |grep -qiE qcom;then
