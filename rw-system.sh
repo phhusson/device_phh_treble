@@ -16,7 +16,7 @@ fixSPL() {
         setprop ro.keymaster.xxx.release "$Arelease"
         setprop ro.keymaster.xxx.security_patch "$(getSPL $img spl)"
 
-        for f in /vendor/lib64/hw/android.hardware.keymaster@3.0-impl-qti.so /system/lib64/vndk-26/libsoftkeymasterdevice.so /vendor/bin/teed /system/lib64/vndk/libsoftkeymasterdevice.so /system/lib/vndk/libsoftkeymasterdevice.so;do
+        for f in /vendor/lib64/hw/android.hardware.keymaster@3.0-impl-qti.so /vendor/lib/hw/android.hardware.keymaster@3.0-impl-qti.so /system/lib64/vndk-26/libsoftkeymasterdevice.so /vendor/bin/teed /system/lib64/vndk/libsoftkeymasterdevice.so /system/lib/vndk/libsoftkeymasterdevice.so /system/lib/vndk-26/libsoftkeymasterdevice.so;do
             [ ! -f $f ] && continue
             ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
             b="$(echo "$f"|tr / _)"
