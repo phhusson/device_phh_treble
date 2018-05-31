@@ -55,4 +55,5 @@ PRODUCT_PACKAGES += \
 	treble-environ-rc
 
 PRODUCT_PACKAGRES += \
-	bootctl
+	bootctl \
+	vintf
