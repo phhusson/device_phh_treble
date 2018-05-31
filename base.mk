@@ -53,3 +53,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
 	treble-environ-rc
+
+PRODUCT_PACKAGRES += \
+	bootctl
