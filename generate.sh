@@ -37,7 +37,7 @@ for part in a ab;do
 					apps_name="vanilla"
 				fi
                 if [ "$arch" == "arm" ];then
-                    vndk="vndk32.mk"
+                    vndk="vndk-binder32.mk"
                 fi
 
 				su_suffix='N'
