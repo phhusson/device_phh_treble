@@ -1,2 +1,1 @@
 allow priv_app overlay_service:service_manager find;
-allow system_app self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
