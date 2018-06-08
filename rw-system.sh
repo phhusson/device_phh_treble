@@ -8,8 +8,8 @@ fixSPL() {
     else
 	    setprop ro.keymaster.mod 'AOSP on ARM64'
     fi
-    img="$(find /dev/block -type l |grep by-name |grep /kernel$(getprop ro.boot.slot_suffix) |head -n 1)"
-    [ -z "$img" ] && img="$(find /dev/block -type l |grep by-name |grep /boot$(getprop ro.boot.slot_suffix) |head -n 1)"
+    img="$(find /dev/block -type l -name kernel$(getprop ro.boot.slot_suffix) |grep by-name |head -n 1)"
+    [ -z "$img" ] && img="$(find /dev/block -type l -name boot$(getprop ro.boot.slot_suffix) |grep by-name |head -n 1)"
     if [ -n "$img" ];then
         #Rewrite SPL/Android version if needed
         Arelease="$(getSPL $img android)"
