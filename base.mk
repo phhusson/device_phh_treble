@@ -43,6 +43,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	device/phh/treble/nfc/libnfc-nci.conf:system/etc/libnfc-nci.conf
 
+# LineageOS build may need this to make NFC work
+PRODUCT_PACKAGES += \
+        NfcNci  
+
 PRODUCT_COPY_FILES += \
 	device/phh/treble/rw-system.sh:system/bin/rw-system.sh \
 	device/phh/treble/fixSPL/getSPL.arm:system/bin/getSPL
