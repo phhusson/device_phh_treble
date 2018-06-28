@@ -1,3 +1,11 @@
 #me.phh.treble.qti.audio is system-signed
 allow system_app hal_telephony_hwservice:hwservice_manager { find };
 allow { rild system_app } { rild system_app }:binder { call transfer };
+
+#Pixel 1
+type vnd_qcril_audio_hwservice, hwservice_manager_type;
+allow system_app vnd_qcril_audio_hwservice:hwservice_manager { find };
+
+#Pixel 2
+type vnd_qcrilhook_hwservice, hwservice_manager_type;
+allow system_app vnd_qcrilhook_hwservice:hwservice_manager { find };
