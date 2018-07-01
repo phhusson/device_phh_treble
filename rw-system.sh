@@ -74,3 +74,7 @@ fi
 if getprop ro.vendor.build.fingerprint |grep full_k50v1_64;then
 	setprop persist.sys.overlay.nightmode false
 fi
+
+if getprop ro.wlan.mtk.wifi.5g |grep -qF 1;then
+	setprop persist.sys.overlay.wifi5g true
+fi
