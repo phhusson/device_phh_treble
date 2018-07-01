@@ -71,10 +71,10 @@ if [ "$(getprop ro.vendor.product.device)" == "OnePlus6" ];then
 	resize2fs /dev/block/platform/soc/1d84000.ufshc/by-name/userdata
 fi
 
-if getprop ro.vendor.build.fingerprint |grep full_k50v1_64;then
+if getprop ro.vendor.build.fingerprint |grep -q full_k50v1_64 || getprop ro.hardware |grep -q mt6580 ;then
 	setprop persist.sys.overlay.nightmode false
 fi
 
-if getprop ro.wlan.mtk.wifi.5g |grep -qF 1;then
+if getprop ro.wlan.mtk.wifi.5g |grep -q 1;then
 	setprop persist.sys.overlay.wifi5g true
 fi
