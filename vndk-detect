@@ -28,3 +28,11 @@ if getprop ro.hardware |grep -qiE qcom;then
 	FOUND_QCOM=1
 	setprop persist.sys.overlay.devinputjack true
 fi
+
+if ( getprop ro.hardware | grep -qE '(hi6250)' );then
+	setprop QC.HI6250 1
+fi
+
+if ( getprop ro.hardware | grep -qE '(hi3660|hi3670|kirin970)' );then
+	setprop QC.HI36x0 1
+fi
