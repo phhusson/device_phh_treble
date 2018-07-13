@@ -26,7 +26,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 	ro.build.version.security_patch=$(PLATFORM_SECURITY_PATCH) \
 	ro.adb.secure=0 \
 #Huawei HiSuite (also other OEM custom programs I guess) it's of no use
-	persist.sys.usb.config=mtp
+	persist.sys.usb.config=adb
 	
 
 #VNDK config files
