@@ -78,3 +78,12 @@ fi
 if getprop ro.wlan.mtk.wifi.5g |grep -q 1;then
 	setprop persist.sys.overlay.wifi5g true
 fi
+
+if grep -qF 'mkdir /data/.fps 0770 system fingerp' vendor/etc/init/hw/init.mmi.rc;then
+    mkdir -p /data/.fps
+    chmod 0770 /data/.fps
+    chown system:9015 /data/.fps
+
+    chown system:9015 /sys/devices/soc/soc:fpc_fpc1020/irq
+    chown system:9015 /sys/devices/soc/soc:fpc_fpc1020/irq_cnt
+fi
