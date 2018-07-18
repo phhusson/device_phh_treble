@@ -4,13 +4,12 @@ on post-fs
 	mount none /system/etc/usb_audio_policy_configuration.xml /vendor/etc/usb_audio_policy_configuration.xml bind
 	export LD_CONFIG_FILE /system/etc/ld.config.${persist.sys.vndk}.txt
 
-service phh_service_cleaner /system/bin/service-cleaner.sh
+service phh_on_boot /system/bin/phh-on-boot.sh
     oneshot
     disabled
 
 on property:sys.boot_completed=1
-    start phh_service_cleaner
-    exec u:r:phhsu_daemon:s0 root -- /system/bin/bootctl mark-boot-successful
+    start phh_on_boot
 
 on property:QC.HI6250=1
    write /sys/class/hw_power/charger/direct_charger/iin_thermal 2750
