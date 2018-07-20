@@ -58,7 +58,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
 	device/phh/treble/empty:system/phh/empty \
-	device/phh/treble/service-cleaner.sh:system/bin/service-cleaner.sh
+	device/phh/treble/phh-on-boot.sh:system/bin/phh-on-boot.sh
 
 PRODUCT_PACKAGES += \
 	treble-environ-rc
