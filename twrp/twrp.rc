@@ -1,0 +1,4 @@
+on post-fs
+	exec - root -- /system/bin/vndk-detect
+	export LD_CONFIG_FILE /system/etc/ld.config.${persist.sys.vndk}.txt
+	exec u:r:phhsu_daemon:s0 root -- /system/bin/twrp.sh

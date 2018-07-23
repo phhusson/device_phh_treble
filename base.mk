@@ -66,3 +66,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	bootctl \
 	vintf
+
+PRODUCT_COPY_FILES += \
+	device/phh/treble/twrp/twrp.rc:system/etc/init/twrp.rc \
+	device/phh/treble/twrp/twrp.sh:system/bin/twrp.sh \
+	device/phh/treble/twrp/buysbox-armv7l:system/bin/busybox_phh
