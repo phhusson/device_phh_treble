@@ -116,7 +116,8 @@ death() {
 dev="$(sed -n 1p /cache/phh/block.map)"
                     devbase="$(echo $dev | sed -nE 's;(/dev/block/.*/)userdata;\1;p')"
 [ -z "$devbase" ] && devbase="$(echo $dev | sed -nE 's;(/dev/block/.*/)data;\1;p')"
-for i in system system_a;do
+[ -z "$devbase" ] && devbase="$(echo $dev | sed -nE 's;(/dev/block/.*/)USERDATA;\1;p')"
+for i in system system_a SYSTEM;do
 	v="$devbase/$i"
 	[ -b "$v" ] && system="$v"
 done
