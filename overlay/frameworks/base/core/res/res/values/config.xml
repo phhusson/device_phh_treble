@@ -28,4 +28,6 @@
 	<integer name="config_multiuserMaximumUsers">4</integer>
 	<bool name="config_enableMultiUserUI">true</bool>
 	-->
+
+	<string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
 </resources>
