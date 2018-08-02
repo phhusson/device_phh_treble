@@ -1,0 +1,2 @@
+on post-fs
+    exec u:r:phhsu_daemon:s0 root -- /system/bin/change-device-name.sh
