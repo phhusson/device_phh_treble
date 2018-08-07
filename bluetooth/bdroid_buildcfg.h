@@ -40,12 +40,12 @@ static inline const char* BtmDefLocalName()
     return "hello";
 }
 
-static inline bool BtmBypassExtraAclSetup() {
+static inline int BtmBypassExtraAclSetup() {
 #if 0
     int8_t prop = property_get_bool("persist.sys.bt_acl_bypass", false);
     return prop == true;
 #endif
-    return false;
+    return 1;
 }
 
 #define BTM_DEF_LOCAL_NAME BtmDefLocalName()
