@@ -21,7 +21,7 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#include <cutils/properties.h>
+//#include <cutils/properties.h>
 #include <string.h>
 
 static inline const char* BtmDefLocalName()
