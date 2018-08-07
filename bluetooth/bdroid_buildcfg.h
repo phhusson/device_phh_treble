@@ -26,6 +26,7 @@
 
 static inline const char* BtmDefLocalName()
 {
+#if 0
     static char product_device[PROPERTY_VALUE_MAX];
     //Huawei-defined property
     property_get("ro.config.marketing_name", product_device, "");
@@ -35,11 +36,16 @@ static inline const char* BtmDefLocalName()
 
     // Fallback to ro.product.model
     return "";
+#endif
+    return "hello";
 }
 
 static inline bool BtmBypassExtraAclSetup() {
+#if 0
     int8_t prop = property_get_bool("persist.sys.bt_acl_bypass", false);
     return prop == true;
+#endif
+    return false;
 }
 
 #define BTM_DEF_LOCAL_NAME BtmDefLocalName()
