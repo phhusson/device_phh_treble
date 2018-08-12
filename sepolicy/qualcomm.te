@@ -1,4 +1,5 @@
 #me.phh.treble.qti.audio is system-signed
+type rild, domain;
 allow system_app hal_telephony_hwservice:hwservice_manager { find };
 allow { rild system_app } { rild system_app }:binder { call transfer };
 
