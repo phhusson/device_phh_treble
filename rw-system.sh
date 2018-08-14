@@ -2,6 +2,10 @@
 
 set -e
 
+if getprop ro.vendor.build.fingerprint |grep -qi samsung;then
+	setprop sys.usb.ffs.aio_compat true
+fi
+
 fixSPL() {
     if [ "$(getprop ro.product.cpu.abi)" == "armeabi-v7a" ];then
 	    setprop ro.keymaster.mod 'AOSP on ARM32'
