@@ -1,0 +1,1 @@
+allow ueventd proc:file r_file_perms;
