@@ -4,9 +4,7 @@ mount -o bind /system/phh/empty /vendor/lib64/hw/keystore.exynos9810.so
 mount -o bind /system/phh/empty /vendor/lib64/hw/keystore.mdfpp.so
 set -e
 
-if getprop ro.vendor.build.fingerprint |grep -qi samsung;then
-	setprop sys.usb.ffs.aio_compat true
-fi
+setprop sys.usb.ffs.aio_compat true
 
 fixSPL() {
     if [ "$(getprop ro.product.cpu.abi)" == "armeabi-v7a" ];then
@@ -22,7 +20,7 @@ fixSPL() {
         setprop ro.keymaster.xxx.release "$Arelease"
         setprop ro.keymaster.xxx.security_patch "$(getSPL $img spl)"
 
-        for f in /vendor/lib64/hw/android.hardware.keymaster@3.0-impl-qti.so /vendor/lib/hw/android.hardware.keymaster@3.0-impl-qti.so /system/lib64/vndk-26/libsoftkeymasterdevice.so /vendor/bin/teed /system/lib64/vndk/libsoftkeymasterdevice.so /system/lib/vndk/libsoftkeymasterdevice.so /system/lib/vndk-26/libsoftkeymasterdevice.so;do
+        for f in /vendor/lib64/hw/android.hardware.keymaster@3.0-impl-qti.so /vendor/lib/hw/android.hardware.keymaster@3.0-impl-qti.so /system/lib64/vndk-26/libsoftkeymasterdevice.so /vendor/bin/teed /system/lib64/vndk/libsoftkeymasterdevice.so /system/lib/vndk/libsoftkeymasterdevice.so /system/lib/vndk-26/libsoftkeymasterdevice.so /vendor/lib64/libkeymaster_helper.so;do
             [ ! -f $f ] && continue
             ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
             b="$(echo "$f"|tr / _)"
