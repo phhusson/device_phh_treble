@@ -70,3 +70,9 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/twrp/twrp.rc:system/etc/init/twrp.rc \
 	device/phh/treble/twrp/twrp.sh:system/bin/twrp.sh \
 	device/phh/treble/twrp/busybox-armv7l:system/bin/busybox_phh
+
+ifneq (,$(wildcard external/exfat)
+PRODUCT_PACKAGES += \
+	mkfs.exfat \
+	fsck.exfat
+endif
