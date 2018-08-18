@@ -67,6 +67,11 @@ if getprop ro.hardware |grep -qF qcom && [ -f /sys/class/backlight/panel0-backli
     setprop persist.sys.qcom-brightness $(cat /sys/class/backlight/panel0-backlight/max_brightness)
 fi
 
+if getprop ro.hardware |grep -qF qcom && [ -f /sys/class/leds/lcd-backlight/max_brightness ] && \
+        grep -qvE '^255$' /sys/class/leds/lcd-backlight/max_brightness;then
+    setprop persist.sys.qcom-brightness $(cat /sys/class/leds/lcd-backlight/max_brightness)
+fi
+
 if [ "$(getprop ro.vendor.product.device)" == "OnePlus6" ];then
 	resize2fs /dev/block/platform/soc/1d84000.ufshc/by-name/userdata
 fi
