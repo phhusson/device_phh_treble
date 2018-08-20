@@ -1,7 +1,5 @@
 #!/system/bin/sh
 
-mount -o bind /system/phh/empty /vendor/lib64/hw/keystore.exynos9810.so
-mount -o bind /system/phh/empty /vendor/lib64/hw/keystore.mdfpp.so
 set -e
 
 setprop sys.usb.ffs.aio_compat true
