@@ -2,7 +2,11 @@
 
 rom_script=''
 if [ -n "$1" ];then
-	rom_script='$(call inherit-product, device/phh/treble/'$1'.mk)'
+	if echo "$1" | grep -qF /;then
+		rom_script='$(call inherit-product, '$1')'
+	else
+		rom_script='$(call inherit-product, device/phh/treble/'$1'.mk)'
+	fi
 fi
 
 echo 'PRODUCT_MAKEFILES := \' > AndroidProducts.mk
