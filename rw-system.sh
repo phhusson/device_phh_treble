@@ -63,10 +63,6 @@ if ! grep android.hardware.biometrics.fingerprint /vendor/manifest.xml;then
     mount -o bind system/phh/empty /system/etc/permissions/android.hardware.fingerprint.xml
 fi
 
-if ! grep android.hardware.ir /vendor/manifest.xml;then
-    mount -o bind system/phh/empty /system/etc/permissions/android.hardware.consumerir.xml
-fi
-
 if getprop ro.hardware |grep -qF qcom && [ -f /sys/class/backlight/panel0-backlight/max_brightness ] && \
         grep -qvE '^255$' /sys/class/backlight/panel0-backlight/max_brightness;then
     setprop persist.sys.qcom-brightness $(cat /sys/class/backlight/panel0-backlight/max_brightness)
