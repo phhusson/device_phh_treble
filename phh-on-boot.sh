@@ -1,8 +1,5 @@
 #!/system/bin/sh
 
-if grep -qF android.hardware.boot /vendor/manifest.xml;then
-	bootctl mark-boot-successful
-fi
 
 #Clear looping services
 sleep 30
@@ -12,3 +9,7 @@ getprop | \
     while read svc ;do
         setprop ctl.stop $svc
     done
+
+if grep -qF android.hardware.boot /vendor/manifest.xml;then
+	bootctl mark-boot-successful
+fi
