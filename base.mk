@@ -76,3 +76,10 @@ PRODUCT_PACKAGES += \
 	mkfs.exfat \
 	fsck.exfat
 endif
+
+PRODUCT_PACKAGES += \
+	vendor.huawei.hardware.biometrics.fingerprint-V2.1-java \
+	vendor.huawei.hardware.tp-V1.0-java \
+	vendor.qti.hardware.radio.am-V1.0-java \
+	vendor.qti.qcril.am-V1.0-java \
+
