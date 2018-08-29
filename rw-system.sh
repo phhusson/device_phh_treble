@@ -48,7 +48,11 @@ fi
 mount -o remount,ro /system || true
 mount -o remount,ro / || true
 
+mkdir -p /mnt/phh/
+mount -t tmpfs -o rw,nodev,relatime,mode=755,gid=0 none /mnt/phh || true
+set +e
 fixSPL
+set -e
 
 if grep vendor.huawei.hardware.biometrics.fingerprint /vendor/manifest.xml;then
     mount -o bind system/phh/huawei/fingerprint.kl /vendor/usr/keylayout/fingerprint.kl
@@ -91,5 +95,18 @@ fi
 if getprop ro.vendor.build.fingerprint |grep -q Xiaomi/clover/clover;then
     setprop persist.sys.qcom-brightness $(cat /sys/class/leds/lcd-backlight/max_brightness)
 fi
+
+for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so;do
+    [ ! -f $f ] && continue
+    ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
+    b="$(echo "$f"|tr / _)"
+
+    cp -a $f /mnt/phh/$b
+    sed -i \
+        -e 's/AT+EAIC=2/AT+EAIC=3/g' \
+        /mnt/phh/$b
+    chcon "$ctxt" /mnt/phh/$b
+    mount -o bind /mnt/phh/$b $f
+done
 
 mount -o bind /system/phh/empty /vendor/overlay/SysuiDarkTheme/SysuiDarkTheme.apk || true
