@@ -1,7 +1,8 @@
 #!/system/bin/sh
 
+[ "$(getprop vold.decrypt)" == "trigger_restart_min_framework" ] && exit 0
 if [ -f /vendor/bin/mtkmal ];then
-    if [ "$(getprop persist.mtk_ims_support)" == 1 ];then
+    if [ "$(getprop persist.mtk_ims_support)" == 1 -o "$(getprop persist.mtk_epdg_support)" == 1 ];then
         setprop persist.mtk_ims_support 0
         setprop persist.mtk_epdg_support 0
         reboot
