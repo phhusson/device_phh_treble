@@ -13,3 +13,9 @@ getprop | \
 if grep -qF android.hardware.boot /vendor/manifest.xml;then
 	bootctl mark-boot-successful
 fi
+
+if [ $FOUND_HUAWEI =  1];then
+rm -rf /system/etc/libnfc-nci.conf
+cp --symbolic-link /product/etc/nfc/* /system/etc/
+setprop ro.hardware.nfc_nci pn54x.default
+fi
