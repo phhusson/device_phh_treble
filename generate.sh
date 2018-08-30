@@ -3,8 +3,11 @@
 rom_script=''
 if [ -n "$1" ];then
 	if echo "$1" | grep -qF /;then
-		rom_script='$(call inherit-product, '$1')'
-	else
+        rom_script=''
+        for i in "$@";do
+            rom_script="$rom_script"$'\n''$(call inherit-product, '$i')'
+        done
+    else
 		rom_script='$(call inherit-product, device/phh/treble/'$1'.mk)'
 	fi
 fi
