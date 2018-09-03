@@ -54,6 +54,12 @@ changeKeylayout() {
         chmod 0644 /mnt/phh/keylayout/gpio_keys.kl /mnt/phh/keylayout/sec_touchscreen.kl
     fi
 
+    if getprop ro.vendor.build.fingerprint |grep -q Xiaomi/polaris;then
+        cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
+        chmod 0644 /mnt/phh/keylayout/uinput-goodix.kl
+        changed=true
+    fi
+
     if [ "$changed" == true ];then
         mount -o bind /mnt/phh/keylayout /system/usr/keylayout
         restorecon -R /system/usr/keylayout
