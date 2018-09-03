@@ -41,6 +41,25 @@ fixSPL() {
     fi
 }
 
+changeKeylayout() {
+    cp -a /system/usr/keylayout /mnt/phh/keylayout
+    changed=false
+
+    if getprop ro.vendor.build.fingerprint | \
+        grep -qE -e ".*(crown|star)[q2]*lte.*"  -e ".*(SC-0[23]K|SCV3[89]).*";then
+        changed=true
+
+        cp /system/phh/samsung-gpio_keys.kl /mnt/phh/keylayout/gpio_keys.kl
+        cp /system/phh/samsung-sec_touchscreen.kl /mnt/phh/keylayout/sec_touchscreen.kl
+        chmod 0644 /mnt/phh/keylayout/gpio_keys.kl /mnt/phh/keylayout/sec_touchscreen.kl
+    fi
+
+    if [ "$changed" == true ];then
+        mount -o bind /mnt/phh/keylayout /system/usr/keylayout
+        restorecon -R /system/usr/keylayout
+    fi
+}
+
 if mount -o remount,rw /system;then
 	resize2fs $(grep ' /system ' /proc/mounts |cut -d ' ' -f 1) || true
 elif mount -o remount,rw /;then
@@ -54,6 +73,8 @@ mount -t tmpfs -o rw,nodev,relatime,mode=755,gid=0 none /mnt/phh || true
 set +e
 fixSPL
 set -e
+
+changeKeylayout
 
 if grep vendor.huawei.hardware.biometrics.fingerprint /vendor/manifest.xml;then
     mount -o bind system/phh/huawei/fingerprint.kl /vendor/usr/keylayout/fingerprint.kl
