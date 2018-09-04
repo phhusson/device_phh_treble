@@ -76,6 +76,7 @@ mount -o remount,ro / || true
 
 mkdir -p /mnt/phh/
 mount -t tmpfs -o rw,nodev,relatime,mode=755,gid=0 none /mnt/phh || true
+mkdir /mnt/phh/empty_dir
 set +e
 fixSPL
 set -e
@@ -120,6 +121,10 @@ if getprop ro.vendor.build.fingerprint |grep -q Xiaomi/clover/clover;then
     setprop persist.sys.qcom-brightness $(cat /sys/class/leds/lcd-backlight/max_brightness)
 fi
 
+if getprop ro.vendor.build.fingerprint |grep -q -e Xiaomi/beryllium/berillium -e Xiaomi/sirius/sirius -e Xiaomi/dipper/dipper -e Xiaomi/ursa/ursa;then
+    mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx/
+fi
+
 for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so;do
     [ ! -f $f ] && continue
     ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
@@ -134,3 +139,5 @@ for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so;do
 done
 
 mount -o bind /system/phh/empty /vendor/overlay/SysuiDarkTheme/SysuiDarkTheme.apk || true
+
+
