@@ -122,7 +122,8 @@ if getprop ro.vendor.build.fingerprint |grep -q -e Xiaomi/clover/clover -e iaomi
 fi
 
 if getprop ro.vendor.build.fingerprint |grep -q -e Xiaomi/beryllium/beryllium -e Xiaomi/sirius/sirius -e Xiaomi/dipper/dipper -e Xiaomi/ursa/ursa -e Xiaomi/polaris/polaris;then
-    mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx/
+    mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
+    mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
 fi
 
 for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so;do
