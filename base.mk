@@ -78,6 +78,7 @@ PRODUCT_PACKAGES += \
 endif
 
 PRODUCT_PACKAGES += \
+	android.hardware.wifi.hostapd-V1.0-java \
 	vendor.huawei.hardware.biometrics.fingerprint-V2.1-java \
 	vendor.huawei.hardware.tp-V1.0-java \
 	vendor.qti.hardware.radio.am-V1.0-java \
@@ -88,4 +89,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
 	device/phh/treble/files/samsung-gpio_keys.kl:system/phh/samsung-gpio_keys.kl \
-	device/phh/treble/files/samsung-sec_touchscreen.kl:system/phh/samsung-sec_touchscreen.kl
+	device/phh/treble/files/samsung-sec_touchscreen.kl:system/phh/samsung-sec_touchscreen.kl \
+	device/phh/treble/files/oneplus6-synaptics_s3320.kl:system/phh/oneplus6-synaptics_s3320.kl \
+

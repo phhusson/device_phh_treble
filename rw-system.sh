@@ -60,6 +60,12 @@ changeKeylayout() {
         changed=true
     fi
 
+    if [ "$(getprop ro.vendor.product.device)" == "OnePlus6" ];then
+        cp /system/phh/oneplus6-synaptics_s3320.kl /mnt/phh/keylayout/synaptics_s3320.kl
+        chmod 0644 /mnt/phh/keylayout/synaptics_s3320.kl
+        changed=true
+    fi
+
     if [ "$changed" == true ];then
         mount -o bind /mnt/phh/keylayout /system/usr/keylayout
         restorecon -R /system/usr/keylayout
