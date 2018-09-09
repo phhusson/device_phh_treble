@@ -145,3 +145,7 @@ if grep -qF 'PowerVR Rogue GE8100' /vendor/lib/egl/GLESv1_CM_mtk.so;then
 	setprop debug.hwui.renderer opengl
 fi
 
+#If we have both Samsung and AOSP power hal, take Samsung's
+if [ -f /vendor/bin/hw/vendor.samsung.hardware.miscpower@1.0-service ];then
+	mount -o bind /system/phh/empty /vendor/bin/hw/android.hardware.power@1.0-service
+fi
