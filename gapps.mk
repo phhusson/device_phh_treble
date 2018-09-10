@@ -5,7 +5,7 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/empty-permission.xml:system/etc/permissions/com.google.android.camera.experimental2017.xml
 
 DEVICE_PACKAGE_OVERLAYS += device/phh/treble/overlay-gapps
-GAPPS_VARIANT := nano
+GAPPS_VARIANT := pico
 DONT_DEXPREOPT_PREBUILTS := true
 WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
 GAPPS_FORCE_PACKAGE_OVERRIDES := true
@@ -16,7 +16,6 @@ PRODUCT_PACKAGES += \
        CalculatorGoogle \
        PrebuiltDeskClockGoogle \
        CalendarGooglePrebuilt \
-       GoogleHome \
        LatinImeGoogle \
        phh-overrides
 
