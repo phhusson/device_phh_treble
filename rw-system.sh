@@ -1,6 +1,5 @@
 #!/system/bin/sh
 
-set -e
 
 setprop sys.usb.ffs.aio_compat true
 
@@ -83,9 +82,7 @@ mount -o remount,ro / || true
 mkdir -p /mnt/phh/
 mount -t tmpfs -o rw,nodev,relatime,mode=755,gid=0 none /mnt/phh || true
 mkdir /mnt/phh/empty_dir
-set +e
 fixSPL
-set -e
 
 changeKeylayout
 
