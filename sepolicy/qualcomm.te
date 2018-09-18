@@ -1,9 +1,8 @@
-attribute rild_26_0;
-attribute rild_27_0;
+type rild, domain;
 
 #me.phh.treble.qti.audio is system-signed
 allow system_app hal_telephony_hwservice:hwservice_manager { find };
-allow { rild_26_0 rild_27_0 system_app } { rild_26_0 rild_27_0 system_app }:binder { call transfer };
+allow { rild system_app } { rild system_app }:binder { call transfer };
 
 #Pixel 1
 type vnd_qcril_audio_hwservice, hwservice_manager_type;

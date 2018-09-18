@@ -92,3 +92,4 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/files/samsung-sec_touchscreen.kl:system/phh/samsung-sec_touchscreen.kl \
 	device/phh/treble/files/oneplus6-synaptics_s3320.kl:system/phh/oneplus6-synaptics_s3320.kl \
 
+SELINUX_IGNORE_NEVERALLOWS := true
