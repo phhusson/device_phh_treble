@@ -9,5 +9,5 @@
 	<library name="vendor.huawei.hardware.tp.V1_0"
 		file="/system/framework/vendor.huawei.hardware.tp-V1.0-java.jar" />
     <library name="android.hardware.wifi.hostapd.V1_0"
-        file="/system/framework/android.hardware.wifi.hostapd-V1.0-java" />
+        file="/system/framework/android.hardware.wifi.hostapd-V1.0-java.jar" />
 </permissions>
