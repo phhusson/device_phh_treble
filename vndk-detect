@@ -13,6 +13,8 @@ mount -o bind /system/bin/adbd /sbin/adbd
 if ( getprop ro.hardware | grep -qE '(kirin970|hi3660|hi6250|hi3670)' );then
 	FOUND_HUAWEI=1
 	setprop persist.sys.bt_acl_bypass true
+	setprop persist.sys.camera.huawei true
+	setprop persist.sys.radio.huawei true
 fi
 
 if getprop ro.vendor.build.fingerprint |grep -qiE '(huawei|honor|hi3660)' || [ -n "$FOUND_HUAWEI" ];then
