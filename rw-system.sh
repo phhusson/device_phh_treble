@@ -130,6 +130,13 @@ if getprop ro.vendor.build.fingerprint |grep -q -e Xiaomi/beryllium/beryllium -e
     mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
 fi
 
+if getprop ro.vendor.build.fingerprint |grep -q -i -e xiaomi/wayne -e xiaomi/jasmine;then
+    setprop persist.imx376_sunny.low.lux 310
+    setprop persist.imx376_sunny.light.lux 280
+    setprop persist.imx376_ofilm.low.lux 310
+    setprop persist.imx376_ofilm.light.lux 280
+fi
+
 for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so;do
     [ ! -f $f ] && continue
     ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
