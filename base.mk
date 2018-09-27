@@ -28,8 +28,8 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 	
 #Huawei HiSuite (also other OEM custom programs I guess) it's of no use in AOSP builds
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-	persist.sys.usb.config=adb
-	
+	persist.sys.usb.config=adb \
+	ro.cust.cdrom=/dev/null	
 
 #VNDK config files
 PRODUCT_COPY_FILES += \
