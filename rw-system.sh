@@ -151,6 +151,7 @@ for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so;do
 done
 
 mount -o bind /system/phh/empty /vendor/overlay/SysuiDarkTheme/SysuiDarkTheme.apk || true
+mount -o bind /system/phh/empty /vendor/overlay/SysuiDarkTheme/SysuiDarkThemeOverlay.apk || true
 
 if grep -qF 'PowerVR Rogue GE8100' /vendor/lib/egl/GLESv1_CM_mtk.so;then
 	setprop debug.hwui.renderer opengl
