@@ -168,3 +168,7 @@ fi
 if busybox_phh unzip -p /vendor/app/ims/ims.apk classes.dex |grep -qF -e Landroid/telephony/ims/feature/MmTelFeature -e Landroid/telephony/ims/feature/MMTelFeature;then
     mount -o bind /system/phh/empty /vendor/app/ims/ims.apk
 fi
+
+if [ -d /vendor/etc/charger ] && [ ! -d /system/etc/charger ] && [ ! -L /system/etc/charger ];then
+    ln -s /vendor/etc/charger /system/etc/charger
+fi
