@@ -137,6 +137,12 @@ if getprop ro.vendor.build.fingerprint |grep -q -i -e xiaomi/wayne -e xiaomi/jas
     setprop persist.imx376_ofilm.light.lux 280
 fi
 
+if getprop ro.vendor.build.fingerprint |grep -q -i -e xiaomi/jasmine;then
+    chmod 660 /sys/class/leds/red/blink
+    chmod 660 /sys/class/leds/red/brightness
+    chown system:system /sys/class/leds/red/blink
+fi
+
 for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so;do
     [ ! -f $f ] && continue
     ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
