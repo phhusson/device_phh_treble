@@ -9,3 +9,10 @@ cc_binary {
 		"libhidlbase",
 	],
 }
+
+cc_binary {
+	name: "uevent",
+	srcs: [
+		"uevent.cpp",
+	],
+}
