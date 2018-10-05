@@ -131,7 +131,10 @@ if getprop ro.vendor.build.fingerprint |grep -q -e Xiaomi/clover/clover -e iaomi
     setprop persist.sys.qcom-brightness $(cat /sys/class/leds/lcd-backlight/max_brightness)
 fi
 
-if getprop ro.vendor.build.fingerprint |grep -q -e Xiaomi/beryllium/beryllium -e Xiaomi/sirius/sirius -e Xiaomi/dipper/dipper -e Xiaomi/ursa/ursa -e Xiaomi/polaris/polaris;then
+if getprop ro.vendor.build.fingerprint |grep -q \
+	-e Xiaomi/beryllium/beryllium -e Xiaomi/sirius/sirius \
+	-e Xiaomi/dipper/dipper -e Xiaomi/ursa/ursa -e Xiaomi/polaris/polaris \
+	-e motorola/ali/ali ;then
     mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
     mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
 fi
