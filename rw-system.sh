@@ -57,18 +57,14 @@ changeKeylayout() {
     if getprop ro.vendor.build.fingerprint |grep -iq -e xiaomi/polaris -e xiaomi/sirius -e xiaomi/dipper -e xiaomi/wayne -e xiaomi/jasmine;then
         cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
         chmod 0644 /mnt/phh/keylayout/uinput-goodix.kl
+        cp /system/phh/empty /mnt/phh/keylayout/uinput-fpc.kl
+        chmod 0644 /mnt/phh/keylayout/uinput-fpc.kl
         changed=true
     fi
 
     if getprop ro.vendor.build.fingerprint |grep -qi oneplus/oneplus6/oneplus6;then
         cp /system/phh/oneplus6-synaptics_s3320.kl /mnt/phh/keylayout/synaptics_s3320.kl
         chmod 0644 /mnt/phh/keylayout/synaptics_s3320.kl
-        changed=true
-    fi
-
-    if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/wayne -e xiaomi/jasmine;then
-        cp /system/phh/empty /mnt/phh/keylayout/uinput-fpc.kl
-        chmod 0644 /mnt/phh/keylayout/uinput-fpc.kl
         changed=true
     fi
 
