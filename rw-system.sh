@@ -60,7 +60,7 @@ changeKeylayout() {
         changed=true
     fi
 
-    if [ "$(getprop ro.vendor.product.device)" == "OnePlus6" ];then
+    if getprop ro.vendor.build.fingerprint |grep -qi oneplus/oneplus6/oneplus6;then
         cp /system/phh/oneplus6-synaptics_s3320.kl /mnt/phh/keylayout/synaptics_s3320.kl
         chmod 0644 /mnt/phh/keylayout/synaptics_s3320.kl
         changed=true
@@ -106,7 +106,7 @@ if getprop ro.hardware |grep -qF qcom && [ -f /sys/class/backlight/panel0-backli
     setprop persist.sys.qcom-brightness $(cat /sys/class/backlight/panel0-backlight/max_brightness)
 fi
 
-if [ "$(getprop ro.vendor.product.device)" == "OnePlus6" ];then
+if getprop ro.vendor.build.fingerprint |grep -qi oneplus/oneplus6/oneplus6;then
 	resize2fs /dev/block/platform/soc/1d84000.ufshc/by-name/userdata
 fi
 
