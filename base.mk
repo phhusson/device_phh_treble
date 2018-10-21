@@ -96,3 +96,7 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/files/samsung-9810-floating_feature.xml:system/ph/sam-9810-flo_feat.xml \
 
 SELINUX_IGNORE_NEVERALLOWS := true
+
+# Universal NoCutoutOverlay
+PRODUCT_PACKAGES += \
+    NoCutoutOverlay
