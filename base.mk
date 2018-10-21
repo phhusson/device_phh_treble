@@ -94,3 +94,7 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/files/huawei-fingerprint.kl:system/phh/huawei/fingerprint.kl \
 
 SELINUX_IGNORE_NEVERALLOWS := true
+
+# Universal NoCutoutOverlay
+PRODUCT_PACKAGES += \
+    NoCutoutOverlay
