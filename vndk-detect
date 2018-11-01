@@ -23,6 +23,7 @@ if getprop ro.vendor.build.fingerprint |grep -qiE '(huawei|honor|hi3660)' || [ -
 fi
 
 if [ -n "$FOUND_HUAWEI" ];then
+	stop displayengine-hal-1-0
 	setprop debug.hwui.profile true
 fi
 
