@@ -6,3 +6,6 @@ allow init userdata_block_device:blk_file relabelto;
 allow init userdata_block_device:lnk_file relabelto;
 
 allow vendor_init vendor_init:capability { sys_module };
+
+#Needed for Samsung dual speaker
+allow init vendor_configs_file:file mounton; 

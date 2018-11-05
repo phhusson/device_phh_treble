@@ -177,4 +177,10 @@ fi
 
 if getprop ro.hardware |grep -qF samsungexynos;then
 	setprop debug.sf.latch_unsignaled 1
+    mount none /system/etc/mixer_paths.xml /vendor/etc/mixer_paths.xml bind
+    mount none /system/etc/mixer_gains.xml /vendor/etc/mixer_gains.xml bind
+    mount none /system/etc/mixer_paths_r02.xml /vendor/etc/mixer_paths_r02.xml bind
+    mount none /system/etc/mixer_gains_r02.xml /vendor/etc/mixer_gains_r02.xml bind
+    mount none /system/etc/mixer_paths_r08.xml /vendor/etc/mixer_paths_r08.xml bind
+    mount none /system/etc/mixer_gains_r08.xml /vendor/etc/mixer_gains_r08.xml bind
 fi

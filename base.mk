@@ -93,5 +93,12 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/files/oneplus6-synaptics_s3320.kl:system/phh/oneplus6-synaptics_s3320.kl \
 	device/phh/treble/files/huawei-fingerprint.kl:system/phh/huawei/fingerprint.kl \
 	device/phh/treble/files/samsung-sec_e-pen.idc:system/usr/idc/sec_e-pen.idc \
+	device/phh/treble/files/samsung-gpio_keys.kl:system/phh/samsung-gpio_keys.kl \
+	device/phh/treble/files/mixer_paths.xml:system/etc/mixer_paths.xml \
+	device/phh/treble/files/mixer_gains.xml:system/etc/mixer_gains.xml \
+	device/phh/treble/files/mixer_paths_r02.xml:system/etc/mixer_paths_r02.xml \
+	device/phh/treble/files/mixer_gains_r02.xml:system/etc/mixer_gains_r02.xml \
+	device/phh/treble/files/mixer_paths_r08.xml:system/etc/mixer_paths_r08.xml \
+	device/phh/treble/files/mixer_gains_r08.xml:system/etc/mixer_gains_r08.xml 
 
 SELINUX_IGNORE_NEVERALLOWS := true
