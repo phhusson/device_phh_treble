@@ -142,7 +142,7 @@ if getprop ro.vendor.build.fingerprint |grep -q -i -e xiaomi/wayne -e xiaomi/jas
     setprop persist.imx376_ofilm.light.lux 280
 fi
 
-for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so;do
+for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so /vendor/lib/libmtk-ril.so /vendor/lib64/libmtk-ril.so;do
     [ ! -f $f ] && continue
     ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
     b="$(echo "$f"|tr / _)"
@@ -158,7 +158,7 @@ done
 mount -o bind /system/phh/empty /vendor/overlay/SysuiDarkTheme/SysuiDarkTheme.apk || true
 mount -o bind /system/phh/empty /vendor/overlay/SysuiDarkTheme/SysuiDarkThemeOverlay.apk || true
 
-if grep -qF 'PowerVR Rogue GE8100' /vendor/lib/egl/GLESv1_CM_mtk.so;then
+if grep -qF 'PowerVR Rogue GE8100' /vendor/lib/egl/GLESv1_CM_mtk.so || grep -qF 'PowerVR Rogue' /vendor/lib/egl/libGLESv1_CM_mtk.so;then
 	setprop debug.hwui.renderer opengl
 fi
 
