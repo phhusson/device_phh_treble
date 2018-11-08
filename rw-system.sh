@@ -179,6 +179,10 @@ if getprop ro.hardware |grep -qF samsungexynos;then
 	setprop debug.sf.latch_unsignaled 1
 fi
 
+if getprop ro.product.model |grep -qF ANE;then
+	setprop debug.sf.latch_unsignaled 1
+fi
+
 if getprop ro.vendor.build.fingerprint | grep -qE -e ".*(crown|star)[q2]*lte.*"  -e ".*(SC-0[23]K|SCV3[89]).*";then
 	for f in /vendor/lib/libfloatingfeature.so /vendor/lib64/libfloatingfeature.so;do
 		[ ! -f $f ] && continue
