@@ -123,7 +123,7 @@ if grep -qF 'mkdir /data/.fps 0770 system fingerp' vendor/etc/init/hw/init.mmi.r
     chown system:9015 /sys/devices/soc/soc:fpc_fpc1020/irq_cnt
 fi
 
-if getprop ro.vendor.build.fingerprint |grep -q -i -e xiaomi/clover -e xiaomi/wayne -e xiaomi/sakura -e xiaomi/nitrogen;then
+if getprop ro.vendor.build.fingerprint |grep -q -i -e xiaomi/clover -e xiaomi/wayne -e xiaomi/sakura -e xiaomi/nitrogen -e xiaomi/whyred;then
     setprop persist.sys.qcom-brightness $(cat /sys/class/leds/lcd-backlight/max_brightness)
 fi
 
