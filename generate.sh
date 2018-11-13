@@ -16,7 +16,7 @@ echo 'PRODUCT_MAKEFILES := \' > AndroidProducts.mk
 
 for part in a ab;do
 	for apps in vanilla gapps foss gapps-go;do
-		for arch in arm64 arm;do
+		for arch in arm64 arm a64;do
 			for su in yes no;do
 				apps_suffix=""
 				apps_script=""
@@ -43,9 +43,12 @@ for part in a ab;do
 					apps_script=''
 					apps_name="vanilla"
 				fi
-                if [ "$arch" == "arm" ];then
-                    vndk="vndk-binder32.mk"
-                fi
+				if [ "$arch" == "arm" ];then
+					vndk="vndk-binder32.mk"
+				fi
+				if [ "$arch" == "a64" ];then
+					vndk="vndk32.mk"
+				fi
 
 				su_suffix='N'
 				if [ "$su" == "yes" ];then
