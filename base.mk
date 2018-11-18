@@ -24,6 +24,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 	ro.build.version.all_codenames=$(PLATFORM_VERSION_ALL_CODENAMES) \
 	ro.build.version.release=$(PLATFORM_VERSION) \
 	ro.build.version.security_patch=$(PLATFORM_SECURITY_PATCH) \
+	ro.build.display.id=$(BUILD_DISPLAY_ID) \
 	ro.adb.secure=0 
 	
 #Huawei HiSuite (also other OEM custom programs I guess) it's of no use in AOSP builds
