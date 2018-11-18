@@ -18,7 +18,13 @@ fixSPL() {
         setprop ro.keymaster.xxx.release "$Arelease"
         setprop ro.keymaster.xxx.security_patch "$(getSPL $img spl)"
 
-        for f in /vendor/lib64/hw/android.hardware.keymaster@3.0-impl-qti.so /vendor/lib/hw/android.hardware.keymaster@3.0-impl-qti.so /system/lib64/vndk-26/libsoftkeymasterdevice.so /vendor/bin/teed /system/lib64/vndk/libsoftkeymasterdevice.so /system/lib/vndk/libsoftkeymasterdevice.so /system/lib/vndk-26/libsoftkeymasterdevice.so;do
+        for f in \
+		/vendor/lib64/hw/android.hardware.keymaster@3.0-impl-qti.so /vendor/lib/hw/android.hardware.keymaster@3.0-impl-qti.so \
+		/system/lib64/vndk-26/libsoftkeymasterdevice.so /vendor/bin/teed \
+		/system/lib64/vndk/libsoftkeymasterdevice.so /system/lib/vndk/libsoftkeymasterdevice.so \
+		/system/lib/vndk-26/libsoftkeymasterdevice.so \
+		/system/lib/vndk-27/libsoftkeymasterdevice.so /system/lib64/vndk-27/libsoftkeymasterdevice.so \
+		;do
             [ ! -f $f ] && continue
             ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
             b="$(echo "$f"|tr / _)"
@@ -74,6 +80,9 @@ changeKeylayout() {
     fi
 }
 
+mount -o bind /system/phh/empty /vendor/lib/hw/keystore.exynos7870.so
+mount -o bind /system/phh/empty /vendor/lib/hw/keystore.mdfpp.so
+
 if mount -o remount,rw /system;then
 	resize2fs $(grep ' /system ' /proc/mounts |cut -d ' ' -f 1) || true
 elif mount -o remount,rw /;then
@@ -88,6 +97,7 @@ mkdir /mnt/phh/empty_dir
 fixSPL
 
 changeKeylayout
+
 
 if grep vendor.huawei.hardware.biometrics.fingerprint /vendor/manifest.xml;then
     mount -o bind system/phh/huawei/fingerprint.kl /vendor/usr/keylayout/fingerprint.kl
@@ -197,3 +207,5 @@ if getprop ro.vendor.build.fingerprint | grep -qE -e ".*(crown|star)[q2]*lte.*" 
 		mount -o bind /mnt/phh/$b $f
 	done
 fi
+
+mount -o bind /mnt/phh/empty_dir /vendor/etc/audio || true
