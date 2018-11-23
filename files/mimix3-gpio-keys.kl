@@ -29,5 +29,4 @@ key 114   VOLUME_DOWN
 key 102   HOME
 key 528   FOCUS
 key 766   CAMERA
-# AI
-key 689   CAMERA
+key 689   ASSIST
