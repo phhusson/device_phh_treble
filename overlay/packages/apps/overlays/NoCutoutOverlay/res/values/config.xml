@@ -28,6 +28,11 @@
     <!-- Height of the status bar -->
     <dimen name="status_bar_height_portrait">24dp</dimen>
     <dimen name="status_bar_height_landscape">24dp</dimen>
+    <!-- Because we hardcode status_bar_height in Oreo device overlays,
+         we also need to do it here. -->
+    <dimen name="status_bar_height">24dp</dimen>
+    <!-- For rounded corners to work, set rounded_corner_radius_bottom or rounded_corner_radius
+         in device overlay. -->
     <dimen name="rounded_corner_radius_top">@*android:dimen/rounded_corner_radius_bottom</dimen>
 
     <!-- Height of area above QQS where battery/time go (equal to status bar height if > 48dp) -->
