@@ -80,9 +80,6 @@ changeKeylayout() {
     fi
 }
 
-mount -o bind /system/phh/empty /vendor/lib/hw/keystore.exynos7870.so
-mount -o bind /system/phh/empty /vendor/lib/hw/keystore.mdfpp.so
-
 if mount -o remount,rw /system;then
 	resize2fs $(grep ' /system ' /proc/mounts |cut -d ' ' -f 1) || true
 elif mount -o remount,rw /;then
