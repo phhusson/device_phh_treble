@@ -1,0 +1,1 @@
+allow bootanim gpu_device:dir r_dir_perms;
