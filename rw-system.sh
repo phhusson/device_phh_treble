@@ -60,7 +60,7 @@ changeKeylayout() {
         chmod 0644 /mnt/phh/keylayout/gpio_keys.kl /mnt/phh/keylayout/sec_touchscreen.kl
     fi
 
-    if getprop ro.vendor.build.fingerprint |grep -iq -e xiaomi/polaris -e xiaomi/sirius -e xiaomi/dipper -e xiaomi/wayne -e xiaomi/jasmine -e xiaomi/jasmine_sprout -e xiaomi/platina;then
+    if getprop ro.vendor.build.fingerprint |grep -iq -e xiaomi/polaris -e xiaomi/sirius -e xiaomi/dipper -e xiaomi/wayne -e xiaomi/jasmine -e xiaomi/jasmine_sprout -e xiaomi/platina -e iaomi/perseus;then
         cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
         chmod 0644 /mnt/phh/keylayout/uinput-goodix.kl
         cp /system/phh/empty /mnt/phh/keylayout/uinput-fpc.kl
@@ -71,6 +71,12 @@ changeKeylayout() {
     if getprop ro.vendor.build.fingerprint |grep -qi oneplus/oneplus6/oneplus6;then
         cp /system/phh/oneplus6-synaptics_s3320.kl /mnt/phh/keylayout/synaptics_s3320.kl
         chmod 0644 /mnt/phh/keylayout/synaptics_s3320.kl
+        changed=true
+    fi
+
+    if getprop ro.vendor.build.fingerprint |grep -iq -e iaomi/perseus;then
+        cp /system/phh/mimix3-gpio-keys.kl /mnt/phh/keylayout/gpio-keys.kl
+        chmod 0644 /mnt/phh/keylayout/gpio-keys.kl
         changed=true
     fi
 
