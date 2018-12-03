@@ -101,3 +101,6 @@ SELINUX_IGNORE_NEVERALLOWS := true
 # Universal NoCutoutOverlay
 PRODUCT_PACKAGES += \
     NoCutoutOverlay
+
+PRODUCT_COPY_FILES += \
+	device/phh/treble/files/adbd.rc:system/etc/init/adbd.rc
