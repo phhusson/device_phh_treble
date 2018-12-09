@@ -126,17 +126,31 @@ done
 
 blockdev --setrw "$system"
 
-size="$(sed -En '2s/^([0-9]+) .*/\1/p' /cache/phh/block.map)"
-block_size="$(sed -En '2s/.* ([0-9]*)$/\1/p' /cache/phh/block.map)"
-n_ranges="$(sed -n 3p /cache/phh/block.map)"
-block_id=0
-for i in $(seq 1 $n_ranges);do
-	range_start="$(sed -En $((i+3))'s/^([0-9]+) .*/\1/p' /cache/phh/block.map)"
-	range_end="$(sed -En $((i+3))'s/^.* ([0-9]+)$/\1/p' /cache/phh/block.map)"
-	n_blocks=$((range_end-range_start))
-	busybox_phh dd bs=$block_size skip=$range_start seek=$block_id count=$n_blocks if=$dev of=$system
 
-	block_id=$((block_id+n_blocks))
+for method in xz-sparse sparse raw;do
+	(
+		size="$(sed -En '2s/^([0-9]+) .*/\1/p' /cache/phh/block.map)"
+		block_size="$(sed -En '2s/.* ([0-9]*)$/\1/p' /cache/phh/block.map)"
+		n_ranges="$(sed -n 3p /cache/phh/block.map)"
+		block_id=0
+		for i in $(seq 1 $n_ranges);do
+			range_start="$(sed -En $((i+3))'s/^([0-9]+) .*/\1/p' /cache/phh/block.map)"
+			range_end="$(sed -En $((i+3))'s/^.* ([0-9]+)$/\1/p' /cache/phh/block.map)"
+			n_blocks=$((range_end-range_start))
+			busybox_phh dd bs=$block_size skip=$range_start count=$n_blocks if=$dev
+
+			block_id=$((block_id+n_blocks))
+		done
+	) | (
+		set -e
+		if [ "$method" == xz-sparse ];then
+			busybox_phh xz -d -c | simg2img_simple > $system
+		elif [ "$method" == sparse ];then
+			simg2img_simple > $system
+		elif [ "$method" == raw ];then
+			cat > $system
+		fi
+	) && break
 done
 
 sync

@@ -72,6 +72,9 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/twrp/twrp.sh:system/bin/twrp.sh \
 	device/phh/treble/twrp/busybox-armv7l:system/bin/busybox_phh
 
+PRODUCT_PACKAGES += \
+    simg2img_simple
+
 ifneq (,$(wildcard external/exfat))
 PRODUCT_PACKAGES += \
 	mkfs.exfat \

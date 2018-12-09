@@ -16,3 +16,11 @@ cc_binary {
 		"uevent.cpp",
 	],
 }
+
+cc_binary {
+	name: "simg2img_simple",
+	srcs: [
+		"simg2img_simple.cpp",
+	],
+	host_supported: true,
+}
