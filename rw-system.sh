@@ -80,6 +80,12 @@ changeKeylayout() {
         changed=true
     fi
 
+    if getprop ro.vendor.build.fingerprint |grep -iq -E -e '^Sony/G834';then
+	cp /system/phh/sony-gpio-keys.kl /mnt/phh/keylayout/gpio-keys.kl
+	chmod 0644 /mnt/phh/keylayout/gpio-keys.kl
+	changed=true
+    fi
+
     if [ "$changed" == true ];then
         mount -o bind /mnt/phh/keylayout /system/usr/keylayout
         restorecon -R /system/usr/keylayout
@@ -113,6 +119,11 @@ fi
 if getprop ro.hardware |grep -qF qcom && [ -f /sys/class/backlight/panel0-backlight/max_brightness ] && \
         grep -qvE '^255$' /sys/class/backlight/panel0-backlight/max_brightness;then
     setprop persist.sys.qcom-brightness $(cat /sys/class/backlight/panel0-backlight/max_brightness)
+fi
+
+#Sony don't use Qualcomm HAL, so they don't have their mess
+if getprop ro.vendor.build.fingerprint |grep -qE 'Sony/';then
+    setprop persist.sys.qcom-brightness -1
 fi
 
 if getprop ro.vendor.build.fingerprint |grep -qi oneplus/oneplus6/oneplus6;then
