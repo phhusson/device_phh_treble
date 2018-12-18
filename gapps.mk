@@ -16,7 +16,7 @@ PRODUCT_PACKAGES += \
        CalculatorGoogle \
        PrebuiltDeskClockGoogle \
        CalendarGooglePrebuilt \
-       GoogleHome \
+       GoogleNow \
        LatinImeGoogle \
        phh-overrides
 
