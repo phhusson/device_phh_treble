@@ -16,10 +16,10 @@
 
 <resources>
     <!-- Can't link to other dimensions here, but this should be status_bar_height_landscape -->
-    <dimen name="quick_qs_offset_height">24dp</dimen>
+    <dimen name="quick_qs_offset_height">28dp</dimen>
     <!-- Total height of QQS in landscape; quick_qs_offset_height + 128 -->
-    <dimen name="quick_qs_total_height">152dp</dimen>
+    <dimen name="quick_qs_total_height">156dp</dimen>
     <!-- Because we hardcode status_bar_height in Oreo device overlays,
          we also need to do it here. -->
-    <dimen name="status_bar_height">24dp</dimen>
+    <dimen name="status_bar_height">28dp</dimen>
 </resources>
