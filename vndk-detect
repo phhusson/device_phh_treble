@@ -24,7 +24,7 @@ if [ -n "$FOUND_HUAWEI" ];then
 	setprop debug.hwui.profile true
 fi
 
-if getprop ro.hardware |grep -qiE qcom;then
+if getprop ro.hardware |grep -qiE -e qcom -e judyln -e judypn;then
 	FOUND_QCOM=1
 	setprop persist.sys.overlay.devinputjack true
 fi
