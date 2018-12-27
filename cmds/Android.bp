@@ -11,6 +11,18 @@ cc_binary {
 }
 
 cc_binary {
+	name: "op-fp",
+	srcs: [
+		"op-fp.cpp",
+	],
+	shared_libs: [
+		"vendor.oneplus.fingerprint.extension@1.0",
+		"libutils",
+		"libhidlbase",
+	],
+}
+
+cc_binary {
 	name: "uevent",
 	srcs: [
 		"uevent.cpp",
