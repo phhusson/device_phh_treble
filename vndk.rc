@@ -11,3 +11,4 @@ service phh_on_boot /system/bin/phh-on-boot.sh
 on property:sys.boot_completed=1
     start phh_on_boot
     chown wifi system /data/misc/wifi
+    chown system wifi /data/misc/wifi/hostapd.conf
