@@ -81,7 +81,6 @@ allow phhsu_daemon system_file:dir rw_dir_perms;
 allow phhsu_daemon system_file:file { rwx_file_perms create rename setattr unlink };
 allow phhsu_daemon init:unix_stream_socket { connectto };
 allow phhsu_daemon self:process { ptrace setexec execmem setfscreate };
-allow phhsu_daemon tmpfs:filesystem { associate };
 allow phhsu_daemon app_data_file:file { rwx_file_perms create rename setattr unlink };
 allow phhsu_daemon app_data_file:dir rw_dir_perms;
 allow phhsu_daemon ashmem_device:chr_file { execute };
@@ -95,11 +94,10 @@ allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }
 allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:chr_file rwx_file_perms;
 allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:blk_file rw_file_perms;
 
-allow phhsu_daemon labeledfs:filesystem { remount unmount };
 allow phhsu_daemon device:file rwx_file_perms;
 allow phhsu_daemon device:dir rw_dir_perms;
 
-allow phhsu_daemon domain:process { ptrace signal signull };
+allow phhsu_daemon domain:process { ptrace signal signull getattr };
 allow phhsu_daemon selinuxfs:file rwx_file_perms;
 allow domain phhsu_daemon:process { sigchld };
 allow phhsu_daemon domain:binder { call transfer };
@@ -115,3 +113,11 @@ allow phhsu_daemon property_socket:sock_file { write };
 allow phhsu_daemon property_type:file rw_file_perms;
 allow phhsu_daemon { hwservicemanager hwservice_manager_type }:hwservice_manager { list add find };
 allow phhsu_daemon domain:unix_dgram_socket rw_socket_perms;
+
+allow phhsu_daemon tombstoned_intercept_socket:sock_file { write };
+allow phhsu_daemon tombstoned:unix_stream_socket { connectto };
+
+allow phhsu_daemon { property_data_file data_file_type tmpfs }:file create_file_perms;
+allow phhsu_daemon { property_data_file data_file_type tmpfs }:dir create_dir_perms;
+
+allow phhsu_daemon fs_type:filesystem { remount remount unmount associate};
