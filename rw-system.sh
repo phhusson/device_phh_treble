@@ -232,4 +232,10 @@ if getprop ro.vendor.build.fingerprint | grep -qE -e ".*(crown|star)[q2]*lte.*" 
 	done
 fi
 
+if getprop ro.hardware |grep -q samsungexynos7870;then
+	if [ "$vndk" -le 27 ];then
+		setprop persist.sys.phh.sdk_override /vendor/bin/hw/rild=27
+	fi
+fi
+
 mount -o bind /mnt/phh/empty_dir /vendor/etc/audio || true
