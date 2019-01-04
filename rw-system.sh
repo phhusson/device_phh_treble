@@ -228,6 +228,8 @@ fi
 if getprop ro.vendor.build.fingerprint |grep -iq -E -e 'huawei|honor' || getprop persist.sys.overlay.huawei |grep -iq -E -e 'true' ; then
 	mount -o bind /product/etc/nfc/libnfc-nxp_*_*.conf /system/etc/libnfc-nxp.conf
 	mount -o bind /product/etc/nfc/libnfc_brcm_*_*.conf /system/etc/libnfc-brcm.conf
+	mount -o bind /product/etc/nfc/libnfc-nxp.conf /system/etc/libnfc-nxp.conf
+	mount -o bind /product/etc/nfc/libnfc_brcm.conf /system/etc/libnfc-brcm.conf
 	mount -o bind /system/phh/libnfc-nci-huawei.conf /system/etc/libnfc-nci.conf
 fi
 
