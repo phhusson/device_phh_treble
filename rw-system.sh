@@ -171,6 +171,13 @@ if getprop ro.vendor.build.fingerprint |grep -q \
     mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
 fi
 
+if [ "$(getprop ro.vendor.product.manufacturer)" == "motorola" ];then
+    if getprop ro.vendor.product.device |grep -q -e nora -e ali;then
+        mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
+        mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
+    fi
+fi
+
 if getprop ro.vendor.build.fingerprint |grep -q -i -e xiaomi/wayne -e xiaomi/jasmine;then
     setprop persist.imx376_sunny.low.lux 310
     setprop persist.imx376_sunny.light.lux 280
