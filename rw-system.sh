@@ -1,5 +1,10 @@
 #!/system/bin/sh
 
+#Uncomment me to output sh -x of this script to /cache/phh/logs
+#if [ -z "$debug" ];then
+#	mkdir -p /cache/phh
+#	debug=1 exec sh -x "$(readlink -f -- "$0")" > /cache/phh/logs 2>&1
+#fi
 
 vndk="$(getprop persist.sys.vndk)"
 setprop sys.usb.ffs.aio_compat true
