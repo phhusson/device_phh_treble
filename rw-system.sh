@@ -226,11 +226,22 @@ if getprop ro.vendor.build.fingerprint | grep -qE -e ".*(crown|star)[q2]*lte.*" 
 fi
 
 if getprop ro.vendor.build.fingerprint |grep -iq -E -e 'huawei|honor' || getprop persist.sys.overlay.huawei |grep -iq -E -e 'true' ; then
+	p=/product/etc/nfc/libnfc_nxp_*_*.conf
+	mount -o bind "$p" /system/etc/libnfc-nxp.conf ||
+		mount -o bind /product/etc/libnfc-nxp.conf /system/etc/libnfc-nxp.conf || true
+
+	p=/product/etc/nfc/libnfc_brcm_*_*.conf
+	mount -o bind "$p" /system/etc/libnfc-brcm.conf ||
+		mount -o bind /product/etc/libnfc-nxp.conf /system/etc/libnfc-nxp.conf || true
+
+	mount -o bind /system/phh/libnfc-nci-huawei.conf /system/etc/libnfc-nci.conf
+fi
+
+if getprop ro.vendor.build.fingerprint |grep -iq -E -e 'huawei|honor' || getprop persist.sys.overlay.huawei |grep -iq -E -e 'true' ; then
 	mount -o bind /product/etc/nfc/libnfc-nxp_*_*.conf /system/etc/libnfc-nxp.conf
 	mount -o bind /product/etc/nfc/libnfc_brcm_*_*.conf /system/etc/libnfc-brcm.conf
 	mount -o bind /product/etc/nfc/libnfc-nxp.conf /system/etc/libnfc-nxp.conf
 	mount -o bind /product/etc/nfc/libnfc_brcm.conf /system/etc/libnfc-brcm.conf
-	mount -o bind /system/phh/libnfc-nci-huawei.conf /system/etc/libnfc-nci.conf
 fi
 
 mount -o bind /mnt/phh/empty_dir /vendor/etc/audio || true
