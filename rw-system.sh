@@ -226,8 +226,10 @@ if getprop ro.vendor.build.fingerprint | grep -qE -e ".*(crown|star)[q2]*lte.*" 
 fi
 
 if getprop ro.vendor.build.fingerprint |grep -iq -E -e 'huawei|honor' || getprop persist.sys.overlay.huawei |grep -iq -E -e 'true' ; then
-	mount -o bind /product/etc/nfc/libnfc-nxp_*_*.conf /system/etc/libnfc-nxp.conf
-	mount -o bind /product/etc/nfc/libnfc_brcm_*_*.conf /system/etc/libnfc-brcm.conf
+        boardname=$(getprop ro.board.boardname | cut -d "_" -f1 | tr '[:upper:]' '[:lower:]')
+        modeltype=$(getprop ro.board.boardname | cut -d "_" -f2 | tr '[:lower:]' '[:upper:]')
+	mount -o bind /product/etc/nfc/libnfc-nxp_${boardname}_${modeltype}.conf /system/etc/libnfc-nxp.conf
+	mount -o bind /product/etc/nfc/libnfc_brcm_${boardname}_${modeltype}.conf /system/etc/libnfc-brcm.conf
 	mount -o bind /system/phh/libnfc-nci-huawei.conf /system/etc/libnfc-nci.conf
 fi
 
