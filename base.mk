@@ -68,6 +68,10 @@ PRODUCT_PACKAGES += \
 	bootctl \
 	vintf
 
+# Fix Offline Charging on Huawmeme
+PRODUCT_PACKAGES += \
+	huawei-charger
+
 PRODUCT_COPY_FILES += \
 	device/phh/treble/twrp/twrp.rc:system/etc/init/twrp.rc \
 	device/phh/treble/twrp/twrp.sh:system/bin/twrp.sh \
