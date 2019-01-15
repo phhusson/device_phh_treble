@@ -166,13 +166,13 @@ if getprop ro.vendor.build.fingerprint |grep -q \
 	-e Xiaomi/beryllium/beryllium -e Xiaomi/sirius/sirius \
 	-e Xiaomi/dipper/dipper -e Xiaomi/ursa/ursa -e Xiaomi/polaris/polaris \
 	-e motorola/ali/ali -e iaomi/perseus/perseus -e iaomi/platina/platina \
-	-e iaomi/equuleus/equuleus -e motorola/nora;then
+	-e iaomi/equuleus/equuleus -e motorola/nora -e motorola/hannah;then
     mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
     mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
 fi
 
 if [ "$(getprop ro.vendor.product.manufacturer)" == "motorola" ];then
-    if getprop ro.vendor.product.device |grep -q -e nora -e ali;then
+    if getprop ro.vendor.product.device |grep -q -e nora -e ali -e hannah;then
         mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
         mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
     fi
