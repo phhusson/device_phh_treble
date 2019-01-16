@@ -218,7 +218,7 @@ if getprop ro.vendor.build.fingerprint | grep -qE -e ".*(crown|star)[q2]*lte.*" 
 
 		cp -a $f /mnt/phh/$b
 		sed -i \
-			-e 's;/system/etc/floating_feature.xml;/system/ph/sam-9810-flo_feat.xml;g' \
+			-e 's;/system/etc/floating_feature.xml;/system/phh/sam-9810-flo_feat.xml;g' \
 			/mnt/phh/$b
 		chcon "$ctxt" /mnt/phh/$b
 		mount -o bind /mnt/phh/$b $f
