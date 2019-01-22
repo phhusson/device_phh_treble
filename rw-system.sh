@@ -167,8 +167,7 @@ if getprop ro.vendor.build.fingerprint |grep -iq \
 	-e Xiaomi/beryllium/beryllium -e Xiaomi/sirius/sirius \
 	-e Xiaomi/dipper/dipper -e Xiaomi/ursa/ursa -e Xiaomi/polaris/polaris \
 	-e motorola/ali/ali -e iaomi/perseus/perseus -e iaomi/platina/platina \
-	-e iaomi/equuleus/equuleus -e motorola/nora -e xiaomi/nitrogen \
-	-e motorola/hannah;then
+	-e iaomi/equuleus/equuleus -e motorola/nora -e motorola/hannah;then
     mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
     mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
 fi
