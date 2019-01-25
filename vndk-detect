@@ -33,6 +33,10 @@ fi
 
 if getprop ro.hardware |grep -qiE -e qcom -e judyln -e judypn;then
 	FOUND_QCOM=1
-	setprop persist.sys.overlay.devinputjack true
+    if getprop ro.vendor.build.fingerprint |grep -qiE '^samsung';then 
+        setprop persist.sys.overlay.devinputjack false
+    else
+        setprop persist.sys.overlay.devinputjack true
+    fi
 fi
 
