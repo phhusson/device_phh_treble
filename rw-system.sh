@@ -259,9 +259,16 @@ if getprop ro.vendor.build.fingerprint | grep -qE -e ".*(crown|star)[q2]*lte.*" 
 	done
 fi
 
-if getprop ro.hardware |grep -q samsungexynos7870;then
-	if [ "$vndk" -le 27 ];then
-		setprop persist.sys.phh.sdk_override /vendor/bin/hw/rild=27
+
+if getprop ro.vendor.build.fingerprint |grep -qiE '^samsung';then
+	if getprop ro.hardware |grep -q qcom;then
+		setprop persist.sys.overlay.devinputjack false
+	fi
+
+	if getprop ro.hardware |grep -q -e samsungexynos7870 -e qcom;then
+		if [ "$vndk" -le 27 ];then
+			setprop persist.sys.phh.sdk_override /vendor/bin/hw/rild=27
+		fi
 	fi
 fi
 
