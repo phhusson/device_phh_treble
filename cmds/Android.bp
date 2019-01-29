@@ -36,3 +36,15 @@ cc_binary {
 	],
 	host_supported: true,
 }
+
+cc_binary {
+	name: "vibrator-lge",
+	srcs: [
+		"vibrator-lge.cpp",
+	],
+	shared_libs: [
+		"vendor.lge.hardware.vibrator@1.0",
+		"libutils",
+		"libhidlbase",
+	],
+}
