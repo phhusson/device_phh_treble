@@ -259,7 +259,6 @@ if getprop ro.vendor.build.fingerprint | grep -qE -e ".*(crown|star)[q2]*lte.*" 
 	done
 fi
 
-
 if getprop ro.vendor.build.fingerprint |grep -qiE '^samsung';then
 	if getprop ro.hardware |grep -q qcom;then
 		setprop persist.sys.overlay.devinputjack false
@@ -270,6 +269,10 @@ if getprop ro.vendor.build.fingerprint |grep -qiE '^samsung';then
 			setprop persist.sys.phh.sdk_override /vendor/bin/hw/rild=27
 		fi
 	fi
+
+if getprop ro.vendor.build.fingerprint | grep -qE '^xiaomi/daisy/daisy_sprout:8.1.0/OPM.*'; then
+	setprop setprop audio.camerasound.force true
+	# Fix camera on DND, ugly workaround but meh
 fi
 
 mount -o bind /mnt/phh/empty_dir /vendor/etc/audio || true
