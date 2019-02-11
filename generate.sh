@@ -3,11 +3,11 @@
 rom_script=''
 if [ -n "$1" ];then
 	if echo "$1" | grep -qF /;then
-        rom_script=''
-        for i in "$@";do
-            rom_script="$rom_script"$'\n''$(call inherit-product, '$i')'
-        done
-    else
+		rom_script=''
+		for i in "$@";do
+			rom_script="$rom_script"$'\n''$(call inherit-product, '$i')'
+		done
+	else
 		rom_script='$(call inherit-product, device/phh/treble/'$1'.mk)'
 	fi
 fi
@@ -22,7 +22,7 @@ for part in a ab;do
 				apps_script=""
 				apps_name=""
 				extra_packages=""
-                vndk="vndk.mk"
+				vndk="vndk.mk"
 				if [ "$apps" == "gapps" ];then
 					apps_suffix="g"
 					apps_script='$(call inherit-product, device/phh/treble/gapps.mk)'
