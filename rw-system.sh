@@ -53,9 +53,15 @@ changeKeylayout() {
         chmod 0644 /mnt/phh/keylayout/gpio_keys.kl /mnt/phh/keylayout/sec_touchscreen.kl
     fi
 
-    if getprop ro.vendor.build.fingerprint |grep -q Xiaomi/polaris;then
+    if getprop ro.vendor.build.fingerprint |grep -iq \
+        -e xiaomi/polaris -e xiaomi/sirius -e xiaomi/dipper \
+        -e xiaomi/wayne -e xiaomi/jasmine -e xiaomi/jasmine_sprout \
+        -e xiaomi/platina -e iaomi/perseus -e xiaomi/ysl \
+        -e xiaomi/nitrogen -e xiaomi/daisy;then
         cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
         chmod 0644 /mnt/phh/keylayout/uinput-goodix.kl
+        cp /system/phh/empty /mnt/phh/keylayout/uinput-fpc.kl
+        chmod 0644 /mnt/phh/keylayout/uinput-fpc.kl
         changed=true
     fi
 
@@ -119,8 +125,18 @@ if grep -qF 'mkdir /data/.fps 0770 system fingerp' vendor/etc/init/hw/init.mmi.r
     chown system:9015 /sys/devices/soc/soc:fpc_fpc1020/irq_cnt
 fi
 
-if getprop ro.vendor.build.fingerprint |grep -q -e Xiaomi/clover/clover -e iaomi/wayne/wayne;then
+if getprop ro.vendor.build.fingerprint |grep -q -i \
+    -e xiaomi/clover -e xiaomi/wayne -e xiaomi/sakura \
+    -e xiaomi/nitrogen -e xiaomi/whyred -e xiaomi/platina \
+    -e xiaomi/ysl;then
     setprop persist.sys.qcom-brightness $(cat /sys/class/leds/lcd-backlight/max_brightness)
+fi
+
+if getprop ro.vendor.build.fingerprint |grep -q -i -e xiaomi/wayne -e xiaomi/jasmine;then
+    setprop persist.imx376_sunny.low.lux 310
+    setprop persist.imx376_sunny.light.lux 280
+    setprop persist.imx376_ofilm.low.lux 310
+    setprop persist.imx376_ofilm.light.lux 280
 fi
 
 for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so /vendor/lib/libmtk-ril.so /vendor/lib64/libmtk-ril.so;do
