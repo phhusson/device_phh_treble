@@ -175,7 +175,7 @@ if getprop ro.vendor.build.fingerprint |grep -iq \
 fi
 
 if [ "$(getprop ro.vendor.product.manufacturer)" == "motorola" ];then
-    if getprop ro.vendor.product.device |grep -q -e nora -e ali -e hannah;then
+    if getprop ro.vendor.product.device |grep -q -e nora -e ali -e hannah -e evert -e jeter;then
         mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
         mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
     fi
