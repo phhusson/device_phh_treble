@@ -272,7 +272,7 @@ if getprop ro.vendor.build.fingerprint |grep -qiE '^samsung';then
 fi
 
 if getprop ro.vendor.build.fingerprint | grep -qE '^xiaomi/daisy/daisy_sprout:8.1.0/OPM.*'; then
-	setprop setprop audio.camerasound.force true
+	setprop audio.camerasound.force true
 	# Fix camera on DND, ugly workaround but meh
 fi
 
