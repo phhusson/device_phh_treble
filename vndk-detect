@@ -28,6 +28,7 @@ if [ -n "$FOUND_HUAWEI" ];then
 	setprop persist.sys.bt_acl_bypass true
  	setprop persist.sys.camera.huawei true
 	setprop persist.sys.radio.ussd.fix true
+	setprop persist.sys.radio.huawei true
 	setprop debug.hwui.profile true
 fi
 
