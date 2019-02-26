@@ -199,6 +199,8 @@ for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so /vendor/lib/libmtk-ril.
         /mnt/phh/$b
     chcon "$ctxt" /mnt/phh/$b
     mount -o bind /mnt/phh/$b $f
+
+    setprop persist.sys.phh.radio.force_cognitive true
 done
 
 mount -o bind /system/phh/empty /vendor/overlay/SysuiDarkTheme/SysuiDarkTheme.apk || true
