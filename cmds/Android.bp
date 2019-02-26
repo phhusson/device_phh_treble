@@ -1,0 +1,14 @@
+cc_binary {
+	name: "mtk-sms-fwk-ready",
+	srcs: [
+		"mtk-sms-fwk-ready.cpp",
+	],
+	shared_libs: [
+		"vendor.mediatek.hardware.radio@2.6",
+		"libutils",
+		"libhidlbase",
+	],
+	init_rc: [
+		"mtk-sms-fwk-ready.rc"
+	],
+}
