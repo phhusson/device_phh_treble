@@ -10,18 +10,18 @@ vndk="$(getprop persist.sys.vndk)"
 setprop sys.usb.ffs.aio_compat true
 
 fixSPL() {
-    if [ "$(getprop ro.product.cpu.abi)" == "armeabi-v7a" ];then
+    if [ "$(getprop ro.product.cpu.abi)" = "armeabi-v7a" ];then
 	    setprop ro.keymaster.mod 'AOSP on ARM32'
     else
 	    setprop ro.keymaster.mod 'AOSP on ARM64'
     fi
-    img="$(find /dev/block -type l -name kernel$(getprop ro.boot.slot_suffix) |grep by-name |head -n 1)"
-    [ -z "$img" ] && img="$(find /dev/block -type l -name boot$(getprop ro.boot.slot_suffix) |grep by-name |head -n 1)"
+    img="$(find /dev/block -type l -name kernel"$(getprop ro.boot.slot_suffix)" |grep by-name |head -n 1)"
+    [ -z "$img" ] && img="$(find /dev/block -type l -name boot"$(getprop ro.boot.slot_suffix)" |grep by-name |head -n 1)"
     if [ -n "$img" ];then
         #Rewrite SPL/Android version if needed
-        Arelease="$(getSPL $img android)"
+        Arelease="$(getSPL "$img" android)"
         setprop ro.keymaster.xxx.release "$Arelease"
-        setprop ro.keymaster.xxx.security_patch "$(getSPL $img spl)"
+        setprop ro.keymaster.xxx.security_patch "$(getSPL "$img" spl)"
 
 	getprop ro.vendor.build.fingerprint |grep -qiE '^samsung/' && return 0
         for f in \
@@ -32,6 +32,7 @@ fixSPL() {
 		/system/lib/vndk-27/libsoftkeymasterdevice.so /system/lib64/vndk-27/libsoftkeymasterdevice.so \
 		;do
             [ ! -f $f ] && continue
+	    # shellcheck disable=SC2010
             ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
             b="$(echo "$f"|tr / _)"
 
@@ -44,10 +45,10 @@ fixSPL() {
             chcon "$ctxt" /mnt/phh/$b
             mount -o bind /mnt/phh/$b $f
         done
-        if [ "$(getprop init.svc.keymaster-3-0)" == "running" ];then
+        if [ "$(getprop init.svc.keymaster-3-0)" = "running" ];then
 		setprop ctl.restart keymaster-3-0
 	fi
-        if [ "$(getprop init.svc.teed)" == "running" ];then
+        if [ "$(getprop init.svc.teed)" = "running" ];then
 		setprop ctl.restart teed
 	fi
     fi
@@ -96,14 +97,14 @@ changeKeylayout() {
 	changed=true
     fi
 
-    if [ "$changed" == true ];then
+    if [ "$changed" = true ];then
         mount -o bind /mnt/phh/keylayout /system/usr/keylayout
         restorecon -R /system/usr/keylayout
     fi
 }
 
 if mount -o remount,rw /system;then
-	resize2fs $(grep ' /system ' /proc/mounts |cut -d ' ' -f 1) || true
+	resize2fs "$(grep ' /system ' /proc/mounts |cut -d ' ' -f 1)" || true
 elif mount -o remount,rw /;then
 	resize2fs /dev/root || true
 fi
@@ -128,7 +129,7 @@ fi
 
 if getprop ro.hardware |grep -qF qcom && [ -f /sys/class/backlight/panel0-backlight/max_brightness ] && \
         grep -qvE '^255$' /sys/class/backlight/panel0-backlight/max_brightness;then
-    setprop persist.sys.qcom-brightness $(cat /sys/class/backlight/panel0-backlight/max_brightness)
+    setprop persist.sys.qcom-brightness "$(cat /sys/class/backlight/panel0-backlight/max_brightness)"
 fi
 
 #Sony don't use Qualcomm HAL, so they don't have their mess
@@ -161,7 +162,7 @@ if getprop ro.vendor.build.fingerprint |grep -q -i \
     -e xiaomi/clover -e xiaomi/wayne -e xiaomi/sakura \
     -e xiaomi/nitrogen -e xiaomi/whyred -e xiaomi/platina \
     -e xiaomi/ysl;then
-    setprop persist.sys.qcom-brightness $(cat /sys/class/leds/lcd-backlight/max_brightness)
+    setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
 fi
 
 if getprop ro.vendor.build.fingerprint |grep -iq \
@@ -174,11 +175,38 @@ if getprop ro.vendor.build.fingerprint |grep -iq \
     mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
 fi
 
-if [ "$(getprop ro.vendor.product.manufacturer)" == "motorola" ];then
-    if getprop ro.vendor.product.device |grep -q -e nora -e ali -e hannah -e evert -e jeter;then
-        mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
-        mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
+if [ "$(getprop ro.vendor.product.manufacturer)" = "motorola" ] || [ "$(getprop ro.product.vendor.manufacturer)" = "motorola" ];then
+    if getprop ro.vendor.product.device |grep -q -e nora -e ali -e hannah -e evert -e jeter -e deen;then
+        if [ "$vndk" -ge 28 ];then
+            f="/vendor/lib/libeffects.so"
+            # shellcheck disable=SC2010
+            ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
+            b="$(echo "$f"|tr / _)"
+
+            cp -a $f "/mnt/phh/$b"
+            sed -i \
+                's/%zu errors during loading of configuration: %s/%zu errors during loading of configuration: ss/g' \
+                "/mnt/phh/$b"
+            chcon "$ctxt" "/mnt/phh/$b"
+            mount -o bind "/mnt/phh/$b" $f
+        else
+            mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
+            mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
+        fi
     fi
+fi
+
+if true;then
+	f="/vendor/lib/libeffects.so"
+        ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
+        b="$(echo "$f"|tr / _)"
+
+        cp -a $f /mnt/phh/$b
+        sed -i \
+		's/%zu errors during loading of configuration: %s/%zu errors during loading of configuration: ss/g' \
+	        /mnt/phh/$b
+        chcon "$ctxt" /mnt/phh/$b
+        mount -o bind /mnt/phh/$b $f
 fi
 
 if getprop ro.vendor.build.fingerprint |grep -q -i -e xiaomi/wayne -e xiaomi/jasmine;then
