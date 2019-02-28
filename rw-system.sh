@@ -176,6 +176,18 @@ fi
 
 if [ "$(getprop ro.vendor.product.manufacturer)" == "motorola" ];then
     if getprop ro.vendor.product.device |grep -q -e nora -e ali -e hannah -e evert -e jeter;then
+
+	f="/vendor/lib/libeffects.so"
+        ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
+        b="$(echo "$f"|tr / _)"
+
+        cp -a $f /mnt/phh/$b
+        sed -i \
+		's/%zu errors during loading of configuration: %s/%zu errors during loading of configuration: ss/g'
+	        /mnt/phh/$b
+        chcon "$ctxt" /mnt/phh/$b
+        mount -o bind /mnt/phh/$b $f
+
         mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
         mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
     fi
