@@ -191,7 +191,7 @@ if true;then
 
         cp -a $f /mnt/phh/$b
         sed -i \
-		's/%zu errors during loading of configuration: %s/%zu errors during loading of configuration: ss/g'
+		's/%zu errors during loading of configuration: %s/%zu errors during loading of configuration: ss/g' \
 	        /mnt/phh/$b
         chcon "$ctxt" /mnt/phh/$b
         mount -o bind /mnt/phh/$b $f
