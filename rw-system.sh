@@ -31,19 +31,19 @@ fixSPL() {
 		/system/lib/vndk-26/libsoftkeymasterdevice.so \
 		/system/lib/vndk-27/libsoftkeymasterdevice.so /system/lib64/vndk-27/libsoftkeymasterdevice.so \
 		;do
-            [ ! -f $f ] && continue
+            [ ! -f "$f" ] && continue
 	    # shellcheck disable=SC2010
-            ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
+            ctxt="$(ls -lZ "$f" |grep -oE 'u:object_r:[^:]*:s0')"
             b="$(echo "$f"|tr / _)"
 
-            cp -a $f /mnt/phh/$b
+            cp -a "$f" "/mnt/phh/$b"
             sed -i \
 		    -e 's/ro.build.version.release/ro.keymaster.xxx.release/g' \
 		    -e 's/ro.build.version.security_patch/ro.keymaster.xxx.security_patch/g' \
 		    -e 's/ro.product.model/ro.keymaster.mod/g' \
-		    /mnt/phh/$b
-            chcon "$ctxt" /mnt/phh/$b
-            mount -o bind /mnt/phh/$b $f
+		    "/mnt/phh/$b"
+            chcon "$ctxt" "/mnt/phh/$b"
+            mount -o bind "/mnt/phh/$b" "$f"
         done
         if [ "$(getprop init.svc.keymaster-3-0)" = "running" ];then
 		setprop ctl.restart keymaster-3-0
@@ -196,18 +196,20 @@ if [ "$(getprop ro.vendor.product.manufacturer)" = "motorola" ] || [ "$(getprop 
     fi
 fi
 
-if true;then
+for f in /vendor/lib/libeffects.so /vendor/lib64/libeffects.so;do
+	[ ! -f $f ] && continue
 	f="/vendor/lib/libeffects.so"
-        ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
+	# shellcheck disable=SC2010
+        ctxt="$(ls -lZ "$f" |grep -oE 'u:object_r:[^:]*:s0')"
         b="$(echo "$f"|tr / _)"
 
-        cp -a $f /mnt/phh/$b
+        cp -a "$f" "/mnt/phh/$b"
         sed -i \
 		's/%zu errors during loading of configuration: %s/%zu errors during loading of configuration: ss/g' \
-	        /mnt/phh/$b
-        chcon "$ctxt" /mnt/phh/$b
-        mount -o bind /mnt/phh/$b $f
-fi
+	        "/mnt/phh/$b"
+        chcon "$ctxt" "/mnt/phh/$b"
+        mount -o bind "/mnt/phh/$b" "$f"
+done
 
 if getprop ro.vendor.build.fingerprint |grep -q -i -e xiaomi/wayne -e xiaomi/jasmine;then
     setprop persist.imx376_sunny.low.lux 310
@@ -218,15 +220,16 @@ fi
 
 for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so /vendor/lib/libmtk-ril.so /vendor/lib64/libmtk-ril.so;do
     [ ! -f $f ] && continue
-    ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
+    # shellcheck disable=SC2010
+    ctxt="$(ls -lZ "$f" |grep -oE 'u:object_r:[^:]*:s0')"
     b="$(echo "$f"|tr / _)"
 
-    cp -a $f /mnt/phh/$b
+    cp -a "$f" "/mnt/phh/$b"
     sed -i \
         -e 's/AT+EAIC=2/AT+EAIC=3/g' \
-        /mnt/phh/$b
-    chcon "$ctxt" /mnt/phh/$b
-    mount -o bind /mnt/phh/$b $f
+        "/mnt/phh/$b"
+    chcon "$ctxt" "/mnt/phh/$b"
+    mount -o bind "/mnt/phh/$b" "$f"
 
     setprop persist.sys.phh.radio.force_cognitive true
 done
@@ -246,7 +249,7 @@ if [ -f /vendor/bin/hw/vendor.samsung.hardware.miscpower@1.0-service ];then
 	mount -o bind /system/phh/empty /vendor/bin/hw/android.hardware.power@1.0-service
 fi
 
-if [ "$vndk" == 27 -o "$vndk" == 26 ];then
+if [ "$vndk" = 27 ] || [ "$vndk" = 26 ];then
     mount -o bind /system/phh/libnfc-nci-oreo.conf /system/etc/libnfc-nci.conf
 fi
 
@@ -276,16 +279,17 @@ fi
 
 if getprop ro.vendor.build.fingerprint | grep -qE -e ".*(crown|star)[q2]*lte.*"  -e ".*(SC-0[23]K|SCV3[89]).*";then
 	for f in /vendor/lib/libfloatingfeature.so /vendor/lib64/libfloatingfeature.so;do
-		[ ! -f $f ] && continue
-		ctxt="$(ls -lZ $f |grep -oE 'u:object_r:[^:]*:s0')"
+		[ ! -f "$f" ] && continue
+		# shellcheck disable=SC2010
+		ctxt="$(ls -lZ "$f" |grep -oE 'u:object_r:[^:]*:s0')"
 		b="$(echo "$f"|tr / _)"
 
-		cp -a $f /mnt/phh/$b
+		cp -a "$f" "/mnt/phh/$b"
 		sed -i \
 			-e 's;/system/etc/floating_feature.xml;/system/ph/sam-9810-flo_feat.xml;g' \
-			/mnt/phh/$b
-		chcon "$ctxt" /mnt/phh/$b
-		mount -o bind /mnt/phh/$b $f
+			"/mnt/phh/$b"
+		chcon "$ctxt" "/mnt/phh/$b"
+		mount -o bind "/mnt/phh/$b" "$f"
 	done
 fi
 
@@ -302,8 +306,8 @@ if getprop ro.vendor.build.fingerprint |grep -qiE '^samsung';then
 fi
 
 if getprop ro.vendor.build.fingerprint | grep -qE '^xiaomi/daisy/daisy_sprout:8.1.0/OPM.*'; then
-	setprop audio.camerasound.force true
 	# Fix camera on DND, ugly workaround but meh
+	setprop audio.camerasound.force true
 fi
 
 mount -o bind /mnt/phh/empty_dir /vendor/etc/audio || true
