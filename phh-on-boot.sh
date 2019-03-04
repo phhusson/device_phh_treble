@@ -18,6 +18,6 @@ getprop | \
         setprop ctl.stop $svc
     done
 
-if grep -qF android.hardware.boot /vendor/manifest.xml;then
+if grep -qF android.hardware.boot /vendor/manifest.xml || grep -qF android.hardware.boot /vendor/etc/vintf/manifest.xml ;then
 	bootctl mark-boot-successful
 fi
