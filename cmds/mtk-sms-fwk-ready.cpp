@@ -7,6 +7,6 @@ using ::android::sp;
 
 int main(int argc, char **argv) {
 	auto svc = IRadio::getService(argv[1]);
-
-	svc->setSmsFwkReady(1);
+	if(svc != nullptr)
+		svc->setSmsFwkReady(1);
 }
