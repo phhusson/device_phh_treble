@@ -313,3 +313,19 @@ if getprop ro.vendor.build.fingerprint | grep -qE '^xiaomi/daisy/daisy_sprout:8.
 fi
 
 mount -o bind /mnt/phh/empty_dir /vendor/etc/audio || true
+
+for f in /vendor/lib{,64}/hw/com.qti.chi.override.so;do
+    [ ! -f $f ] && continue
+    # shellcheck disable=SC2010
+    ctxt="$(ls -lZ "$f" | grep -oE 'u:object_r:[^:]*:s0')"
+    b="$(echo "$f" | tr / _)"
+
+    cp -a "$f" "/mnt/phh/$b"
+    sed -i \
+        -e 's/ro.product.manufacturer/sys.phh.xx.manufacturer/g' \
+        "/mnt/phh/$b"
+    chcon "$ctxt" "/mnt/phh/$b"
+    mount -o bind "/mnt/phh/$b" "$f"
+
+    setprop sys.phh.xx.manufacturer "$(getprop ro.product.vendor.manufacturer)"
+done
