@@ -84,7 +84,7 @@ changeKeylayout() {
         changed=true
     fi
 
-    if getprop ro.vendor.build.fingerprint | grep -iq -e iaomi/perseus; then
+    if getprop ro.vendor.build.fingerprint | grep -iq -e iaomi/perseus -e iaomi/cepheus; then
         cp /system/phh/mimix3-gpio-keys.kl /mnt/phh/keylayout/gpio-keys.kl
         chmod 0644 /mnt/phh/keylayout/gpio-keys.kl
         changed=true
