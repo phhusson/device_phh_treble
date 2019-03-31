@@ -40,7 +40,3 @@ if getprop ro.hardware |grep -qiE -e qcom -e judyln -e judypn;then
         setprop persist.sys.overlay.devinputjack true
     fi
 fi
-
-if getprop Build.BRAND  | grep -qiE -e MTK;then
-   setprop persist.sys.radio.ussd.fix true
-fi
