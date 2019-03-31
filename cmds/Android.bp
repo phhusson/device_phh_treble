@@ -63,3 +63,39 @@ cc_binary {
 		"mtk-sms-fwk-ready.rc"
 	],
 }
+
+cc_binary {
+	name: "xiaomi-display-feature",
+	srcs: [
+		"xiaomi-display-feature.cpp",
+	],
+	shared_libs: [
+		"vendor.xiaomi.hardware.displayfeature@1.0",
+		"libutils",
+		"libhidlbase",
+	],
+}
+
+cc_binary {
+	name: "xiaomi-fp",
+	srcs: [
+		"xiaomi-fp.cpp",
+	],
+	shared_libs: [
+		"vendor.xiaomi.hardware.fingerprintextension@1.0",
+		"libutils",
+		"libhidlbase",
+	],
+}
+
+cc_binary {
+	name: "lightsctl-sec",
+	srcs: [
+		"lightsctl-sec.cpp",
+	],
+	shared_libs: [
+		"vendor.samsung.hardware.light@2.0",
+		"libutils",
+		"libhidlbase",
+	],
+}
