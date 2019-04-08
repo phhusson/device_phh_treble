@@ -198,21 +198,6 @@ if [ "$(getprop ro.vendor.product.manufacturer)" = "motorola" ] || [ "$(getprop 
     fi
 fi
 
-for f in /vendor/lib/libeffects.so /vendor/lib64/libeffects.so; do
-    [ ! -f $f ] && continue
-    f="/vendor/lib/libeffects.so"
-    # shellcheck disable=SC2010
-    ctxt="$(ls -lZ "$f" | grep -oE 'u:object_r:[^:]*:s0')"
-    b="$(echo "$f" | tr / _)"
-
-    cp -a "$f" "/mnt/phh/$b"
-    sed -i \
-        's/%zu errors during loading of configuration: %s/%zu errors during loading of configuration: ss/g' \
-        "/mnt/phh/$b"
-    chcon "$ctxt" "/mnt/phh/$b"
-    mount -o bind "/mnt/phh/$b" "$f"
-done
-
 if getprop ro.vendor.build.fingerprint | grep -q -i -e xiaomi/wayne -e xiaomi/jasmine; then
     setprop persist.imx376_sunny.low.lux 310
     setprop persist.imx376_sunny.light.lux 280
