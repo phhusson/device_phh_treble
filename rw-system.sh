@@ -69,7 +69,7 @@ changeKeylayout() {
     if getprop ro.vendor.build.fingerprint | grep -iq \
         -e xiaomi/polaris -e xiaomi/sirius -e xiaomi/dipper \
         -e xiaomi/wayne -e xiaomi/jasmine \
-        -e xiaomi/platina -e iaomi/perseus -e xiaomi/ysl \
+        -e xiaomi/platina -e xiaomi/perseus -e xiaomi/ysl \
         -e xiaomi/nitrogen -e xiaomi/daisy -e xiaomi/sakura; then
         cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
         chmod 0644 /mnt/phh/keylayout/uinput-goodix.kl
@@ -84,7 +84,7 @@ changeKeylayout() {
         changed=true
     fi
 
-    if getprop ro.vendor.build.fingerprint | grep -iq -e iaomi/perseus -e iaomi/cepheus; then
+    if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/perseus -e xiaomi/cepheus; then
         cp /system/phh/mimix3-gpio-keys.kl /mnt/phh/keylayout/gpio-keys.kl
         chmod 0644 /mnt/phh/keylayout/gpio-keys.kl
         changed=true
