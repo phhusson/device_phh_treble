@@ -206,6 +206,9 @@ if getprop ro.vendor.build.fingerprint | grep -q -i -e xiaomi/wayne -e xiaomi/ja
 
     # Fixes the front-facing flash from constantly staying on
     echo "none" > /sys/class/leds/led:torch_2/trigger
+
+    # Fixes the quick settings being to close to the edge of the panel
+    wm density 460
 fi
 
 for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so /vendor/lib/libmtk-ril.so /vendor/lib64/libmtk-ril.so; do
