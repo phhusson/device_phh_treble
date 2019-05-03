@@ -278,7 +278,14 @@ if getprop ro.vendor.build.fingerprint | grep -qE -e ".*(crown|star)[q2]*lte.*" 
             "/mnt/phh/$b"
         chcon "$ctxt" "/mnt/phh/$b"
         mount -o bind "/mnt/phh/$b" "$f"
+
+	setprop ro.audio.monitorRotation true
     done
+fi
+
+# This matches both Razer Phone 1 & 2
+if getprop ro.vendor.build.fingerprint |grep -qE razer/cheryl;then
+	setprop ro.audio.monitorRotation true
 fi
 
 if getprop ro.vendor.build.fingerprint | grep -qiE '^samsung'; then
