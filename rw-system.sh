@@ -178,7 +178,7 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
 fi
 
 if [ "$(getprop ro.vendor.product.manufacturer)" = "motorola" ] || [ "$(getprop ro.product.vendor.manufacturer)" = "motorola" ]; then
-    if getprop ro.vendor.product.device | grep -q -e nora -e ali -e hannah -e evert -e jeter -e deen -e james -e pettyl; then
+    if getprop ro.vendor.product.device | grep -q -e nora -e ali -e hannah -e evert -e jeter -e deen -e james -e pettyl -e jater; then
         if [ "$vndk" -ge 28 ]; then
             f="/vendor/lib/libeffects.so"
             # shellcheck disable=SC2010
