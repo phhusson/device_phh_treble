@@ -70,7 +70,8 @@ changeKeylayout() {
         -e xiaomi/polaris -e xiaomi/sirius -e xiaomi/dipper \
         -e xiaomi/wayne -e xiaomi/jasmine -e xiaomi/jasmine_sprout \
         -e xiaomi/platina -e iaomi/perseus -e xiaomi/ysl \
-        -e xiaomi/nitrogen -e xiaomi/daisy -e xiaomi/sakura; then
+        -e xiaomi/nitrogen -e xiaomi/daisy -e xiaomi/sakura \
+        -e xiaomi/whyred; then
         cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
         chmod 0644 /mnt/phh/keylayout/uinput-goodix.kl
         cp /system/phh/empty /mnt/phh/keylayout/uinput-fpc.kl
