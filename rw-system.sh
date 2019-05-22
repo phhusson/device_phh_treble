@@ -177,6 +177,7 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
     -e iaomi/grus;then
     mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
     mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
+    setprop  ro.audio.ignore_effects true
 fi
 
 if [ "$(getprop ro.vendor.product.manufacturer)" = "motorola" ] || [ "$(getprop ro.product.vendor.manufacturer)" = "motorola" ]; then
