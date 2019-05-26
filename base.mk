@@ -126,3 +126,17 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	Stk
+
+PRODUCT_COPY_FILES += \
+	device/phh/treble/empty:system/etc/firmware/empty \
+
+PRODUCT_COPY_FILES += \
+	device/phh/treble/files/xiaomi-goodixfp.b00:system/phh/xiaomi-goodixfp.b00 \
+	device/phh/treble/files/xiaomi-goodixfp.b01:system/phh/xiaomi-goodixfp.b01 \
+	device/phh/treble/files/xiaomi-goodixfp.b02:system/phh/xiaomi-goodixfp.b02 \
+	device/phh/treble/files/xiaomi-goodixfp.b03:system/phh/xiaomi-goodixfp.b03 \
+	device/phh/treble/files/xiaomi-goodixfp.b04:system/phh/xiaomi-goodixfp.b04 \
+	device/phh/treble/files/xiaomi-goodixfp.b05:system/phh/xiaomi-goodixfp.b05 \
+	device/phh/treble/files/xiaomi-goodixfp.b06:system/phh/xiaomi-goodixfp.b06 \
+	device/phh/treble/files/xiaomi-goodixfp.b07:system/phh/xiaomi-goodixfp.b07 \
+	device/phh/treble/files/xiaomi-goodixfp.mdp:system/phh/xiaomi-goodixfp.mdp
