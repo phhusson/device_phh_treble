@@ -99,3 +99,15 @@ cc_binary {
 		"libhidlbase",
 	],
 }
+
+cc_binary {
+	name: "xiaomi-motor",
+	srcs: [
+		"xiaomi-motor.cpp",
+	],
+	shared_libs: [
+		"vendor.xiaomi.hardware.motor@1.0",
+		"libutils",
+		"libhidlbase",
+	],
+}
