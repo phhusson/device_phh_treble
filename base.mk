@@ -124,5 +124,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
 	mtk-sms-fwk-ready
 
+# Helper to debug Xiaomi motorized camera
+PRODUCT_PACKAGES += \
+	xiaomi-motor
+
 PRODUCT_PACKAGES += \
 	Stk
