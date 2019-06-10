@@ -111,3 +111,15 @@ cc_binary {
 		"libhidlbase",
 	],
 }
+
+cc_binary {
+	name: "oneplus-motor",
+	srcs: [
+		"oneplus-motor.cpp",
+	],
+	shared_libs: [
+		"vendor.oneplus.hardware.motorcontrol@1.0",
+		"libutils",
+		"libhidlbase",
+	],
+}
