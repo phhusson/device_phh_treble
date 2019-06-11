@@ -123,3 +123,19 @@ cc_binary {
 		"libhidlbase",
 	],
 }
+
+cc_binary {
+	name: "persistprops",
+	srcs: [
+		"persistent_properties.proto",
+		"persistprops.cpp",
+	],
+	static_executable: true,
+	proto: {
+		type: "lite",
+		static: true,
+	},
+	static_libs: [
+		"libprotobuf-cpp-lite"
+	],
+}
