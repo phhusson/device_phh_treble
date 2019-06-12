@@ -326,3 +326,7 @@ for f in /vendor/lib{,64}/hw/com.qti.chi.override.so;do
 
     setprop sys.phh.xx.manufacturer "$(getprop ro.product.vendor.manufacturer)"
 done
+
+if [ -n "$(getprop ro.boot.product.hardware.sku)" ] && [ -z "$(getprop ro.hw.oemName)" ];then
+	setprop ro.hw.oemName "$(getprop ro.boot.product.hardware.sku)"
+fi
