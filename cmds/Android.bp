@@ -139,3 +139,15 @@ cc_binary {
 		"libprotobuf-cpp-lite"
 	],
 }
+
+cc_binary {
+	name: "lightsctl-huawei",
+	srcs: [
+		"lightsctl-huawei.cpp",
+	],
+	shared_libs: [
+		"vendor.huawei.hardware.light@2.0",
+		"libutils",
+		"libhidlbase",
+	],
+}
