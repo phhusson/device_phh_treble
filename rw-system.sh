@@ -187,9 +187,6 @@ if [ "$(getprop ro.vendor.product.manufacturer)" = "motorola" ] || [ "$(getprop 
             # shellcheck disable=SC2010
             ctxt="$(ls -lZ $f | grep -oE 'u:object_r:[^:]*:s0')"
             b="$(echo "$f" | tr / _)"
-	    setprop debug.egl.hw 1
-	    setprop debug.sf.hw 1
-	    setprop debug.sf.latch_unsignaled 1
 
             cp -a $f "/mnt/phh/$b"
             sed -i \
