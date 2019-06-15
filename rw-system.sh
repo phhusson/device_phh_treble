@@ -257,6 +257,13 @@ if getprop ro.product.model | grep -qF ANE; then
     setprop debug.sf.latch_unsignaled 1
 fi
 
+if [ "$(getprop ro.vendor.product.manufacturer)" = "motorola" ] || [ "$(getprop ro.product.vendor.manufacturer)" = "motorola" ]; then
+    if getprop ro.vendor.product.device | grep -q -e nora -e hannah -e james -e pettyl; then
+        setprop debug.egl.hw 1
+        setprop debug.sf.hw 1
+        setprop debug.sf.latch_unsignaled 1
+fi
+
 if getprop ro.vendor.build.fingerprint | grep -iq -E -e 'huawei|honor' || getprop persist.sys.overlay.huawei | grep -iq -E -e 'true'; then
     p=/product/etc/nfc/libnfc_nxp_*_*.conf
     mount -o bind "$p" /system/etc/libnfc-nxp.conf ||
