@@ -72,11 +72,16 @@ changeKeylayout() {
         -e xiaomi/platina -e iaomi/perseus -e xiaomi/ysl \
         -e xiaomi/nitrogen -e xiaomi/daisy -e xiaomi/sakura \
         -e xiaomi/whyred -e xiaomi/tulip; then
-        cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
-        chmod 0644 /mnt/phh/keylayout/uinput-goodix.kl
-        cp /system/phh/empty /mnt/phh/keylayout/uinput-fpc.kl
-        chmod 0644 /mnt/phh/keylayout/uinput-fpc.kl
-        changed=true
+        if [ ! -f /mnt/phh/keylayout/uinput-goodix.kl ]; then
+          cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
+          chmod 0644 /mnt/phh/keylayout/uinput-goodix.kl
+          changed=true
+        fi
+        if [ ! -f /mnt/phh/keylayout/uinput-fpc.kl ]; then
+          cp /system/phh/empty /mnt/phh/keylayout/uinput-fpc.kl
+          chmod 0644 /mnt/phh/keylayout/uinput-fpc.kl
+          changed=true
+        fi
     fi
 
     if getprop ro.vendor.build.fingerprint | grep -qi oneplus/oneplus6/oneplus6; then
