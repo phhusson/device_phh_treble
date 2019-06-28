@@ -258,7 +258,7 @@ if getprop ro.product.model | grep -qF ANE; then
 fi
 
 if [ "$(getprop ro.vendor.product.manufacturer)" = "motorola" ] || [ "$(getprop ro.product.vendor.manufacturer)" = "motorola" ]; then
-    if getprop ro.vendor.product.device | grep -q -e nora -e hannah -e james -e pettyl; then
+    if getprop ro.vendor.product.device | grep -q -e nora -e rhannah -e james -e pettyl; then
         setprop debug.egl.hw 1
         setprop debug.sf.hw 1
         setprop debug.sf.latch_unsignaled 1
