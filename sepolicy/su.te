@@ -51,7 +51,7 @@ allow phhsu_daemon self:file { rwx_file_perms create rename setattr unlink };
 allow phhsu_daemon self:lnk_file { r_file_perms execmod };
 
 allow phhsu_daemon adbd_exec:file { getattr read };
-allow phhsu_daemon { rootfs same_process_hal_file system_file }:file { mounton getattr };
+allow phhsu_daemon { rootfs same_process_hal_file system_file tmpfs }:file { mounton getattr };
 allow phhsu_daemon self:capability { sys_admin chown setuid setgid net_raw dac_override dac_read_search kill };
 allow phhsu_daemon self:capability2 { syslog };
 allow phhsu_daemon shell_exec:file rx_file_perms;
@@ -89,8 +89,8 @@ allow phhsu_daemon dex2oat_exec:file rx_file_perms;
 
 allow phhsu_daemon phhsu_daemon_tmpfs:file rwx_file_perms;
 
-allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:file { rwx_file_perms create };
-allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:dir rw_dir_perms;
+allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:file { rwx_file_perms create mounton};
+allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:dir { rw_dir_perms mounton };
 allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:chr_file rwx_file_perms;
 allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:blk_file rw_file_perms;
 
@@ -120,4 +120,10 @@ allow phhsu_daemon tombstoned:unix_stream_socket { connectto };
 allow phhsu_daemon { property_data_file data_file_type tmpfs }:file create_file_perms;
 allow phhsu_daemon { property_data_file data_file_type tmpfs }:dir create_dir_perms;
 
-allow phhsu_daemon fs_type:filesystem { remount remount unmount associate};
+allow phhsu_daemon fs_type:filesystem { mount remount unmount associate };
+
+allow phhsu_daemon phhsu_daemon:file relabelfrom;
+
+allow phhsu_daemon properties_device:dir { map };
+allow phhsu_daemon { tmpfs }:dir { mounton };
+allow phhsu_daemon system_file:file { relabelto };

@@ -22,3 +22,6 @@ allow init vendor_configs_file:file { getattr mounton };
 #/sys/module/five
 allow vndk_detect sysfs:file r_file_perms;
 allow vndk_detect sysfs:dir r_dir_perms;
+
+#/proc/filesystems
+allow vndk_detect proc_filesystems:file r_file_perms;
