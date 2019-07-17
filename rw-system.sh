@@ -123,6 +123,8 @@ fixSPL
 
 changeKeylayout
 
+mount /system/phh/empty /vendor/bin/vendor.samsung.security.proca@1.0-service || true
+
 if grep vendor.huawei.hardware.biometrics.fingerprint /vendor/manifest.xml; then
     mount -o bind system/phh/huawei/fingerprint.kl /vendor/usr/keylayout/fingerprint.kl
 fi
