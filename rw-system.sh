@@ -7,6 +7,7 @@
 #fi
 
 vndk="$(getprop persist.sys.vndk)"
+[ -z "$vndk" ] && vndk="$(getprop ro.vndk.version |grep -oE '^[0-9]+')"
 setprop sys.usb.ffs.aio_compat true
 
 fixSPL() {
