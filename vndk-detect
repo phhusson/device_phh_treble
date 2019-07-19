@@ -13,7 +13,7 @@ if [ -d /sys/module/five ];then
 	if mount -o bind /system/phh/empty /sbin/adbd;then
 		setprop sys.phh.five true
 	fi
-else if [ -f /sbin/adbd ];then
+elif [ -f /sbin/adbd ];then
 	mount -o bind /system/bin/adbd /sbin/adbd
 fi
 if ( getprop ro.hardware | grep -qE '(kirin970|hi3660|hi6250|hi3670)' );then
