@@ -132,6 +132,3 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	Stk
-
-PRODUCT_PACKAGES += \
-	ch.deletescape.lawnchair.plah
