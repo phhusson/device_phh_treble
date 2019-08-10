@@ -13,6 +13,8 @@ if grep -qF android.hardware.boot /vendor/manifest.xml || grep -qF android.hardw
 	bootctl mark-boot-successful
 fi
 
+setprop ctl.restart sec-light-hal-2-0
+
 #Clear looping services
 sleep 30
 getprop | \
