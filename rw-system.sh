@@ -343,3 +343,7 @@ done
 if [ -n "$(getprop ro.boot.product.hardware.sku)" ] && [ -z "$(getprop ro.hw.oemName)" ];then
 	setprop ro.hw.oemName "$(getprop ro.boot.product.hardware.sku)"
 fi
+
+if getprop ro.vendor.build.fingerprint | grep -qiE '^samsung/' && [ "$vndk" -ge 28 ];then
+	setprop persist.sys.phh.samsung_fingerprint -1
+fi
