@@ -109,6 +109,32 @@ changeKeylayout() {
     fi
 }
 
+mountGoodixFirmware() {
+    cp -a /system/etc/firmware /mnt/phh/firmware
+    cp /system/phh/xiaomi-goodixfp.b00 /mnt/phh/firmware/goodixfp.b00
+    cp /system/phh/xiaomi-goodixfp.b01 /mnt/phh/firmware/goodixfp.b01
+    cp /system/phh/xiaomi-goodixfp.b02 /mnt/phh/firmware/goodixfp.b02
+    cp /system/phh/xiaomi-goodixfp.b03 /mnt/phh/firmware/goodixfp.b03
+    cp /system/phh/xiaomi-goodixfp.b04 /mnt/phh/firmware/goodixfp.b04
+    cp /system/phh/xiaomi-goodixfp.b05 /mnt/phh/firmware/goodixfp.b05
+    cp /system/phh/xiaomi-goodixfp.b06 /mnt/phh/firmware/goodixfp.b06
+    cp /system/phh/xiaomi-goodixfp.b07 /mnt/phh/firmware/goodixfp.b07
+    cp /system/phh/xiaomi-goodixfp.mdp /mnt/phh/firmware/goodixfp.mdp
+
+    chmod 644 /mnt/phh/firmware/goodixfp.b00
+    chmod 644 /mnt/phh/firmware/goodixfp.b01
+    chmod 644 /mnt/phh/firmware/goodixfp.b02
+    chmod 644 /mnt/phh/firmware/goodixfp.b03
+    chmod 644 /mnt/phh/firmware/goodixfp.b04
+    chmod 644 /mnt/phh/firmware/goodixfp.b05
+    chmod 644 /mnt/phh/firmware/goodixfp.b06
+    chmod 644 /mnt/phh/firmware/goodixfp.b07
+    chmod 644 /mnt/phh/firmware/goodixfp.mdp
+
+    mount -o bind /mnt/phh/firmware /system/etc/firmware
+    restorecon -R /system/etc/firmware
+}
+
 if mount -o remount,rw /system; then
     resize2fs "$(grep ' /system ' /proc/mounts | cut -d ' ' -f 1)" || true
 elif mount -o remount,rw /; then
@@ -320,6 +346,15 @@ fi
 if getprop ro.vendor.build.fingerprint | grep -qE '^xiaomi/(daisy|wayne)/(daisy|wayne).*'; then
     # Fix camera on DND, ugly workaround but meh
     setprop audio.camerasound.force true
+fi
+
+if getprop ro.vendor.build.fingerprint | grep -iq \
+        -e xiaomi/polaris -e xiaomi/sirius -e xiaomi/dipper \
+        -e xiaomi/wayne -e xiaomi/jasmine -e xiaomi/jasmine_sprout \
+        -e xiaomi/platina -e iaomi/perseus -e xiaomi/ysl \
+        -e xiaomi/nitrogen -e xiaomi/daisy -e xiaomi/sakura \
+        -e xiaomi/whyred -e xiaomi/tulip; then
+	mountGoodixFirmware
 fi
 
 mount -o bind /mnt/phh/empty_dir /vendor/etc/audio || true
