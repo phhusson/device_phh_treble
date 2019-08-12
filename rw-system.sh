@@ -346,4 +346,16 @@ fi
 
 if getprop ro.vendor.build.fingerprint | grep -qiE '^samsung/' && [ "$vndk" -ge 28 ];then
 	setprop persist.sys.phh.samsung_fingerprint -1
+	#obviously broken perms
+	if [ "$(stat -c '%A' /sys/class/sec/tsp/ear_detect_enable)" == "-rw-rw-r--" ] &&
+		[ "$(stat -c '%U' /sys/class/sec/tsp/ear_detect_enable)" == "root" ] &&
+		[ "$(stat -c '%G' /sys/class/sec/tsp/ear_detect_enable)" == "root" ];then
+
+		chcon u:object_r:sysfs_ss_writable:s0 /sys/class/sec/tsp/ear_detect_enable
+		chown system /sys/class/sec/tsp/ear_detect_enable
+
+		chcon u:object_r:sysfs_ss_writable:s0 /sys/class/sec/tsp/cmd
+		chcon u:object_r:sysfs_ss_writable:s0 /sys/class/sec/tsp/cmd_{list,result,status}
+		chown system /sys/class/sec/tsp/cmd_{list,result,status}
+	fi
 fi
