@@ -14,6 +14,9 @@ if grep -qF android.hardware.boot /vendor/manifest.xml || grep -qF android.hardw
 fi
 
 setprop ctl.restart sec-light-hal-2-0
+if find /sys/firmware -name support_fod |grep -qE .;then
+	setprop ctl.restart vendor.fps_hal
+fi
 
 #Clear looping services
 sleep 30
