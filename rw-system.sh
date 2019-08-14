@@ -354,8 +354,7 @@ if getprop ro.vendor.build.fingerprint | grep -qiE '^samsung/' && [ "$vndk" -ge 
 		chcon u:object_r:sysfs_ss_writable:s0 /sys/class/sec/tsp/ear_detect_enable
 		chown system /sys/class/sec/tsp/ear_detect_enable
 
-		chcon u:object_r:sysfs_ss_writable:s0 /sys/class/sec/tsp/cmd
-		chcon u:object_r:sysfs_ss_writable:s0 /sys/class/sec/tsp/cmd_{list,result,status}
-		chown system /sys/class/sec/tsp/cmd_{list,result,status}
+		chcon u:object_r:sysfs_ss_writable:s0 /sys/class/sec/tsp/cmd{,_list,_result,_status}
+		chown system /sys/class/sec/tsp/cmd{,_list,_result,_status}
 	fi
 fi
