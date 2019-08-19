@@ -59,7 +59,7 @@ changeKeylayout() {
     changed=false
 
     if getprop ro.vendor.build.fingerprint |
-        grep -qE -e ".*(crown|star)[q2]*lte.*" -e ".*(SC-0[23]K|SCV3[89]).*"; then
+        grep -qE -e "^samsung"; then
         changed=true
 
         cp /system/phh/samsung-gpio_keys.kl /mnt/phh/keylayout/gpio_keys.kl
