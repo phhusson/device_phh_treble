@@ -39,6 +39,7 @@ net_domain(phhsu_daemon)
 
 hwbinder_use(phhsu_daemon)
 
+allow domain untrusted_app_all_devpts:chr_file { getattr read write };
 allow phhsu_daemon untrusted_app_all_devpts:chr_file { getattr read write open ioctl };
 allow phhsu_daemon zygote_exec:file { execute read open execute_no_trans getattr };
 
@@ -52,7 +53,7 @@ allow phhsu_daemon self:lnk_file { r_file_perms execmod };
 
 allow phhsu_daemon adbd_exec:file { getattr read };
 allow phhsu_daemon { rootfs same_process_hal_file system_file tmpfs }:file { mounton getattr };
-allow phhsu_daemon self:capability { sys_admin chown setuid setgid net_raw dac_override dac_read_search kill fowner };
+allow phhsu_daemon self:capability { sys_admin chown setuid setgid net_raw dac_override dac_read_search kill fowner mknod };
 allow phhsu_daemon self:capability2 { syslog };
 allow phhsu_daemon shell_exec:file rx_file_perms;
 allow phhsu_daemon system_file:file { rx_file_perms entrypoint };
@@ -93,7 +94,7 @@ allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }
 allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:lnk_file { rw_file_perms create mounton setattr getattr relabelto relabelfrom };
 allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:dir { rw_dir_perms create mounton setattr getattr relabelto relabelfrom };
 allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:chr_file rwx_file_perms;
-allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:blk_file rw_file_perms;
+allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:blk_file { rw_file_perms create };
 
 allow phhsu_daemon device:file rwx_file_perms;
 allow phhsu_daemon device:dir rw_dir_perms;
@@ -128,3 +129,8 @@ allow phhsu_daemon phhsu_daemon:file relabelfrom;
 allow phhsu_daemon properties_device:dir { map };
 allow phhsu_daemon { tmpfs }:dir { mounton };
 allow phhsu_daemon { file_type shell_data_file system_file}:file { relabelto relabelfrom} ;
+
+allow phhsu_daemon domain:fd { use };
+allow phhsu_daemon domain:unix_stream_socket { connectto ioctl getattr getopt read write shutdown };
+allow phhsu_daemon self:netlink_kobject_uevent_socket create_socket_perms;
+allow phhsu_daemon self:{ netlink_tcpdiag_socket } { create_socket_perms nlmsg_write nlmsg_read };
