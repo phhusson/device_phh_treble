@@ -392,6 +392,7 @@ if [ -f /system/phh/secure ];then
     copyprop ro.build.product ro.product.vendor.model
     copyprop ro.product.manufacturer ro.vendor.product.manufacturer
     copyprop ro.product.manufacturer ro.product.vendor.manufacturer
+    copyprop ro.build.version.security_patch ro.keymaster.xxx.security_patch
     resetprop ro.build.tags release-keys
     resetprop ro.boot.vbmeta.device_state locked
     resetprop ro.boot.verifiedbootstate green
