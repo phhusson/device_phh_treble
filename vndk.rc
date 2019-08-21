@@ -12,3 +12,6 @@ on property:sys.boot_completed=1
     start phh_on_boot
     chown wifi system /data/misc/wifi
     chown system wifi /data/misc/wifi/hostapd.conf
+
+on property:persist.sys.phh.mainkeys=*
+    setprop qemu.hw.mainkeys ${persist.sys.phh.mainkeys}
