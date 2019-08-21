@@ -356,5 +356,10 @@ if getprop ro.vendor.build.fingerprint | grep -qiE '^samsung/' && [ "$vndk" -ge 
 
 		chcon u:object_r:sysfs_ss_writable:s0 /sys/class/sec/tsp/cmd{,_list,_result,_status}
 		chown system /sys/class/sec/tsp/cmd{,_list,_result,_status}
+
+		chown system /sys/class/power_supply/battery/wc_tx_en
+		chcon u:object_r:sysfs_app_writable:s0 /sys/class/power_supply/battery/wc_tx_en
+
+		chown system:system /sys/class/sec/tsp/input/enabled
 	fi
 fi
