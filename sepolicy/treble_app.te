@@ -3,5 +3,7 @@ allow system_app hidl_base_hwservice:hwservice_manager { add };
 allow system_app wifi_data_file:dir create_dir_perms;
 allow system_app wifi_data_file:file create_file_perms;
 
+allow system_app sysfs_batteryinfo:file rw_file_perms;
+
 type vendor_camera_prop, property_type;
 set_prop(system_app, vendor_camera_prop);
