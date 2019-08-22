@@ -369,6 +369,7 @@ if getprop ro.vendor.build.fingerprint | grep -qiE '^samsung/' && [ "$vndk" -ge 
 	if [ "$(stat -c '%U' /sys/class/sec/tsp/input/enabled)" == "root" ] &&
 		[ "$(stat -c '%G' /sys/class/sec/tsp/input/enabled)" == "root" ];then
 			chown system:system /sys/class/sec/tsp/input/enabled
+			chcon u:object_r:sysfs_ss_writable:s0 /sys/class/sec/tsp/input/enabled
 			setprop ctl.restart sec-miscpower-1-0
 	fi
 fi
