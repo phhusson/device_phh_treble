@@ -57,7 +57,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
 	device/phh/treble/rw-system.sh:system/bin/rw-system.sh \
-	device/phh/treble/phh-prop-handler.sh:system/bin/phh-prop-handler.sh \
 	device/phh/treble/fixSPL/getSPL.arm:system/bin/getSPL
 
 PRODUCT_COPY_FILES += \
@@ -108,8 +107,7 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/files/huawei-fingerprint.kl:system/phh/huawei/fingerprint.kl \
 	device/phh/treble/files/samsung-sec_e-pen.idc:system/usr/idc/sec_e-pen.idc \
 	device/phh/treble/files/samsung-9810-floating_feature.xml:system/ph/sam-9810-flo_feat.xml \
-	device/phh/treble/files/mimix3-gpio-keys.kl:system/phh/mimix3-gpio-keys.kl \
-	device/phh/treble/files/nokia-soc_gpio_keys.kl:system/phh/nokia-soc_gpio_keys.kl
+	device/phh/treble/files/mimix3-gpio-keys.kl:system/phh/mimix3-gpio-keys.kl
 
 SELINUX_IGNORE_NEVERALLOWS := true
 
@@ -140,6 +138,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	device/phh/treble/phh-securize.sh:system/bin/phh-securize.sh \
 
-# Privapp-permissions whitelist for PhhTrebleApp
 PRODUCT_COPY_FILES += \
-	device/phh/treble/privapp-permissions-me.phh.treble.app.xml:system/etc/permissions/privapp-permissions-me.phh.treble.app.xml
+	frameworks/native/data/etc/android.software.secure_lock_screen.xml:system/etc/permissions/android.software.secure_lock_screen.xml \
+
