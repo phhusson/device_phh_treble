@@ -1,5 +1,6 @@
 type phhsu_daemon, domain, mlstrustedsubject;
 type phhsu_exec, exec_type, file_type;
+type phhsu_daemon_tmpfs, file_type;
 
 typeattribute phhsu_daemon coredomain;
 permissive phhsu_daemon;
