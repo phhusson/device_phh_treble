@@ -9,6 +9,7 @@
 vndk="$(getprop persist.sys.vndk)"
 [ -z "$vndk" ] && vndk="$(getprop ro.vndk.version |grep -oE '^[0-9]+')"
 setprop sys.usb.ffs.aio_compat true
+setprop persist.adb.nonblocking_ffs false
 
 fixSPL() {
     if [ "$(getprop ro.product.cpu.abi)" = "armeabi-v7a" ]; then
