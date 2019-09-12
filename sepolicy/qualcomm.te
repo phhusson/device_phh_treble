@@ -1,3 +1,4 @@
+type bt_firmware_file, file_type;
 type rild, domain;
 
 #me.phh.treble.qti.audio is system-signed
