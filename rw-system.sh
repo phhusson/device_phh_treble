@@ -415,3 +415,5 @@ if [ -f /system/phh/secure ];then
     resetprop ro.adb.secure 1
     setprop ctl.restart adbd
 fi
+
+setprop ro.product.first_api_level "$vndk"
