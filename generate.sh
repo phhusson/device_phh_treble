@@ -63,9 +63,19 @@ for part in a ab;do
 
 				target="treble_${arch}_${part_suffix}${apps_suffix}${su_suffix}"
 
+				baseArch="$arch"
+				if [ "$arch" = "a64" ];then
+					baseArch="arm"
+				fi
+
+				zygote=32
+				if [ "$arch" = "arm64" ];then
+					zygote=64_32
+				fi
+
 				cat > ${target}.mk << EOF
 \$(call inherit-product, device/phh/treble/base-pre.mk)
-include build/make/target/product/treble_common.mk
+include build/make/target/product/aosp_${baseArch}_ab.mk
 \$(call inherit-product, vendor/vndk/${vndk})
 \$(call inherit-product, device/phh/treble/base.mk)
 $apps_script
@@ -77,6 +87,7 @@ PRODUCT_BRAND := Android
 PRODUCT_MODEL := Phh-Treble $apps_name
 
 PRODUCT_PACKAGES += $extra_packages
+
 EOF
 echo -e '\t$(LOCAL_DIR)/'$target.mk '\' >> AndroidProducts.mk
 			done
