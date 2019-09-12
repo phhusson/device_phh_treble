@@ -38,7 +38,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_COPY_FILES += \
 	device/phh/treble/vndk-detect:system/bin/vndk-detect \
 	device/phh/treble/vndk.rc:system/etc/init/vndk.rc \
-	device/phh/treble/ld.config.26.txt:system/etc/ld.config.26.txt \
 
 #USB Audio
 PRODUCT_COPY_FILES += \
@@ -53,7 +52,7 @@ PRODUCT_COPY_FILES += \
 
 # LineageOS build may need this to make NFC work
 PRODUCT_PACKAGES += \
-        NfcNci  
+        NfcNci \
 
 PRODUCT_COPY_FILES += \
 	device/phh/treble/rw-system.sh:system/bin/rw-system.sh \
@@ -64,11 +63,11 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/phh-on-boot.sh:system/bin/phh-on-boot.sh
 
 PRODUCT_PACKAGES += \
-	treble-environ-rc
+	treble-environ-rc \
 
 PRODUCT_PACKAGES += \
 	bootctl \
-	vintf
+	vintf \
 
 # Fix Offline Charging on Huawmeme
 PRODUCT_PACKAGES += \
@@ -140,4 +139,20 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.software.secure_lock_screen.xml:system/etc/permissions/android.software.secure_lock_screen.xml \
+
+PRODUCT_COPY_FILES += \
+	device/phh/treble/apex-setup.rc:system/etc/init/apex-setup.rc \
+
+PRODUCT_COPY_FILES += \
+        device/phh/treble/ld.config.26.txt:system/etc/ld.config.26.txt \
+
+PRODUCT_COPY_FILES += \
+	system/core/rootdir/init.zygote32.rc:system/etc/init/zygote/init.zygote32.rc \
+	system/core/rootdir/init.zygote32_64.rc:system/etc/init/zygote/init.zygote32_64.rc \
+	system/core/rootdir/init.zygote64_32.rc:system/etc/init/zygote/init.zygote64_32.rc \
+	system/core/rootdir/init.zygote64.rc:system/etc/init/zygote/init.zygote64.rc \
+
+PRODUCT_COPY_FILES += \
+	frameworks/av/apex/mediaswcodec.rc:system/etc/init/mediaswcodec-treble.rc \
+	device/phh/treble/environ/init.treble-environ.rc:system/etc/init/init.treble-environ.rc \
 
