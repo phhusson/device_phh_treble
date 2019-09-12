@@ -31,7 +31,7 @@ fixSPL() {
             /system/lib64/vndk/libsoftkeymasterdevice.so /system/lib/vndk/libsoftkeymasterdevice.so \
             /system/lib/vndk-26/libsoftkeymasterdevice.so \
             /system/lib/vndk-27/libsoftkeymasterdevice.so /system/lib64/vndk-27/libsoftkeymasterdevice.so \
-	    /vendor/lib/libkeymaster3device.so ; do
+	    /vendor/lib/libkeymaster3device.so /vendor/lib64/libkeymaster3device.so ; do
             [ ! -f "$f" ] && continue
             # shellcheck disable=SC2010
             ctxt="$(ls -lZ "$f" | grep -oE 'u:object_r:[^:]*:s0')"
