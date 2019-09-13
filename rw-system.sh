@@ -229,15 +229,17 @@ fi
 for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so /vendor/lib/libmtk-ril.so /vendor/lib64/libmtk-ril.so; do
     [ ! -f $f ] && continue
     # shellcheck disable=SC2010
-    ctxt="$(ls -lZ "$f" | grep -oE 'u:object_r:[^:]*:s0')"
-    b="$(echo "$f" | tr / _)"
+    if [ ! -f "/vendor/lib/vendor.mediatek.hardware.radio@2.0_vendor.so" ]; then
+        ctxt="$(ls -lZ "$f" | grep -oE 'u:object_r:[^:]*:s0')"
+        b="$(echo "$f" | tr / _)"
 
-    cp -a "$f" "/mnt/phh/$b"
-    sed -i \
-        -e 's/AT+EAIC=2/AT+EAIC=3/g' \
-        "/mnt/phh/$b"
-    chcon "$ctxt" "/mnt/phh/$b"
-    mount -o bind "/mnt/phh/$b" "$f"
+        cp -a "$f" "/mnt/phh/$b"
+        sed -i \
+            -e 's/AT+EAIC=2/AT+EAIC=3/g' \
+            "/mnt/phh/$b"
+        chcon "$ctxt" "/mnt/phh/$b"
+        mount -o bind "/mnt/phh/$b" "$f"
+    fi
 
     setprop persist.sys.phh.radio.force_cognitive true
     setprop persist.sys.radio.ussd.fix true
