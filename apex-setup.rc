@@ -1,3 +1,5 @@
+import /system/etc/init/zygote/init.${ro.zygote}.rc
+
 on early-fs
     mkdir /mnt/runtime/full 0755 root root
     mkdir /mnt/runtime/full/self 0755 root root
