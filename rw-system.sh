@@ -8,6 +8,11 @@
 
 vndk="$(getprop persist.sys.vndk)"
 [ -z "$vndk" ] && vndk="$(getprop ro.vndk.version |grep -oE '^[0-9]+')"
+
+if [ "$vndk" = 26 ];then
+	resetprop ro.vndk.version 26
+fi
+
 setprop sys.usb.ffs.aio_compat true
 setprop persist.adb.nonblocking_ffs false
 
