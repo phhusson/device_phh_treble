@@ -269,11 +269,11 @@ if busybox_phh unzip -p /vendor/app/ims/ims.apk classes.dex | grep -qF -e Landro
     mount -o bind /system/phh/empty /vendor/app/ims/ims.apk
 fi
 
-if getprop ro.hardware | grep -qF samsungexynos; then
+if getprop ro.hardware | grep -qF samsungexynos -e mt6771; then
     setprop debug.sf.latch_unsignaled 1
 fi
 
-if getprop ro.product.model | grep -qF ANE; then
+if getprop ro.product.model | grep -qF -e ANE; then
     setprop debug.sf.latch_unsignaled 1
 fi
 
