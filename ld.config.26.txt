@@ -407,7 +407,7 @@ namespace.default.asan.permitted.paths += /data/asan/vendor
 namespace.default.asan.permitted.paths +=           /vendor
 
 namespace.default.links = system,vndk,runtime
-namespace.default.link.system.shared_libs = libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libRS.so:libandroid_net.so:libc.so:libdl.so:libft2.so:liblog.so:libm.so:libmediandk.so:libnativewindow.so:libsync.so:libvndksupport.so
+namespace.default.link.system.shared_libs = libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libRS.so:libandroid_net.so:libc.so:libdl.so:libft2.so:libm.so:libmediandk.so:libnativewindow.so:libsync.so:libvndksupport.so
 
 namespace.default.link.vndk.allow_all_shared_libs = true
 
