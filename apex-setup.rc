@@ -10,3 +10,8 @@ on early-fs
     export ANDROID_RUNTIME_ROOT /apex/com.android.runtime
     export ANDROID_TZDATA_ROOT /apex/com.android.tzdata
     symlink /system/product /product
+
+on fs
+    exec u:r:su:s0 -- /system/bin/umount -l /product
+    exec u:r:su:s0 -- /system/bin/rmdir /product
+    symlink /system/product /product
