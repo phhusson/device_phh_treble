@@ -1,6 +1,15 @@
 #!/system/bin/sh
 
 [ "$(getprop vold.decrypt)" = "trigger_restart_min_framework" ] && exit 0
+
+for i in wpa p2p;do
+	if [ ! -f /data/misc/wifi/${i}_supplicant.conf ];then
+		cp /vendor/etc/wifi/wpa_supplicant.conf /data/misc/wifi/${i}_supplicant.conf
+	fi
+	chmod 0660 /data/misc/wifi/${i}_supplicant.conf
+	chown wifi:system /data/misc/wifi/${i}_supplicant.conf
+done
+
 if [ -f /vendor/bin/mtkmal ];then
     if [ "$(getprop persist.mtk_ims_support)" = 1 ] || [ "$(getprop persist.mtk_epdg_support)" = 1 ];then
         setprop persist.mtk_ims_support 0
