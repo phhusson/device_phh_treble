@@ -1,0 +1,20 @@
+type mediacodec_26_0, domain;
+typeattribute mediacodec_26_0 hal_omx_server;
+
+hal_client_domain(mediacodec_26_0, hal_allocator)
+hal_client_domain(mediacodec_26_0, hal_graphics_allocator)
+hal_client_domain(mediacodec_26_0, hal_cas)
+
+type mediacodec_27_0, domain;
+typeattribute mediacodec_27_0 hal_omx_server;
+
+hal_client_domain(mediacodec_27_0, hal_allocator)
+hal_client_domain(mediacodec_27_0, hal_graphics_allocator)
+hal_client_domain(mediacodec_27_0, hal_cas)
+
+type mediacodec_28_0, domain;
+typeattribute mediacodec_28_0 hal_omx_server;
+
+hal_client_domain(mediacodec_28_0, hal_allocator)
+hal_client_domain(mediacodec_28_0, hal_graphics_allocator)
+hal_client_domain(mediacodec_28_0, hal_cas)
