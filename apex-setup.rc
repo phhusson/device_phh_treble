@@ -6,7 +6,7 @@ on early-fs
     mkdir /apex 0777 root root
     mount tmpfs tmpfs /apex mode=0755,uid=0,gid=0
     restorecon /apex
-    exec u:r:su:s0 -- /system/bin/apexd --bootstrap
+    exec -- /system/bin/apexd --bootstrap
     export ANDROID_RUNTIME_ROOT /apex/com.android.runtime
     export ANDROID_TZDATA_ROOT /apex/com.android.tzdata
     symlink /system/product /product
