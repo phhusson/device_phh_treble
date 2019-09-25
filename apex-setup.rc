@@ -13,3 +13,11 @@ on fs
     exec u:r:su:s0 -- /system/bin/umount -l /product
     exec u:r:su:s0 -- /system/bin/rmdir /product
     symlink /system/product /product
+
+on boot
+    setprop ro.product.brand ${ro.product.vendor.brand}
+    setprop ro.product.device ${ro.product.vendor.device}
+    setprop ro.product.manufacturer ${ro.product.vendor.manufacturer}
+    setprop ro.product.model ${ro.product.vendor.model}
+    setprop ro.product.name ${ro.product.vendor.name}
+    setprop ro.build.fingerprint ${ro.vendor.build.fingerprint}
