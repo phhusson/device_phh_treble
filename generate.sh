@@ -23,6 +23,7 @@ for part in a ab;do
 				apps_name=""
 				extra_packages=""
                 vndk="vndk.mk"
+		optional_base=""
 				if [ "$apps" == "gapps" ];then
 					apps_suffix="g"
 					apps_script='$(call inherit-product, device/phh/treble/gapps.mk)'
@@ -59,6 +60,8 @@ for part in a ab;do
 				part_suffix='a'
 				if [ "$part" == 'ab' ];then
 					part_suffix='b'
+				else
+					optional_base='$(call inherit-product, device/phh/treble/base-sas.mk)'
 				fi
 
 				target="treble_${arch}_${part_suffix}${apps_suffix}${su_suffix}"
@@ -78,6 +81,7 @@ for part in a ab;do
 include build/make/target/product/aosp_${baseArch}_ab.mk
 \$(call inherit-product, vendor/vndk/${vndk})
 \$(call inherit-product, device/phh/treble/base.mk)
+$optional_base
 $apps_script
 $rom_script
 
