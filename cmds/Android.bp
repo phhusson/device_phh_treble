@@ -151,3 +151,10 @@ cc_binary {
 		"libhidlbase",
 	],
 }
+
+cc_binary {
+	name: "asus-motor",
+	srcs: [
+		"asus-motor.cpp",
+	],
+}
