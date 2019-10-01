@@ -143,3 +143,5 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
         device/phh/treble/ld.config.26.txt:system/etc/ld.config.26.txt \
 
+PRODUCT_PACKAGES += \
+    asus-motor
