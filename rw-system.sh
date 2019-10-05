@@ -191,7 +191,7 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
     -e motorola/ali/ali -e iaomi/perseus/perseus -e iaomi/platina/platina \
     -e iaomi/equuleus/equuleus -e motorola/nora -e xiaomi/nitrogen \
     -e motorola/hannah -e motorola/james -e motorola/pettyl -e iaomi/cepheus \
-    -e iaomi/grus -e xiaomi/cereus -e iaomi/raphael;then
+    -e iaomi/grus -e xiaomi/cereus -e iaomi/raphael -e iaomi/davinci;then
     mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
     mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
     setprop  ro.audio.ignore_effects true
