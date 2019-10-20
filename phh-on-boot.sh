@@ -2,6 +2,8 @@
 
 [ "$(getprop vold.decrypt)" = "trigger_restart_min_framework" ] && exit 0
 
+setprop ctl.start media.swcodec
+
 for i in wpa p2p;do
 	if [ ! -f /data/misc/wifi/${i}_supplicant.conf ];then
 		cp /vendor/etc/wifi/wpa_supplicant.conf /data/misc/wifi/${i}_supplicant.conf
