@@ -1,3 +1,4 @@
+ifneq ($(wildcard vendor/opengapps),)
 PRODUCT_COPY_FILES += \
 	device/phh/treble/empty-permission.xml:system/etc/permissions/com.google.android.camera2.xml \
 	device/phh/treble/empty-permission.xml:system/etc/permissions/com.google.android.camera.experimental2015.xml \
@@ -20,3 +21,11 @@ PRODUCT_PACKAGES += \
        phh-overrides
 
 $(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
+endif
+
+#Pixel Experience gapps
+ifneq ($(wildcard vendor/gapps),)
+$(call inherit-product,vendor/gapps/config.mk)
+PRODUCT_PACKAGES += \
+       phh-overrides
+endif
