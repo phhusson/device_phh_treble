@@ -260,6 +260,7 @@ if grep -qF 'PowerVR Rogue GE8100' /vendor/lib/egl/GLESv1_CM_mtk.so ||
     ( (getprop ro.product.board; getprop ro.board.platform) | grep -qiE -e msm8917 -e msm8937 -e msm8940); then
 
     setprop debug.hwui.renderer opengl
+    setprop ro.skia.ignore_swizzle true
 fi
 
 #If we have both Samsung and AOSP power hal, take Samsung's
