@@ -7,9 +7,6 @@
 /system/bin/asus-motor u:object_r:phhsu_exec:s0
 /system/bin/xiaomi-touch u:object_r:phhsu_exec:s0
 
-#/system/bin/fsck\.exfat                 u:object_r:fsck_exec:s0
-/system/bin/fsck\.ntfs                  u:object_r:fsck_exec:s0
-
 /bt_firmware(/.*)?      u:object_r:bt_firmware_file:s0
 
 /sec_storage(/.*)?      u:object_r:teecd_data_file:s0
