@@ -426,3 +426,7 @@ if [ -f /system/phh/secure ];then
 fi
 
 setprop ro.product.first_api_level "$vndk"
+
+if ! grep 'uhid' /vendor/etc/init/android.hardware.biometrics.fingerprint@2.1-service.rc && getprop ro.vendor.build.fingerprint | grep -iq \ -e xiaomi/lavender; then
+   sed 's/group system input/group system input uhid' /vendor/etc/init/android.hardware.biometrics.fingerprint@2.1-service.rc
+fi
