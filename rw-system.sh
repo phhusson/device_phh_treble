@@ -118,7 +118,7 @@ changeKeylayout() {
         changed=true
     fi
 
-    if getprop ro.vendor.build.fingerprint |grep -iq -E -e '^Lenovo/kunlun';then
+    if getprop ro.vendor.build.fingerprint |grep -iq -E -e '^Lenovo/' && [ -f /sys/devices/virtual/touch/tp_dev/gesture_on ];then
         cp /system/phh/lenovo-synaptics_dsx.kl /mnt/phh/keylayout/synaptics_dsx.kl
         chmod 0644 /mnt/phh/keylayout/synaptics_dsx.kl
         changed=true
