@@ -6,3 +6,6 @@
 
 /system/bin/fsck\.exfat                 u:object_r:fsck_exec:s0
 /system/bin/fsck\.ntfs                  u:object_r:fsck_exec:s0
+
+/sec_storage(/.*)?      u:object_r:teecd_data_file:s0
+/dev/dsm                u:object_r:dmd_device:s0

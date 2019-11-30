@@ -1,1 +1,11 @@
 allow ueventd proc:file r_file_perms;
+
+type teecd_data_file, file_type;
+type dmd_device, file_type;
+allow hal_fingerprint_server dmd_device:chr_file rw_file_perms;
+allow hal_fingerprint_server sysfs:file rw_file_perms;
+
+type oeminfo_nvm, domain;
+type oeminfo_nvm_device, file_type;
+allowxperm oeminfo_nvm oeminfo_nvm_device:blk_file ioctl { 0x1260 };
+allow ueventd dmd_device:chr_file create_file_perms;

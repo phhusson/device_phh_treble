@@ -425,3 +425,16 @@ if [ -f /system/phh/secure ];then
     resetprop ro.adb.secure 1
     setprop ctl.restart adbd
 fi
+
+if getprop ro.boot.boot_devices |grep -v , |grep -qE .;then
+    ln -s /dev/block/platform/$(getprop ro.boot.boot_devices) /dev/block/bootdevice
+fi
+
+if [ -c /dev/dsm ];then
+    chown system:system /dev/dsm
+    chmod 0660 /dev/dsm
+    mkdir -p /data/sec_storage_data
+    chown system:system /data/sec_storage_data
+    chcon u:object_r:teecd_data_file_system:s0 /data/sec_storage_data
+    mount /data/sec_storage_data /sec_storage
+fi
