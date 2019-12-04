@@ -19,3 +19,10 @@ allow system_app hal_fingerprint_default:binder { call };
 allow system_app sysfs_power:dir r_dir_perms;
 allow system_app sysfs_power:file rw_file_perms;
 allow system_app sysfs_power:lnk_file read;
+
+type default_hisi_hwservice, hwservice_manager_type;
+allow system_app default_hisi_hwservice:hwservice_manager { find };
+
+type hal_tp_default, domain;
+allow system_app hal_tp_default:binder { call };
+
