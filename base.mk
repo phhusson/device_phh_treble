@@ -90,6 +90,7 @@ PRODUCT_PACKAGES += \
 endif
 
 PRODUCT_PACKAGES += \
+	android.hidl.manager-V1.0-java \
 	android.hardware.wifi.hostapd-V1.0-java \
 	vendor.huawei.hardware.biometrics.fingerprint-V2.1-java \
 	vendor.huawei.hardware.tp-V1.0-java \
