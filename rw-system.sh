@@ -66,6 +66,11 @@ fixSPL() {
 changeKeylayout() {
     cp -a /system/usr/keylayout /mnt/phh/keylayout
     changed=false
+    if grep -q vendor.huawei.hardware.biometrics.fingerprint /vendor/etc/vintf/manifest.xml; then
+        changed=true
+        cp /system/phh/huawei/fingerprint.kl /mnt/phh/keylayout/fingerprint.kl
+        chmod 0644 /mnt/phh/keylayout/fingerprint.kl
+    fi
 
     if getprop ro.vendor.build.fingerprint |
         grep -qE -e "^samsung"; then
