@@ -474,3 +474,14 @@ for ev in $(cd /sys/class/input;echo event*);do
 		setprop persist.sys.phh.dt2w_evnode /dev/input/$ev
 	fi
 done
+
+has_hostapd=false
+for i in odm oem vendor product;do
+    if grep -qF android.hardware.wifi.hostapd /$i/etc/vintf/manifest.xml;then
+        has_hostapd=true
+    fi
+done
+
+if [ "$has_hostapd" = false ];then
+    setprop persist.sys.phh.system_hostapd true
+fi
