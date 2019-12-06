@@ -491,3 +491,14 @@ for part in odm vendor;do
         fi
     fi
 done
+
+has_hostapd=false
+for i in odm oem vendor product;do
+    if grep -qF android.hardware.wifi.hostapd /$i/etc/vintf/manifest.xml;then
+        has_hostapd=true
+    fi
+done
+
+if [ "$has_hostapd" = false ];then
+    setprop persist.sys.phh.system_hostapd true
+fi
