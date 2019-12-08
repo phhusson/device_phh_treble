@@ -502,3 +502,11 @@ done
 if [ "$has_hostapd" = false ];then
     setprop persist.sys.phh.system_hostapd true
 fi
+
+#Weird /odm/phone.prop Huawei stuff
+if [ -f /odm/phone.prop ];then
+    HW_PRODID="$(sed -nE 's/.*productid=([0-9x]*).*/\1/p' /proc/cmdline)"
+    if [ -n "$HW_PRODID" ];then
+        eval "$(awk 'BEGIN { a=0 }; /\[.*\].*/ { a=0 }; tolower($0) ~ /.*0x39606014.*/ { a=1 }; /.*=.*/ { if(a == 1) print $0 }' /odm/phone.prop |sed -nE 's/(.*)=(.*)/setprop \1 "\2";/p')"
+    fi
+fi
