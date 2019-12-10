@@ -290,7 +290,8 @@ if grep -qF 'PowerVR Rogue GE8100' /vendor/lib/egl/GLESv1_CM_mtk.so ||
     setprop debug.hwui.renderer opengl
     setprop ro.skia.ignore_swizzle true
     if [ "$vndk" = 26 ] || [ "$vndk" = 27 ];then
-        setprop debug.hwui.profile true
+       setprop debug.hwui.use_buffer_age false
+
     fi
 fi
 
