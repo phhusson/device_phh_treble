@@ -158,3 +158,15 @@ cc_binary {
 		"asus-motor.cpp",
 	],
 }
+
+cc_binary {
+	name: "goodix-fp",
+	srcs: [
+		"goodix-fp.cpp",
+	],
+	shared_libs: [
+		"vendor.goodix.extend.service@2.0",
+		"libutils",
+		"libhidlbase",
+	],
+}
