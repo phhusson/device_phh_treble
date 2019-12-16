@@ -101,6 +101,18 @@ cc_binary {
 }
 
 cc_binary {
+	name: "lightsctl-seh",
+	srcs: [
+		"lightsctl-seh.cpp",
+	],
+	shared_libs: [
+		"vendor.samsung.hardware.light@3.0",
+		"libutils",
+		"libhidlbase",
+	],
+}
+
+cc_binary {
 	name: "xiaomi-motor",
 	srcs: [
 		"xiaomi-motor.cpp",
