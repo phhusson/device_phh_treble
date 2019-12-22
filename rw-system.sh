@@ -179,6 +179,12 @@ if getprop ro.vendor.build.fingerprint | grep -qE 'Sony/'; then
     setprop persist.sys.qcom-brightness -1
 fi
 
+# Xiaomi MiA3 uses OLED display which works best with this setting
+if getprop ro.vendor.build.fingerprint | grep -iq \
+    -e iaomi/laurel_sprout;then
+    setprop persist.sys.qcom-brightness -1
+fi
+
 if getprop ro.vendor.build.fingerprint | grep -qi oneplus/oneplus6/oneplus6; then
     resize2fs /dev/block/platform/soc/1d84000.ufshc/by-name/userdata
 fi
