@@ -87,7 +87,7 @@ changeKeylayout() {
         -e xiaomi/polaris -e xiaomi/sirius -e xiaomi/dipper \
         -e xiaomi/wayne -e xiaomi/jasmine -e xiaomi/jasmine_sprout \
         -e xiaomi/platina -e iaomi/perseus -e xiaomi/ysl -e Redmi/begonia\
-        -e xiaomi/nitrogen -e xiaomi/daisy -e xiaomi/sakura -e xiaomi/andromeda \
+        -e xiaomi/nitrogen -e xiaomi/sakura -e xiaomi/andromeda \
         -e xiaomi/whyred -e xiaomi/tulip -e xiaomi/onc; then
         if [ ! -f /mnt/phh/keylayout/uinput-goodix.kl ]; then
           cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
@@ -99,6 +99,21 @@ changeKeylayout() {
           chmod 0644 /mnt/phh/keylayout/uinput-fpc.kl
           changed=true
         fi
+    fi
+
+    if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/daisy; then
+        mpk="/mnt/phh/keylayout"
+        cp /system/phh/daisy-buttonJack.kl ${mpk}/msm8953-snd-card-mtp_Button_Jack.kl
+        changed=true
+        if [ ! -f /mnt/phh/keylayout/uinput-goodix.kl ]; then
+           cp /system/phh/daisy-uinput-goodix.kl ${mpk}/uinput-goodix.kl
+           changed=true
+        fi
+        if [ ! -f /mnt/phh/keylayout/uinput-fpc.kl ]; then
+           cp /system/phh/daisy-uinput-fpc.kl ${mpk}/uinput-fpc.kl
+           changed=true
+        fi
+        chmod 0644 ${mpk}/uinput* ${mpk}/msm8953*
     fi
 
     if getprop ro.vendor.build.fingerprint | grep -qi oneplus/oneplus6/oneplus6; then

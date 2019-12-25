@@ -115,6 +115,9 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/files/lenovo-synaptics_dsx.kl:system/phh/lenovo-synaptics_dsx.kl \
 	device/phh/treble/files/oppo-touchpanel.kl:system/phh/oppo-touchpanel.kl \
 	device/phh/treble/files/google-uinput-fpc.kl:system/phh/google-uinput-fpc.kl \
+	device/phh/treble/files/daisy-buttonJack.kl:system/phh/daisy-buttonJack.kl \
+	device/phh/treble/files/daisy-uinput-fpc.kl:system/phh/daisy-uinput-fpc.kl \
+	device/phh/treble/files/daisy-uinput-goodix.kl:system/phh/daisy-uinput-goodix.kl
 
 SELINUX_IGNORE_NEVERALLOWS := true
 
