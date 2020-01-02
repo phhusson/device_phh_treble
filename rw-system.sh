@@ -517,3 +517,12 @@ if [ -f /odm/phone.prop ];then
         eval "$(awk 'BEGIN { a=0 }; /\[.*\].*/ { a=0 }; tolower($0) ~ /.*0x39606014.*/ { a=1 }; /.*=.*/ { if(a == 1) print $0 }' /odm/phone.prop |sed -nE 's/(.*)=(.*)/setprop \1 "\2";/p')"
     fi
 fi
+
+# Fix sprd adf for surfaceflinger to start
+# Somehow the names of the device nodes are incorrect on Android 10; fix them by mknod
+if [ -e /dev/sprd-adf-dev ];then
+    mknod -m666 /dev/adf0 c 250 0
+    mknod -m666 /dev/adf-interface0.0 c 250 1
+    mknod -m666 /dev/adf-overlay-engine0.0 c 250 2
+    restorecon /dev/adf0 /dev/adf-interface0.0 /dev/adf-overlay-engine0.0
+fi
