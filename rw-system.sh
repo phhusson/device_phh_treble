@@ -520,3 +520,12 @@ done
 if [ "$has_hostapd" = false ];then
     setprop persist.sys.phh.system_hostapd true
 fi
+
+# Fix sprd adf for surfaceflinger to start
+# Somehow the names of the device nodes are incorrect on Android 10; fix them by mknod
+if [ -e /dev/sprd-adf-dev ];then
+    mknod -m666 /dev/adf0 c 250 0
+    mknod -m666 /dev/adf-interface0.0 c 250 1
+    mknod -m666 /dev/adf-overlay-engine0.0 c 250 2
+    restorecon /dev/adf0 /dev/adf-interface0.0 /dev/adf-overlay-engine0.0
+fi
