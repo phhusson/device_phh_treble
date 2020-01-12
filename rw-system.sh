@@ -521,6 +521,12 @@ if [ -f /odm/phone.prop ];then
     if [ -n "$HW_PRODID" ];then
         eval "$(awk 'BEGIN { a=0 }; /\[.*\].*/ { a=0 }; tolower($0) ~ /.*0x39606014.*/ { a=1 }; /.*=.*/ { if(a == 1) print $0 }' /odm/phone.prop |sed -nE 's/(.*)=(.*)/setprop \1 "\2";/p')"
     fi
+else 
+    #Export Huawei /vendor/phone.prop 
+    if [ -f /vendor/phone.prop ];then
+        HW_MODEM_ID="0x$(od -A none -t x1 /sys/firmware/devicetree/base/hisi,modem_id | sed s/' '//g)"
+        eval "$(awk 'BEGIN { a=0 }; /\[.*\].*/ { a=0 }; tolower($0) ~ /.*'"$HW_MODEM_ID"'.*/ { a=1 }; /.*=.*/ { if(a == 1) print $0 }' /vendor/phone.prop |sed -nE 's/(.*)=(.*)/setprop \1 "\2";/p')"
+    fi
 fi
 
 # Fix sprd adf for surfaceflinger to start
