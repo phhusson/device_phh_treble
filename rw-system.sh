@@ -530,4 +530,8 @@ if [ -e /dev/sprd-adf-dev ];then
     mknod -m666 /dev/adf-interface0.0 c 250 1
     mknod -m666 /dev/adf-overlay-engine0.0 c 250 2
     restorecon /dev/adf0 /dev/adf-interface0.0 /dev/adf-overlay-engine0.0
+
+    # SPRD GL causes crashes in system_server (not currently observed in other processes)
+    # Tell the system to avoid using hardware acceleration in system_server.
+    setprop ro.config.avoid_gfx_accel true
 fi
