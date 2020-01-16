@@ -534,3 +534,10 @@ if [ -e /dev/sprd-adf-dev ];then
     mknod -m666 /dev/adf-overlay-engine0.0 c 250 2
     restorecon /dev/adf0 /dev/adf-interface0.0 /dev/adf-overlay-engine0.0
 fi
+
+# Fix manual network selection with old modem
+# https://github.com/LineageOS/android_hardware_ril/commit/e3d006fa722c02fc26acdfcaa43a3f3a1378eba9
+if getprop ro.vendor.build.fingerprint | grep -iq \
+    -e xiaomi/polaris -e xiaomi/whyred; then
+    setprop persist.sys.phh.radio.use_old_mnc_format true
+fi
