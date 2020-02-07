@@ -291,6 +291,10 @@ if getprop ro.product.model | grep -qF -e ANE; then
     setprop debug.sf.latch_unsignaled 1
 fi
 
+if getprop ro.vendor.product.device | grep -q -e nora -e rhannah; then
+    setprop debug.sf.latch_unsignaled 1
+fi
+
 if getprop ro.vendor.build.fingerprint | grep -iq -E -e 'huawei|honor' || getprop persist.sys.overlay.huawei | grep -iq -E -e 'true'; then
     p=/product/etc/nfc/libnfc_nxp_*_*.conf
     mount -o bind "$p" /system/etc/libnfc-nxp.conf ||
