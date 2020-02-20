@@ -40,7 +40,7 @@ fixSPL() {
             sed -i \
                 -e 's/ro.build.version.release/ro.keymaster.xxx.release/g' \
                 -e 's/ro.build.version.security_patch/ro.keymaster.xxx.security_patch/g' \
-                -e 's/ro.product.model/ro.keymaster.mod/g' \
+                -e 's/ro.product.model/ro.keymaster.mod/g' \b
                 "/mnt/phh/$b"
             chcon "$ctxt" "/mnt/phh/$b"
             mount -o bind "/mnt/phh/$b" "$f"
@@ -190,7 +190,7 @@ if getprop ro.vendor.build.fingerprint | grep -q -i \
     -e xiaomi/clover -e xiaomi/wayne -e xiaomi/sakura \
     -e xiaomi/nitrogen -e xiaomi/whyred -e xiaomi/platina \
     -e xiaomi/ysl -e nubia/nx60 -e nubia/nx61 -e xiaomi/tulip \
-    -e xiaomi/lavender -e xiaomi/olivelite -e xiaomi/pine -e Redmi/*.begonia; then
+    -e xiaomi/lavender -e xiaomi/olivelite -e xiaomi/pine -e Redmi/*/begonia; then
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
 fi
 
