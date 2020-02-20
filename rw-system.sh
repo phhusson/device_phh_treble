@@ -278,6 +278,7 @@ for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so /vendor/lib/libmtk-ril.
 done
 
 if getprop ro.vendor.build.fingerprint | grep -iq -e iaomi/cactus -e iaomi/cereus; then
+    mount -o bind /system/phh/empty /vendor/lib/libpdx_default_transport.so
     setprop debug.stagefright.omx_default_rank.sw-audio 1
     setprop debug.stagefright.omx_default_rank 0
 fi
