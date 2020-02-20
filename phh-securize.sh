@@ -9,7 +9,7 @@ rm /system/xbin/su
 rm /system/bin/phh-su
 rm /system/etc/init/su.rc
 rm /system/bin/phh-securize.sh
-rm -Rf /system/bin/me.phh.superuser/
+rm -Rf /system/app/me.phh.superuser/
 mount -o remount,ro /
 mount -o remount,ro /system
 sync
