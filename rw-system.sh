@@ -285,6 +285,10 @@ if getprop ro.vendor.build.fingerprint | grep -iq -e iaomi/cactus -e iaomi/cereu
     setprop debug.stagefright.omx_default_rank 0
 fi
 
+if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/ginkgo -e  xiaomi/willow; then
+    mount -o bind /system/phh/empty /vendor/lib/soundfx/libvolumelistener.so
+fi
+
 mount -o bind /system/phh/empty /vendor/lib/libpdx_default_transport.so
 mount -o bind /system/phh/empty /vendor/lib64/libpdx_default_transport.so
 
