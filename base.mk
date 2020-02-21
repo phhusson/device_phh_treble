@@ -109,7 +109,8 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/files/samsung-9810-floating_feature.xml:system/ph/sam-9810-flo_feat.xml \
 	device/phh/treble/files/mimix3-gpio-keys.kl:system/phh/mimix3-gpio-keys.kl \
 	device/phh/treble/files/nokia-soc_gpio_keys.kl:system/phh/nokia-soc_gpio_keys.kl \
-	device/phh/treble/files/lenovo-synaptics_dsx.kl:system/phh/lenovo-synaptics_dsx.kl
+	device/phh/treble/files/lenovo-synaptics_dsx.kl:system/phh/lenovo-synaptics_dsx.kl \
+	device/phh/treble/files/oppo-touchpanel.kl:system/phh/oppo-touchpanel.kl \
 
 SELINUX_IGNORE_NEVERALLOWS := true
 
