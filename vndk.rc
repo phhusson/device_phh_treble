@@ -2,7 +2,8 @@ on post-fs
 	exec - root -- /system/bin/vndk-detect
 	exec - root -- /system/bin/rw-system.sh
 	mount none /system/etc/usb_audio_policy_configuration.xml /vendor/etc/usb_audio_policy_configuration.xml bind
-	export LD_CONFIG_FILE /system/etc/ld.config.${persist.sys.vndk}.txt
+        setprop ro.vndk.version ${persist.sys.vndk}
+	export LD_PRELOAD :
 
 service phh_on_boot /system/bin/phh-on-boot.sh
     oneshot
@@ -12,3 +13,12 @@ on property:sys.boot_completed=1
     start phh_on_boot
     chown wifi system /data/misc/wifi
     chown system wifi /data/misc/wifi/hostapd.conf
+
+on property:persist.sys.phh.mainkeys=*
+    setprop qemu.hw.mainkeys ${persist.sys.phh.mainkeys}
+
+on property:persist.sys.phh.oppo.dt2w=*
+    exec_background u:r:phhsu_daemon:s0 root -- /system/bin/sh -c "echo ${persist.sys.phh.oppo.dt2w} > /proc/touchpanel/double_tap_enable"
+
+on property:persist.sys.phh.oppo.gaming_mode=*
+    exec_background u:r:phhsu_daemon:s0 root -- /system/bin/sh -c "echo ${persist.sys.phh.oppo.gaming_mode} > /proc/touchpanel/game_switch_enable"

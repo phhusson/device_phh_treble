@@ -3,3 +3,26 @@ allow system_app hidl_base_hwservice:hwservice_manager { add };
 allow system_app wifi_data_file:dir create_dir_perms;
 allow system_app wifi_data_file:file create_file_perms;
 
+allow system_app sysfs_batteryinfo:file rw_file_perms;
+
+type vendor_camera_prop, property_type;
+set_prop(system_app, vendor_camera_prop);
+
+#Used to control double-tap-to-wake on Xiaomi
+allow system_app input_device:chr_file rw_file_perms;
+allow system_app input_device:dir r_dir_perms;
+
+type hal_ext_fingerprint_hwservice, hwservice_manager_type;
+allow system_app hal_ext_fingerprint_hwservice:hwservice_manager { find };
+type hal_fingerprint_default, domain;
+allow system_app hal_fingerprint_default:binder { call };
+allow system_app sysfs_power:dir r_dir_perms;
+allow system_app sysfs_power:file rw_file_perms;
+allow system_app sysfs_power:lnk_file read;
+
+type default_hisi_hwservice, hwservice_manager_type;
+allow system_app default_hisi_hwservice:hwservice_manager { find };
+
+type hal_tp_default, domain;
+allow system_app hal_tp_default:binder { call };
+

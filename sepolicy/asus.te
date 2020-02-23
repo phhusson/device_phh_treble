@@ -1,0 +1,5 @@
+allow cameraserver phhsu_exec:file rx_file_perms;
+
+type asus_motor_device, file_type;
+allow cameraserver asus_motor_device:chr_file { open read write ioctl };
+allowxperm cameraserver asus_motor_device:chr_file ioctl { 0x4d02 };

@@ -23,6 +23,7 @@ for part in a ab;do
 				apps_name=""
 				extra_packages=""
                 vndk="vndk.mk"
+		optional_base=""
 				if [ "$apps" == "gapps" ];then
 					apps_suffix="g"
 					apps_script='$(call inherit-product, device/phh/treble/gapps.mk)'
@@ -59,15 +60,29 @@ for part in a ab;do
 				part_suffix='a'
 				if [ "$part" == 'ab' ];then
 					part_suffix='b'
+				else
+					optional_base='$(call inherit-product, device/phh/treble/base-sas.mk)'
 				fi
 
 				target="treble_${arch}_${part_suffix}${apps_suffix}${su_suffix}"
 
+				baseArch="$arch"
+				if [ "$arch" = "a64" ];then
+					baseArch="arm"
+				fi
+
+				zygote=32
+				if [ "$arch" = "arm64" ];then
+					zygote=64_32
+				fi
+
 				cat > ${target}.mk << EOF
+TARGET_GAPPS_ARCH := ${baseArch}
 \$(call inherit-product, device/phh/treble/base-pre.mk)
-include build/make/target/product/treble_common.mk
+include build/make/target/product/aosp_${baseArch}_ab.mk
 \$(call inherit-product, vendor/vndk/${vndk})
 \$(call inherit-product, device/phh/treble/base.mk)
+$optional_base
 $apps_script
 $rom_script
 
@@ -77,6 +92,7 @@ PRODUCT_BRAND := Android
 PRODUCT_MODEL := Phh-Treble $apps_name
 
 PRODUCT_PACKAGES += $extra_packages
+
 EOF
 echo -e '\t$(LOCAL_DIR)/'$target.mk '\' >> AndroidProducts.mk
 			done

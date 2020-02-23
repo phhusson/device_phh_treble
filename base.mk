@@ -2,7 +2,9 @@
 #TODO: Proper detection
 PRODUCT_COPY_FILES := \
 	frameworks/native/data/etc/android.hardware.fingerprint.xml:system/etc/permissions/android.hardware.fingerprint.xml \
-	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml
+	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
+	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
+	frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
 
 #Use a more decent APN config
 PRODUCT_COPY_FILES += \
@@ -36,7 +38,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_COPY_FILES += \
 	device/phh/treble/vndk-detect:system/bin/vndk-detect \
 	device/phh/treble/vndk.rc:system/etc/init/vndk.rc \
-	device/phh/treble/ld.config.26.txt:system/etc/ld.config.26.txt \
 
 #USB Audio
 PRODUCT_COPY_FILES += \
@@ -51,7 +52,7 @@ PRODUCT_COPY_FILES += \
 
 # LineageOS build may need this to make NFC work
 PRODUCT_PACKAGES += \
-        NfcNci  
+        NfcNci \
 
 PRODUCT_COPY_FILES += \
 	device/phh/treble/rw-system.sh:system/bin/rw-system.sh \
@@ -62,11 +63,17 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/phh-on-boot.sh:system/bin/phh-on-boot.sh
 
 PRODUCT_PACKAGES += \
-	treble-environ-rc
+	treble-environ-rc \
 
 PRODUCT_PACKAGES += \
 	bootctl \
-	vintf
+	vintf \
+
+# Fix Offline Charging on Huawmeme
+PRODUCT_PACKAGES += \
+	huawei-charger
+PRODUCT_COPY_FILES += \
+	$(call find-copy-subdir-files,*,device/phh/treble/huawei_charger/files,system/etc/charger)
 
 PRODUCT_COPY_FILES += \
 	device/phh/treble/twrp/twrp.rc:system/etc/init/twrp.rc \
@@ -83,6 +90,7 @@ PRODUCT_PACKAGES += \
 endif
 
 PRODUCT_PACKAGES += \
+	android.hidl.manager-V1.0-java \
 	android.hardware.wifi.hostapd-V1.0-java \
 	vendor.huawei.hardware.biometrics.fingerprint-V2.1-java \
 	vendor.huawei.hardware.tp-V1.0-java \
@@ -99,7 +107,10 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/files/huawei-fingerprint.kl:system/phh/huawei/fingerprint.kl \
 	device/phh/treble/files/samsung-sec_e-pen.idc:system/usr/idc/sec_e-pen.idc \
 	device/phh/treble/files/samsung-9810-floating_feature.xml:system/ph/sam-9810-flo_feat.xml \
-	device/phh/treble/files/mimix3-gpio-keys.kl:system/phh/mimix3-gpio-keys.kl
+	device/phh/treble/files/mimix3-gpio-keys.kl:system/phh/mimix3-gpio-keys.kl \
+	device/phh/treble/files/nokia-soc_gpio_keys.kl:system/phh/nokia-soc_gpio_keys.kl \
+	device/phh/treble/files/lenovo-synaptics_dsx.kl:system/phh/lenovo-synaptics_dsx.kl \
+	device/phh/treble/files/oppo-touchpanel.kl:system/phh/oppo-touchpanel.kl \
 
 SELINUX_IGNORE_NEVERALLOWS := true
 
@@ -113,3 +124,32 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
 	device/phh/treble/files/adbd.rc:system/etc/init/adbd.rc
+
+#MTK incoming SMS fix
+PRODUCT_PACKAGES += \
+	mtk-sms-fwk-ready
+
+# Helper to debug Xiaomi motorized camera
+PRODUCT_PACKAGES += \
+	xiaomi-motor
+
+PRODUCT_PACKAGES += \
+	Stk
+
+PRODUCT_PACKAGES += \
+	resetprop
+PRODUCT_COPY_FILES += \
+	device/phh/treble/phh-securize.sh:system/bin/phh-securize.sh \
+
+PRODUCT_COPY_FILES += \
+	frameworks/native/data/etc/android.software.secure_lock_screen.xml:system/etc/permissions/android.software.secure_lock_screen.xml \
+
+PRODUCT_COPY_FILES += \
+        device/phh/treble/ld.config.26.txt:system/etc/ld.config.26.txt \
+
+PRODUCT_PACKAGES += \
+    asus-motor
+
+# Privapp-permissions whitelist for PhhTrebleApp
+PRODUCT_COPY_FILES += \
+	device/phh/treble/privapp-permissions-me.phh.treble.app.xml:system/etc/permissions/privapp-permissions-me.phh.treble.app.xml

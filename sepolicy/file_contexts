@@ -3,6 +3,12 @@
 /system/etc/usb_audio_policy_configuration.xml	u:object_r:vendor_configs_file:s0
 /system/bin/rw-system.sh u:object_r:phhsu_exec:s0
 /system/bin/phh-on-boot.sh u:object_r:phhsu_exec:s0
+/system/bin/asus-motor u:object_r:phhsu_exec:s0
 
-/system/bin/fsck\.exfat                 u:object_r:fsck_exec:s0
+#/system/bin/fsck\.exfat                 u:object_r:fsck_exec:s0
 /system/bin/fsck\.ntfs                  u:object_r:fsck_exec:s0
+
+/bt_firmware(/.*)?      u:object_r:bt_firmware_file:s0
+
+/sec_storage(/.*)?      u:object_r:teecd_data_file:s0
+/dev/dsm                u:object_r:dmd_device:s0
