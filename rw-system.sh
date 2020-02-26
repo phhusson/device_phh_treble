@@ -129,7 +129,7 @@ changeKeylayout() {
         changed=true
     fi
 
-    if getprop ro.build.overlay.deviceid |grep -q RMX1931;then
+    if getprop ro.build.overlay.deviceid |grep -q -e RMX1931 -e CPH1859;then
         cp /system/phh/oppo-touchpanel.kl /mnt/phh/keylayout/touchpanel.kl
         chmod 0644 /mnt/phh/keylayout/touchpanel.kl
         changed=true
@@ -153,13 +153,15 @@ fi
 mount -o remount,ro /system || true
 mount -o remount,ro / || true
 
-if [ -b  /dev/block/bootdevice/by-name/oppodycnvbk ];then
-    for devname in RMX1931;do
-        if grep -q $devname /dev/block/bootdevice/by-name/oppodycnvbk;then
-            setprop ro.build.overlay.deviceid $devname
-       fi
-    done
-fi
+for part in /dev/block/bootdevice/by-name/oppodycnvbk  /dev/block/platform/bootdevice/by-name/nvdata;do
+    if [ -b "$part" ];then
+        for devname in RMX1931 CPH1859;do
+            if grep -q $devname $part;then
+                setprop ro.build.overlay.deviceid $devname
+           fi
+        done
+    fi
+done
 
 
 mkdir -p /mnt/phh/
