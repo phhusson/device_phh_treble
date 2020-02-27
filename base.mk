@@ -111,6 +111,7 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/files/nokia-soc_gpio_keys.kl:system/phh/nokia-soc_gpio_keys.kl \
 	device/phh/treble/files/lenovo-synaptics_dsx.kl:system/phh/lenovo-synaptics_dsx.kl \
 	device/phh/treble/files/oppo-touchpanel.kl:system/phh/oppo-touchpanel.kl \
+	device/phh/treble/files/google-uinput-fpc.kl:system/phh/google-uinput-fpc.kl \
 
 SELINUX_IGNORE_NEVERALLOWS := true
 
