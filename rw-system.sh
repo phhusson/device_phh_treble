@@ -237,7 +237,7 @@ if getprop ro.vendor.build.fingerprint | grep -q -i \
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
 fi
 
-if getprop ro.vendor.product.device |grep -iq -e RMX1801 -e RMX1803 -e RMX1807 -e CPH1859 -e CPH1861;then	
+if getprop ro.vendor.product.device |grep -iq -e RMX1801 -e RMX1803 -e RMX1807;then	
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
 fi
 
