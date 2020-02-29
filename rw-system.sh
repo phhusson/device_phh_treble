@@ -420,11 +420,13 @@ for f in /vendor/lib{,64}/hw/com.qti.chi.override.so;do
     cp -a "$f" "/mnt/phh/$b"
     sed -i \
         -e 's/ro.product.manufacturer/sys.phh.xx.manufacturer/g' \
+        -e 's/ro.product.brand/sys.phh.xx.brand/g' \
         "/mnt/phh/$b"
     chcon "$ctxt" "/mnt/phh/$b"
     mount -o bind "/mnt/phh/$b" "$f"
 
     setprop sys.phh.xx.manufacturer "$(getprop ro.product.vendor.manufacturer)"
+    setprop sys.phh.xx.brand "$(getprop ro.product.vendor.brand)"
 done
 
 if [ -n "$(getprop ro.boot.product.hardware.sku)" ] && [ -z "$(getprop ro.hw.oemName)" ];then
@@ -579,4 +581,9 @@ fi
 if getprop ro.vendor.build.fingerprint | grep -iq \
     -e xiaomi/polaris -e xiaomi/whyred; then
     setprop persist.sys.phh.radio.use_old_mnc_format true
+fi
+
+if getprop ro.build.overlay.deviceid |grep -E '^RMX';then
+    setprop oppo.camera.packname com.oppo.camera
+    setprop sys.phh.xx.brand realme
 fi
