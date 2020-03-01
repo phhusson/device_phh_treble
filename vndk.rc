@@ -22,3 +22,7 @@ on property:persist.sys.phh.oppo.dt2w=*
 
 on property:persist.sys.phh.oppo.gaming_mode=*
     exec_background u:r:phhsu_daemon:s0 root -- /system/bin/sh -c "echo ${persist.sys.phh.oppo.gaming_mode} > /proc/touchpanel/game_switch_enable"
+
+on property:persist.sys.phh.oppo.usbotg=*
+    exec_background u:r:phhsu_daemon:s0 root -- /system/bin/sh -c "echo ${persist.sys.phh.oppo.usbotg} > /sys/class/power_supply/usb/otg_switch"
+
