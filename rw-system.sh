@@ -529,12 +529,26 @@ if getprop ro.boot.boot_devices |grep -v , |grep -qE .;then
 fi
 
 if [ -c /dev/dsm ];then
+		# /dev/dsm is a magic device on Kirin chipsets that teecd needs to access.
+		# Make sure that permissions are right.
     chown system:system /dev/dsm
     chmod 0660 /dev/dsm
-    mkdir -p /data/sec_storage_data
-    chown system:system /data/sec_storage_data
-    chcon u:object_r:teecd_data_file_system:s0 /data/sec_storage_data
-    mount /data/sec_storage_data /sec_storage
+
+		# The presence of /dev/dsm indicates that we have a teecd, which needs /sec_storage
+
+		mount | grep " on /sec_storage " > /dev/null 2>&1
+		if [ "$?" -eq "0" ]; then
+				# /sec_storage is already mounted by the vendor, don't try to create and mount it
+				# ourselves. However, some devices have /sec_storage owned by root, which means that
+				# the fingerprint daemon (running as system) cannot access it.
+				chown -R system:system /sec_storage
+				chmod -R 0660 /sec_storage
+		else
+				# No /sec_storage provided by vendor, create our own
+				mkdir -p /data/sec_storage_data
+				chown system:system /data/sec_storage_data
+				mount /data/sec_storage_data /sec_storage
+		fi
 fi
 
 #Try to detect DT2W
