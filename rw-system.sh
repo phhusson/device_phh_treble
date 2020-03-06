@@ -587,7 +587,18 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
     setprop persist.sys.phh.radio.use_old_mnc_format true
 fi
 
-if getprop ro.build.overlay.deviceid |grep -E '^RMX';then
+if getprop ro.build.overlay.deviceid |grep -qE '^RMX';then
     setprop oppo.camera.packname com.oppo.camera
     setprop sys.phh.xx.brand realme
 fi
+
+if [ -f /sys/firmware/devicetree/base/oppo,prjversion ];then
+    setprop ro.separate.soft $((0x$(od -w4 -j4  -An -tx1 /sys/firmware/devicetree/base/oppo,prjversion |tr -d ' ' |head -n 1)))
+fi
+
+if [ -f /proc/oppoVersion/prjVersion ];then
+    setprop ro.separate.soft $(cat /proc/oppoVersion/prjVersion)
+fi
+
+echo 1 >  /proc/tfa98xx/oppo_tfa98xx_fw_update
+
