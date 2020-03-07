@@ -274,6 +274,13 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
     setprop  ro.audio.ignore_effects true
 fi
 
+if getprop ro.build.fingerprint | grep -iq \
+    -e motorola/channel; then
+    mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
+    mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
+    setprop ro.audio.ignore_effects true
+fi
+
 if [ "$(getprop ro.vendor.product.manufacturer)" = "motorola" ] || [ "$(getprop ro.product.vendor.manufacturer)" = "motorola" ]; then
     if getprop ro.vendor.product.device | grep -q -e nora -e ali -e hannah -e evert -e jeter -e deen -e james -e pettyl -e jater; then
         if [ "$vndk" -ge 28 ]; then
