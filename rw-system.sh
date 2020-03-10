@@ -546,8 +546,7 @@ if [ -c /dev/dsm ];then
     chown system:system /data/sec_storage_data
     chcon -R u:object_r:teecd_data_file:s0 /data/sec_storage_data
 
-    mount | grep " on /sec_storage " > /dev/null 2>&1
-    if [ "$?" -eq "0" ]; then
+    if mount | grep -q " on /sec_storage " ; then
         # /sec_storage is already mounted by the vendor, don't try to create and mount it
         # ourselves. However, some devices have /sec_storage owned by root, which means that
         # the fingerprint daemon (running as system) cannot access it.
