@@ -38,7 +38,8 @@ fixSPL() {
             /system/lib64/vndk/libsoftkeymasterdevice.so /system/lib/vndk/libsoftkeymasterdevice.so \
             /system/lib/vndk-26/libsoftkeymasterdevice.so \
             /system/lib/vndk-27/libsoftkeymasterdevice.so /system/lib64/vndk-27/libsoftkeymasterdevice.so \
-	    /vendor/lib/libkeymaster3device.so /vendor/lib64/libkeymaster3device.so ; do
+	    /vendor/lib/libkeymaster3device.so /vendor/lib64/libkeymaster3device.so \
+        /vendor/lib/libMcTeeKeymaster.so /vendor/lib64/libMcTeeKeymaster.so ; do
             [ ! -f "$f" ] && continue
             # shellcheck disable=SC2010
             ctxt="$(ls -lZ "$f" | grep -oE 'u:object_r:[^:]*:s0')"
@@ -608,4 +609,13 @@ if [ -f /proc/oppoVersion/prjVersion ];then
 fi
 
 echo 1 >  /proc/tfa98xx/oppo_tfa98xx_fw_update
+echo 1 > /proc/touchpanel/tp_fw_update
 
+if getprop ro.build.overlay.deviceid |grep -qE '^RMX';then
+    chmod 0660 /sys/devices/platform/soc/soc:fpc_fpc1020/{irq,irq_enable,wakelock_enable}
+    if [ "$(stat -c '%U' /sys/devices/platform/soc/soc:fpc_fpc1020/irq)" == "root" ] &&
+		[ "$(stat -c '%G' /sys/devices/platform/soc/soc:fpc_fpc1020/irq)" == "root" ];then
+            chown system:system /sys/devices/platform/soc/soc:fpc_fpc1020/{irq,irq_enable,wakelock_enable}
+            setprop persist.sys.phh.fingerprint.nocleanup true
+    fi
+fi
