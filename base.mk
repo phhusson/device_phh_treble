@@ -161,3 +161,6 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/remote/phh-remotectl.rc:system/etc/init/phh-remotectl.rc \
 	device/phh/treble/remote/phh-remotectl.sh:system/bin/phh-remotectl.sh \
 
+PRODUCT_PACKAGES += \
+	android.hardware.biometrics.fingerprint@2.1-service.oppo.compat \
+
