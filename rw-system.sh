@@ -637,3 +637,7 @@ if getprop ro.build.overlay.deviceid |grep -qE '^RMX';then
             setprop persist.sys.phh.fingerprint.nocleanup true
     fi
 fi
+
+if [ "$vndk" -le 28 ] && getprop ro.hardware |grep mt6761;then
+    setprop debug.stagefright.ccodec 0
+fi
