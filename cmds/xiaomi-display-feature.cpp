@@ -33,6 +33,8 @@ int main(int argc, char **argv) {
 		mode = 9;
 	if(modeArg == "HIGHLIGHT")
 		mode = 11;
+    else
+        mode = atoi(argv[1]);
 
 	svc->setFeature(0, mode, atoi(argv[2]), 255);
 }
