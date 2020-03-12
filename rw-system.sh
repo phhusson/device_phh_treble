@@ -639,6 +639,6 @@ if getprop ro.build.overlay.deviceid |grep -qE '^RMX';then
     fi
 fi
 
-if [ "$vndk" -le 28 ] && getprop ro.hardware |grep mt6761;then
+if [ "$vndk" -le 28 ] && getprop ro.hardware |grep -q -e mt6761 -e mt6763;then
     setprop debug.stagefright.ccodec 0
 fi
