@@ -217,6 +217,12 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
     setprop persist.sys.qcom-brightness -1
 fi
 
+# Lenovo Z5s brightness flickers without this setting
+if getprop ro.vendor.build.fingerprint | grep -iq \
+    -e Lenovo/jd2019; then
+    setprop persist.sys.qcom-brightness -1
+fi
+
 if getprop ro.vendor.build.fingerprint | grep -qi oneplus/oneplus6/oneplus6; then
     resize2fs /dev/block/platform/soc/1d84000.ufshc/by-name/userdata
 fi
