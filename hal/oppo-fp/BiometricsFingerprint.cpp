@@ -52,7 +52,7 @@ public:
     OppoClientCallback(sp<android::hardware::biometrics::fingerprint::V2_1::IBiometricsFingerprintClientCallback> clientCallback) : mClientCallback(clientCallback) {}
     Return<void> onEnrollResult(uint64_t deviceId, uint32_t fingerId,
         uint32_t groupId, uint32_t remaining) {
-        ALOGE("onEnrollResult %lu %u %u %u", deviceId, fingerId, groupId, remaining);
+        ALOGE("onEnrollResult %" PRIu64 " %u %u %u", deviceId, fingerId, groupId, remaining);
         if(mClientCallback != nullptr)
             mClientCallback->onEnrollResult(deviceId, fingerId, groupId, remaining);
         return Void();
@@ -60,7 +60,7 @@ public:
 
     Return<void> onAcquired(uint64_t deviceId, vendor::oppo::hardware::biometrics::fingerprint::V2_1::FingerprintAcquiredInfo acquiredInfo,
         int32_t vendorCode) {
-        ALOGE("onAcquired %lu %d", deviceId, vendorCode);
+        ALOGE("onAcquired %" PRIu64 " %d", deviceId, vendorCode);
         if(mClientCallback != nullptr)
             mClientCallback->onAcquired(deviceId, OppoToAOSPFingerprintAcquiredInfo(acquiredInfo), vendorCode);
         return Void();
@@ -68,14 +68,14 @@ public:
 
     Return<void> onAuthenticated(uint64_t deviceId, uint32_t fingerId, uint32_t groupId,
         const hidl_vec<uint8_t>& token) {
-        ALOGE("onAuthenticated %lu %u %u", deviceId, fingerId, groupId);
+        ALOGE("onAuthenticated %" PRIu64 " %u %u", deviceId, fingerId, groupId);
         if(mClientCallback != nullptr)
             mClientCallback->onAuthenticated(deviceId, fingerId, groupId, token);
         return Void();
     }
 
     Return<void> onError(uint64_t deviceId, vendor::oppo::hardware::biometrics::fingerprint::V2_1::FingerprintError error, int32_t vendorCode) {
-        ALOGE("onError %lu %d", deviceId, vendorCode);
+        ALOGE("onError %" PRIu64 " %d", deviceId, vendorCode);
         if(error == vendor::oppo::hardware::biometrics::fingerprint::V2_1::FingerprintError::ERROR_CANCELED) {
             receivedCancel = true;
         }
@@ -86,7 +86,7 @@ public:
 
     Return<void> onRemoved(uint64_t deviceId, uint32_t fingerId, uint32_t groupId,
         uint32_t remaining) {
-        ALOGE("onRemoved %lu %u", deviceId, fingerId);
+        ALOGE("onRemoved %" PRIu64 " %" PRIu32, deviceId, fingerId);
         if(mClientCallback != nullptr)
             mClientCallback->onRemoved(deviceId, fingerId, groupId, remaining);
         return Void();
@@ -95,7 +95,7 @@ public:
     Return<void> onEnumerate(uint64_t deviceId, uint32_t fingerId, uint32_t groupId,
         uint32_t remaining) {
         receivedEnumerate = true;
-        ALOGE("onEnumerate %lu %u %u %u", deviceId, fingerId, groupId, remaining);
+        ALOGE("onEnumerate %" PRIu64 " %u %u %u", deviceId, fingerId, groupId, remaining);
         if(mClientCallback != nullptr)
             mClientCallback->onEnumerate(deviceId, fingerId, groupId, remaining);
         return Void();
@@ -104,7 +104,7 @@ public:
     Return<void> onTouchUp(uint64_t deviceId) { return Void(); }
     Return<void> onTouchDown(uint64_t deviceId) { return Void(); }
     Return<void> onSyncTemplates(uint64_t deviceId, const hidl_vec<uint32_t>& fingerId, uint32_t remaining) {
-        ALOGE("onSyncTemplates %lu %zu %u", deviceId, fingerId.size(), remaining);
+        ALOGE("onSyncTemplates %" PRIu64 " %zu %" PRIu32, deviceId, fingerId.size(), remaining);
         myDeviceId = deviceId;
 
         for(auto fid : fingerId) {
