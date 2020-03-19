@@ -164,7 +164,7 @@ mount -o remount,ro / || true
 
 for part in /dev/block/bootdevice/by-name/oppodycnvbk  /dev/block/platform/bootdevice/by-name/nvdata;do
     if [ -b "$part" ];then
-        oppoName="$(grep -aohE '(RMX|CPH)[0-9]{4}' "$part")"
+        oppoName="$(grep -aohE '(RMX|CPH)[0-9]{4}' "$part" |head -n 1)"
         if [ -n "$oppoName" ];then
             setprop ro.build.overlay.deviceid "$oppoName"
         fi
