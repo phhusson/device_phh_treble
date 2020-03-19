@@ -3,3 +3,6 @@ ro.adb.secure=0
 #Disable for everyone for the moment
 ro.sys.sdcardfs=0
 persist.sys.overlay.nightmode=true
+
+#Disable debugging strict mode toasts
+persist.sys.strictmode.disable=true
