@@ -18,13 +18,13 @@ on property:persist.sys.phh.mainkeys=*
     setprop qemu.hw.mainkeys ${persist.sys.phh.mainkeys}
 
 on property:persist.sys.phh.oppo.dt2w=*
-    exec_background u:r:phhsu_daemon:s0 root -- /system/bin/sh -c "echo ${persist.sys.phh.oppo.dt2w} > /proc/touchpanel/double_tap_enable"
+    exec_background u:r:phhsu_daemon:s0 root -- /system/bin/phh-prop-handler.sh "persist.sys.phh.oppo.dt2w"
 
 on property:persist.sys.phh.oppo.gaming_mode=*
-    exec_background u:r:phhsu_daemon:s0 root -- /system/bin/sh -c "echo ${persist.sys.phh.oppo.gaming_mode} > /proc/touchpanel/game_switch_enable"
+    exec_background u:r:phhsu_daemon:s0 root -- /system/bin/phh-prop-handler.sh "persist.sys.phh.oppo.gaming_mode"
 
 on property:persist.sys.phh.oppo.usbotg=*
-    exec_background u:r:phhsu_daemon:s0 root -- /system/bin/sh -c "echo ${persist.sys.phh.oppo.usbotg} > /sys/class/power_supply/usb/otg_switch"
+    exec_background u:r:phhsu_daemon:s0 root -- /system/bin/phh-prop-handler.sh "persist.sys.phh.oppo.usbotg"
 
 on property:persist.sys.phh.xiaomi.dt2w=*
     exec_background u:r:phhsu_daemon:s0 root -- /system/bin/phh-prop-handler.sh "persist.sys.phh.xiaomi.dt2w"
