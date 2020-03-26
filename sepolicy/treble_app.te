@@ -8,10 +8,6 @@ allow system_app sysfs_batteryinfo:file rw_file_perms;
 type vendor_camera_prop, property_type;
 set_prop(system_app, vendor_camera_prop);
 
-#Used to control double-tap-to-wake on Xiaomi
-allow system_app input_device:chr_file rw_file_perms;
-allow system_app input_device:dir r_dir_perms;
-
 type hal_ext_fingerprint_hwservice, hwservice_manager_type;
 allow system_app hal_ext_fingerprint_hwservice:hwservice_manager { find };
 type hal_fingerprint_default, domain;
