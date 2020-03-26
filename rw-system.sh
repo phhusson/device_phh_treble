@@ -449,13 +449,6 @@ if [ -c /dev/dsm ];then
     mount /data/sec_storage_data /sec_storage
 fi
 
-#Try to detect DT2W
-for ev in $(cd /sys/class/input;echo event*);do
-	if [ -f "/sys/class/input/$ev/device/device/gesture_mask" ];then
-		setprop persist.sys.phh.dt2w_evnode /dev/input/$ev
-	fi
-done
-
 has_hostapd=false
 for i in odm oem vendor product;do
     if grep -qF android.hardware.wifi.hostapd /$i/etc/vintf/manifest.xml;then
