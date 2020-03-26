@@ -58,3 +58,30 @@ if [ "$1" == "persist.sys.phh.xiaomi.dt2w" ]; then
     fi
     exit $?
 fi
+
+if [ "$1" == "persist.sys.phh.oppo.dt2w" ]; then
+    if [[ "$prop_value" -ne 0 && "$prop_value" -ne 1 ]]; then
+        exit 1
+    fi
+
+    echo "$prop_value" >/proc/touchpanel/double_tap_enable
+    exit
+fi
+
+if [ "$1" == "persist.sys.phh.oppo.gaming_mode" ]; then
+    if [[ "$prop_value" -ne 0 && "$prop_value" -ne 1 ]]; then
+        exit 1
+    fi
+
+    echo "$prop_value" >/proc/touchpanel/game_switch_enable
+    exit
+fi
+
+if [ "$1" == "persist.sys.phh.oppo.usbotg" ]; then
+    if [[ "$prop_value" -ne 0 && "$prop_value" -ne 1 ]]; then
+        exit 1
+    fi
+
+    echo "$prop_value" >/sys/class/power_supply/usb/otg_switch
+    exit
+fi
