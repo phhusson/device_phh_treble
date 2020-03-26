@@ -48,7 +48,7 @@ xiaomi_toggle_dt2w_event_node() {
 }
 
 if [ "$1" == "persist.sys.phh.xiaomi.dt2w" ]; then
-    if [[ "$prop_value" -ne 0 && "$prop_value" -ne 1 ]]; then
+    if [[ "$prop_value" != "0" && "$prop_value" != "1" ]]; then
         exit 1
     fi
 
@@ -60,7 +60,7 @@ if [ "$1" == "persist.sys.phh.xiaomi.dt2w" ]; then
 fi
 
 if [ "$1" == "persist.sys.phh.oppo.dt2w" ]; then
-    if [[ "$prop_value" -ne 0 && "$prop_value" -ne 1 ]]; then
+    if [[ "$prop_value" != "0" && "$prop_value" != "1" ]]; then
         exit 1
     fi
 
@@ -69,7 +69,7 @@ if [ "$1" == "persist.sys.phh.oppo.dt2w" ]; then
 fi
 
 if [ "$1" == "persist.sys.phh.oppo.gaming_mode" ]; then
-    if [[ "$prop_value" -ne 0 && "$prop_value" -ne 1 ]]; then
+    if [[ "$prop_value" != "0" && "$prop_value" != "1" ]]; then
         exit 1
     fi
 
@@ -78,7 +78,7 @@ if [ "$1" == "persist.sys.phh.oppo.gaming_mode" ]; then
 fi
 
 if [ "$1" == "persist.sys.phh.oppo.usbotg" ]; then
-    if [[ "$prop_value" -ne 0 && "$prop_value" -ne 1 ]]; then
+    if [[ "$prop_value" != "0" && "$prop_value" != "1" ]]; then
         exit 1
     fi
 
