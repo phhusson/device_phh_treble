@@ -220,7 +220,7 @@ fi
 # Lenovo Z5s brightness flickers without this setting
 if getprop ro.vendor.build.fingerprint | grep -iq \
     -e Lenovo/jd2019; then
-    setprop persist.sys.qcom-brightness -1
+    setprop persist.sys.qcom-brightness 4095
 fi
 
 if getprop ro.vendor.build.fingerprint | grep -qi oneplus/oneplus6/oneplus6; then
