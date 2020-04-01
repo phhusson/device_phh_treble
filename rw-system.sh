@@ -152,7 +152,9 @@ changeKeylayout() {
 
 if mount -o remount,rw /system; then
     resize2fs "$(grep ' /system ' /proc/mounts | cut -d ' ' -f 1)" || true
-elif mount -o remount,rw /; then
+else
+    remount system
+    mount -o remount,rw /
     major="$(stat -c '%D' /.|sed -E 's/^([0-9a-f]+)([0-9a-f]{2})$/\1/g')"
     minor="$(stat -c '%D' /.|sed -E 's/^([0-9a-f]+)([0-9a-f]{2})$/\2/g')"
     mknod /dev/tmp-phh b $((0x$major)) $((0x$minor))
