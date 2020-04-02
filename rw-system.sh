@@ -331,7 +331,8 @@ for f in /vendor/lib/mtk-ril.so /vendor/lib64/mtk-ril.so /vendor/lib/libmtk-ril.
     mount -o bind "/mnt/phh/$b" "$f"
 done
 
-if getprop ro.vendor.build.fingerprint | grep -iq -e iaomi/cactus -e iaomi/cereus; then
+if getprop ro.vendor.build.fingerprint | grep -iq -e iaomi/cactus -e iaomi/cereus \
+    -e Redmi/begonia; then
     setprop debug.stagefright.omx_default_rank.sw-audio 1
     setprop debug.stagefright.omx_default_rank 0
 fi
