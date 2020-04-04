@@ -6,3 +6,4 @@ persist.sys.overlay.nightmode=true
 
 #Disable debugging strict mode toasts
 persist.sys.strictmode.disable=true
+persist.sys.phh.mainkeys=0
