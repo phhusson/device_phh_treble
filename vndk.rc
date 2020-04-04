@@ -5,6 +5,12 @@ on post-fs
         setprop ro.vndk.version ${persist.sys.vndk}
 	export LD_PRELOAD :
 
+on property:vold.decrypt=trigger_restart_framework
+	exec - root -- /system/bin/phh-on-data.sh
+
+on early-boot
+	exec - root -- /system/bin/phh-on-data.sh
+
 service phh_on_boot /system/bin/phh-on-boot.sh
     oneshot
     disabled
