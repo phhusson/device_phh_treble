@@ -659,3 +659,9 @@ fi
 if [ "$vndk" -le 28 ] && getprop ro.hardware |grep -q -e mt6761 -e mt6763 -e mt6765 -e mt6785;then
     setprop debug.stagefright.ccodec 0
 fi
+
+if getprop ro.omc.build.version |grep -qE .;then
+	for f in $(find /odm -name \*.apk);do
+		mount /system/phh/empty $f
+	done
+fi
