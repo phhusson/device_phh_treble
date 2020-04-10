@@ -91,11 +91,11 @@ allow phhsu_daemon dex2oat_exec:file rx_file_perms;
 
 allow phhsu_daemon phhsu_daemon_tmpfs:file rwx_file_perms;
 
-allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:file { rwx_file_perms create mounton setattr getattr relabelto relabelfrom };
-allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:lnk_file { rw_file_perms create mounton setattr getattr relabelto relabelfrom };
-allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:dir { rw_dir_perms create mounton setattr getattr relabelto relabelfrom };
-allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:chr_file rwx_file_perms;
-allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type }:blk_file { rw_file_perms create };
+allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type phhsu_daemon }:file { rwx_file_perms create mounton setattr getattr relabelto relabelfrom };
+allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type phhsu_daemon }:lnk_file { rw_file_perms create mounton setattr getattr relabelto relabelfrom };
+allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type phhsu_daemon }:dir { rw_dir_perms create mounton setattr getattr relabelto relabelfrom };
+allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type phhsu_daemon }:chr_file rwx_file_perms;
+allow phhsu_daemon { proc_type dev_type exec_type file_type sysfs_type fs_type phhsu_daemon }:blk_file { rw_file_perms create };
 
 allow phhsu_daemon device:file rwx_file_perms;
 allow phhsu_daemon device:dir rw_dir_perms;
@@ -138,3 +138,4 @@ allow phhsu_daemon self:{ netlink_tcpdiag_socket } { create_socket_perms nlmsg_w
 
 allow phhsu_daemon file_type:file create_file_perms;
 allow phhsu_daemon file_type:dir create_dir_perms;
+
