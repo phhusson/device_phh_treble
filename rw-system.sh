@@ -266,7 +266,7 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
     -e motorola/ali/ali -e iaomi/perseus/perseus -e iaomi/platina/platina \
     -e iaomi/equuleus/equuleus -e motorola/nora -e xiaomi/nitrogen \
     -e motorola/hannah -e motorola/james -e motorola/pettyl -e iaomi/cepheus \
-    -e iaomi/grus -e xiaomi/cereus -e iaomi/raphael -e iaomi/davinci \
+    -e iaomi/grus -e iaomi/cereus -e iaomi/cactus -e iaomi/raphael -e iaomi/davinci \
     -e iaomi/ginkgo -e iaomi/laurel_sprout -e xiaomi/andromeda; then
     mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
     mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
