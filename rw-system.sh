@@ -664,6 +664,8 @@ if getprop ro.omc.build.version |grep -qE .;then
 	done
 fi
 
-if getprop ro.vendor.build.fingerprint |grep -qiE -e Nokia/Plate2; then
+if getprop ro.vendor.build.fingerprint |grep -qiE \
+        -e Nokia/Plate2 \
+        -e razer/cheryl ; then
     setprop media.settings.xml "/vendor/etc/media_profiles_vendor.xml"
 fi
