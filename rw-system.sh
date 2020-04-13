@@ -655,3 +655,7 @@ if getprop ro.omc.build.version |grep -qE .;then
 		mount /system/phh/empty $f
 	done
 fi
+
+if getprop ro.vendor.build.fingerprint |grep -qiE -e Nokia/Plate2; then
+    setprop media.settings.xml "/vendor/etc/media_profiles_vendor.xml"
+fi
