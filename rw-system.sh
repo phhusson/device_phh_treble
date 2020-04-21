@@ -66,8 +66,14 @@ fixSPL() {
 }
 
 changeKeylayout() {
+    cp -a /system/usr/idc /mnt/phh/idc
+    cp -a /system/usr/keychars /mnt/phh/keychars
     cp -a /system/usr/keylayout /mnt/phh/keylayout
+
     changed=false
+    idc_changed=false
+    keychars_changed=false
+
     if grep -q vendor.huawei.hardware.biometrics.fingerprint /vendor/etc/vintf/manifest.xml; then
         changed=true
         cp /system/phh/huawei/fingerprint.kl /mnt/phh/keylayout/fingerprint.kl
@@ -145,9 +151,33 @@ changeKeylayout() {
         changed=true
     fi
 
+    if getprop ro.vendor.build.fingerprint |grep -q -e Unihertz/Titan;then
+        cp /system/phh/unihertz-titan-aw9523-key.idc /mnt/phh/idc/aw9523-key.idc
+        cp /system/phh/unihertz-titan-mtk-kpd.idc /mnt/phh/idc/mtk-kpd.idc
+        cp /system/phh/unihertz-titan-mtk-pad.idc /mnt/phh/idc/mtk-pad.idc
+        cp /system/phh/unihertz-titan-aw9523-key.kcm /mnt/phh/keychars/aw9523-key.kcm
+        cp /system/phh/unihertz-titan-mtk-kpd.kl /mnt/phh/keylayout/mtk-kpd.kl
+        chmod 0644 /mnt/phh/idc/aw9523-key.idc
+        chmod 0644 /mnt/phh/idc/mtk-kpd.idc
+        chmod 0644 /mnt/phh/idc/mtk-pad.idc
+        chmod 0644 /mnt/phh/keychars/aw9523-key.kcm
+        chmod 0644 /mnt/phh/keylayout/mtk-kpd.kl
+        chmod 0644 /mnt/phh/keylayout/uinput-fpc.kl
+        idc_changed=true
+        keychars_changed=true
+    fi
+
     if [ "$changed" = true ]; then
         mount -o bind /mnt/phh/keylayout /system/usr/keylayout
         restorecon -R /system/usr/keylayout
+    fi
+    if [ "$idc_changed" = true ]; then
+        mount -o bind /mnt/phh/idc /system/usr/idc
+        restorecon -R /system/usr/idc
+    fi
+    if [ "$keychars_changed" = true ]; then
+        mount -o bind /mnt/phh/keychars /system/usr/keychars
+        restorecon -R /system/usr/keychars
     fi
 }
 
