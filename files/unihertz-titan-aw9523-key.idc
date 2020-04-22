@@ -1,5 +1,3 @@
-# Agold add for A61 by guotuo
-
 device.internal = 1
 
 touch.deviceType = touchScreen

@@ -115,9 +115,7 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/files/oppo-touchpanel.kl:system/phh/oppo-touchpanel.kl \
 	device/phh/treble/files/google-uinput-fpc.kl:system/phh/google-uinput-fpc.kl \
 	device/phh/treble/files/unihertz-titan-aw9523-key.idc:system/phh/unihertz-titan-aw9523-key.idc \
-	device/phh/treble/files/unihertz-titan-mtk-kpd.idc:system/phh/unihertz-titan-mtk-kpd.idc \
-  device/phh/treble/files/unihertz-titan-mtk-pad.idc:system/phh/unihertz-titan-mtk-pad.idc \
-  device/phh/treble/files/unihertz-titan-aw9523-key.kcm:system/phh/unihertz-titan-aw9523-key.kcm \
+	device/phh/treble/files/unihertz-titan-aw9523-key.kcm:system/phh/unihertz-titan-aw9523-key.kcm \
 	device/phh/treble/files/unihertz-titan-mtk-kpd.kl:system/phh/unihertz-titan-mtk-kpd.kl
 
 SELINUX_IGNORE_NEVERALLOWS := true
