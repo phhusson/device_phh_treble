@@ -494,6 +494,11 @@ if getprop ro.vendor.build.fingerprint | grep -qiE '^samsung/' && [ "$vndk" -ge 
 			chcon u:object_r:sysfs_ss_writable:s0 /sys/class/sec/tsp/input/enabled
 			setprop ctl.restart sec-miscpower-1-0
 	fi
+	if [ "$(stat -c '%U' /sys/class/camera/flash/rear_flash)" == "root" ] &&
+		[ "$(stat -c '%G' /sys/class/camera/flash/rear_flash)" == "root" ];then
+        chown system:system /sys/class/camera/flash/rear_flash
+        chcon u:object_r:sysfs_camera_writable:s0 /sys/class/camera/flash/rear_flash
+    fi
 fi
 
 if [ -f /system/phh/secure ];then
