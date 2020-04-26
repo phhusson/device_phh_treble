@@ -77,7 +77,6 @@ for part in a ab;do
 				fi
 
 				cat > ${target}.mk << EOF
-TARGET_GAPPS_ARCH := ${baseArch}
 \$(call inherit-product, device/phh/treble/base-pre.mk)
 include build/make/target/product/aosp_${baseArch}_ab.mk
 \$(call inherit-product, vendor/vndk/${vndk})
