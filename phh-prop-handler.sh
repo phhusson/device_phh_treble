@@ -31,8 +31,13 @@ xiaomi_toggle_dt2w_event_node() {
         cd /sys/class/input || return
         echo event*
     ); do
+        isTouchscreen=false
+        if getevent -p /dev/input/$ev |grep -e 0035 -e 0036|wc -l |grep -q 2;then
+            isTouchscreen=true
+        fi
         [ ! -f "/sys/class/input/${ev}/device/device/gesture_mask" ] &&
-            [ ! -f "/sys/class/input/${ev}/device/wake_gesture" ] && continue
+            [ ! -f "/sys/class/input/${ev}/device/wake_gesture" ] &&
+            ! $isTouchscreen && continue
         echo "Trying to set dt2w mode with event node: /dev/input/${ev}"
         if [ "$1" -eq 1 ]; then
             # Enable
