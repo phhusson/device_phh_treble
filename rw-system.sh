@@ -442,7 +442,7 @@ fi
 
 mount -o bind /mnt/phh/empty_dir /vendor/etc/audio || true
 
-for f in /vendor/lib{,64}/hw/com.qti.chi.override.so;do
+for f in /vendor/lib{,64}/hw/com.qti.chi.override.so /vendor/lib{,64}/libVD*;do
     [ ! -f $f ] && continue
     # shellcheck disable=SC2010
     ctxt="$(ls -lZ "$f" | grep -oE 'u:object_r:[^:]*:s0')"
@@ -452,12 +452,14 @@ for f in /vendor/lib{,64}/hw/com.qti.chi.override.so;do
     sed -i \
         -e 's/ro.product.manufacturer/sys.phh.xx.manufacturer/g' \
         -e 's/ro.product.brand/sys.phh.xx.brand/g' \
+        -e 's/ro.product.model/sys.phh.xx.model/g' \
         "/mnt/phh/$b"
     chcon "$ctxt" "/mnt/phh/$b"
     mount -o bind "/mnt/phh/$b" "$f"
 
     setprop sys.phh.xx.manufacturer "$(getprop ro.product.vendor.manufacturer)"
     setprop sys.phh.xx.brand "$(getprop ro.product.vendor.brand)"
+    setprop sys.phh.xx.model "$(getprop ro.product.vendor.model)"
 done
 
 if [ -n "$(getprop ro.boot.product.hardware.sku)" ] && [ -z "$(getprop ro.hw.oemName)" ];then
