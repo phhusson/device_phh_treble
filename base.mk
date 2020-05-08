@@ -150,6 +150,9 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/phh-securize.sh:system/bin/phh-securize.sh \
 
 PRODUCT_COPY_FILES += \
+	device/phh/treble/remove-telephony.sh:system/bin/remove-telephony.sh \
+
+PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.software.secure_lock_screen.xml:system/etc/permissions/android.software.secure_lock_screen.xml \
 
 PRODUCT_COPY_FILES += \
