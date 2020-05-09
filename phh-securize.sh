@@ -1,18 +1,28 @@
 #!/system/bin/sh
 
-mount -o remount,rw /
-mount -o remount,rw /system
+SYSTEM=/system
+[ -d /sbin/.magisk/mirror/system ] && SYSTEM=/sbin/.magisk/mirror/system
+
+for MOUNTPOINT in \
+    /sbin/.magisk/mirror/system_root \
+    /sbin/.magisk/mirror/system \
+    /system \
+    /
+do
+    [ -d $MOUNTPOINT ] && mountpoint -q $MOUNTPOINT && break
+done
+
+mount -o remount,rw $MOUNTPOINT
 remount
 
-touch /system/phh/secure
-umount -l /system/xbin/su
-rm /system/xbin/su
-rm /system/bin/phh-su
-rm /system/etc/init/su.rc
-rm /system/bin/phh-securize.sh
-rm -Rf /system/{app,priv-app}/me.phh.superuser/
+touch $SYSTEM/phh/secure
+umount -l $SYSTEM/xbin/su
+rm $SYSTEM/xbin/su
+rm $SYSTEM/bin/phh-su
+rm $SYSTEM/etc/init/su.rc
+rm $SYSTEM/bin/phh-securize.sh
+rm -Rf $SYSTEM/{app,priv-app}/me.phh.superuser/
 rm -Rf /data/su || true
-mount -o remount,ro /
-mount -o remount,ro /system
+mount -o remount,ro $MOUNTPOINT
 sync
 reboot
