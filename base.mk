@@ -84,7 +84,8 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/twrp/busybox-armv7l:system/bin/busybox_phh
 
 PRODUCT_PACKAGES += \
-    simg2img_simple
+    simg2img_simple \
+    lptools
 
 ifneq (,$(wildcard external/exfat))
 PRODUCT_PACKAGES += \
