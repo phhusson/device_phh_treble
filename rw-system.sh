@@ -551,8 +551,10 @@ if [ -f /system/phh/secure ];then
     copyprop ro.product.manufacturer ro.vendor.product.manufacturer
     copyprop ro.system.product.manufacturer ro.product.vendor.manufacturer
     copyprop ro.product.manufacturer ro.product.vendor.manufacturer
-    copyprop ro.build.version.security_patch ro.vendor.build.security_patch
-    copyprop ro.build.version.security_patch ro.keymaster.xxx.security_patch
+    (getprop ro.vendor.build.security_patch; getprop ro.keymaster.xxx.security_patch) |sort |tail -n 1 |while read v;do
+        [ -n "$v" ] && resetprop ro.build.version.security_patch "$v"
+    done
+
     resetprop ro.build.tags release-keys
     resetprop ro.boot.vbmeta.device_state locked
     resetprop ro.boot.verifiedbootstate green
