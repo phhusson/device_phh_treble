@@ -694,3 +694,4 @@ if getprop ro.vendor.build.fingerprint |grep -qiE \
         -e razer/cheryl ; then
     setprop media.settings.xml "/vendor/etc/media_profiles_vendor.xml"
 fi
+resetprop service.adb.root 0
