@@ -697,3 +697,6 @@ if getprop ro.vendor.build.fingerprint |grep -qiE \
     setprop media.settings.xml "/vendor/etc/media_profiles_vendor.xml"
 fi
 resetprop service.adb.root 0
+
+#This is for Samsung Galaxy devices with HBM FOD
+echo 319 > /sys/class/lcd/panel/mask_brightness
