@@ -210,3 +210,14 @@ cc_binary {
     ],
 }
 
+cc_binary {
+	name: "sec-camera-list",
+	srcs: [
+		"sec-camera-list.cpp",
+	],
+	shared_libs: [
+		"vendor.samsung.hardware.camera.provider@3.0",
+		"libutils",
+		"libhidlbase",
+	],
+}
