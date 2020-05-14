@@ -194,7 +194,7 @@ if getprop ro.vendor.build.fingerprint | grep -q -i \
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
 fi
 
-if getprop ro.vendor.product.device |grep -iq -e RMX1801 -e RMX1803 -e RMX1807;then	
+if getprop ro.vendor.product.device |grep -iq -e RMX1801 -e RMX1803 -e RMX1807;then
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
 fi
 
@@ -283,7 +283,7 @@ if busybox_phh unzip -p /vendor/app/ims/ims.apk classes.dex | grep -qF -e Landro
     mount -o bind /system/phh/empty /vendor/app/ims/ims.apk
 fi
 
-if getprop ro.hardware | grep -qF samsungexynos -e mt6771 -e exynos; then
+if getprop ro.hardware | grep -q -e exynos -e mt6771; then
     setprop debug.sf.latch_unsignaled 1
 fi
 
