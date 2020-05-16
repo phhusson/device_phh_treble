@@ -5,6 +5,9 @@ if [ -f /vendor/bin/mtkmal ];then
     if [ "$(getprop persist.mtk_ims_support)" = 1 ] || [ "$(getprop persist.mtk_epdg_support)" = 1 ];then
         setprop persist.mtk_ims_support 0
         setprop persist.mtk_epdg_support 0
+        setprop rild.libpath mtk-ril.so
+        setprop rild.libargs -d /dev/ttyC0
+        setprop persist.mal.mode 0
         reboot
     fi
 fi
