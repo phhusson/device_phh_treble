@@ -716,3 +716,8 @@ fi
 if getprop ro.build.overlay.deviceid |grep -qiE -e '^RMX' -e '^CPH';then
     setprop persist.sys.phh.fod.bbk true
 fi
+
+if getprop ro.build.overlay.deviceid |grep -iq -e RMX1941 -e RMX1945 -e RMX1943 -e RMX1942;then	
+    setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
+    setprop persist.sys.phh.mainkeys 0
+fi
