@@ -694,3 +694,25 @@ resetprop service.adb.root 0
 # On those devices, a magic Layer usageBits switches to "mask_brightness"
 # But default is 255, so set it to max instead
 cat /sys/class/backlight/*/max_brightness |sort -n |tail -n 1 > /sys/class/lcd/panel/mask_brightness
+
+if getprop ro.vendor.build.fingerprint |grep -qiE '^xiaomi/';then
+    setprop persist.sys.phh.fod.xiaomi true
+fi
+
+if getprop ro.vendor.build.fingerprint |grep -qiE '^samsung/';then
+    if ls -lZ /sys/class/lcd/panel/mask_brightness |grep -q u:object_r:sysfs:s0;then
+        chcon u:object_r:sysfs_lcd_writable:s0 /sys/class/lcd/panel/actual_mask_brightness
+        chcon u:object_r:sysfs_lcd_writable:s0 /sys/class/lcd/panel/mask_brightness
+        chcon u:object_r:sysfs_lcd_writable:s0 /sys/class/lcd/panel/device/backlight/panel/brightness
+        chcon u:object_r:sysfs_lcd_writable:s0 /sys/class/backlight/panel0-backlight/brightness
+    fi
+
+    setprop persist.sys.phh.fod.samsung true
+fi
+
+if getprop ro.vendor.build.fingerprint |grep -qiE '^oneplus/';then
+    setprop persist.sys.phh.fod.bbk true
+fi
+if getprop ro.build.overlay.deviceid |grep -qiE -e '^RMX' -e '^CPH';then
+    setprop persist.sys.phh.fod.bbk true
+fi
