@@ -88,7 +88,8 @@ changeKeylayout() {
         -e xiaomi/wayne -e xiaomi/jasmine -e xiaomi/jasmine_sprout \
         -e xiaomi/platina -e iaomi/perseus -e xiaomi/ysl -e Redmi/begonia\
         -e xiaomi/nitrogen -e xiaomi/sakura -e xiaomi/andromeda \
-        -e xiaomi/whyred -e xiaomi/tulip -e xiaomi/onc; then
+        -e xiaomi/whyred -e xiaomi/tulip -e xiaomi/onc \
+        -e xiaomi/curtana; then
         if [ ! -f /mnt/phh/keylayout/uinput-goodix.kl ]; then
           cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
           chmod 0644 /mnt/phh/keylayout/uinput-goodix.kl
@@ -279,13 +280,14 @@ if getprop ro.build.overlay.deviceid |grep -q -e CPH1859 -e CPH1861 -e RMX1811;t
 fi
 
 if getprop ro.vendor.build.fingerprint | grep -iq \
-    -e Xiaomi/beryllium/beryllium -e Xiaomi/sirius/sirius \
-    -e Xiaomi/dipper/dipper -e Xiaomi/ursa/ursa -e Xiaomi/polaris/polaris \
-    -e motorola/ali/ali -e iaomi/perseus/perseus -e iaomi/platina/platina \
-    -e iaomi/equuleus/equuleus -e motorola/nora -e xiaomi/nitrogen \
-    -e motorola/hannah -e motorola/james -e motorola/pettyl -e iaomi/cepheus \
-    -e iaomi/grus -e iaomi/cereus -e iaomi/cactus -e iaomi/raphael -e iaomi/davinci \
-    -e iaomi/ginkgo -e iaomi/laurel_sprout -e xiaomi/andromeda; then
+    -e xiaomi/beryllium/beryllium -e xiaomi/sirius/sirius \
+    -e xiaomi/dipper/dipper -e xiaomi/ursa/ursa -e xiaomi/polaris/polaris \
+    -e motorola/ali/ali -e xiaomi/perseus/perseus -e xiaomi/platina/platina \
+    -e xiaomi/equuleus/equuleus -e motorola/nora -e xiaomi/nitrogen \
+    -e motorola/hannah -e motorola/james -e motorola/pettyl -e xiaomi/cepheus \
+    -e xiaomi/grus -e xiaomi/cereus -e xiaomi/cactus -e xiaomi/raphael -e xiaomi/davinci \
+    -e xiaomi/ginkgo -e xiaomi/laurel_sprout -e xiaomi/andromeda \
+    -e xiaomi/curtana ; then
     mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
     mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
     setprop  ro.audio.ignore_effects true
