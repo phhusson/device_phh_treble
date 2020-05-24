@@ -121,7 +121,7 @@ if [ "$1" == "persist.sys.phh.caf.audio_policy" ];then
 
     if [[ "$prop_value" == 1 ]];then
         umount /vendor/etc/audio
-        mount /audio_policy_configuration.xml /vendor/etc/audio_policy_configuration.xml
+        mount /vendor/etc/audio/audio_policy_configuration.xml /vendor/etc/audio_policy_configuration.xml
     else
         umount /vendor/etc/audio_policy_configuration.xml
         mount /mnt/phh/empty_dir /vendor/etc/audio
