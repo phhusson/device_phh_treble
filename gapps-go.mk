@@ -10,11 +10,11 @@ FILTER_OUT = $(foreach v,$(2),$(if $(findstring $(1),$(v)),,$(v)))
 PRODUCT_COPY_FILES := $(call FILTER_OUT,google_go.xml:, $(PRODUCT_COPY_FILES))
 
 #We need to use this way because it overrides sync adapters
-PRODUCT_PACKAGES := $(call FILTER_OUT,CalendarGoogle, $(PRODUCT_PACKAGES))
-PRODUCT_PACKAGES := $(call FILTER_OUT,GoogleContacts, $(PRODUCT_PACKAGES))
+PRODUCT_PACKAGES := $(filter-out CalendarGoogle, $(PRODUCT_PACKAGES))
+PRODUCT_PACKAGES := $(filter-out GoogleContacts, $(PRODUCT_PACKAGES))
 
 PRODUCT_SHIPPING_API_LEVEL :=
 
 PRODUCT_PACKAGES += \
 	phh-gapps-go-overrides \
-
+	GoogleContactsSyncAdapter \
