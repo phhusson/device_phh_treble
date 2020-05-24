@@ -1,11 +1,16 @@
 BUILD_GMS := yes
 ifneq ($(wildcard vendor/google),)
--include vendor/google/products/gms_eea_type1.mk
+-include vendor/google/products/gms.mk
 PRODUCT_SHIPPING_API_LEVEL :=
+
+PRODUCT_PACKAGES := $(filter-out CalendarGoogle, $(PRODUCT_PACKAGES))
+PRODUCT_PACKAGES := $(filter-out GoogleContacts, $(PRODUCT_PACKAGES))
+
 PRODUCT_PACKAGES += \
 	phh-gapps-overrides \
+	Chrome \
+	GoogleContactsSyncAdapter \
 
-FILTER_OUT = $(foreach v,$(2),$(if $(findstring $(1),$(v)),,$(v)))
 endif
 
 ifneq ($(wildcard vendor/opengapps),)
