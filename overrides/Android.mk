@@ -30,6 +30,24 @@ PACKAGES.$(LOCAL_MODULE).OVERRIDES := \
 	Maps \
 	Gmail2 \
 	GoogleContacts \
+	GmsSampleIntegration \
+	GmsSampleIntegrationGo \
+	GmsSampleIntegrationGo2GB \
+	GmsSampleIntegrationGo512M \
+	GmsEEAType1Integration \
+	GmsEEAType1IntegrationGo \
+	GmsEEAType2Integration \
+	GmsEEAType2IntegrationGo \
+	GmsEEAType3aIntegration \
+	GmsEEAType3aIntegrationGo \
+	GmsEEAType3bIntegration \
+	GmsEEAType3bIntegrationGo \
+	GmsEEAType4aIntegration \
+	GmsEEAType4aIntegrationGo \
+	GmsEEAType4bIntegration \
+	GmsEEAType4bIntegrationGo \
+	GmsEEAType4cIntegration \
+	GmsEEAType4cIntegrationGo
 
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
