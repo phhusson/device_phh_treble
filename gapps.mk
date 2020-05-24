@@ -1,3 +1,13 @@
+BUILD_GMS := yes
+ifneq ($(wildcard vendor/google),)
+-include vendor/google/products/gms_eea_type1.mk
+PRODUCT_SHIPPING_API_LEVEL :=
+PRODUCT_PACKAGES += \
+	phh-gapps-overrides \
+
+FILTER_OUT = $(foreach v,$(2),$(if $(findstring $(1),$(v)),,$(v)))
+endif
+
 ifneq ($(wildcard vendor/opengapps),)
 PRODUCT_COPY_FILES += \
 	device/phh/treble/empty-permission.xml:system/etc/permissions/com.google.android.camera2.xml \

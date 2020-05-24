@@ -2,7 +2,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := phh-gapps-go-overrides
-PACKAGES.phh-gapps-go-overrides.OVERRIDES := \
+PACKAGES.$(LOCAL_MODULE).OVERRIDES := \
 	Wellbeing \
 	GMailGo \
 	YouTubeGo \
@@ -18,13 +18,18 @@ include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := phh-gapps-overrides
-PACKAGES.phh-gapps-go-overrides.OVERRIDES := \
+PACKAGES.$(LOCAL_MODULE).OVERRIDES := \
 	Drive \
 	YTMusic \
 	Videos \
 	Duo \
 	Traceur \
-	Weelbeing \
+	Wellbeing \
+	YouTube \
+	Photos \
+	Maps \
+	Gmail2 \
+	GoogleContacts \
 
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
