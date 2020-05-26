@@ -34,5 +34,7 @@ int main(int argc, char **argv) {
 		svc->takebackMotor(atoi(argv[2]));
 	} else if(cmd == "takebackShortly") {
 		svc->takebackMotorShortly();
+	} else if(cmd == "getMotorStatus") {
+		std::cerr << svc->getMotorStatus() << std::endl;
 	}
 }
