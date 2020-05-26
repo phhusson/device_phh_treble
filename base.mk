@@ -111,7 +111,9 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/files/mimix3-gpio-keys.kl:system/phh/mimix3-gpio-keys.kl \
 	device/phh/treble/files/nokia-soc_gpio_keys.kl:system/phh/nokia-soc_gpio_keys.kl
 
+ifneq ($(TARGET_BUILD_VARIANT),user)
 SELINUX_IGNORE_NEVERALLOWS := true
+endif
 
 # Universal NoCutoutOverlay
 PRODUCT_PACKAGES += \
