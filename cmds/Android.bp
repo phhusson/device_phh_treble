@@ -182,3 +182,42 @@ cc_binary {
 		"libhidlbase",
 	],
 }
+
+cc_binary {
+    name: "lptools",
+    cflags: [
+        "-Werror",
+        "-Wextra",
+    ],
+    device_supported: true,
+    shared_libs: [
+        "libbase",
+        "liblog",
+        "liblp",
+        "libsparse",
+        "libfs_mgr",
+        "libutils",
+        "libcutils",
+    ],
+    static_libs: [
+        "libdm",
+    ],
+    srcs: [
+        "lptools.cc",
+    ],
+    cppflags: [
+        "-D_FILE_OFFSET_BITS=64",
+    ],
+}
+
+cc_binary {
+	name: "sec-camera-list",
+	srcs: [
+		"sec-camera-list.cpp",
+	],
+	shared_libs: [
+		"vendor.samsung.hardware.camera.provider@3.0",
+		"libutils",
+		"libhidlbase",
+	],
+}

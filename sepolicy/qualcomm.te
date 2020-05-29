@@ -24,3 +24,7 @@ allow ipacm hal_tetheroffload_hwservice:hwservice_manager { add };
 type rpmb_device, file_type;
 allow tee rpmb_device:blk_file rw_file_perms;
 allowxperm tee rpmb_device:blk_file ioctl { 0xb300-0xbfff };
+
+attribute smcinvoke_device_29_0;
+type smcinvoke_device, dev_type;
+typeattribute smcinvoke_device smcinvoke_device_29_0;

@@ -29,6 +29,8 @@ if find /sys/firmware -name support_fod |grep -qE .;then
 	setprop ctl.restart vendor.fps_hal
 fi
 
+setprop ctl.stop storageproxyd
+
 #Clear looping services
 sleep 30
 getprop | \

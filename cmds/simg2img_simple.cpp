@@ -42,8 +42,15 @@ typedef struct chunk_header {
  */
 
 void nsendfile(int out_fd, int in_fd, size_t count) {
+    char buf[1024*1024];
 	while(count) {
 		ssize_t res = splice(in_fd, NULL, out_fd, NULL, count, 0);
+        if(res==-1) {
+            ssize_t sizeToRead = sizeof(buf);
+            if(count < sizeToRead) sizeToRead = count;
+            res = read(in_fd, buf, sizeToRead);
+            if(write(out_fd, buf, res) != res) exit(114);
+        }
 		if(res == 0 || res == -1) exit(112);
 		count -= res;
 	}

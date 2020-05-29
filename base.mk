@@ -3,6 +3,7 @@
 PRODUCT_COPY_FILES := \
 	frameworks/native/data/etc/android.hardware.fingerprint.xml:system/etc/permissions/android.hardware.fingerprint.xml \
 	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
+	frameworks/native/data/etc/android.hardware.telephony.ims.xml:system/etc/permissions/android.hardware.telephony.ims.xml \
 	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
 	frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
 
@@ -83,7 +84,8 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/twrp/busybox-armv7l:system/bin/busybox_phh
 
 PRODUCT_PACKAGES += \
-    simg2img_simple
+    simg2img_simple \
+    lptools
 
 ifneq (,$(wildcard external/exfat))
 PRODUCT_PACKAGES += \
@@ -117,6 +119,9 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/files/unihertz-titan-aw9523-key.idc:system/phh/unihertz-titan-aw9523-key.idc \
 	device/phh/treble/files/unihertz-titan-aw9523-key.kcm:system/phh/unihertz-titan-aw9523-key.kcm \
 	device/phh/treble/files/unihertz-titan-mtk-kpd.kl:system/phh/unihertz-titan-mtk-kpd.kl
+	device/phh/treble/files/daisy-buttonJack.kl:system/phh/daisy-buttonJack.kl \
+	device/phh/treble/files/daisy-uinput-fpc.kl:system/phh/daisy-uinput-fpc.kl \
+	device/phh/treble/files/daisy-uinput-goodix.kl:system/phh/daisy-uinput-goodix.kl
 
 SELINUX_IGNORE_NEVERALLOWS := true
 
@@ -147,6 +152,9 @@ PRODUCT_PACKAGES += \
 	resetprop
 PRODUCT_COPY_FILES += \
 	device/phh/treble/phh-securize.sh:system/bin/phh-securize.sh \
+
+PRODUCT_COPY_FILES += \
+	device/phh/treble/remove-telephony.sh:system/bin/remove-telephony.sh \
 
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.software.secure_lock_screen.xml:system/etc/permissions/android.software.secure_lock_screen.xml \

@@ -3,4 +3,4 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/phh/treble/bluetooth
 TARGET_EXFAT_DRIVER := exfat
 DEVICE_FRAMEWORK_MANIFEST_FILE := device/phh/treble/framework_manifest.xml
 
-BOARD_ROOT_EXTRA_FOLDERS += bt_firmware sec_storage
+BOARD_ROOT_EXTRA_FOLDERS += bt_firmware sec_storage efs
