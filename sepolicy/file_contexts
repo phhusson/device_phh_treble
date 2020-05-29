@@ -16,3 +16,4 @@
 
 /efs u:object_r:efs_file:s0
 
+/dev/smcinvoke u:object_r:smcinvoke_device:s0
