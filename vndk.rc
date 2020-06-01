@@ -41,3 +41,6 @@ on property:persist.sys.phh.disable_audio_effects=*
 on property:persist.sys.phh.caf.audio_policy=*
     exec u:r:phhsu_daemon:s0 root -- /system/bin/phh-prop-handler.sh "persist.sys.phh.caf.audio_policy"
 
+on property:persist.sys.phh.vsmart.dt2w=*
+    exec u:r:phhsu_daemon:s0 root -- /system/bin/phh-prop-handler.sh "persist.sys.phh.vsmart.dt2w"
+

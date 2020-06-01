@@ -129,3 +129,16 @@ if [ "$1" == "persist.sys.phh.caf.audio_policy" ];then
     restartAudio
     exit
 fi
+
+if [ "$1" == "persist.sys.phh.vsmart.dt2w" ];then
+    if [[ "$prop_value" != "0" && "$prop_value" != "1" ]]; then
+        exit 1
+    fi
+
+    if [[ "$prop_value" == 1 ]];then
+        echo 0 > /sys/class/vsm/tp/gesture_control
+    else
+        echo > /sys/class/vsm/tp/gesture_control
+    fi
+    exit
+fi
