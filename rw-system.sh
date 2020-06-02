@@ -160,6 +160,12 @@ changeKeylayout() {
         changed=true
     fi
 
+    if getprop ro.product.vendor.manufacturer |grep -q -e motorola;then
+        cp /system/phh/moto-uinput-egis.kl /mnt/phh/keylayout/uinput-egis.kl
+        chmod 0644 /mnt/phh/keylayout/uinput-egis.kl
+        changed=true
+    fi
+
     if [ "$changed" = true ]; then
         mount -o bind /mnt/phh/keylayout /system/usr/keylayout
         restorecon -R /system/usr/keylayout
