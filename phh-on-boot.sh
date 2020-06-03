@@ -1,5 +1,8 @@
 #!/system/bin/sh
 
+vndk="$(getprop persist.sys.vndk)"
+[ -z "$vndk" ] && vndk="$(getprop ro.vndk.version |grep -oE '^[0-9]+')"
+
 [ "$(getprop vold.decrypt)" = "trigger_restart_min_framework" ] && exit 0
 
 setprop ctl.start media.swcodec
@@ -30,6 +33,12 @@ if find /sys/firmware -name support_fod |grep -qE .;then
 fi
 
 setprop ctl.stop storageproxyd
+
+sleep 10
+if [ "$vndk" = 27 ] && getprop init.svc.mediacodec |grep -q restarting;then
+    mount /system/lib64/vndk-27/libminijail.so /vendor/lib64/libminijail_vendor.so
+    mount /system/lib/vndk-27/libminijail.so /vendor/lib/libminijail_vendor.so
+fi
 
 #Clear looping services
 sleep 30
