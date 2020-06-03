@@ -746,3 +746,9 @@ fi
 if getprop ro.vendor.build.fingerprint |grep -qi redmi/curtana;then
     setprop ro.netflix.bsp_rev Q6250-19132-1
 fi
+
+# Set props for Vsmart Live's fod
+if getprop ro.vendor.build.fingerprint |grep -q vsmart/V620A_open;then
+    setprop persist.sys.fp.fod.location.X_Y 447,1812
+    setprop persist.sys.fp.fod.size.width_height 186,186
+fi
