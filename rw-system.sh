@@ -752,3 +752,5 @@ if getprop ro.vendor.build.fingerprint |grep -q vsmart/V620A_open;then
     setprop persist.sys.fp.fod.location.X_Y 447,1812
     setprop persist.sys.fp.fod.size.width_height 186,186
 fi
+
+setprop vendor.display.res_switch_en 1
