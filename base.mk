@@ -150,6 +150,7 @@ PRODUCT_PACKAGES += \
 	resetprop
 PRODUCT_COPY_FILES += \
 	device/phh/treble/phh-securize.sh:system/bin/phh-securize.sh \
+	device/phh/treble/files/ota.sh:system/bin/ota.sh \
 
 PRODUCT_COPY_FILES += \
 	device/phh/treble/remove-telephony.sh:system/bin/remove-telephony.sh \
@@ -176,6 +177,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
 	android.hardware.biometrics.fingerprint@2.1-service.oppo.compat \
 
-
 PRODUCT_PACKAGES += \
-	vr_hwc
+	vr_hwc \
+	curl \
+
