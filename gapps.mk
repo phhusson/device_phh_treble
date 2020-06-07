@@ -17,6 +17,9 @@ PRODUCT_PACKAGES += \
        PrebuiltDeskClockGoogle \
        CalendarGooglePrebuilt \
        LatinImeGoogle \
+       Tycho \
+       CarrierServices \
+       GoogleDialer \
        phh-overrides
 
 $(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
