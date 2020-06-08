@@ -164,7 +164,9 @@ changeKeylayout() {
 
     if getprop ro.product.vendor.manufacturer |grep -q -e motorola;then
         cp /system/phh/moto-uinput-egis.kl /mnt/phh/keylayout/uinput-egis.kl
+        cp /system/phh/moto-uinput-egis.kl /mnt/phh/keylayout/uinput-fpc.kl
         chmod 0644 /mnt/phh/keylayout/uinput-egis.kl
+        chmod 0644 /mnt/phh/keylayout/uinput-fpc.kl
         changed=true
     fi
 
@@ -481,9 +483,13 @@ for f in /vendor/lib{,64}/hw/com.qti.chi.override.so /vendor/lib{,64}/libVD*;do
     chcon "$ctxt" "/mnt/phh/$b"
     mount -o bind "/mnt/phh/$b" "$f"
 
-    setprop sys.phh.xx.manufacturer "$(getprop ro.product.vendor.manufacturer)"
+    manufacturer=$(getprop ro.product.vendor.manufacturer)
+    [ -z "$manufacturer" ] && manufacturer=$(getprop ro.product.manufacturer)
+    model=$(getprop ro.product.vendor.model)
+    [ -z "$model" ] && model=$(getprop ro.product.odm.model)
+    setprop sys.phh.xx.manufacturer "$manufacturer"
     setprop sys.phh.xx.brand "$(getprop ro.product.vendor.brand)"
-    setprop sys.phh.xx.model "$(getprop ro.product.vendor.model)"
+    setprop sys.phh.xx.model "$model"
 done
 
 if [ -n "$(getprop ro.boot.product.hardware.sku)" ] && [ -z "$(getprop ro.hw.oemName)" ];then
