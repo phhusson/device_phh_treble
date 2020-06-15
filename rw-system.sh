@@ -700,7 +700,8 @@ fi
 
 if getprop ro.vendor.build.fingerprint |grep -qiE \
         -e Nokia/Plate2 \
-        -e razer/cheryl ; then
+        -e razer/cheryl \
+        -e GM/GM9PRO ; then
     setprop media.settings.xml "/vendor/etc/media_profiles_vendor.xml"
 fi
 resetprop service.adb.root 0
