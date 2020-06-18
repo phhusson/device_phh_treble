@@ -176,6 +176,15 @@ changeKeylayout() {
     fi
 }
 
+if [ "$(getprop ro.product.vendor.manufacturer)" = motorola ] && getprop ro.vendor.product.name |grep -qE '^lima';then
+    for l in lib lib64;do
+        for f in mt6771 lima;do
+            mount /system/phh/empty /vendor/$l/hw/keystore.$f.so
+        done
+    done
+    setprop persist.sys.overlay.devinputjack true
+fi
+
 if mount -o remount,rw /system; then
     resize2fs "$(grep ' /system ' /proc/mounts | cut -d ' ' -f 1)" || true
 else
