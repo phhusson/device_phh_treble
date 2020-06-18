@@ -78,12 +78,32 @@ void saveToDisk(std::unique_ptr<MetadataBuilder> builder) {
     }
 }
 
+std::string findGroup(std::unique_ptr<MetadataBuilder>& builder) {
+    auto groups = builder->ListGroups();
+    std::string maxGroup = "";
+    uint64_t maxGroupSize = 0;
+    for(auto groupName: groups) {
+        auto group = builder->FindGroup(groupName);
+        if(group->maximum_size() > maxGroupSize) {
+            maxGroup = groupName;
+            maxGroupSize = group->maximum_size();
+        }
+    }
+
+    return maxGroup;
+}
+
+
+
 int main(int argc, char **argv) {
     if(argc<=1) {
         std::cerr << "Usage: " << argv[0] << " <create|remove|resize|rename>" << std::endl;
         exit(1);
     }
     auto builder = makeBuilder();
+    auto group = findGroup(builder);
+    std::cout << "Best group seems to be " << group << std::endl;
+
     if(strcmp(argv[1], "create") == 0) {
         if(argc != 4) {
             std::cerr << "Usage: " << argv[0] << " create <partition name> <partition size>" << std::endl;
@@ -96,7 +116,7 @@ int main(int argc, char **argv) {
             std::cerr << "Partition " << partName << " already exists." << std::endl;
             exit(1);
         }
-        partition = builder->AddPartition(partName, "main", 0);
+        partition = builder->AddPartition(partName, group, 0);
         std::cout << "Growing partition " << builder->ResizePartition(partition, size) << std::endl;
         saveToDisk(std::move(builder));
 
@@ -158,7 +178,7 @@ int main(int argc, char **argv) {
         }
         builder->RemovePartition(src);
         builder->RemovePartition(dst);
-        auto newDstPartition = builder->AddPartition(dst, "main", 0);
+        auto newDstPartition = builder->AddPartition(dst, group, 0);
         for(auto&& extent: originalExtents) {
             newDstPartition->AddExtent(std::move(extent));
         }
