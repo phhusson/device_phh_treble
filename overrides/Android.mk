@@ -47,7 +47,6 @@ PACKAGES.$(LOCAL_MODULE).OVERRIDES := \
 	Photos \
 	Maps \
 	Gmail2 \
-	Velvet \
 	FilesGoogle \
 	GmsSampleIntegration \
 	GmsSampleIntegrationGo \
