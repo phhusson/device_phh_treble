@@ -765,9 +765,9 @@ fi
 
 setprop vendor.display.res_switch_en 1
 
-setprop dalvik.vm.isa.arm64.features runtime
 if getprop ro.bionic.cpu_variant |grep -q kryo300;then
     resetprop ro.bionic.cpu_variant cortex-a75
     setprop dalvik.vm.isa.arm64.variant cortex-a75
+    setprop dalvik.vm.isa.arm64.features runtime
 fi
 
