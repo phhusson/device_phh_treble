@@ -170,6 +170,12 @@ changeKeylayout() {
         changed=true
     fi
 
+    if getprop ro.vendor.build.fingerprint | grep -iq -e GM/GM9PRO; then
+        cp /system/phh/gm9pro-gpio-keys.kl /mnt/phh/keylayout/gpio-keys.kl
+        chmod 0644 /mnt/phh/keylayout/gpio-keys.kl
+        changed=true
+    fi
+
     if [ "$changed" = true ]; then
         mount -o bind /mnt/phh/keylayout /system/usr/keylayout
         restorecon -R /system/usr/keylayout
@@ -709,7 +715,8 @@ fi
 
 if getprop ro.vendor.build.fingerprint |grep -qiE \
         -e Nokia/Plate2 \
-        -e razer/cheryl ; then
+        -e razer/cheryl \
+        -e GM/GM9PRO ; then
     setprop media.settings.xml "/vendor/etc/media_profiles_vendor.xml"
 fi
 resetprop service.adb.root 0

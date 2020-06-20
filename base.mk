@@ -120,7 +120,9 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/files/moto-uinput-egis.kl:system/phh/moto-uinput-egis.kl \
 	device/phh/treble/files/daisy-buttonJack.kl:system/phh/daisy-buttonJack.kl \
 	device/phh/treble/files/daisy-uinput-fpc.kl:system/phh/daisy-uinput-fpc.kl \
-	device/phh/treble/files/daisy-uinput-goodix.kl:system/phh/daisy-uinput-goodix.kl
+	device/phh/treble/files/daisy-uinput-goodix.kl:system/phh/daisy-uinput-goodix.kl \
+	device/phh/treble/files/gm9pro-gpio-keys.kl:system/phh/gm9pro-gpio-keys.kl \
+
 
 SELINUX_IGNORE_NEVERALLOWS := true
 
