@@ -596,7 +596,7 @@ fi
 for abi in "" 64;do
     f=/vendor/lib$abi/libstagefright_foundation.so
     if [ -f "$f" ];then
-        for vndk in 26 27 28;do
+        for vndk in 26 27 28 29;do
             mount "$f" /system/lib$abi/vndk-$vndk/libstagefright_foundation.so
         done
     fi
