@@ -9,3 +9,5 @@ allow hal_fingerprint_server sysfs:file rw_file_perms;
 type oeminfo_nvm, domain;
 type oeminfo_nvm_device, file_type;
 allowxperm oeminfo_nvm oeminfo_nvm_device:blk_file ioctl { 0x1260 };
+
+allow charger rootfs:file { ioctl read getattr lock map execute entrypoint open };
