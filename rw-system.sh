@@ -736,13 +736,11 @@ if getprop ro.vendor.build.fingerprint |grep -qiE '^xiaomi/';then
 fi
 
 if getprop ro.vendor.build.fingerprint |grep -qiE '^samsung/';then
-    if ls -lZ /sys/class/lcd/panel/mask_brightness |grep -q u:object_r:sysfs:s0;then
-        for f in /sys/class/lcd/panel/actual_mask_brightness /sys/class/lcd/panel/mask_brightness /sys/class/lcd/panel/device/backlight/panel/brightness /sys/class/backlight/panel0-backlight/brightness;do
-            chcon u:object_r:sysfs_lcd_writable:s0 $f
-            chmod 0644 $f
-            chown system:system $f
-        done
-    fi
+    for f in /sys/class/lcd/panel/actual_mask_brightness /sys/class/lcd/panel/mask_brightness /sys/class/lcd/panel/device/backlight/panel/brightness /sys/class/backlight/panel0-backlight/brightness;do
+        chcon u:object_r:sysfs_lcd_writable:s0 $f
+        chmod 0644 $f
+        chown system:system $f
+    done
 
     setprop persist.sys.phh.fod.samsung true
 fi
