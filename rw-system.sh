@@ -324,6 +324,10 @@ if getprop ro.build.fingerprint | grep -iq \
     setprop ro.audio.ignore_effects true
 fi
 
+if getprop ro.product.vendor.device | grep -ie m20lte -e m30lte; then
+    mount /system/phh/empty /vendor/lib64/hw/keystore.mdfpp.so
+fi
+
 if [ "$(getprop ro.vendor.product.manufacturer)" = "motorola" ] || [ "$(getprop ro.product.vendor.manufacturer)" = "motorola" ]; then
     if getprop ro.vendor.product.device | grep -q -e nora -e ali -e hannah -e evert -e jeter -e deen -e james -e pettyl -e jater; then
         setprop  ro.audio.ignore_effects true
