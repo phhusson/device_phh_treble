@@ -150,9 +150,11 @@ changeKeylayout() {
         changed=true
     fi
 
-    if getprop ro.build.overlay.deviceid |grep -q -e RMX1931 -e CPH1859 -e CPH1861;then
+    if getprop ro.build.overlay.deviceid |grep -q -e RMX1931 -e RMX1941 -e CPH1859 -e CPH1861;then
         cp /system/phh/oppo-touchpanel.kl /mnt/phh/keylayout/touchpanel.kl
+	cp /system/phh/oppo-touchpanel.kl /mnt/phh/keylayout/mtk-tpd.kl
         chmod 0644 /mnt/phh/keylayout/touchpanel.kl
+	chmod 0644 /mnt/phh/keylayout/mtk-tpd.kl
         changed=true
     fi
 
