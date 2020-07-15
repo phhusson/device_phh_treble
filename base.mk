@@ -183,3 +183,5 @@ PRODUCT_PACKAGES += \
 	vr_hwc \
 	curl \
 
+# Keymaster from SM-M205F - M205FDDU1ASC1
+PRODUCT_COPY_FILES += device/phh/treble/files/keystore.mdfpp.so:system/phh/keystore.mdfpp
