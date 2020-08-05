@@ -689,7 +689,8 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
 fi
 
 if getprop ro.build.overlay.deviceid |grep -qE '^RMX';then
-    setprop oppo.camera.packname com.oppo.camera
+    resetprop ro.vendor.gsi.build.flavor byPass
+    setprop oppo.camera.packname com.oppo.engineermode.camera
     setprop sys.phh.xx.brand realme
 fi
 
