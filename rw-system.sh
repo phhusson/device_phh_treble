@@ -175,6 +175,14 @@ changeKeylayout() {
         changed=true
     fi
 
+    if getprop ro.vendor.asus.build.fp |grep -q ASUS_I01WD;then
+        cp /system/phh/zf6-goodixfp.kl /mnt/phh/keylayout/goodixfp.kl
+        cp /system/phh/zf6-googlekey_input.kl /mnt/phh/keylayout/googlekey_input.kl
+        chmod 0644 /mnt/phh/keylayout/goodixfp.kl
+        chmod 0644 /mnt/phh/keylayout/googlekey_input.kl
+        changed=true
+    fi
+
     if [ "$changed" = true ]; then
         mount -o bind /mnt/phh/keylayout /system/usr/keylayout
         restorecon -R /system/usr/keylayout
