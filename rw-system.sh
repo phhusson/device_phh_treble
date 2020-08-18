@@ -793,6 +793,8 @@ if getprop ro.bionic.cpu_variant |grep -q kryo300;then
     setprop dalvik.vm.isa.arm64.features runtime
 fi
 
+resetprop ro.control_privapp_permissions log
+
 # Set proper LCD density for Realme SDM710 devices
 if getprop ro.build.overlay.deviceid |grep -iq -e RMX1921 -e RMX1901 -e RMX1901CN -e RMX1971 -e RMX1971CN -e RMX1851;then
     setprop ro.sf.lcd_density "440"
