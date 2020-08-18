@@ -309,6 +309,7 @@ fi
 if getprop ro.vendor.product.device |grep -iq -e RMX2001;then
     setprop persist.sys.phh.fingerprint.nocleanup true
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
+    setprop ro.sf.lcd_density "440"
 fi
 
 if getprop ro.vendor.product.device |grep -iq -e RMX1801 -e RMX1803 -e RMX1807;then
