@@ -768,6 +768,12 @@ if getprop ro.build.overlay.deviceid |grep -iq -e RMX1941 -e RMX1945 -e RMX1943 
     setprop persist.sys.phh.mainkeys 0
 fi
 
+if getprop ro.build.overlay.deviceid |grep -iq -e RMX2020 -e RMX2027;then	
+    setprop persist.sys.qcom-brightness 2047
+    setprop persist.sys.overlay.devinputjack true
+    setprop persist.sys.phh.fingerprint.nocleanup true
+fi
+
 resetprop ro.bluetooth.library_name libbluetooth.so
 
 if getprop ro.vendor.build.fingerprint |grep -iq xiaomi/cepheus;then
