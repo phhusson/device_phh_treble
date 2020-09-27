@@ -79,7 +79,7 @@ if [ "$configfs" == 1 ];then
 	sleep 1
 	echo none > /config/usb_gadget/g1/UDC
 	ln -s /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/c.1/f1
-	echo ff100000.dwc3 > /config/usb_gadget/g1/UDC
+	ls /sys/class/udc |head -n 1 > /config/usb_gadget/g1/UDC
 
 	sleep 2
 	echo 2 > /sys/devices/virtual/android_usb/android0/port_mode
