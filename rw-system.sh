@@ -35,6 +35,8 @@ fixSPL() {
         for f in \
             /vendor/lib64/hw/android.hardware.keymaster@3.0-impl-qti.so /vendor/lib/hw/android.hardware.keymaster@3.0-impl-qti.so \
             /system/lib64/vndk-26/libsoftkeymasterdevice.so /vendor/bin/teed \
+            /apex/com.android.vndk.v26/lib/libsoftkeymasterdevice.so  \
+            /apex/com.android.vndk.v26/lib64/libsoftkeymasterdevice.so  \
             /system/lib64/vndk/libsoftkeymasterdevice.so /system/lib/vndk/libsoftkeymasterdevice.so \
             /system/lib/vndk-26/libsoftkeymasterdevice.so \
             /system/lib/vndk-27/libsoftkeymasterdevice.so /system/lib64/vndk-27/libsoftkeymasterdevice.so \
