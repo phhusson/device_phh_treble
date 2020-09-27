@@ -62,7 +62,6 @@ public:
 
 static FileOrBlockDeviceOpener opener;
 std::unique_ptr<MetadataBuilder> makeBuilder() {
-    MetadataBuilder::OverrideABForTesting(false);
     auto builder = MetadataBuilder::New(opener, "super", 0);
     if(builder == nullptr) {
         std::cout << "Failed creating super builder" << std::endl;
@@ -121,11 +120,14 @@ int main(int argc, char **argv) {
         saveToDisk(std::move(builder));
 
         std::string dmPath;
-        auto dmCreateRes = android::fs_mgr::CreateLogicalPartition(
-                "/dev/block/by-name/super",
-                0, partName,
-                true,
-                std::chrono::milliseconds(10000), &dmPath);
+        CreateLogicalPartitionParams params {
+                .block_device = "/dev/block/by-name/super",
+                .metadata_slot = 0,
+                .partition_name = partName,
+                .timeout_ms = std::chrono::milliseconds(10000),
+                .force_writable = true,
+        };
+        auto dmCreateRes = android::fs_mgr::CreateLogicalPartition(params, &dmPath);
         std::cout << "Creating dm partition for " << partName << " answered " << dmCreateRes << " at " << dmPath << std::endl;
         exit(0);
     } else if(strcmp(argv[1], "remove") == 0) {
@@ -136,7 +138,7 @@ int main(int argc, char **argv) {
         auto partName = argv[2];
         auto dmState = android::dm::DeviceMapper::Instance().GetState(partName);
         if(dmState == android::dm::DmDeviceState::ACTIVE) {
-            android::fs_mgr::DestroyLogicalPartition(partName, std::chrono::milliseconds(2000));
+            android::fs_mgr::DestroyLogicalPartition(partName);
         }
         builder->RemovePartition(partName);
         saveToDisk(std::move(builder));
@@ -191,11 +193,14 @@ int main(int argc, char **argv) {
         }
         auto partName = argv[2];
         std::string dmPath;
-        auto dmCreateRes = android::fs_mgr::CreateLogicalPartition(
-                "/dev/block/by-name/super",
-                0, partName,
-                true,
-                std::chrono::milliseconds(10000), &dmPath);
+        CreateLogicalPartitionParams params {
+                .block_device = "/dev/block/by-name/super",
+                .metadata_slot = 0,
+                .partition_name = partName,
+                .timeout_ms = std::chrono::milliseconds(10000),
+                .force_writable = true,
+        };
+        auto dmCreateRes = android::fs_mgr::CreateLogicalPartition(params, &dmPath);
         std::cout << "Creating dm partition for " << partName << " answered " << dmCreateRes << " at " << dmPath << std::endl;
         exit(0);
     } else if(strcmp(argv[1], "unmap") == 0) {
@@ -206,7 +211,7 @@ int main(int argc, char **argv) {
         auto partName = argv[2];
         auto dmState = android::dm::DeviceMapper::Instance().GetState(partName);
         if(dmState == android::dm::DmDeviceState::ACTIVE) {
-            android::fs_mgr::DestroyLogicalPartition(partName, std::chrono::milliseconds(2000));
+            android::fs_mgr::DestroyLogicalPartition(partName);
         }
         exit(0);
     }
