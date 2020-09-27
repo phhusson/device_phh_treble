@@ -184,4 +184,4 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	vr_hwc \
 	curl \
-
+	healthd \
