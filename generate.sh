@@ -80,7 +80,6 @@ for part in a ab;do
 TARGET_GAPPS_ARCH := ${baseArch}
 \$(call inherit-product, device/phh/treble/base-pre.mk)
 include build/make/target/product/aosp_${baseArch}_ab.mk
-\$(call inherit-product, vendor/vndk/${vndk})
 \$(call inherit-product, device/phh/treble/base.mk)
 $optional_base
 $apps_script
