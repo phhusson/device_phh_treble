@@ -741,7 +741,7 @@ resetprop service.adb.root 0
 # This is for Samsung Galaxy devices with HBM FOD
 # On those devices, a magic Layer usageBits switches to "mask_brightness"
 # But default is 255, so set it to max instead
-cat /sys/class/backlight/*/max_brightness |sort -n |tail -n 1 > /sys/class/lcd/panel/mask_brightness
+echo 319 > /sys/class/lcd/panel/mask_brightness
 
 if getprop ro.vendor.build.fingerprint |grep -qiE '^xiaomi/';then
     setprop persist.sys.phh.fod.xiaomi true
