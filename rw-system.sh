@@ -611,15 +611,6 @@ if [ -f /system/phh/secure ];then
     setprop ctl.restart adbd
 fi
 
-for abi in "" 64;do
-    f=/vendor/lib$abi/libstagefright_foundation.so
-    if [ -f "$f" ];then
-        for vndk in 26 27 28 29;do
-            mount "$f" /system/lib$abi/vndk-$vndk/libstagefright_foundation.so
-        done
-    fi
-done
-
 setprop ro.product.first_api_level "$vndk"
 
 if getprop ro.boot.boot_devices |grep -v , |grep -qE .;then
