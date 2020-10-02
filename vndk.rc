@@ -44,3 +44,11 @@ on property:persist.sys.phh.caf.audio_policy=*
 on property:persist.sys.phh.vsmart.dt2w=*
     exec u:r:phhsu_daemon:s0 root -- /system/bin/phh-prop-handler.sh "persist.sys.phh.vsmart.dt2w"
 
+on property:persist.sys.phh.disable_a2dp_offload=0
+    setprop persist.sys.phh.disable_a2dp_offload false
+
+on property:persist.sys.phh.disable_a2dp_offload=1
+    setprop persist.sys.phh.disable_a2dp_offload true
+
+on property:persist.sys.phh.disable_a2dp_offload=*
+    setprop persist.bluetooth.bluetooth_audio_hal.disabled ${persist.sys.phh.disable_a2dp_offload}
