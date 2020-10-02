@@ -34,4 +34,9 @@
 	<dimen name="config_buttonCornerRadius">4.0dip</dimen>
 
 	<bool name="config_cellBroadcastAppLinks">true</bool>
+
+    <string-array name="config_biometric_sensors" translatable="false" >
+        <!-- ID0:Fingerprint:Strong -->
+        <item>0:2:15</item>
+    </string-array>
 </resources>
