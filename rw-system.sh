@@ -805,3 +805,7 @@ fi
 if [ "$vndk" -le 27 ];then
     setprop persist.sys.phh.no_present_or_validate true
 fi
+
+if grep -q /mnt/vendor/persist /vendor/etc/fstab.qcom;then
+    mount /mnt/vendor/persist /persist
+fi
