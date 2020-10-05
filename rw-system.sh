@@ -794,3 +794,7 @@ if getprop ro.bionic.cpu_variant |grep -q kryo300;then
 fi
 
 resetprop ro.control_privapp_permissions log
+
+if grep -q /mnt/vendor/persist /vendor/etc/fstab.qcom;then
+    mount /mnt/vendor/persist /persist
+fi
