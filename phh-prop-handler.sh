@@ -142,3 +142,12 @@ if [ "$1" == "persist.sys.phh.vsmart.dt2w" ];then
     fi
     exit
 fi
+
+if [ "$1" == "persist.sys.phh.qin.dt2w" ];then
+    if [[ "$prop_value" != "0" && "$prop_value" != "1" ]]; then
+        exit 1
+    fi
+
+    echo "$prop_value" > /sys/devices/platform/soc/soc:ap-apb/70800000.i2c/i2c-3/3-0038/fts_gesture_mode
+    exit
+fi
