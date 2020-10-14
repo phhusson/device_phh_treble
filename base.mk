@@ -161,6 +161,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.software.secure_lock_screen.xml:system/etc/permissions/android.software.secure_lock_screen.xml \
+	device/phh/treble/files/android.software.controls.xml:system/etc/permissions/android.software.controls.xml \
 
 PRODUCT_COPY_FILES += \
         device/phh/treble/ld.config.26.txt:system/etc/ld.config.26.txt \
