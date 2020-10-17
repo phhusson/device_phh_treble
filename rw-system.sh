@@ -89,7 +89,7 @@ changeKeylayout() {
         -e xiaomi/wayne -e xiaomi/jasmine -e xiaomi/jasmine_sprout \
         -e xiaomi/platina -e iaomi/perseus -e xiaomi/ysl -e Redmi/begonia\
         -e xiaomi/nitrogen -e xiaomi/sakura -e xiaomi/andromeda \
-        -e xiaomi/whyred -e xiaomi/tulip -e xiaomi/onc \
+        -e xiaomi/whyred -e xiaomi/tulip -e xiaomi/onc -e Redmi/merlin \
         -e redmi/curtana -e redmi/picasso -e redmi/galahad; then
         if [ ! -f /mnt/phh/keylayout/uinput-goodix.kl ]; then
           cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
@@ -299,10 +299,15 @@ fi
 
 if getprop ro.vendor.build.fingerprint | grep -q -i \
     -e xiaomi/clover -e xiaomi/wayne -e xiaomi/sakura \
-    -e xiaomi/nitrogen -e xiaomi/whyred -e xiaomi/platina \
+    -e xiaomi/nitrogen -e xiaomi/whyred -e xiaomi/platina -e Redmi/merlin \
     -e xiaomi/ysl -e nubia/nx60 -e nubia/nx61 -e xiaomi/tulip -e Redmi/begonia\
     -e xiaomi/lavender -e xiaomi/olive -e xiaomi/olivelite -e xiaomi/pine; then
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
+fi
+
+#Xiaomi Redmi Note 9
+if getprop ro.vendor.build.fingerprint |grep -qi -e Redmi/merlin; then
+    setprop persist.sys.overlay.devinputjack true
 fi
 
 #Realme 6
