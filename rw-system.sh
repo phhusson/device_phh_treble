@@ -93,7 +93,7 @@ changeKeylayout() {
         -e xiaomi/nitrogen -e xiaomi/sakura -e xiaomi/andromeda \
         -e xiaomi/whyred -e xiaomi/tulip -e xiaomi/onc \
         -e redmi/curtana -e redmi/picasso -e Redmi/lancelot \
-		-e Redmi/galahad; then
+        -e Redmi/galahad; then
         if [ ! -f /mnt/phh/keylayout/uinput-goodix.kl ]; then
           cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
           chmod 0644 /mnt/phh/keylayout/uinput-goodix.kl
@@ -305,7 +305,7 @@ if getprop ro.vendor.build.fingerprint | grep -q -i \
     -e xiaomi/nitrogen -e xiaomi/whyred -e xiaomi/platina \
     -e xiaomi/ysl -e nubia/nx60 -e nubia/nx61 -e xiaomi/tulip -e Redmi/begonia\
     -e xiaomi/lavender -e xiaomi/olive -e xiaomi/olivelite -e xiaomi/pine \
-	-e Redmi/lancelot -e Redmi/galahad; then
+    -e Redmi/lancelot -e Redmi/galahad; then
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
 fi
 
