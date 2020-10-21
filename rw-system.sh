@@ -371,8 +371,8 @@ if getprop ro.vendor.build.fingerprint | grep -q -i \
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
 fi
 
-#Xiaomi Redmi Note 9
-if getprop ro.vendor.build.fingerprint |grep -qi -e Redmi/merlin; then
+#Xiaomi Redmi Note 9, Redmi 9 (Prime)
+if getprop ro.vendor.build.fingerprint |grep -qi -e Redmi/merlin -e Redmi/lancelot; then
     setprop persist.sys.overlay.devinputjack true
 fi
 
