@@ -7,6 +7,8 @@ allow system_app sysfs_batteryinfo:file rw_file_perms;
 
 type vendor_camera_prop, property_type;
 set_prop(system_app, vendor_camera_prop);
+type camera_prop, property_type;
+set_prop(system_app, camera_prop);
 
 type hal_ext_fingerprint_hwservice, hwservice_manager_type;
 allow system_app hal_ext_fingerprint_hwservice:hwservice_manager { find };
@@ -22,3 +24,6 @@ allow system_app default_hisi_hwservice:hwservice_manager { find };
 type hal_tp_default, domain;
 allow system_app hal_tp_default:binder { call };
 
+
+set_prop(system_app, default_prop);
+set_prop(system_app, exported3_default_prop);
