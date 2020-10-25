@@ -44,6 +44,11 @@ int main(int argc, char **argv, char **envp) {
                 if (buflen<0) {
                         exit(1);
                 }
+
+                if(argc>=2) {
+                    if(!strstr(buffer, argv[1])) continue;
+                }
+
                 printf("%s\n", buffer);
                 char *pos = buffer + strlen(buffer);
                 char *end = buffer + buflen;
