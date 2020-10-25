@@ -1,10 +1,14 @@
 #!/system/bin/sh
 
-#Uncomment me to output sh -x of this script to /cache/phh/logs
-#if [ -z "$debug" ];then
-#	mkdir -p /cache/phh
-#	debug=1 exec sh -x "$(readlink -f -- "$0")" > /cache/phh/logs 2>&1
-#fi
+if [ -z "$debug" ] && [ -f /cache/phh-log ];then
+	mkdir -p /cache/phh
+	debug=1 exec sh -x "$(readlink -f -- "$0")" > /cache/phh/logs 2>&1
+else
+    # Allow accessing logs from system app
+    # Protected via SELinux for other apps
+    chmod 0755 /cache/phh
+    chmod 0644 /cache/phh/logs
+fi
 
 vndk="$(getprop persist.sys.vndk)"
 [ -z "$vndk" ] && vndk="$(getprop ro.vndk.version |grep -oE '^[0-9]+')"
