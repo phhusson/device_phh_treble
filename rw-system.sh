@@ -816,6 +816,10 @@ if grep -q /mnt/vendor/persist /vendor/etc/fstab.qcom;then
     mount /mnt/vendor/persist /persist
 fi
 
+for f in $(find /sys -name fts_gesture_mode);do
+    setprop persist.sys.phh.focaltech_node "$f"
+done
+
 if [ "$vndk" -le 27 ] && [ -f /vendor/bin/mnld ];then
     setprop persist.sys.phh.sdk_override /vendor/bin/mnld=26
 fi
