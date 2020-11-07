@@ -26,8 +26,8 @@ fixSPL() {
     else
         setprop ro.keymaster.mod 'AOSP on ARM64'
     fi
-    img="$(find /dev/block -type l -name kernel"$(getprop ro.boot.slot_suffix)" | grep by-name | head -n 1)"
-    [ -z "$img" ] && img="$(find /dev/block -type l -name boot"$(getprop ro.boot.slot_suffix)" | grep by-name | head -n 1)"
+    img="$(find /dev/block -type l -iname kernel"$(getprop ro.boot.slot_suffix)" | grep by-name | head -n 1)"
+    [ -z "$img" ] && img="$(find /dev/block -type l -iname boot"$(getprop ro.boot.slot_suffix)" | grep by-name | head -n 1)"
     if [ -n "$img" ]; then
         #Rewrite SPL/Android version if needed
         Arelease="$(getSPL "$img" android)"
@@ -35,7 +35,11 @@ fixSPL() {
         setprop ro.keymaster.xxx.security_patch "$(getSPL "$img" spl)"
         setprop ro.keymaster.brn Android
 
-        getprop ro.vendor.build.fingerprint | grep -qiE '^samsung/' && return 0
+        if getprop ro.vendor.build.fingerprint |grep -qiE 'samsung.*star.*lte';then
+            additional="/apex/com.android.vndk.v28/lib64/libsoftkeymasterdevice.so /apex/com.android.vndk.v29/lib64/libsoftkeymasterdevice.so"
+        else
+            getprop ro.vendor.build.fingerprint | grep -qiE '^samsung/' && return 0
+        fi
         for f in \
             /vendor/lib64/hw/android.hardware.keymaster@3.0-impl-qti.so /vendor/lib/hw/android.hardware.keymaster@3.0-impl-qti.so \
             /system/lib64/vndk-26/libsoftkeymasterdevice.so /vendor/bin/teed \
@@ -46,7 +50,7 @@ fixSPL() {
             /system/lib/vndk-27/libsoftkeymasterdevice.so /system/lib64/vndk-27/libsoftkeymasterdevice.so \
 	    /vendor/lib/libkeymaster3device.so /vendor/lib64/libkeymaster3device.so \
         /vendor/lib/libMcTeeKeymaster.so /vendor/lib64/libMcTeeKeymaster.so \
-        /vendor/lib/hw/libMcTeeKeymaster.so /vendor/lib64/hw/libMcTeeKeymaster.so ; do
+        /vendor/lib/hw/libMcTeeKeymaster.so /vendor/lib64/hw/libMcTeeKeymaster.so $additional; do
             [ ! -f "$f" ] && continue
             # shellcheck disable=SC2010
             ctxt="$(ls -lZ "$f" | grep -oE 'u:object_r:[^:]*:s0')"
