@@ -30,3 +30,7 @@ set_prop(system_app, exported3_default_prop);
 
 type mtk_hal_rild_hwservice, hwservice_manager_type;
 allow system_app mtk_hal_rild_hwservice:hwservice_manager { find};
+
+type mtk_vilte_support_prop, property_type;
+allow system_app mtk_vilte_support_prop:property_service set;
+
