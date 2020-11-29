@@ -148,5 +148,4 @@ allow phhsu_daemon domain:process { transition };
 # 06-06 12:59:53.775 30150 30150 I auditd  : type=1400 audit(0.0:35585): avc: denied { ioctl } for comm="blockdev" path="/dev/block/dm-3" dev="tmpfs" ino=12687 ioctlcmd=0x125d scontext=u:r:phhsu_daemon:s0 tcontext=u:object_r:dm_device:s0 tclass=blk_file permissive=0
 
 allowxperm phhsu_daemon { file_type block_device }:blk_file ioctl { 0-0xffff };
-allowxperm phhsu_daemon { super_block_device dm_device }:blk_file ioctl { 0x1278-0x127a 0x125d };
-
+allowxperm phhsu_daemon { system_block_device super_block_device dm_device }:blk_file ioctl { 0x1278-0x127a 0x125d };
