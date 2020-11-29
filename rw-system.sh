@@ -161,7 +161,7 @@ changeKeylayout() {
         changed=true
     fi
 
-    if getprop ro.build.overlay.deviceid |grep -q -e RMX1931 -e RMX1941 -e CPH1859 -e CPH1861;then
+    if getprop ro.build.overlay.deviceid |grep -q -e RMX1931 -e RMX1941 -e CPH1859 -e CPH1861 -e RMX2185;then
         cp /system/phh/oppo-touchpanel.kl /mnt/phh/keylayout/touchpanel.kl
 	cp /system/phh/oppo-touchpanel.kl /mnt/phh/keylayout/mtk-tpd.kl
         chmod 0644 /mnt/phh/keylayout/touchpanel.kl
@@ -327,7 +327,7 @@ if getprop ro.vendor.product.device |grep -iq -e RMX1801 -e RMX1803 -e RMX1807;t
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
 fi
 
-if getprop ro.build.overlay.deviceid |grep -q -e CPH1859 -e CPH1861 -e RMX1811;then
+if getprop ro.build.overlay.deviceid |grep -q -e CPH1859 -e CPH1861 -e RMX1811 -e RMX2185;then
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
 fi
 
