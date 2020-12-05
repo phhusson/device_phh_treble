@@ -143,3 +143,20 @@ if [ "$1" == "persist.sys.phh.vsmart.dt2w" ];then
     fi
     exit
 fi
+
+if [ "$1" == "persist.sys.phh.backlight.scale" ];then
+    if [[ "$prop_value" != "0" && "$prop_value" != "1" ]]; then
+        exit 1
+    fi
+
+    if [[ "$prop_value" == 1 ]];then
+        if [ -f /sys/class/leds/lcd-backlight/max_brightness ];then
+            setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
+        elif [ -f /sys/class/backlight/panel0-backlight/max_brightness ];then
+            setprop persist.sys.qcom-brightness "$(cat /sys/class/backlight/panel0-backlight/max_brightness)"
+        fi
+    else
+        setprop persist.sys.qcom-brightness -1
+    fi
+    exit
+fi
