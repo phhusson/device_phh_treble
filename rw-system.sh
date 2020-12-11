@@ -576,6 +576,8 @@ if [ -f /system/phh/secure ];then
         fi
     }
 
+    setprop ctl.stop console
+    dmesg -n 1
     copyprop ro.build.device ro.vendor.build.device
     copyprop ro.system.build.fingerprint ro.vendor.build.fingerprint
     copyprop ro.bootimage.build.fingerprint ro.vendor.build.fingerprint
