@@ -782,7 +782,7 @@ if getprop ro.build.overlay.deviceid |grep -iq -e RMX1941 -e RMX1945 -e RMX1943 
     setprop persist.sys.phh.mainkeys 0
 fi
 
-if getprop ro.build.overlay.deviceid |grep -iq -e RMX2185;then
+if getprop ro.build.overlay.deviceid |grep -iq -e RMX2185 -e RMX1941 -e RMX1945 -e RMX1943 -e RMX1942;then
     setprop persist.sys.overlay.devinputjack true
 fi
 
