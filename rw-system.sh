@@ -707,6 +707,11 @@ if [ -e /dev/sprd-adf-dev ];then
     setprop ro.config.avoid_gfx_accel true
 fi
 
+# Fix sensor services crashing on SPRD devices with Pie vendor
+if getprop ro.hardware.keystore | grep -iq sprd && [ "$vndk" -le 28 ]; then
+    setprop persist.sys.phh.disable_sensor_direct_report true
+fi
+
 # Fix manual network selection with old modem
 # https://github.com/LineageOS/android_hardware_ril/commit/e3d006fa722c02fc26acdfcaa43a3f3a1378eba9
 if getprop ro.vendor.build.fingerprint | grep -iq \
