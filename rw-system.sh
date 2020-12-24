@@ -404,7 +404,7 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
     -e motorola/hannah -e motorola/james -e motorola/pettyl -e xiaomi/cepheus \
     -e xiaomi/grus -e xiaomi/cereus -e xiaomi/cactus -e xiaomi/raphael -e xiaomi/davinci \
     -e xiaomi/ginkgo -e xiaomi/laurel_sprout -e xiaomi/andromeda \
-    -e redmi/curtana -e redmi/picasso \
+    -e redmi/curtana -e redmi/joyeuse -e redmi/picasso \
     -e bq/Aquaris_M10 ; then
     mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
     mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
@@ -883,7 +883,7 @@ if getprop ro.vendor.build.fingerprint |grep -iq xiaomi/cepheus;then
     setprop ro.netflix.bsp_rev Q855-16947-1
 fi
 
-if getprop ro.vendor.build.fingerprint |grep -qi redmi/curtana;then
+if getprop ro.vendor.build.fingerprint |grep -qi -e redmi/curtana -e redmi/joyeuse; then
     setprop ro.netflix.bsp_rev Q6250-19132-1
 fi
 
