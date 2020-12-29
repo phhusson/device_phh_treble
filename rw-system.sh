@@ -347,6 +347,11 @@ if getprop ro.vendor.build.fingerprint | grep -qE '^xiaomi/wayne/wayne.*'; then
     setprop audio.camerasound.force true
 fi
 
+if getprop persist.sys.phh.fingerprint.nocleanup | grep -qE '^realme/RMX1831/RMX1831.*'; then
+   # Fix fingerprint cleanup after reboot in RMX1831 aka realme U1
+   setprop.sys.phh.fingerprint.nocleanup true
+fi
+
 mount -o bind /mnt/phh/empty_dir /vendor/etc/audio || true
 
 for f in /vendor/lib{,64}/hw/com.qti.chi.override.so;do
