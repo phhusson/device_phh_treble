@@ -58,3 +58,15 @@ on property:persist.sys.phh.disable_a2dp_offload=1
 
 on property:persist.sys.phh.disable_a2dp_offload=*
     setprop persist.bluetooth.bluetooth_audio_hal.disabled ${persist.sys.phh.disable_a2dp_offload}
+
+on property:init.svc.ril-proxy=stopped && property:persist.sys.phh.restart_ril=true
+    start ril-proxy
+
+on property:init.svc.vendor.ril-daemon-mtk=stopped && property:persist.sys.phh.restart_ril=true
+    start vendor.ril-daemon-mtk
+
+on property:persist.sys.phh.restart_ril=true
+    restart ril-proxy
+    restart vendor.qcrild
+    restart vendor.qcrild2
+    restart vendor.ril-daemon-mtk
