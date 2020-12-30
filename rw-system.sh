@@ -358,6 +358,11 @@ if getprop ro.build.fingerprint | grep -iq \
     setprop ro.audio.ignore_effects true
 fi
 
+if getprop persist.sys.phh.fingerprint.nocleanup | grep -q -i -e realme/RMX1831; then
+   # Fix fingerprint cleanup after reboot in RMX1831 aka realme U1
+   setprop.sys.phh.fingerprint.nocleanup true
+fi
+
 if [ "$(getprop ro.vendor.product.manufacturer)" = "motorola" ] || [ "$(getprop ro.product.vendor.manufacturer)" = "motorola" ]; then
     if getprop ro.vendor.product.device | grep -q -e nora -e ali -e hannah -e evert -e jeter -e deen -e james -e pettyl -e jater; then
         setprop  ro.audio.ignore_effects true
