@@ -24,6 +24,8 @@ allow system_app default_hisi_hwservice:hwservice_manager { find };
 type hal_tp_default, domain;
 allow system_app hal_tp_default:binder { call };
 
+#cam2api
+allow system_app vendor_default_prop:property_service { set };
 
 set_prop(system_app, default_prop);
 set_prop(system_app, exported3_default_prop);
