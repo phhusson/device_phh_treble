@@ -10,6 +10,48 @@ else
     chmod 0644 /cache/phh/logs
 fi
 
+if [ -f /cache/phh-adb ];then
+    setprop ctl.stop adbd
+    setprop ctl.stop adbd_apex
+    mount -t configfs none /config
+    rm -Rf /config/usb_gadget
+    mkdir -p /config/usb_gadget/g1
+
+    echo 0x12d1 > /config/usb_gadget/g1/idVendor
+    echo 0x103A > /config/usb_gadget/g1/idProduct
+    mkdir -p /config/usb_gadget/g1/strings/0x409
+    echo phh > /config/usb_gadget/g1/strings/0x409/serialnumber
+    echo phh > /config/usb_gadget/g1/strings/0x409/manufacturer
+    echo phh > /config/usb_gadget/g1/strings/0x409/product
+
+    mkdir /config/usb_gadget/g1/functions/ffs.adb
+    mkdir /config/usb_gadget/g1/functions/mtp.gs0
+    mkdir /config/usb_gadget/g1/functions/ptp.gs1
+
+    mkdir /config/usb_gadget/g1/configs/c.1/
+    mkdir /config/usb_gadget/g1/configs/c.1/strings/0x409
+    echo 'ADB MTP' > /config/usb_gadget/g1/configs/c.1/strings/0x409/configuration
+
+    mkdir /dev/usb-ffs
+    chmod 0770 /dev/usb-ffs
+    chown shell:shell /dev/usb-ffs
+    mkdir /dev/usb-ffs/adb/
+    chmod 0770 /dev/usb-ffs/adb
+    chown shell:shell /dev/usb-ffs/adb
+
+    mount -t functionfs -o uid=2000,gid=2000 adb /dev/usb-ffs/adb
+
+    /apex/com.android.adbd/bin/adbd &
+
+    sleep 1
+    echo none > /config/usb_gadget/g1/UDC
+    ln -s /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/c.1/f1
+    ls /sys/class/udc |head -n 1 > /config/usb_gadget/g1/UDC
+
+    sleep 2
+    echo 2 > /sys/devices/virtual/android_usb/android0/port_mode
+fi
+
 vndk="$(getprop persist.sys.vndk)"
 [ -z "$vndk" ] && vndk="$(getprop ro.vndk.version |grep -oE '^[0-9]+')"
 
