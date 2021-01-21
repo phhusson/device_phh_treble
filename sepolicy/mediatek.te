@@ -3,3 +3,17 @@ type proc_ged, file_type;
 allowxperm domain proc_ged:file ioctl { 0x6700-0x67ff };
 
 allow init mnt_product_file:dir mounton;
+
+type mtk_hal_audio, domain;
+typeattribute mtk_hal_audio hal_broadcastradio_client;
+
+type mtk_hal_power, domain;
+allow mtk_hal_power system_data_root_file:file create_file_perms;
+allow zygote ashmem_device:chr_file execute;
+
+attribute hal_mms_server;
+binder_call({appdomain -isolated_app}, hal_mms_server)
+binder_call(hal_mms_server, {appdomain -isolated_app})
+
+type mtk_hal_mms_hwservice, hwservice_manager_type;
+allow { appdomain -isolated_app }  mtk_hal_mms_hwservice:hwservice_manager find;
