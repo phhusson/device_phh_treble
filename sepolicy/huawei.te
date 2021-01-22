@@ -5,6 +5,10 @@ type teecd_data_file, file_type;
 type dmd_device, file_type;
 allow hal_fingerprint_server dmd_device:chr_file rw_file_perms;
 allow hal_fingerprint_server sysfs:file rw_file_perms;
+allow tee hal_fingerprint_default:process { getattr };
+allow tee teecd_data_file:dir { search write getattr add_name };
+allow tee teecd_data_file:file { read write create getattr open };
+allow tee system_data_file:dir { getattr };
 
 type oeminfo_nvm, domain;
 type oeminfo_nvm_device, file_type;
