@@ -617,6 +617,8 @@ if getprop ro.vendor.build.fingerprint | grep -qiE '^samsung/' && [ "$vndk" -ge 
     fi
 fi
 
+setprop ctl.stop console
+dmesg -n 1
 if [ -f /system/phh/secure ];then
     copyprop() {
         p="$(getprop "$2")"
@@ -625,8 +627,6 @@ if [ -f /system/phh/secure ];then
         fi
     }
 
-    setprop ctl.stop console
-    dmesg -n 1
     copyprop ro.build.device ro.vendor.build.device
     copyprop ro.system.build.fingerprint ro.vendor.build.fingerprint
     copyprop ro.bootimage.build.fingerprint ro.vendor.build.fingerprint
@@ -671,6 +671,10 @@ if [ -f /system/phh/secure ];then
     resetprop ro.adb.secure 1
     setprop ctl.restart adbd
 fi
+
+resetprop ro.adb.secure 0
+setprop ctl.restart adbd
+
 
 for abi in "" 64;do
     f=/vendor/lib$abi/libstagefright_foundation.so
@@ -804,6 +808,8 @@ if getprop ro.vendor.build.fingerprint |grep -qiE \
     setprop media.settings.xml "/vendor/etc/media_profiles_vendor.xml"
 fi
 resetprop service.adb.root 0
+
+setprop persist.sys.usb.config mtp,adb
 
 # This is for Samsung Galaxy devices with HBM FOD
 # On those devices, a magic Layer usageBits switches to "mask_brightness"
