@@ -1,6 +1,7 @@
 BUILD_GMS := yes
 #include not inherit, because we must edit some values
-include vendor/google/products/gms_go.mk
+-include vendor/google/products/gms_go.mk
+-include vendor/partner_gms/products/gms_go.mk
 
 FILTER_OUT = $(foreach v,$(2),$(if $(findstring $(1),$(v)),,$(v)))
 
