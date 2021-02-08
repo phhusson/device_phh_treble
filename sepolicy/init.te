@@ -8,3 +8,6 @@ allow init userdata_block_device:lnk_file relabelto;
 allow vendor_init vendor_init:capability { sys_module };
 
 allow init system_file:lnk_file create_file_perms;
+
+#fix adb in some cases
+allow init adbd_exec:lnk_file read;
