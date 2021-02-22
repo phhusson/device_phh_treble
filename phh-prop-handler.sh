@@ -106,9 +106,9 @@ if [ "$1" == "persist.sys.phh.disable_audio_effects" ];then
     fi
 
     if [[ "$prop_value" == 1 ]];then
-        resetprop ro.audio.ignore_effects true
+        resetprop_phh ro.audio.ignore_effects true
     else
-        resetprop --delete ro.audio.ignore_effects
+        resetprop_phh --delete ro.audio.ignore_effects
     fi
     restartAudio
     exit
