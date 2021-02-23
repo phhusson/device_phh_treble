@@ -895,3 +895,6 @@ done
 if [ "$vndk" -le 27 ] && [ -f /vendor/bin/mnld ];then
     setprop persist.sys.phh.sdk_override /vendor/bin/mnld=26
 fi
+
+# Disable secondary watchdogs
+echo -n V > /dev/watchdog1
