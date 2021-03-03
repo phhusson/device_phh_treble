@@ -2,5 +2,3 @@ type boot_prop, property_type;
 
 set_prop(system_server, boot_prop);
 
-allow hal_camera_default system_prop:property_service { set }
-allow kernel sysfs:file { read open }
