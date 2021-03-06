@@ -191,3 +191,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 	debug.fdsan=0 \
+
+# AOSP overlays
+PRODUCT_PACKAGES += \
+    NavigationBarMode2ButtonOverlay
