@@ -672,10 +672,6 @@ if [ -f /system/phh/secure ];then
     setprop ctl.restart adbd
 fi
 
-resetprop_phh ro.adb.secure 0
-setprop ctl.restart adbd
-
-
 for abi in "" 64;do
     f=/vendor/lib$abi/libstagefright_foundation.so
     if [ -f "$f" ];then
@@ -813,8 +809,6 @@ if getprop ro.vendor.build.fingerprint |grep -qiE \
     setprop media.settings.xml "/vendor/etc/media_profiles_vendor.xml"
 fi
 resetprop_phh service.adb.root 0
-
-setprop persist.sys.usb.config mtp,adb
 
 # This is for Samsung Galaxy devices with HBM FOD
 # On those devices, a magic Layer usageBits switches to "mask_brightness"
