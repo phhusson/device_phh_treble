@@ -724,6 +724,11 @@ for i in odm oem vendor product;do
     if grep -qF android.hardware.wifi.hostapd /$i/etc/vintf/manifest.xml;then
         has_hostapd=true
     fi
+    for j in /$i/etc/vintf/manifest/*;do
+        if grep -qF android.hardware.wifi.hostapd $j;then
+            has_hostapd=true
+        fi
+    done
 done
 
 if [ "$has_hostapd" = false ];then
