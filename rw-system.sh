@@ -376,6 +376,11 @@ if getprop ro.vendor.build.fingerprint |grep -qi -e Redmi/merlin -e Redmi/lancel
     setprop persist.sys.overlay.devinputjack true
 fi
 
+# UMIDIGI/A3X & UMIDIGI/A9
+if getprop ro.vendor.build.fingerprint |grep -qi -e UMIDIGI/A3X -e UMIDIGI/A9; then
+    setprop persist.sys.overlay.devinputjack true
+fi
+
 #Realme 6
 if getprop ro.vendor.product.device |grep -iq -e RMX2001 -e RMX2151 -e RMX2111 -e RMX2111L1;then
     setprop persist.sys.phh.fingerprint.nocleanup true
