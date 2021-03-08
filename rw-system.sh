@@ -376,8 +376,13 @@ if getprop ro.vendor.build.fingerprint |grep -qi -e Redmi/merlin -e Redmi/lancel
     setprop persist.sys.overlay.devinputjack true
 fi
 
-# UMIDIGI/A3X & UMIDIGI/A9
+# UMIDIGI A3X & A9
 if getprop ro.vendor.build.fingerprint |grep -qi -e UMIDIGI/A3X -e UMIDIGI/A9; then
+    setprop persist.sys.overlay.devinputjack true
+fi
+
+# CUBOT KINGKONG MINI2
+if getprop ro.vendor.build.fingerprint |grep -qi -e CUBOT/KINGKONG_MINI2; then
     setprop persist.sys.overlay.devinputjack true
 fi
 
