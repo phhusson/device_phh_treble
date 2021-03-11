@@ -190,7 +190,7 @@ PRODUCT_PACKAGES += \
 	healthd \
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-	debug.fdsan=0 \
+	debug.fdsan=warn_once \
 
 # AOSP overlays
 PRODUCT_PACKAGES += \
