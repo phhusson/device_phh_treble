@@ -617,6 +617,13 @@ if getprop ro.vendor.build.fingerprint | grep -qiE '^samsung/' && [ "$vndk" -ge 
     fi
 fi
 
+# For Nubia Red Magic 6 audio policy configuration
+if getprop ro.vendor.build.fingerprint | grep -q -e nubia/NX669; then
+    umount /vendor/etc/audio
+    sku="$(getprop ro.boot.product.vendor.sku)"
+    mount /vendor/etc/audio/sku_${sku}_qssi/audio_policy_configuration.xml /vendor/etc/audio/sku_$sku/audio_policy_configuration.xml
+fi
+
 setprop ctl.stop console
 dmesg -n 1
 if [ -f /system/phh/secure ];then
