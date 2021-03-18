@@ -895,6 +895,8 @@ fi
 
 if getprop ro.vendor.build.fingerprint |grep -qi -e redmi/curtana -e redmi/joyeuse; then
     setprop ro.netflix.bsp_rev Q6250-19132-1
+    setprop debug.sf.latch_unsignaled 1
+    setprop sys.use_fifo_ui 1
 fi
 
 # Set props for Vsmart Live's fod
