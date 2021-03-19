@@ -144,7 +144,8 @@ changeKeylayout() {
         -e xiaomi/nitrogen -e xiaomi/sakura -e xiaomi/andromeda \
         -e xiaomi/whyred -e xiaomi/tulip -e xiaomi/onc \
         -e redmi/curtana -e redmi/picasso -e Redmi/lancelot \
-        -e Redmi/galahad -e xiaomi/olive -e Redmi/angelica -e Redmi/joyeuse ; then
+        -e Redmi/galahad -e xiaomi/olive -e Redmi/angelica -e Redmi/joyeuse \
+	-e POCO/citrus; then
         if [ ! -f /mnt/phh/keylayout/uinput-goodix.kl ]; then
           cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
           chmod 0644 /mnt/phh/keylayout/uinput-goodix.kl
