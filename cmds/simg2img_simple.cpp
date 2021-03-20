@@ -41,10 +41,17 @@ typedef struct chunk_header {
  *  For a CRC32 chunk, it's 4 bytes of CRC32
  */
 
+static int disable_splice = 0;
 void nsendfile(int out_fd, int in_fd, size_t count) {
     char buf[1024*1024];
 	while(count) {
-		ssize_t res = splice(in_fd, NULL, out_fd, NULL, count, 0);
+		ssize_t res = -1;
+        if(!disable_splice) {
+            res = splice(in_fd, NULL, out_fd, NULL, count, 0);
+        }
+
+        if(count > 16*1024 && res < 1024)
+            disable_splice = 1;
         if(res==-1) {
             ssize_t sizeToRead = sizeof(buf);
             if(count < sizeToRead) sizeToRead = count;
