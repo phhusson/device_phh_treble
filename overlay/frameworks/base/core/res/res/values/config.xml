@@ -39,4 +39,15 @@
         <!-- ID0:Fingerprint:Strong -->
         <item>0:2:15</item>
     </string-array>
+
+    <array name="config_availableColorModes">
+        <!-- ColorDisplayManager.COLOR_MODE_NATURAL -->
+        <item>0</item>
+        <!-- ColorDisplayManager.COLOR_MODE_BOOSTED -->
+        <item>1</item>
+        <!-- ColorDisplayManager.COLOR_MODE_SATURATED -->
+        <item>2</item>
+        <!-- ColorDisplayManager.COLOR_MODE_AUTOMATIC -->
+        <item>3</item>
+    </array>
 </resources>
