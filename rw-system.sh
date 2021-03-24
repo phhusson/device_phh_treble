@@ -648,6 +648,10 @@ if getprop ro.vendor.build.fingerprint | grep -qiE '^samsung/' && [ "$vndk" -ge 
     fi
 fi
 
+if getprop ro.vendor.build.fingerprint | grep -q -e Sony/aosp_f5121/suzu; then
+    chown system:system /sys/class/leds/*/breath
+fi
+
 # For Nubia Red Magic 6 audio policy configuration
 if getprop ro.vendor.build.fingerprint | grep -q -e nubia/NX669; then
     umount /vendor/etc/audio
