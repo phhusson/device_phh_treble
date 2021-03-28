@@ -194,6 +194,10 @@ int main(int argc, char **argv) {
         if(dstPartition == nullptr) {
             dstPartition = builder->FindPartition(dst + ::android::base::GetProperty("ro.boot.slot_suffix", ""));
         }
+        std::string dstPartitionName = dst;
+        if(dstPartition != nullptr) {
+            dstPartitionName = dstPartition->name();
+        }
         std::vector<std::unique_ptr<Extent>> originalExtents;
 
         const auto& extents = srcPartition->extents();
@@ -209,8 +213,8 @@ int main(int argc, char **argv) {
             }
         }
         builder->RemovePartition(srcPartition->name());
-        builder->RemovePartition(dstPartition->name());
-        auto newDstPartition = builder->AddPartition(dstPartition->name(), group, 0);
+        builder->RemovePartition(dstPartitionName);
+        auto newDstPartition = builder->AddPartition(dstPartitionName, group, 0);
         for(auto&& extent: originalExtents) {
             newDstPartition->AddExtent(std::move(extent));
         }
