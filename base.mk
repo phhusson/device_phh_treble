@@ -43,7 +43,8 @@ PRODUCT_COPY_FILES += \
 
 #USB Audio
 PRODUCT_COPY_FILES += \
-	frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:system/etc/usb_audio_policy_configuration.xml
+	frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:system/etc/usb_audio_policy_configuration.xml \
+	device/phh/treble/files/fake_audio_policy_volume.xml:system/etc/fake_audio_policy_volume.xml \
 
 # NFC:
 #   Provide default libnfc-nci.conf file for devices that does not have one in
