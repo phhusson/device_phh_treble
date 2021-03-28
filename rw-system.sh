@@ -534,7 +534,11 @@ fi
 
 if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/daisy; then
     setprop debug.sf.latch_unsignaled 1
-    setprop debug.sf.enable_hwc_vds 1
+fi
+
+if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/lavender; then
+    setprop debug.sf.latch_unsignaled 1
+    setprop ro.netflix.bsp_rev Q660-13149-1
 fi
 
 if getprop ro.vendor.build.fingerprint | grep -iq -E -e 'huawei|honor' || getprop persist.sys.overlay.huawei | grep -iq -E -e 'true'; then
