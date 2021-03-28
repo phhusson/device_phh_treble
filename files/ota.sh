@@ -1,65 +1,72 @@
-#!/bin/bash
+#!/system/bin/sh
 
 set -e
 
-latestVersion=$(curl -L --silent https://api.github.com/repos/phhusson/treble_experimentations/releases |grep -oE 'v2[0-9]*' |sort -V |sort -u |tail -n 1)
-if [ -n "$1" ];then
-    echo "Forcing dl of version $1 instead of $latestVersion"
-    latestVersion="$1"
+if ! [ "$(getprop ro.boot.dynamic_partitions)" = true ];then
+    echo "OTA is supported only for devices with dynamic partitions!"
+    exit 1
 fi
 
-flavor=$(getprop ro.build.flavor)
-fileName=""
-
-fileName="system-quack"
-if echo "$flavor" |grep -E '^treble_arm64';then
-    fileName="${fileName}-arm64"
-elif echo "$flavor" | grep -E '^treble_arm_';then
-    fileName="${fileName}-arm"
-elif echo "$flavor" | grep -E '^treble_a64_';then
-    fileName="${fileName}-arm32_binder64"
+flavor=$(getprop ro.product.product.name)
+nextVersion=$(curl --silent -L https://raw.githubusercontent.com/phhusson/treble_experimentations/master/ota/roar/$flavor/date)
+if [ -z "$nextVersion" ];then
+    echo "Couldn't find any OTA for $flavor"
+    exit 1
 fi
 
-if echo "$flavor" |grep -E '^treble_[^_]*_b';then
-    fileName="${fileName}-ab"
-elif echo "$flavor" |grep -E '^treble_[^_]*_a';then
-    fileName="${fileName}-aonly"
+url=$(curl --silent -L https://raw.githubusercontent.com/phhusson/treble_experimentations/master/ota/roar/$flavor/url)
+size=$(curl --silent -L https://raw.githubusercontent.com/phhusson/treble_experimentations/master/ota/roar/$flavor/size)
+
+if [ "$(getprop ro.product.build.date.utc)" = "$nextVersion" ];then
+    echo "Installing $nextVersion onto itself, aborting"
+    exit 1
 fi
 
-if echo "$flavor" |grep -E '^treble_[^_]*_.g';then
-    fileName="${fileName}-gapps"
-elif echo "$flavor" |grep -E '^treble_[^_]*_.o';then
-    fileName="${fileName}-go"
-elif echo "$flavor" |grep -E '^treble_[^_]*_.f';then
-    fileName="${fileName}-floss"
-elif echo "$flavor" |grep -E '^treble_[^_]*_.v';then
-    fileName="${fileName}-floss"
+if ! curl --silent -L https://raw.githubusercontent.com/phhusson/treble_experimentations/master/ota/roar/$flavor/known_releases |grep -q $(getprop ro.product.build.date.utc);then
+    echo "Warning! The build you are currently running is unknown. Type YES to confirm you want to apply OTA from $url"
+    read answer
+    if ! [ "$answer" = YES ];then
+        exit 1
+    fi
 fi
 
-fileName="${fileName}.img.xz"
-url=https://github.com/phhusson/treble_experimentations/releases/download/"$latestVersion"/"${fileName}"
-echo "Downloading from ${url}..."
-#This path is really NOT ideal.
-out=/sdcard/sys.img.xz
-curl -L "$url" > $out
-
-if [ "$(getprop ro.boot.dynamic_partitions)" = true ];then
-    #Having to decompress twice is pretty stupid, but how do I get the size otherwise?
-    size=$(busybox_phh xz -d -c < $out | simg2img_simple |wc -c)
-    lptools remove system_phh
-    lptools create system_phh "$size"
-    lptools unmap system_phh
-    dmDevice=$(lptools map system_phh|grep -oE '/dev/block/[^ ]*')
-    busybox_phh xz -d -c < $out | simg2img_simple > $dmDevice
-    lptools replace system_phh system
-    reboot
-    exit 0
-else
-    #Use twrp.sh
-    mkdir -p /cache/phh
-    uncrypt /data/media/0/sys.img.xz /cache/phh/block.map
-    touch /cache/phh/flash
-    reboot
-    exit 0
+if [ -b /dev/tmp-phh ] && ! tune2fs -l /dev/tmp-phh  |grep 'Last mount time' |grep -q n/a;then
+    echo "Warning! It looks like you modified your system image! Flashing this OTA will revert this!"
+    echo "Type YES to acknowledge"
+    read answer
+    if ! [ "$answer" = YES ];then
+        exit 1
+    fi
 fi
 
+lptools remove system_phh
+free=$(lptools free |grep -oE '[0-9]+$')
+if [ "$free" -le "$size" ];then
+    echo "Warning! There doesn't seem to be enough space on super partition."
+    echo "Do you want me to try to make more space? Type YES"
+    read answer
+    if ! [ "$answer" = YES ];then
+        exit 1
+    fi
+    lptools clear-cow || true
+    lptools unlimited-group || true
+    lptools remove product || true
+    lptools remove product$(getprop ro.boot.slot_suffix) || true
+    free=$(lptools free |grep -oE '[0-9]+$')
+    if [ "$free" -le "$size" ];then
+        echo "Sorry, there is still not enough space available. OTA requires $size, you have $free available"
+        exit 1
+    fi
+fi
+
+
+lptools create system_phh "$size"
+lptools unmap system_phh
+dmDevice=$(lptools map system_phh|grep -oE '/dev/block/[^ ]*')
+echo "Flashing from ${url}..."
+
+curl -L "$url" | busybox_phh xz -d -c | simg2img_simple > $dmDevice
+
+lptools replace system_phh system
+reboot
+exit 0
