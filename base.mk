@@ -124,6 +124,10 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/files/daisy-uinput-fpc.kl:system/phh/daisy-uinput-fpc.kl \
 	device/phh/treble/files/daisy-uinput-goodix.kl:system/phh/daisy-uinput-goodix.kl \
 	device/phh/treble/files/nubia-nubia_synaptics_dsx.kl:system/phh/nubia-nubia_synaptics_dsx.kl \
+	device/phh/treble/files/unihertz-mtk-kpd.kl:system/phh/unihertz-mtk-kpd.kl \
+	device/phh/treble/files/unihertz-mtk-tpd.kl:system/phh/unihertz-mtk-tpd.kl \
+	device/phh/treble/files/unihertz-mtk-tpd-kpd.kl:system/phh/unihertz-mtk-tpd-kpd.kl \
+	device/phh/treble/files/unihertz-fingerprint_key.kl:system/phh/unihertz-fingerprint_key.kl \
 	device/phh/treble/files/zf6-goodixfp.kl:system/phh/zf6-goodixfp.kl \
 	device/phh/treble/files/zf6-googlekey_input.kl:system/phh/zf6-googlekey_input.kl \
 
