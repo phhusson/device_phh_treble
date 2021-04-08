@@ -240,6 +240,18 @@ changeKeylayout() {
         changed=true
     fi
 
+    if getprop ro.vendor.build.fingerprint | grep -q -e Unihertz/;then
+        cp /system/phh/unihertz-mtk-kpd.kl /mnt/phh/keylayout/mtk-kpd.kl
+        cp /system/phh/unihertz-mtk-tpd.kl /mnt/phh/keylayout/mtk-tpd.kl
+        cp /system/phh/unihertz-mtk-tpd-kpd.kl /mnt/phh/keylayout/mtk-tpd-kpd.kl
+        cp /system/phh/unihertz-fingerprint_key.kl /mnt/phh/keylayout/fingerprint_key.kl
+        chmod 0644 /mnt/phh/keylayout/mtk-kpd.kl
+        chmod 0644 /mnt/phh/keylayout/mtk-tpd.kl
+        chmod 0644 /mnt/phh/keylayout/mtk-tpd-kpd.kl
+        chmod 0644 /mnt/phh/keylayout/fingerprint_key.kl
+        changed=true
+    fi
+
     if [ "$changed" = true ]; then
         mount -o bind /mnt/phh/keylayout /system/usr/keylayout
         restorecon -R /system/usr/keylayout
