@@ -233,6 +233,12 @@ changeKeylayout() {
         changed=true
     fi
 
+    if getprop ro.vendor.build.fingerprint |grep -q -i -e Teracube/Teracube_2e;then
+        cp /system/phh/teracube2e-mtk-kpd.kl /mnt/phh/keylayout/mtk-kpd.kl
+        chmod 0644 /mnt/phh/keylayout/mtk-kpd.kl
+        changed=true
+    fi
+
     if getprop ro.vendor.asus.build.fp |grep -q ASUS_I01WD;then
         cp /system/phh/zf6-goodixfp.kl /mnt/phh/keylayout/goodixfp.kl
         cp /system/phh/zf6-googlekey_input.kl /mnt/phh/keylayout/googlekey_input.kl
