@@ -137,15 +137,7 @@ changeKeylayout() {
     fi
 
     if getprop ro.vendor.build.fingerprint | grep -iq \
-        -e xiaomi/polaris -e xiaomi/sirius -e xiaomi/dipper \
-        -e xiaomi/wayne -e xiaomi/jasmine -e xiaomi/jasmine_sprout \
-        -e xiaomi/platina -e iaomi/perseus -e xiaomi/ysl -e Redmi/begonia\
-        -e redmi/angelica -e redmi/angelican \
-        -e xiaomi/nitrogen -e xiaomi/sakura -e xiaomi/andromeda \
-        -e xiaomi/whyred -e xiaomi/tulip -e xiaomi/onc \
-        -e redmi/curtana -e redmi/picasso -e Redmi/lancelot \
-        -e Redmi/galahad -e xiaomi/olive -e Redmi/angelica -e Redmi/joyeuse \
-	-e POCO/citrus -e Redmi/cannon -e Redmi/cannong; then
+        -e poco/ -e redmi/ -e xiaomi/ ; then
         if [ ! -f /mnt/phh/keylayout/uinput-goodix.kl ]; then
           cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
           chmod 0644 /mnt/phh/keylayout/uinput-goodix.kl
