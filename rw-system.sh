@@ -406,6 +406,11 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
     setprop  ro.audio.ignore_effects true
 fi
 
+if getprop ro.vendor.build.fingerprint | grep -iq \
+	-e bq/Aquaris_M10 ; then
+	setprop ro.surface_flinger.primary_display_orientation ORIENTATION_90
+fi
+
 if getprop ro.build.fingerprint | grep -iq \
     -e motorola/channel; then
     mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
