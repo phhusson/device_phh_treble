@@ -399,7 +399,8 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
     -e motorola/hannah -e motorola/james -e motorola/pettyl -e xiaomi/cepheus \
     -e xiaomi/grus -e xiaomi/cereus -e xiaomi/cactus -e xiaomi/raphael -e xiaomi/davinci \
     -e xiaomi/ginkgo -e xiaomi/laurel_sprout -e xiaomi/andromeda \
-    -e redmi/curtana -e redmi/picasso ; then
+    -e redmi/curtana -e redmi/picasso \
+    -e bq/Aquaris_M10 ; then
     mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
     mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
     setprop  ro.audio.ignore_effects true
