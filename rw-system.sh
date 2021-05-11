@@ -799,7 +799,9 @@ if [ -f /proc/oppoVersion/prjVersion ];then
 fi
 
 echo 1 >  /proc/tfa98xx/oppo_tfa98xx_fw_update
-echo 1 > /proc/touchpanel/tp_fw_update
+if ! grep -q -E -e '.*#write .*tp_fw_update' /vendor/etc/init/hw/*touch*;then
+	echo 1 > /proc/touchpanel/tp_fw_update
+fi
 
 if getprop ro.build.overlay.deviceid |grep -qE '^RMX';then
     chmod 0660 /sys/devices/platform/soc/soc:fpc_fpc1020/{irq,irq_enable,wakelock_enable}
