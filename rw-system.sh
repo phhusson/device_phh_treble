@@ -372,7 +372,7 @@ if getprop ro.vendor.build.fingerprint | grep -q -i \
 fi
 
 #Realme 6
-if getprop ro.vendor.product.device |grep -iq -e RMX2001 -e RMX2151;then
+if getprop ro.vendor.product.device |grep -iq -e RMX2001 -e RMX2151 -e RMX2111 -e RMX2111L1;then
     setprop persist.sys.phh.fingerprint.nocleanup true
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
 fi
@@ -385,7 +385,7 @@ if getprop ro.build.overlay.deviceid |grep -q -e CPH1859 -e CPH1861 -e RMX1811 -
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
 fi
 
-if getprop ro.build.overlay.deviceid |grep -iq -e RMX2020 -e RMX2027 -e RMX2040;then	
+if getprop ro.build.overlay.deviceid |grep -iq -e RMX2020 -e RMX2027 -e RMX2040 -e RMX2193 -e RMX2191;then	
     setprop persist.sys.qcom-brightness 2047
     setprop persist.sys.overlay.devinputjack true
     setprop persist.sys.phh.fingerprint.nocleanup true
