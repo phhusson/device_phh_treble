@@ -192,9 +192,12 @@ changeKeylayout() {
     if getprop ro.vendor.build.fingerprint |grep -iq -E -e '^Lenovo/' && [ -f /sys/devices/virtual/touch/tp_dev/gesture_on ];then
         cp /system/phh/lenovo-synaptics_dsx.kl /mnt/phh/keylayout/synaptics_dsx.kl
         chmod 0644 /mnt/phh/keylayout/synaptics_dsx.kl
-        cp /system/phh/lenovo-synaptics_dsx.kl /mnt/phh/keylayout/fts_ts.kl
-        chmod 0644 /mnt/phh/keylayout/fts_ts.kl
         changed=true
+        if ! getprop ro.vendor.build.fingerprint |grep -iq -E -e '^Lenovo/jd20/'; then
+          cp /system/phh/lenovo-synaptics_dsx.kl /mnt/phh/keylayout/fts_ts.kl
+          chmod 0644 /mnt/phh/keylayout/fts_ts.kl
+          changed=true
+        fi
     fi
 
     if getprop ro.build.overlay.deviceid |grep -q -e RMX1931 -e RMX1941 -e CPH1859 -e CPH1861 -e RMX2185;then
