@@ -448,6 +448,9 @@ fi
 if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/daisy; then
     setprop debug.sf.latch_unsignaled 1
     setprop debug.sf.enable_hwc_vds 1
+    setprop ro.telephony.default_network 22,22
+    setprop persist.vendor.radio.block_allow_data 0
+    setprop telephony.lteOnGsmDevice 1
 fi
 
 if getprop ro.vendor.build.fingerprint | grep -iq -E -e 'huawei|honor' || getprop persist.sys.overlay.huawei | grep -iq -E -e 'true'; then
