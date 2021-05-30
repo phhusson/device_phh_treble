@@ -3,4 +3,6 @@
     <privapp-permissions package="me.phh.treble.app">
         <permission name="android.permission.INTERACT_ACROSS_USERS"/>
     </privapp-permissions>
+    <!-- fix voice channels in calls (stop unloading treble-app) -->
+    <allow-in-power-save package="me.phh.treble.app" />
 </permissions>
