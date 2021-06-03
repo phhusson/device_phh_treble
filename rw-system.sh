@@ -574,7 +574,9 @@ if getprop ro.vendor.build.fingerprint | grep -qE '^xiaomi/wayne/wayne.*'; then
     setprop audio.camerasound.force true
 fi
 
-mount -o bind /mnt/phh/empty_dir /vendor/etc/audio || true
+if [ $(find /vendor/etc/audio -type f |wc -l) -le 3 ];then
+	mount -o bind /mnt/phh/empty_dir /vendor/etc/audio || true
+fi
 
 for f in /vendor/lib{,64}/hw/com.qti.chi.override.so /vendor/lib{,64}/libVD*;do
     [ ! -f $f ] && continue
