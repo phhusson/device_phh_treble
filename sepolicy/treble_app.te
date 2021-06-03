@@ -36,3 +36,9 @@ allow system_app mtk_hal_rild_hwservice:hwservice_manager { find};
 type mtk_vilte_support_prop, property_type;
 allow system_app mtk_vilte_support_prop:property_service set;
 
+type hal_gesturewake_hwservice, hwservice_manager_type;
+type hal_gesturewake_default, domain;
+allow system_app hal_gesturewake_hwservice:hwservice_manager { find };
+allow system_app hal_gesturewake_default:binder { call transfer };
+allow hal_gesturewake_default system_app:binder { call transfer };
+
