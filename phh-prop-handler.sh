@@ -129,7 +129,9 @@ if [ "$1" == "persist.sys.phh.caf.audio_policy" ];then
         fi
     else
         umount /vendor/etc/audio_policy_configuration.xml
-        mount /mnt/phh/empty_dir /vendor/etc/audio
+	if [ $(find /vendor/etc/audio -type f |wc -l) -le 3 ];then
+		mount /mnt/phh/empty_dir /vendor/etc/audio
+	fi
     fi
     restartAudio
     exit
