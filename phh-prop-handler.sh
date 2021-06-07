@@ -135,6 +135,22 @@ if [ "$1" == "persist.sys.phh.caf.audio_policy" ];then
     exit
 fi
 
+if [ "$1" == "persist.sys.phh.samsung.audio_policy" ];then
+    if [[ "$prop_value" != "0" && "$prop_value" != "1" ]]; then
+        exit 1
+    fi
+
+    if [[ "$prop_value" == 1 ]];then
+        if [ -f /vendor/etc/audio_policy_configuration_sec.xml ];then
+            mount /vendor/etc/audio_policy_configuration_sec.xml /vendor/etc/audio_policy_configuration.xml
+        fi
+    else
+        umount /vendor/etc/audio_policy_configuration.xml
+    fi
+    restartAudio
+    exit
+fi
+
 if [ "$1" == "persist.sys.phh.vsmart.dt2w" ];then
     if [[ "$prop_value" != "0" && "$prop_value" != "1" ]]; then
         exit 1
