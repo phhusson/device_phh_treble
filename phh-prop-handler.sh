@@ -119,12 +119,14 @@ if [ "$1" == "persist.sys.phh.caf.audio_policy" ];then
         exit 1
     fi
 
+    sku="$(getprop ro.boot.product.vendor.sku)"
     if [[ "$prop_value" == 1 ]];then
         umount /vendor/etc/audio
         umount /vendor/etc/audio
-        sku="$(getprop ro.boot.product.vendor.sku)"
 
-        if [ -f /vendor/etc/audio/sku_${sku}_qssi/audio_policy_configuration.xml ] && [ -f /vendor/etc/audio/sku_$sku/audio_policy_configuration.xml ];then
+        if [ -f /vendor/etc/audio_policy_configuration_sec.xml ];then
+            mount /vendor/etc/audio_policy_configuration_sec.xml /vendor/etc/audio_policy_configuration.xml
+        elif [ -f /vendor/etc/audio/sku_${sku}_qssi/audio_policy_configuration.xml ] && [ -f /vendor/etc/audio/sku_$sku/audio_policy_configuration.xml ];then
             umount /vendor/etc/audio
             mount /vendor/etc/audio/sku_${sku}_qssi/audio_policy_configuration.xml /vendor/etc/audio/sku_$sku/audio_policy_configuration.xml
         elif [ -f /vendor/etc/audio/audio_policy_configuration.xml ];then
@@ -134,6 +136,7 @@ if [ "$1" == "persist.sys.phh.caf.audio_policy" ];then
         fi
     else
         umount /vendor/etc/audio_policy_configuration.xml
+        umount /vendor/etc/audio/sku_$sku/audio_policy_configuration.xml
         if [ $(find /vendor/etc/audio -type f |wc -l) -le 3 ];then
             mount /mnt/phh/empty_dir /vendor/etc/audio
         fi
