@@ -642,6 +642,13 @@ if getprop ro.vendor.build.fingerprint | grep -q -e nubia/NX669; then
     mount /vendor/etc/audio/sku_${sku}_qssi/audio_policy_configuration.xml /vendor/etc/audio/sku_$sku/audio_policy_configuration.xml
 fi
 
+# For ZF8, the "best" audio policy isn't the one for QSSI
+if getprop ro.vendor.build.fingerprint |grep -q -e /ASUS_I006D:;then
+    umount /vendor/etc/audio
+    sku="$(getprop ro.boot.product.vendor.sku)"
+    mount /vendor/etc/audio/ZS590KS/audio_policy_configuration_ZS590KS.xml /vendor/etc/audio/sku_$sku/audio_policy_configuration.xml
+fi
+
 setprop ctl.stop console
 dmesg -n 1
 if [ -f /system/phh/secure ];then
