@@ -134,9 +134,19 @@ if [ "$1" == "persist.sys.phh.caf.audio_policy" ];then
         elif [ -f /vendor/etc/audio_policy_configuration_base.xml ];then
             mount /vendor/etc/audio_policy_configuration_base.xml /vendor/etc/audio_policy_configuration.xml
         fi
+
+        if [ -f /vendor/lib/hw/audio.bluetooth_qti.default.so ];then
+            cp /vendor/etc/a2dp_audio_policy_configuration.xml /mnt/phh
+            sed -i 's/bluetooth_qti/a2dp/' /mnt/phh/a2dp_audio_policy_configuration.xml
+            mount /mnt/phh/a2dp_audio_policy_configuration.xml /vendor/etc/a2dp_audio_policy_configuration.xml
+            chcon -h u:object_r:vendor_configs_file:s0 /vendor/etc/a2dp_audio_policy_configuration.xml
+            chmod 644 /vendor/etc/a2dp_audio_policy_configuration.xml
+        fi
     else
         umount /vendor/etc/audio_policy_configuration.xml
         umount /vendor/etc/audio/sku_$sku/audio_policy_configuration.xml
+        umount /vendor/etc/a2dp_audio_policy_configuration.xml
+        rm /mnt/phh/a2dp_audio_policy_configuration.xml
         if [ $(find /vendor/etc/audio -type f |wc -l) -le 3 ];then
             mount /mnt/phh/empty_dir /vendor/etc/audio
         fi
