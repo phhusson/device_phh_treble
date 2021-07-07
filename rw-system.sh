@@ -367,8 +367,23 @@ if getprop ro.vendor.build.fingerprint | grep -q -i \
     -e xiaomi/nitrogen -e xiaomi/whyred -e xiaomi/platina \
     -e xiaomi/ysl -e nubia/nx60 -e nubia/nx61 -e xiaomi/tulip \
     -e xiaomi/lavender -e xiaomi/olive -e xiaomi/olivelite -e xiaomi/pine \
-    -e Redmi/lancelot -e Redmi/galahad; then
+    -e Redmi/lancelot -e Redmi/galahad -e Redmi/merlin -e Redmi/angelican -e Redmi/dandelion; then
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
+fi
+
+#Xiaomi Redmi Note 9, Redmi 9 (Prime)
+if getprop ro.vendor.build.fingerprint |grep -qi -e Redmi/merlin -e Redmi/lancelot -e Redmi/angelican -e Redmi/dandelion; then
+    setprop persist.sys.overlay.devinputjack true
+fi
+
+# UMIDIGI A3X & A9
+if getprop ro.vendor.build.fingerprint |grep -qi -e UMIDIGI/A3X -e UMIDIGI/A9; then
+    setprop persist.sys.overlay.devinputjack true
+fi
+
+# CUBOT KINGKONG MINI2
+if getprop ro.vendor.build.fingerprint |grep -qi -e CUBOT/KINGKONG_MINI2; then
+    setprop persist.sys.overlay.devinputjack true
 fi
 
 #Realme 6
@@ -399,7 +414,7 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
     -e motorola/hannah -e motorola/james -e motorola/pettyl -e xiaomi/cepheus \
     -e xiaomi/grus -e xiaomi/cereus -e xiaomi/cactus -e xiaomi/raphael -e xiaomi/davinci \
     -e xiaomi/ginkgo -e xiaomi/laurel_sprout -e xiaomi/andromeda \
-    -e redmi/curtana -e redmi/picasso \
+    -e redmi/curtana -e redmi/joyeuse -e redmi/picasso \
     -e bq/Aquaris_M10 ; then
     mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
     mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
@@ -887,7 +902,7 @@ if getprop ro.vendor.build.fingerprint |grep -iq xiaomi/cepheus;then
     setprop ro.netflix.bsp_rev Q855-16947-1
 fi
 
-if getprop ro.vendor.build.fingerprint |grep -qi redmi/curtana;then
+if getprop ro.vendor.build.fingerprint |grep -qi -e redmi/curtana -e redmi/joyeuse; then
     setprop ro.netflix.bsp_rev Q6250-19132-1
 fi
 
