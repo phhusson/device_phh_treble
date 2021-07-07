@@ -314,6 +314,12 @@ if [ "$foundFingerprint" = false ];then
     mount -o bind system/phh/empty /system/etc/permissions/android.hardware.fingerprint.xml
 fi
 
+if ! getprop ro.vendor.build.fingerprint | grep -qE 'meizu_18'; then
+    mount -o bind system/phh/empty /system/bin/hw/android.hardware.vibrator@1.3-service.meizu
+    mount -o bind system/phh/empty /system/etc/init/android.hardware.vibrator@1.3-service.meizu.rc
+    mount -o bind system/etc/vintf/manifest/manifest_dummy.xml /system/etc/vintf/manifest/android.hardware.vibrator@1.3-service.meizu.xml
+fi
+
 if ! grep android.hardware.bluetooth /vendor/manifest.xml && ! grep android.hardware.bluetooth /vendor/etc/vintf/manifest.xml; then
     mount -o bind system/phh/empty /system/etc/permissions/android.hardware.bluetooth.xml
     mount -o bind system/phh/empty /system/etc/permissions/android.hardware.bluetooth_le.xml
@@ -385,7 +391,7 @@ if getprop ro.build.overlay.deviceid |grep -q -e CPH1859 -e CPH1861 -e RMX1811 -
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
 fi
 
-if getprop ro.build.overlay.deviceid |grep -iq -e RMX2020 -e RMX2027 -e RMX2040 -e RMX2193 -e RMX2191;then	
+if getprop ro.build.overlay.deviceid |grep -iq -e RMX2020 -e RMX2027 -e RMX2040 -e RMX2193 -e RMX2191;then
     setprop persist.sys.qcom-brightness 2047
     setprop persist.sys.overlay.devinputjack true
     setprop persist.sys.phh.fingerprint.nocleanup true
@@ -872,7 +878,7 @@ if getprop ro.build.overlay.deviceid |grep -qiE -e '^RMX' -e '^CPH';then
     setprop persist.sys.phh.fod.bbk true
 fi
 
-if getprop ro.build.overlay.deviceid |grep -iq -e RMX1941 -e RMX1945 -e RMX1943 -e RMX1942;then	
+if getprop ro.build.overlay.deviceid |grep -iq -e RMX1941 -e RMX1945 -e RMX1943 -e RMX1942;then
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
     setprop persist.sys.phh.mainkeys 0
 fi
