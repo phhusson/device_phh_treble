@@ -12,6 +12,11 @@ do
     [ -d $MOUNTPOINT ] && mountpoint -q $MOUNTPOINT && break
 done
 
+#experimental
+blockdev --setrw /dev/block/mapper/system
+blockdev --setrw /dev/block/by-name/system_a
+blockdev --setrw /dev/block/by-name/system_b
+
 mount -o remount,rw $MOUNTPOINT
 remount
 
