@@ -136,20 +136,6 @@ changeKeylayout() {
         chmod 0644 /mnt/phh/keylayout/gpio_keys.kl /mnt/phh/keylayout/sec_touchscreen.kl
     fi
 
-    if getprop ro.vendor.build.fingerprint | grep -iq \
-        -e poco/ -e redmi/ -e xiaomi/ ; then
-        if [ ! -f /mnt/phh/keylayout/uinput-goodix.kl ]; then
-          cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
-          chmod 0644 /mnt/phh/keylayout/uinput-goodix.kl
-          changed=true
-        fi
-        if [ ! -f /mnt/phh/keylayout/uinput-fpc.kl ]; then
-          cp /system/phh/empty /mnt/phh/keylayout/uinput-fpc.kl
-          chmod 0644 /mnt/phh/keylayout/uinput-fpc.kl
-          changed=true
-        fi
-    fi
-
     if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/daisy; then
         mpk="/mnt/phh/keylayout"
         cp /system/phh/daisy-buttonJack.kl ${mpk}/msm8953-snd-card-mtp_Button_Jack.kl
@@ -163,6 +149,20 @@ changeKeylayout() {
            changed=true
         fi
         chmod 0644 ${mpk}/uinput* ${mpk}/msm8953*
+    fi
+
+    if getprop ro.vendor.build.fingerprint | grep -iq \
+        -e poco/ -e redmi/ -e xiaomi/ ; then
+        if [ ! -f /mnt/phh/keylayout/uinput-goodix.kl ]; then
+          cp /system/phh/empty /mnt/phh/keylayout/uinput-goodix.kl
+          chmod 0644 /mnt/phh/keylayout/uinput-goodix.kl
+          changed=true
+        fi
+        if [ ! -f /mnt/phh/keylayout/uinput-fpc.kl ]; then
+          cp /system/phh/empty /mnt/phh/keylayout/uinput-fpc.kl
+          chmod 0644 /mnt/phh/keylayout/uinput-fpc.kl
+          changed=true
+        fi
     fi
 
     if getprop ro.vendor.build.fingerprint | grep -qi oneplus/oneplus6/oneplus6; then
@@ -192,9 +192,12 @@ changeKeylayout() {
     if getprop ro.vendor.build.fingerprint |grep -iq -E -e '^Lenovo/' && [ -f /sys/devices/virtual/touch/tp_dev/gesture_on ];then
         cp /system/phh/lenovo-synaptics_dsx.kl /mnt/phh/keylayout/synaptics_dsx.kl
         chmod 0644 /mnt/phh/keylayout/synaptics_dsx.kl
-        cp /system/phh/lenovo-synaptics_dsx.kl /mnt/phh/keylayout/fts_ts.kl
-        chmod 0644 /mnt/phh/keylayout/fts_ts.kl
         changed=true
+        if ! getprop ro.vendor.build.fingerprint |grep -iq -E -e '^Lenovo/jd20/'; then
+          cp /system/phh/lenovo-synaptics_dsx.kl /mnt/phh/keylayout/fts_ts.kl
+          chmod 0644 /mnt/phh/keylayout/fts_ts.kl
+          changed=true
+        fi
     fi
 
     if getprop ro.build.overlay.deviceid |grep -q -e RMX1931 -e RMX1941 -e CPH1859 -e CPH1861 -e RMX2185;then
@@ -367,8 +370,23 @@ if getprop ro.vendor.build.fingerprint | grep -q -i \
     -e xiaomi/nitrogen -e xiaomi/whyred -e xiaomi/platina \
     -e xiaomi/ysl -e nubia/nx60 -e nubia/nx61 -e xiaomi/tulip \
     -e xiaomi/lavender -e xiaomi/olive -e xiaomi/olivelite -e xiaomi/pine \
-    -e Redmi/lancelot -e Redmi/galahad; then
+    -e Redmi/lancelot -e Redmi/galahad -e Redmi/merlin -e Redmi/angelican -e Redmi/dandelion; then
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
+fi
+
+#Xiaomi Redmi Note 9, Redmi 9 (Prime)
+if getprop ro.vendor.build.fingerprint |grep -qi -e Redmi/merlin -e Redmi/lancelot -e Redmi/angelican -e Redmi/dandelion; then
+    setprop persist.sys.overlay.devinputjack true
+fi
+
+# UMIDIGI A3X & A9
+if getprop ro.vendor.build.fingerprint |grep -qi -e UMIDIGI/A3X -e UMIDIGI/A9; then
+    setprop persist.sys.overlay.devinputjack true
+fi
+
+# CUBOT KINGKONG MINI2
+if getprop ro.vendor.build.fingerprint |grep -qi -e CUBOT/KINGKONG_MINI2; then
+    setprop persist.sys.overlay.devinputjack true
 fi
 
 #Realme 6
@@ -399,7 +417,7 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
     -e motorola/hannah -e motorola/james -e motorola/pettyl -e xiaomi/cepheus \
     -e xiaomi/grus -e xiaomi/cereus -e xiaomi/cactus -e xiaomi/raphael -e xiaomi/davinci \
     -e xiaomi/ginkgo -e xiaomi/laurel_sprout -e xiaomi/andromeda \
-    -e redmi/curtana -e redmi/picasso \
+    -e redmi/curtana -e redmi/joyeuse -e redmi/picasso \
     -e bq/Aquaris_M10 ; then
     mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
     mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
@@ -519,7 +537,11 @@ fi
 
 if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/daisy; then
     setprop debug.sf.latch_unsignaled 1
-    setprop debug.sf.enable_hwc_vds 1
+fi
+
+if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/lavender; then
+    setprop debug.sf.latch_unsignaled 1
+    setprop ro.netflix.bsp_rev Q660-13149-1
 fi
 
 if getprop ro.vendor.build.fingerprint | grep -iq -E -e 'huawei|honor' || getprop persist.sys.overlay.huawei | grep -iq -E -e 'true'; then
@@ -633,6 +655,10 @@ if getprop ro.vendor.build.fingerprint | grep -qiE '^samsung/' && [ "$vndk" -ge 
         chown system:system /sys/class/camera/flash/rear_flash
         chcon u:object_r:sysfs_camera_writable:s0 /sys/class/camera/flash/rear_flash
     fi
+fi
+
+if getprop ro.vendor.build.fingerprint | grep -q -e Sony/aosp_f5121/suzu; then
+    chown system:system /sys/class/leds/*/breath
 fi
 
 # For Nubia Red Magic 6 audio policy configuration
@@ -887,8 +913,10 @@ if getprop ro.vendor.build.fingerprint |grep -iq xiaomi/cepheus;then
     setprop ro.netflix.bsp_rev Q855-16947-1
 fi
 
-if getprop ro.vendor.build.fingerprint |grep -qi redmi/curtana;then
+if getprop ro.vendor.build.fingerprint |grep -qi -e redmi/curtana -e redmi/joyeuse; then
     setprop ro.netflix.bsp_rev Q6250-19132-1
+    setprop debug.sf.latch_unsignaled 1
+    setprop sys.use_fifo_ui 1
 fi
 
 # Set props for Vsmart Live's fod
