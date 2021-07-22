@@ -71,24 +71,4 @@ on property:persist.sys.phh.restart_ril=true
     restart vendor.qcrild2
     restart vendor.ril-daemon-mtk
 
-#Timekeep
-on boot
-    # Set system as owner of RTC node
-    chown system system /sys/class/rtc/rtc0/since_epoch
 
-on post-fs-data && property:persist.sys.qcom-timekeep=true
-    # Create folder for timekeep
-    mkdir /data/time 0770 system system
-    mkdir /data/vendor/time 0770 system system
-    chmod 0770 /data/time/ats_2
-    chmod 0770 /data/vendor/time/ats_2
-    start gsi_timekeep
-
-# Time service
-service gsi_timekeep /system/bin/gsi_timekeep restore
-    class late_start
-    user system
-    group system
-    capabilities SYS_TIME
-    disabled
-    writepid /dev/cpuset/system-background/tasks
