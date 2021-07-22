@@ -1,0 +1,18 @@
+type gsi_timekeep, domain, domain_deprecated;
+type gsi_timekeep_exec, exec_type, file_type;
+
+# Started by init
+init_daemon_domain(gsi_timekeep)
+
+allow gsi_timekeep self:capability {
+    fowner
+    fsetid
+    sys_time
+    dac_override
+    dac_read_search
+};
+
+allow gsi_timekeep time_data_file:file create_file_perms;
+allow gsi_timekeep time_data_file:dir create_dir_perms;
+
+set_prop(gsi_timekeep, timekeep_prop)
