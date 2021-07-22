@@ -28,3 +28,8 @@ allowxperm tee rpmb_device:blk_file ioctl { 0xb300-0xbfff };
 attribute smcinvoke_device_29_0;
 type smcinvoke_device, dev_type;
 typeattribute smcinvoke_device smcinvoke_device_29_0;
+
+#Timekeep
+type timekeep_prop, property_type;
+allow system_app time_data_file:file rw_file_perms;
+set_prop(system_app, timekeep_prop)
