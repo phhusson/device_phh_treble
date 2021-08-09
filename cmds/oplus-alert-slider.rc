@@ -1,0 +1,3 @@
+service phhoplus-alert-slider /system/bin/oplus-alert-slider
+    seclabel u:r:phhsu_daemon:s0
+    class main

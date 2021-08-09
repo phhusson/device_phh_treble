@@ -253,3 +253,13 @@ cc_binary {
 		"libhidlbase",
 	],
 }
+
+cc_binary {
+	name: "oplus-alert-slider",
+	srcs: [
+		"oplus-alert-slider.cpp",
+	],
+	init_rc: [
+		"oplus-alert-slider.rc",
+	],
+}
