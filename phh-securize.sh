@@ -1,13 +1,22 @@
 #!/system/bin/sh
 
-SYSTEM=/system
-[ -d /sbin/.magisk/mirror/system ] && SYSTEM=/sbin/.magisk/mirror/system
+if [ -e /system/bin/magisk ]
+then
+    # remove bind-mount of phh-su overriding /system/bin/su -> ./magisk
+    umount -l /system/bin/magisk
+    # we need to modify the real system partition
+    MAGISK_MIRROR="$(magisk --path)/.magisk/mirror"
+    SYSTEM=$MAGISK_MIRROR/system
+    MOUNTPOINT_LIST="$MAGISK_MIRROR/system_root $MAGISK_MIRROR/system"
+else
+    SYSTEM=/system
+    MOUNTPOINT_LIST="/system /"
+fi
 
-for MOUNTPOINT in \
-    /sbin/.magisk/mirror/system_root \
-    /sbin/.magisk/mirror/system \
-    /system \
-    /
+# remove bind-mount of phh-su (preventing $SYSTEM/xbin/su to be removed)
+umount -l /system/xbin/su
+
+for MOUNTPOINT in $MOUNTPOINT_LIST
 do
     [ -d $MOUNTPOINT ] && mountpoint -q $MOUNTPOINT && break
 done
@@ -16,7 +25,6 @@ mount -o remount,rw $MOUNTPOINT
 remount
 
 touch $SYSTEM/phh/secure
-umount -l $SYSTEM/xbin/su
 rm $SYSTEM/xbin/su
 rm $SYSTEM/bin/phh-su
 rm $SYSTEM/etc/init/su.rc
