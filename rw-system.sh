@@ -197,7 +197,9 @@ changeKeylayout() {
         changed=true
     fi
 
-    if getprop ro.build.overlay.deviceid |grep -q -e RMX1931 -e RMX1941 -e CPH1859 -e CPH1861 -e RMX2185;then
+    if ( getprop ro.build.overlay.deviceid |grep -q -e RMX1931 -e RMX1941 -e CPH1859 -e CPH1861 -e RMX2185) ||
+	    ( grep -q OnePlus /odm/etc/$(getprop ro.boot.prjname)/*.prop);then
+	echo 1 > /proc/touchpanel/double_tap_enable
         cp /system/phh/oppo-touchpanel.kl /mnt/phh/keylayout/touchpanel.kl
 	cp /system/phh/oppo-touchpanel.kl /mnt/phh/keylayout/mtk-tpd.kl
         chmod 0644 /mnt/phh/keylayout/touchpanel.kl
