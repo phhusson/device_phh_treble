@@ -15,6 +15,7 @@
 /dev/dsm                u:object_r:dmd_device:s0
 
 /system/bin/hw/android.hardware.biometrics.fingerprint@2.1-service.oppo.compat u:object_r:hal_fingerprint_oppo_compat_exec:s0
+/system/bin/hw/android.hardware.biometrics.fingerprint@2.1-service.oplus.compat u:object_r:hal_fingerprint_oppo_compat_exec:s0
 
 /efs u:object_r:efs_file:s0
 
