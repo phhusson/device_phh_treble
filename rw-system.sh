@@ -819,6 +819,10 @@ if [ -f /proc/oppoVersion/prjVersion ];then
     setprop ro.separate.soft $(cat /proc/oppoVersion/prjVersion)
 fi
 
+if grep -q -F ro.separate.soft /odm/build.prop;then
+	setprop ro.separate.soft "$(sed -nE 's/^ro.separate.soft=(.*)/\1/p' /odm/build.prop)"
+fi
+
 echo 1 >  /proc/tfa98xx/oppo_tfa98xx_fw_update
 if ! grep -q -E -e '.*#write .*tp_fw_update' /vendor/etc/init/hw/*touch*;then
 	echo 1 > /proc/touchpanel/tp_fw_update
