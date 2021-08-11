@@ -20,3 +20,6 @@
 /efs u:object_r:efs_file:s0
 
 /dev/smcinvoke u:object_r:smcinvoke_device:s0
+
+#Timekeep
+/system/bin/gsi_timekeep                     u:object_r:gsi_timekeep_exec:s0

@@ -70,3 +70,5 @@ on property:persist.sys.phh.restart_ril=true
     restart vendor.qcrild
     restart vendor.qcrild2
     restart vendor.ril-daemon-mtk
+
+

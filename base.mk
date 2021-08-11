@@ -202,3 +202,8 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # AOSP overlays
 PRODUCT_PACKAGES += \
     NavigationBarMode2ButtonOverlay
+
+# TimeKeep
+PRODUCT_PACKAGES += \
+    timekeep \
+    TimeKeep
