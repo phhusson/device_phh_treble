@@ -202,3 +202,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 # AOSP overlays
 PRODUCT_PACKAGES += \
     NavigationBarMode2ButtonOverlay
+
+PRODUCT_PACKAGES += \
+	oplus-alert-slider
