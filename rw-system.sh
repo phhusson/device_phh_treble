@@ -525,7 +525,7 @@ if getprop ro.vendor.product.device | grep -q -e nora -e rhannah; then
     setprop debug.sf.latch_unsignaled 1
 fi
 
-if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/daisy; then
+if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/daisy -e Redmi/merlin; then
     setprop debug.sf.latch_unsignaled 1
     setprop debug.sf.enable_hwc_vds 1
 fi
