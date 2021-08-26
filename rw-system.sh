@@ -563,6 +563,8 @@ fi
 # This matches both Razer Phone 1 & 2
 if getprop ro.vendor.build.fingerprint |grep -qE razer/cheryl;then
 	setprop ro.audio.monitorRotation true
+	mount -o bind /system/phh/empty /vendor/overlay/BluetoothResCommon.apk
+	mount -o bind /system/phh/empty /vendor/overlay/RazerCherylBluetoothRes.apk
 fi
 
 if getprop ro.vendor.build.fingerprint | grep -qiE '^samsung'; then
