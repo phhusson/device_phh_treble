@@ -151,7 +151,7 @@ PRODUCT_PACKAGES += \
 	Stk
 
 PRODUCT_PACKAGES += \
-	resetprop
+	resetprop_phh
 PRODUCT_COPY_FILES += \
 	device/phh/treble/phh-securize.sh:system/bin/phh-securize.sh \
 	device/phh/treble/files/ota.sh:system/bin/ota.sh \

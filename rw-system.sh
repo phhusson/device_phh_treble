@@ -10,7 +10,7 @@ vndk="$(getprop persist.sys.vndk)"
 [ -z "$vndk" ] && vndk="$(getprop ro.vndk.version |grep -oE '^[0-9]+')"
 
 if [ "$vndk" = 26 ];then
-	resetprop ro.vndk.version 26
+	resetprop_phh ro.vndk.version 26
 fi
 
 setprop sys.usb.ffs.aio_compat true
@@ -565,7 +565,7 @@ if [ -f /system/phh/secure ];then
     copyprop() {
         p="$(getprop "$2")"
         if [ "$p" ]; then
-            resetprop "$1" "$(getprop "$2")"
+            resetprop_phh "$1" "$(getprop "$2")"
         fi
     }
 
@@ -595,22 +595,22 @@ if [ -f /system/phh/secure ];then
     copyprop ro.system.product.manufacturer ro.product.vendor.manufacturer
     copyprop ro.product.manufacturer ro.product.vendor.manufacturer
     (getprop ro.vendor.build.security_patch; getprop ro.keymaster.xxx.security_patch) |sort |tail -n 1 |while read v;do
-        [ -n "$v" ] && resetprop ro.build.version.security_patch "$v"
+        [ -n "$v" ] && resetprop_phh ro.build.version.security_patch "$v"
     done
 
-    resetprop ro.build.tags release-keys
-    resetprop ro.boot.vbmeta.device_state locked
-    resetprop ro.boot.verifiedbootstate green
-    resetprop ro.boot.flash.locked 1
-    resetprop ro.boot.veritymode enforcing
-    resetprop ro.boot.warranty_bit 0
-    resetprop ro.warranty_bit 0
-    resetprop ro.debuggable 0
-    resetprop ro.secure 1
-    resetprop ro.build.type user
-    resetprop ro.build.selinux 0
+    resetprop_phh ro.build.tags release-keys
+    resetprop_phh ro.boot.vbmeta.device_state locked
+    resetprop_phh ro.boot.verifiedbootstate green
+    resetprop_phh ro.boot.flash.locked 1
+    resetprop_phh ro.boot.veritymode enforcing
+    resetprop_phh ro.boot.warranty_bit 0
+    resetprop_phh ro.warranty_bit 0
+    resetprop_phh ro.debuggable 0
+    resetprop_phh ro.secure 1
+    resetprop_phh ro.build.type user
+    resetprop_phh ro.build.selinux 0
 
-    resetprop ro.adb.secure 1
+    resetprop_phh ro.adb.secure 1
     setprop ctl.restart adbd
 fi
 
@@ -700,7 +700,7 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
 fi
 
 if getprop ro.build.overlay.deviceid |grep -qE '^RMX';then
-    resetprop ro.vendor.gsi.build.flavor byPass
+    resetprop_phh ro.vendor.gsi.build.flavor byPass
     setprop oppo.camera.packname com.oppo.engineermode.camera
     setprop sys.phh.xx.brand realme
 fi
@@ -740,7 +740,7 @@ if getprop ro.vendor.build.fingerprint |grep -qiE \
         -e razer/cheryl ; then
     setprop media.settings.xml "/vendor/etc/media_profiles_vendor.xml"
 fi
-resetprop service.adb.root 0
+resetprop_phh service.adb.root 0
 
 # This is for Samsung Galaxy devices with HBM FOD
 # On those devices, a magic Layer usageBits switches to "mask_brightness"
@@ -773,7 +773,7 @@ if getprop ro.build.overlay.deviceid |grep -iq -e RMX1941 -e RMX1945 -e RMX1943 
     setprop persist.sys.phh.mainkeys 0
 fi
 
-resetprop ro.bluetooth.library_name libbluetooth.so
+resetprop_phh ro.bluetooth.library_name libbluetooth.so
 
 if getprop ro.vendor.build.fingerprint |grep -iq xiaomi/cepheus;then
     setprop ro.netflix.bsp_rev Q855-16947-1
@@ -792,12 +792,12 @@ fi
 setprop vendor.display.res_switch_en 1
 
 if getprop ro.bionic.cpu_variant |grep -q kryo300;then
-    resetprop ro.bionic.cpu_variant cortex-a75
+    resetprop_phh ro.bionic.cpu_variant cortex-a75
     setprop dalvik.vm.isa.arm64.variant cortex-a75
     setprop dalvik.vm.isa.arm64.features runtime
 fi
 
-resetprop ro.control_privapp_permissions log
+resetprop_phh ro.control_privapp_permissions log
 
 if grep -q /mnt/vendor/persist /vendor/etc/fstab.qcom;then
     mount /mnt/vendor/persist /persist
