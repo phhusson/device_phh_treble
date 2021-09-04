@@ -521,9 +521,14 @@ if getprop ro.vendor.product.device | grep -q -e nora -e rhannah; then
     setprop debug.sf.latch_unsignaled 1
 fi
 
-if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/daisy -e Redmi/merlin; then
+if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/daisy; then
     setprop debug.sf.latch_unsignaled 1
     setprop debug.sf.enable_hwc_vds 1
+fi
+
+if getprop ro.vendor.build.fingerprint | grep -iq -e Redmi/merlin; then
+    setprop debug.sf.latch_unsignaled 1
+    setprop debug.sf.enable_hwc_vds 0
 fi
 
 if getprop ro.vendor.build.fingerprint | grep -iq -E -e 'huawei|honor' || getprop persist.sys.overlay.huawei | grep -iq -E -e 'true'; then
