@@ -331,7 +331,7 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
     -e motorola/ali/ali -e xiaomi/perseus/perseus -e xiaomi/platina/platina \
     -e xiaomi/equuleus/equuleus -e motorola/nora -e xiaomi/nitrogen \
     -e motorola/hannah -e motorola/james -e motorola/pettyl -e xiaomi/cepheus \
-    -e xiaomi/grus -e xiaomi/cereus -e xiaomi/cactus -e xiaomi/raphael -e xiaomi/davinci \
+    -e xiaomi/grus -e xiaomi/raphael -e xiaomi/davinci \
     -e xiaomi/ginkgo -e xiaomi/laurel_sprout -e xiaomi/andromeda \
     -e redmi/curtana -e redmi/picasso ; then
     mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
@@ -395,7 +395,6 @@ done
 
 if getprop ro.vendor.build.fingerprint | grep -iq -e iaomi/cactus -e iaomi/cereus; then
     setprop debug.stagefright.omx_default_rank.sw-audio 1
-    setprop debug.stagefright.omx_default_rank 0
 fi
 
 if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/ginkgo -e  xiaomi/willow; then
