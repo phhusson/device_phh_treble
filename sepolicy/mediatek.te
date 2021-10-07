@@ -17,3 +17,10 @@ binder_call(hal_mms_server, {appdomain -isolated_app})
 
 type mtk_hal_mms_hwservice, hwservice_manager_type;
 allow { appdomain -isolated_app }  mtk_hal_mms_hwservice:hwservice_manager find;
+
+#denied { read } for comm="tkuinit" name="u:object_r:default_prop:s0" dev="tmpfs" ino=2029 scontext=u:r:tkcore:s0 tcontext=u:object_r:default_prop:s0 tclass=file permissive=1
+#denied { open } for comm="tkuinit" path="/dev/__properties__/u:object_r:default_prop:s0" dev="tmpfs" ino=2029 scontext=u:r:tkcore:s0 tcontext=u:object_r:default_prop:s0 tclass=file permissive=1
+#denied { getattr } for comm="tkuinit" path="/dev/__properties__/u:object_r:default_prop:s0" dev="tmpfs" ino=2029 scontext=u:r:tkcore:s0 tcontext=u:object_r:default_prop:s0 tclass=file permissive=1
+
+type tkcore, domain;
+permissive tkcore;
