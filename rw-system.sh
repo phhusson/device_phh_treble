@@ -73,8 +73,12 @@ fixSPL() {
     if [ -n "$img" ]; then
         #Rewrite SPL/Android version if needed
         Arelease="$(getSPL "$img" android)"
+        spl="$(getSPL "$img" spl)"
         setprop ro.keymaster.xxx.release "$Arelease"
-        setprop ro.keymaster.xxx.security_patch "$(getSPL "$img" spl)"
+        setprop ro.keymaster.xxx.security_patch "$spl"
+	if [ -z "$Arelease" ] || [ -z "$spl" ];then
+		return 0
+	fi
         setprop ro.keymaster.brn Android
 
         if getprop ro.vendor.build.fingerprint |grep -qiE 'samsung.*star.*lte';then
