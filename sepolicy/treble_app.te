@@ -28,7 +28,7 @@ allow system_app hal_tp_default:binder { call };
 allow system_app vendor_default_prop:property_service { set };
 
 set_prop(system_app, default_prop);
-set_prop(system_app, exported3_default_prop);
+#set_prop(system_app, exported3_default_prop);
 
 type mtk_hal_rild_hwservice, hwservice_manager_type;
 allow system_app mtk_hal_rild_hwservice:hwservice_manager { find};

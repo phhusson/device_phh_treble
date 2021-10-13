@@ -205,3 +205,5 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
 	oplus-alert-slider
+
+include build/make/target/product/gsi_release.mk
