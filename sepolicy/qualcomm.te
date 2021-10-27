@@ -28,3 +28,5 @@ allowxperm tee rpmb_device:blk_file ioctl { 0xb300-0xbfff };
 attribute smcinvoke_device_29_0;
 type smcinvoke_device, dev_type;
 typeattribute smcinvoke_device smcinvoke_device_29_0;
+
+get_prop(rild, default_prop);
