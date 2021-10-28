@@ -948,3 +948,9 @@ fi
 
 # Disable secondary watchdogs
 echo -n V > /dev/watchdog1
+
+if [ "$vndk" -le 30 ];then
+	# On older vendor the default behavior was to disable color management
+	# Don't override vendor value, merely add a fallback
+	setprop ro.surface_flinger.use_color_management false
+fi
