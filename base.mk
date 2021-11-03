@@ -199,6 +199,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 	debug.fdsan=warn_once \
 	ro.apex.updatable=false \
+	persist.sys.fflag.override.settings_provider_model=false \
 
 # AOSP overlays
 PRODUCT_PACKAGES += \
