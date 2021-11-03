@@ -33,4 +33,6 @@ rm -Rf $SYSTEM/{app,priv-app}/me.phh.superuser/
 rm -Rf /data/su || true
 mount -o remount,ro $MOUNTPOINT
 sync
+mkdir /metadata/phh
+touch /metadata/phh/secure
 reboot
