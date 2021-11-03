@@ -12,7 +12,7 @@ PRODUCT_COPY_FILES := \
 PRODUCT_COPY_FILES += \
 	device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/phh/treble/sepolicy
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIR += device/phh/treble/sepolicy
 PRODUCT_PACKAGE_OVERLAYS += device/phh/treble/overlay
 
 $(call inherit-product, vendor/hardware_overlay/overlay.mk)
