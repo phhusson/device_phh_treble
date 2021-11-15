@@ -257,6 +257,12 @@ changeKeylayout() {
         changed=true
     fi
 
+    if getprop ro.vendor.build.fingerprint | grep -q -i -e Blackview/BV9500Plus;then
+        cp /system/phh/bv9500plus-mtk-kpd.kl /mnt/phh/keylayout/mtk-kpd.kl
+        chmod 0644 /mnt/phh/keylayout/mtk-kpd.kl
+        changed=true
+    fi
+
     if [ "$changed" = true ]; then
         mount -o bind /mnt/phh/keylayout /system/usr/keylayout
         restorecon -R /system/usr/keylayout
