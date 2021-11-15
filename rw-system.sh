@@ -60,7 +60,12 @@ if [ "$vndk" = 26 ];then
 fi
 
 setprop sys.usb.ffs.aio_compat true
-setprop persist.adb.nonblocking_ffs false
+
+if getprop ro.vendor.build.fingerprint | grep -q -i -e Blackview/BV9500Plus;then
+    setprop persist.adb.nonblocking_ffs true
+else
+    setprop persist.adb.nonblocking_ffs false
+fi
 
 fixSPL() {
     if [ "$(getprop ro.product.cpu.abi)" = "armeabi-v7a" ]; then
@@ -254,6 +259,12 @@ changeKeylayout() {
         chmod 0644 /mnt/phh/keylayout/mtk-tpd.kl
         chmod 0644 /mnt/phh/keylayout/mtk-tpd-kpd.kl
         chmod 0644 /mnt/phh/keylayout/fingerprint_key.kl
+        changed=true
+    fi
+
+    if getprop ro.vendor.build.fingerprint | grep -q -i -e Blackview/BV9500Plus;then
+        cp /system/phh/bv9500plus-mtk-kpd.kl /mnt/phh/keylayout/mtk-kpd.kl
+        chmod 0644 /mnt/phh/keylayout/mtk-kpd.kl
         changed=true
     fi
 
