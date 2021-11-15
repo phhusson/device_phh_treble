@@ -60,7 +60,12 @@ if [ "$vndk" = 26 ];then
 fi
 
 setprop sys.usb.ffs.aio_compat true
-setprop persist.adb.nonblocking_ffs false
+
+if getprop ro.vendor.build.fingerprint | grep -q -i -e Blackview/BV9500Plus;then
+    setprop persist.adb.nonblocking_ffs true
+else
+    setprop persist.adb.nonblocking_ffs false
+fi
 
 fixSPL() {
     if [ "$(getprop ro.product.cpu.abi)" = "armeabi-v7a" ]; then
