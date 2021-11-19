@@ -184,65 +184,6 @@ cc_binary {
 }
 
 cc_binary {
-    name: "lptools",
-    cflags: [
-        "-Werror",
-        "-Wextra",
-    ],
-    device_supported: true,
-    shared_libs: [
-        "libbase",
-        "liblog",
-        "liblp",
-        "libsparse",
-        "libfs_mgr",
-        "libutils",
-        "libcutils",
-		"android.hardware.boot@1.1",
-		"libhidlbase",
-    ],
-    static_libs: [
-        "libdm",
-    ],
-    srcs: [
-        "lptools.cc",
-    ],
-    cppflags: [
-        "-D_FILE_OFFSET_BITS=64",
-    ],
-}
-
-cc_binary {
-    name: "lptools_static",
-    cflags: [
-        "-Werror",
-        "-Wextra",
-        "-DLPTOOLS_STATIC",
-    ],
-    device_supported: true,
-shared_libs: [
-        "libcrypto",
-],
-    static_libs: [
-        "libbase",
-        "liblog",
-        "liblp",
-        "libsparse",
-        "libfs_mgr",
-        "libutils",
-        "libcutils",
-        "libdm",
-        "libext4_utils",
-    ],
-    srcs: [
-        "lptools.cc",
-    ],
-    cppflags: [
-        "-D_FILE_OFFSET_BITS=64",
-    ],
-}
-
-cc_binary {
 	name: "sec-camera-list",
 	srcs: [
 		"sec-camera-list.cpp",
