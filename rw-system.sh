@@ -980,3 +980,8 @@ if [ "$vndk" -le 30 ];then
 	# Don't override vendor value, merely add a fallback
 	setprop ro.surface_flinger.use_color_management false
 fi
+
+# Disable ODM display overlay for Realme GT ME, which is annoyingly hard to override
+if getprop ro.boot.prjname |grep -qi 21615;then
+    mount -o bind /system/phh/empty /odm/overlay/android_framework_res_overlay.display.product.21615.apk
+fi
