@@ -47,6 +47,9 @@ on property:persist.sys.phh.vsmart.dt2w=*
 on property:persist.sys.phh.backlight.scale=*
     exec u:r:phhsu_daemon:s0 root -- /system/bin/phh-prop-handler.sh "persist.sys.phh.backlight.scale"
 
+on property:persist.sys.phh.disable_soundvolume_effect=*
+    exec u:r:phhsu_daemon:s0 root -- /system/bin/phh-prop-handler.sh "persist.sys.phh.disable_soundvolume_effect"
+
 on property:ro.sf.lcd_density=*
     restart surfaceflinger
 

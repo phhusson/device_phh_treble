@@ -184,3 +184,19 @@ if [ "$1" == "persist.sys.phh.backlight.scale" ];then
     fi
     exit
 fi
+
+if [ "$1" == "persist.sys.phh.disable_soundvolume_effect" ];then
+    if [[ "$prop_value" != "0" && "$prop_value" != "1" ]]; then
+        exit 1
+    fi
+
+    if [[ "$prop_value" == 1 ]];then
+        mount /system/phh/empty /vendor/lib/soundfx/libvolumelistener.so
+        mount /system/phh/empty /vendor/lib64/soundfx/libvolumelistener.so
+    else
+        umount /vendor/lib/soundfx/libvolumelistener.so
+        umount /vendor/lib64/soundfx/libvolumelistener.so
+    fi
+    restartAudio
+    exit
+fi
