@@ -997,6 +997,6 @@ if [ "$(stat -c '%U'  /dev/nxp_smartpa_dev)" == "root" ] &&
     chown root:audio /dev/nxp_smartpa_dev
     chmod 0660 /dev/nxp_smartpa_dev
 fi
-if getprop ro.odm.build.fingerprint |grep -q Huawei/Chicago;then
+if getprop ro.odm.build.fingerprint |grep -q Huawei/Chicago/Chicago_VTR;then
     setprop ctl.stop aptouch
 fi
