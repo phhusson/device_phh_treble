@@ -992,7 +992,6 @@ if getprop ro.boot.prjname |grep -qi 21615;then
     mount -o bind /system/phh/empty /odm/overlay/android_framework_res_overlay.display.product.21615.apk
 fi
 
-setprop debug.sf.latch_unsignaled 1
 if [ "$(stat -c '%U'  /dev/nxp_smartpa_dev)" == "root" ] &&
 	[ "$(stat -c '%G' /dev/nxp_smartpa_dev)" == "root" ];then
     chown root:audio /dev/nxp_smartpa_dev
