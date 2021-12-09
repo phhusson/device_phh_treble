@@ -275,11 +275,10 @@ changeKeylayout() {
     fi
 
     if getprop ro.vendor.build.fingerprint | grep -iq -e motorola/liber; then
-      if [ ! -f /mnt/phh/keylayout/uinput_nav.kl ]; then
+      
         cp /system/phh/empty /mnt/phh/keylayout/uinput_nav.kl
         chmod 0644 /mnt/phh/keylayout/uinput_nav.kl
         changed=true
-      fi
     fi
 
     if [ "$changed" = true ]; then
