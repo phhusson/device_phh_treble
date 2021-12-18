@@ -127,6 +127,7 @@ fixSPL() {
 }
 
 changeKeylayout() {
+    mpk="/mnt/phh/keylayout"
     cp -a /system/usr/keylayout /mnt/phh/keylayout
     changed=false
     if grep -q vendor.huawei.hardware.biometrics.fingerprint /vendor/etc/vintf/manifest.xml; then
@@ -160,7 +161,6 @@ changeKeylayout() {
     fi
 
     if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/daisy; then
-        mpk="/mnt/phh/keylayout"
         cp /system/phh/daisy-buttonJack.kl ${mpk}/msm8953-snd-card-mtp_Button_Jack.kl
         changed=true
         if [ ! -f /mnt/phh/keylayout/uinput-goodix.kl ]; then
@@ -172,6 +172,13 @@ changeKeylayout() {
            changed=true
         fi
         chmod 0644 ${mpk}/uinput* ${mpk}/msm8953*
+    fi
+
+    if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/renoir; then
+        mpk="/mnt/phh/keylayout"
+        cp /system/phh/daisy-buttonJack.kl ${mpk}/lahaina-shimaidp-snd-card_Button_Jack.kl
+        chmod 0644 ${mpk}/lahaina-shimaidp-snd-card_Button_Jack.kl
+        changed=true
     fi
 
     if getprop ro.vendor.build.fingerprint | grep -qi oneplus/oneplus6/oneplus6; then
