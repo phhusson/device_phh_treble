@@ -930,10 +930,13 @@ if getprop ro.vendor.build.fingerprint |grep -qiE '^samsung/';then
     setprop persist.sys.phh.fod.samsung true
 fi
 
-if getprop ro.vendor.build.fingerprint |grep -qiE '^oneplus/';then
-    setprop persist.sys.phh.fod.bbk true
+if getprop ro.vendor.build.fingerprint |grep -qiE -e ASUS_I006D -e ASUS_I003;then
+	setprop persist.sys.phh.fod.asus true
 fi
-if getprop ro.build.overlay.deviceid |grep -qiE -e '^RMX' -e '^CPH';then
+
+if (getprop ro.vendor.build.fingerprint;getprop ro.odm.build.fingerprint) |grep -qiE '^oneplus/' ||
+	getprop ro.build.overlay.deviceid |grep -qiE -e '^RMX' -e '^CPH' ||
+	[ -n "$(getprop ro.separate.soft)" ];then
     setprop persist.sys.phh.fod.bbk true
 fi
 
