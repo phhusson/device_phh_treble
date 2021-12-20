@@ -50,4 +50,6 @@
         <!-- ColorDisplayManager.COLOR_MODE_AUTOMATIC -->
         <item>3</item>
     </array>
+
+    <bool name="config_supportAudioSourceUnprocessed">true</bool>
 </resources>
