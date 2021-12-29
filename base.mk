@@ -209,4 +209,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	oplus-alert-slider
 
+PRODUCT_COPY_FILES += \
+	device/phh/treble/empty:system/etc/smartpa_params/empty \
+	device/phh/treble/proprietary-files/gome/fs16xx_01s_left.preset:system/phh/gome/fs16xx_01s_left.preset \
+	device/phh/treble/proprietary-files/gome/fs16xx_01s_mono.preset:system/phh/gome/fs16xx_01s_mono.preset \
+	device/phh/treble/proprietary-files/gome/fs16xx_01s_right.preset:system/phh/gome/fs16xx_01s_right.preset \
+	device/phh/treble/proprietary-files/umidigi/fs16xx_01s_mono.preset:system/phh/umidigi/fs16xx_01s_mono.preset
+
 include build/make/target/product/gsi_release.mk

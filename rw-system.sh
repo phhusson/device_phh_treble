@@ -1017,3 +1017,23 @@ fi
 if getprop ro.odm.build.fingerprint |grep -q Huawei/Chicago/Chicago_VTR;then
     setprop ctl.stop aptouch
 fi
+
+if getprop ro.vendor.build.fingerprint | grep -iq -e GOME/GOME_U9; then
+    cp -a /system/etc/smartpa_params /mnt/phh/smartpa_params
+    cp /system/phh/gome/fs16xx_01s_left.preset /mnt/phh/smartpa_params/fs16xx_01s_left.preset
+    cp /system/phh/gome/fs16xx_01s_mono.preset /mnt/phh/smartpa_params/fs16xx_01s_mono.preset
+    cp /system/phh/gome/fs16xx_01s_right.preset /mnt/phh/smartpa_params/fs16xx_01s_right.preset
+    chmod 0644 /mnt/phh/smartpa_params/fs16xx_01s_left.preset
+    chmod 0644 /mnt/phh/smartpa_params/fs16xx_01s_mono.preset
+    chmod 0644 /mnt/phh/smartpa_params/fs16xx_01s_right.preset
+    mount -o bind /mnt/phh/smartpa_params /system/etc/smartpa_params
+    restorecon -R /system/etc/smartpa_params
+fi
+
+if getprop ro.vendor.build.fingerprint | grep -iq -e UMIDIGI/UMIDIGI_X; then
+    cp -a /system/etc/smartpa_params /mnt/phh/smartpa_params
+    cp /system/phh/umidigi/fs16xx_01s_mono.preset /mnt/phh/smartpa_params/fs16xx_01s_mono.preset
+    chmod 0644 /mnt/phh/smartpa_params/fs16xx_01s_mono.preset
+    mount -o bind /mnt/phh/smartpa_params /system/etc/smartpa_params
+    restorecon -R /system/etc/smartpa_params
+fi
