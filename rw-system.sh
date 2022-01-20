@@ -432,7 +432,8 @@ if getprop ro.build.overlay.deviceid |grep -q -e CPH1859 -e CPH1861 -e RMX1811 -
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
 fi
 
-if getprop ro.build.overlay.deviceid |grep -iq -e RMX2020 -e RMX2027 -e RMX2040 -e RMX2193 -e RMX2191;then
+if getprop ro.build.overlay.deviceid |grep -iq -e RMX2020 -e RMX2027 -e RMX2040 -e RMX2193 \
+    -e RMX2193 -e RMX2191 -e RMX2195;then
     setprop persist.sys.qcom-brightness 2047
     setprop persist.sys.overlay.devinputjack true
     setprop persist.sys.phh.fingerprint.nocleanup true
