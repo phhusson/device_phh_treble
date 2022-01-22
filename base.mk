@@ -216,4 +216,6 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/proprietary-files/gome/fs16xx_01s_right.preset:system/phh/gome/fs16xx_01s_right.preset \
 	device/phh/treble/proprietary-files/umidigi/fs16xx_01s_mono.preset:system/phh/umidigi/fs16xx_01s_mono.preset
 
+PRODUCT_PACKAGES += phh-ota
+
 include build/make/target/product/gsi_release.mk
