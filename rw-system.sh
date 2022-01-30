@@ -282,7 +282,6 @@ changeKeylayout() {
     fi
 
     if getprop ro.vendor.build.fingerprint | grep -iq -e motorola/liber; then
-      
         cp /system/phh/empty /mnt/phh/keylayout/uinput_nav.kl
         chmod 0644 /mnt/phh/keylayout/uinput_nav.kl
         changed=true
@@ -427,7 +426,7 @@ if getprop ro.build.overlay.deviceid |grep -q -e CPH1859 -e CPH1861 -e RMX1811 -
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
 fi
 
-if getprop ro.build.overlay.deviceid |grep -iq -e RMX2020 -e RMX2027 -e RMX2040 -e RMX2193 -e RMX2191;then	
+if getprop ro.build.overlay.deviceid |grep -iq -e RMX2020 -e RMX2027 -e RMX2040 -e RMX2193 -e RMX2191;then
     setprop persist.sys.qcom-brightness 2047
     setprop persist.sys.overlay.devinputjack true
     setprop persist.sys.phh.fingerprint.nocleanup true
@@ -939,7 +938,7 @@ if (getprop ro.vendor.build.fingerprint;getprop ro.odm.build.fingerprint) |grep 
     setprop persist.sys.phh.fod.bbk true
 fi
 
-if getprop ro.build.overlay.deviceid |grep -iq -e RMX1941 -e RMX1945 -e RMX1943 -e RMX1942;then	
+if getprop ro.build.overlay.deviceid |grep -iq -e RMX1941 -e RMX1945 -e RMX1943 -e RMX1942;then
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
     setprop persist.sys.phh.mainkeys 0
 fi
@@ -1007,9 +1006,9 @@ if [ "$vndk" -le 30 ];then
 	setprop ro.surface_flinger.use_color_management false
 fi
 
-# Disable ODM display overlay for Realme GT ME, which is annoyingly hard to override
-if getprop ro.boot.prjname |grep -qi 21615;then
-    mount -o bind /system/phh/empty /odm/overlay/android_framework_res_overlay.display.product.21615.apk
+# Disable ODM display overlay for some OPlus devices, which is annoyingly hard to override
+if getprop ro.boot.prjname |grep -qi -e 20846 -e 20847 -e 2084A -e 21615;then
+    mount -o bind /system/phh/empty /odm/overlay/android_framework_res_overlay.display.product.*.apk
 fi
 
 if [ "$(stat -c '%U'  /dev/nxp_smartpa_dev)" == "root" ] &&
