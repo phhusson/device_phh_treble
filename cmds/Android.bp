@@ -204,15 +204,3 @@ cc_binary {
 		"oplus-alert-slider.rc",
 	],
 }
-
-cc_binary {
-	name: "phh-ota",
-	srcs: [
-		"phh-ota.cpp",
-	],
-	shared_libs: [
-		"libfs_mgr",
-		"libbase",
-		"liblp",
-	],
-}

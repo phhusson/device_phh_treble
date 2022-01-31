@@ -1,0 +1,5 @@
+type phhota_dev, dev_type, bdev_type;
+typeattribute phhota_dev mlstrustedobject;
+
+allow phhsu_daemon phhota_dev:blk_file rw_file_perms;
+allow system_app phhota_dev:blk_file rw_file_perms;

@@ -2,8 +2,11 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/mount.h>
+#include <sys/sysmacros.h>
+#include <sys/xattr.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include <libfiemap/image_manager.h>
 #include <android-base/file.h>
 
@@ -62,6 +65,22 @@ int main(int argc, char **argv) {
 		fprintf(stderr, "Mapping backing image returned %s\n", imgManager->MapImageDevice(imageName, 0ms, &blockDev) ? "true" : "false");
 		fprintf(stderr, "blockdev is %s\n", blockDev.c_str());
 		printf("%s\n", blockDev.c_str());
+
+		struct stat sb;
+		stat(blockDev.c_str(), &sb);
+
+		if(!S_ISBLK(sb.st_mode)) {
+			fprintf(stderr, "blockDev wasn't block dev\n");
+			return -1;
+		}
+
+		unlink("/dev/phh-ota");
+		mknod("/dev/phh-ota", 0644, S_IFBLK | makedev(major(sb.st_rdev), minor(sb.st_rdev)));
+		// Allow system uid to write there
+		chown("/dev/phh-ota", 0, 1000);
+		const char *dstContext = "u:r:phhota_dev:s0";
+		setxattr("/dev/phh-ota", "security.selinux", dstContext, strlen(dstContext), 0);
+
 		return 0;
 	}
 	if(argc>=2 && strcmp(argv[1], "delete-other-slot") == 0) {
