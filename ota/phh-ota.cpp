@@ -75,10 +75,11 @@ int main(int argc, char **argv) {
 		}
 
 		unlink("/dev/phh-ota");
-		mknod("/dev/phh-ota", 0644, S_IFBLK | makedev(major(sb.st_rdev), minor(sb.st_rdev)));
+		mknod("/dev/phh-ota", 0664 | S_IFBLK, makedev(major(sb.st_rdev), minor(sb.st_rdev)));
+		chmod("/dev/phh-ota", 0664);
 		// Allow system uid to write there
 		chown("/dev/phh-ota", 0, 1000);
-		const char *dstContext = "u:r:phhota_dev:s0";
+		const char *dstContext = "u:object_r:phhota_dev:s0";
 		setxattr("/dev/phh-ota", "security.selinux", dstContext, strlen(dstContext), 0);
 
 		return 0;
