@@ -1039,3 +1039,7 @@ if getprop ro.vendor.build.fingerprint | grep -iq -e UMIDIGI/UMIDIGI_X; then
     mount -o bind /mnt/phh/smartpa_params /system/etc/smartpa_params
     restorecon -R /system/etc/smartpa_params
 fi
+
+if getprop ro.vendor.build.fingerprint |grep -iq motorola/kane;then
+	setprop persist.sys.bt.esco_transport_unit_size 16
+fi
