@@ -11,5 +11,3 @@ persist.sys.phh.mainkeys=0
 fw.max_users=10
 persist.sys.max_profiles=10
 ro.boot.realme.lockstate=0
-
-ro.system.ota.json_url=https://raw.githubusercontent.com/phhusson/treble_experimentations/master/ota/squeak/ota.json
