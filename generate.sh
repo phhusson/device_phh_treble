@@ -87,8 +87,8 @@ $rom_script
 
 PRODUCT_NAME := $target
 PRODUCT_DEVICE := phhgsi_${arch}_$part
-PRODUCT_BRAND := Phh
-PRODUCT_SYSTEM_BRAND := Phh
+PRODUCT_BRAND := google
+PRODUCT_SYSTEM_BRAND := google
 PRODUCT_MODEL := Phh-Treble $apps_name
 
 PRODUCT_PACKAGES += $extra_packages
