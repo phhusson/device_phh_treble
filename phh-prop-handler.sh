@@ -52,6 +52,15 @@ xiaomi_toggle_dt2w_event_node() {
     return 1
 }
 
+xiaomi_toggle_dt2w_ioctl() {
+    if [ -c "/dev/xiaomi-touch" ]; then
+        echo "Trying to set dt2w mode with ioctl on /dev/xiaomi-touch"
+        # 14 - Touch_Doubletap_Mode
+        xiaomi-touch 14 "$1"
+        return
+    fi
+    return 1
+}
 
 restartAudio() {
     setprop ctl.restart audioserver
@@ -66,11 +75,12 @@ if [ "$1" == "persist.sys.phh.xiaomi.dt2w" ]; then
         exit 1
     fi
 
-    if ! xiaomi_toggle_dt2w_proc_node "$prop_value"; then
-        # Fallback to event node method
-        xiaomi_toggle_dt2w_event_node "$prop_value"
-    fi
-    exit $?
+    xiaomi_toggle_dt2w_proc_node "$prop_value"
+    # Fallback to event node method
+    xiaomi_toggle_dt2w_event_node "$prop_value"
+    # Fallback to ioctl method
+    xiaomi_toggle_dt2w_ioctl "$prop_value"
+    exit
 fi
 
 if [ "$1" == "persist.sys.phh.oppo.dt2w" ]; then

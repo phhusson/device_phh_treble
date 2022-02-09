@@ -204,3 +204,10 @@ cc_binary {
 		"oplus-alert-slider.rc",
 	],
 }
+
+cc_binary {
+	name: "xiaomi-touch",
+	srcs: [
+		"xiaomi-touch.cpp",
+	],
+}

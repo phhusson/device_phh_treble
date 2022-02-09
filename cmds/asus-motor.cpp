@@ -3,6 +3,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 typedef struct {
     int dir;
@@ -27,4 +28,5 @@ int main(int argc, char **argv) {
 	cfg.speed = 4;
 
 	ioctl(fd, ASUS_MOTOR_DRV_MANUAL_MODE, &cfg);
+	close(fd);
 }

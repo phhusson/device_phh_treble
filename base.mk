@@ -218,4 +218,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += phh-ota
 
+PRODUCT_PACKAGES += \
+    xiaomi-touch
+
 include build/make/target/product/gsi_release.mk
