@@ -195,6 +195,18 @@ if [ "$1" == "persist.sys.phh.backlight.scale" ];then
     exit
 fi
 
+#restart_sysui
+if [ "$1" == "sys.phh.restart_sysui" ]; then
+    if [[ "$prop_value" = "false" && "$prop_value" != "true" ]]; then
+        exit
+    fi
+
+    if [[ "$prop_value" == "true" ]]; then
+        pkill systemui
+    fi
+    exit
+fi
+
 if [ "$1" == "persist.sys.phh.disable_soundvolume_effect" ];then
     if [[ "$prop_value" != "0" && "$prop_value" != "1" ]]; then
         exit 1
