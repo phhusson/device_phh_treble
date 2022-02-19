@@ -948,7 +948,7 @@ fi
 
 resetprop_phh ro.bluetooth.library_name libbluetooth.so
 
-if getprop ro.vendor.build.fingerprint |grep -iq xiaomi/cepheus;then
+if getprop ro.vendor.build.fingerprint |grep -iq xiaomi/cepheus -e xiaomi/nabu;then
     setprop ro.netflix.bsp_rev Q855-16947-1
 fi
 
