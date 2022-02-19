@@ -1043,3 +1043,7 @@ fi
 if getprop ro.vendor.build.fingerprint |grep -iq motorola/kane;then
 	setprop persist.sys.bt.esco_transport_unit_size 16
 fi
+
+if [ -f /vendor/bin/ccci_rpcd ];then
+    setprop debug.phh.props.ccci_rpcd vendor
+fi
