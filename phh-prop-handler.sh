@@ -207,6 +207,18 @@ if [ "$1" == "sys.phh.restart_sysui" ]; then
     exit
 fi
 
+#dump_logs
+if [ "$1" == "sys.phh.dump_logs" ]; then
+    if [[ "$prop_value" = "false" && "$prop_value" != "true" ]]; then
+        exit
+    fi
+
+    if [[ "$prop_value" == "true" ]]; then
+        logcat -b all -d > /sdcard/logs.txt
+    fi
+    exit
+fi
+
 if [ "$1" == "persist.sys.phh.disable_soundvolume_effect" ];then
     if [[ "$prop_value" != "0" && "$prop_value" != "1" ]]; then
         exit 1
