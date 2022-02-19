@@ -695,14 +695,13 @@ fi
 
 setprop ctl.stop console
 dmesg -n 1
+copyprop() {
+    p="$(getprop "$2")"
+    if [ "$p" ]; then
+        resetprop_phh "$1" "$(getprop "$2")"
+    fi
+}
 if [ -f /system/phh/secure ] || [ -f /metadata/phh/secure ];then
-    copyprop() {
-        p="$(getprop "$2")"
-        if [ "$p" ]; then
-            resetprop_phh "$1" "$(getprop "$2")"
-        fi
-    }
-
     copyprop ro.build.device ro.vendor.build.device
     copyprop ro.system.build.fingerprint ro.vendor.build.fingerprint
     copyprop ro.bootimage.build.fingerprint ro.vendor.build.fingerprint
@@ -1046,4 +1045,8 @@ fi
 
 if [ -f /vendor/bin/ccci_rpcd ];then
     setprop debug.phh.props.ccci_rpcd vendor
+fi
+
+if getprop ro.vendor.build.fingerprint | grep -qi -e iaomi/mona; then
+    copyprop ro.product.manufacturer ro.product.vendor.manufacturer
 fi
