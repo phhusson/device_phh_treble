@@ -964,6 +964,8 @@ fi
 
 if getprop ro.vendor.build.fingerprint |grep -iq xiaomi/renoir;then
     setprop ro.netflix.bsp_rev Q875-32774-1
+    resetprop_phh ro.config.media_vol_steps 25
+    resetprop_phh ro.config.media_vol_default 15
 fi
 
 # Set props for Vsmart Live's fod
