@@ -287,6 +287,12 @@ changeKeylayout() {
         changed=true
     fi
 
+    if getprop ro.vendor.build.fingerprint | grep -iq DOOGEE/S88Pro;then
+          cp /system/phh/empty /mnt/phh/keylayout/sf-keys.kl
+          chmod 0644 /mnt/phh/keylayout/sf-keys.kl
+          changed=true
+    fi
+
     if [ "$changed" = true ]; then
         mount -o bind /mnt/phh/keylayout /system/usr/keylayout
         restorecon -R /system/usr/keylayout
