@@ -193,7 +193,7 @@ changeKeylayout() {
         changed=true
     fi
 
-    if getprop ro.vendor.build.fingerprint | grep -iq -E -e '^Sony/G834'; then
+    if getprop ro.vendor.build.fingerprint | grep -iq -E -e '^Sony/'; then
         cp /system/phh/sony-gpio-keys.kl /mnt/phh/keylayout/gpio-keys.kl
         chmod 0644 /mnt/phh/keylayout/gpio-keys.kl
         changed=true
