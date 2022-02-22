@@ -76,3 +76,6 @@ on property:persist.sys.phh.restart_ril=true
 
 on property:vendor.debug.sf.latch_unsignaled=1
     setprop debug.sf.latch_unsignaled 1
+
+on property:sys.phh.uninstall-ota=true
+    exec u:r:phhsu_daemon:s0 root -- /system/bin/rm /metadata/phh/img
