@@ -275,7 +275,7 @@ changeKeylayout() {
         changed=true
     fi
 
-    if getprop ro.product.vendor.device |grep -qi mfh505glm; then
+    if getprop ro.product.vendor.device |grep -qi -e mfh505glm -e fh50lm; then
         cp /system/phh/empty /mnt/phh/keylayout/uinput-fpc.kl
         chmod 0644 /mnt/phh/keylayout/uinput-fpc.kl
         changed=true
