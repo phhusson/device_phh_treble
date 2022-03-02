@@ -1058,3 +1058,14 @@ fi
 if getprop ro.vendor.build.fingerprint | grep -qi -e iaomi/mona; then
     copyprop ro.product.manufacturer ro.product.vendor.manufacturer
 fi
+
+if getprop ro.vendor.build.fingerprint | grep -iq \
+    -e xiaomi/renoir -e oneplus/oneplusnordce -e nubia/nx659j
+    -e lge/cayman -e samsung/a51x -e redmi/atom
+    -e qti/lito ||
+   getprop ro.product.vendor.device | grep -iq \
+    -e mfh505glm -e d1x ||
+   getprop ro.boot.prjname | grep -iq \
+    -e 19101 -e 19335 -e 19501; then
+    setprop persist.sys.phh.enable_5g_network true
+fi

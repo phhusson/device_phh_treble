@@ -210,3 +210,16 @@ if [ "$1" == "persist.sys.phh.disable_soundvolume_effect" ];then
     restartAudio
     exit
 fi
+
+if [ "$1" == "persist.sys.phh.enable_5g_network" ];then
+    if [[ "$prop_value" == "true" ]];then
+        if getprop persist.radio.multisim.config | grep -q dsds ||
+           getprop persist.vendor.mdm.multisim.cfg | grep -q dsds; then
+            resetprop_phh ro.telephony.default_network 33,33
+        else
+            resetprop_phh ro.telephony.default_network 33
+        fi
+        setprop persist.sys.phh.restart_ril true
+    fi
+    exit
+fi
