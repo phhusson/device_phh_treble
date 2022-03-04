@@ -1066,3 +1066,5 @@ if getprop ro.vendor.build.fingerprint | grep -iq -e motorola/liber; then
   chcon -h u:object_r:vendor_configs_file:s0 /vendor/etc/audio_policy_configuration.xml
   chmod 644 /vendor/etc/audio_policy_configuration.xml
 fi
+
+mount /system/phh/empty /vendor/etc/permissions/samsung.hardware.uwb.xml
