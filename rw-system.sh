@@ -1061,7 +1061,7 @@ fi
 
 if getprop ro.vendor.build.fingerprint | grep -iq -e motorola/liber; then
   cp /vendor/etc/audio_policy_configuration.xml /mnt/phh/
-  sed -i '198i <xi:include href="/vendor/etc/a2dp_audio_policy_configuration.xml"/>' /mnt/phh/audio_policy_configuration.xml
+  sed -i '/r_submix_audio_policy_configuration/a \t<xi:include href="/vendor/etc/a2dp_audio_policy_configuration.xml"/>' /mnt/phh/audio_policy_configuration.xml
   mount -o bind /mnt/phh/audio_policy_configuration.xml /vendor/etc/audio_policy_configuration.xml
   chcon -h u:object_r:vendor_configs_file:s0 /vendor/etc/audio_policy_configuration.xml
   chmod 644 /vendor/etc/audio_policy_configuration.xml
