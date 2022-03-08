@@ -37,6 +37,7 @@ include $(BUILD_PREBUILT)
 include $(CLEAR_VARS)
 LOCAL_MODULE := phh-gapps-overrides
 PACKAGES.$(LOCAL_MODULE).OVERRIDES := \
+	SearchLauncherQuickStep \
 	Drive \
 	YTMusic \
 	Videos \
