@@ -28,5 +28,3 @@
 key 143    WAKEUP
 key 172    WAKEUP
 
-# This is the event sent when FOD is pressed during AOD
-key 455 WAKEUP
