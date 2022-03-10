@@ -346,7 +346,7 @@ if grep vendor.huawei.hardware.biometrics.fingerprint /vendor/manifest.xml; then
 fi
 
 foundFingerprint=false
-for manifest in /vendor/manifest.xml /vendor/etc/vintf/manifest.xml /odm/etc/vintf/manifest.xml;do
+for manifest in /vendor/manifest.xml /vendor/etc/vintf/manifest.xml /odm/etc/vintf/manifest.xml /odm/etc/vintf/manifest/manifest_oplus_fingerprint.xml;do
     if grep -q \
             -e android.hardware.biometrics.fingerprint \
             -e vendor.oppo.hardware.biometrics.fingerprint \
