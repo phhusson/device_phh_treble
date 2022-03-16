@@ -203,6 +203,9 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 	persist.sys.fflag.override.settings_provider_model=false \
 	ro.setupwizard.mode=OPTIONAL \
 
+PRODUCT_PRODUCT_PROPERTIES += \
+	ro.setupwizard.mode=OPTIONAL \
+
 # AOSP overlays
 PRODUCT_PACKAGES += \
     NavigationBarMode2ButtonOverlay
