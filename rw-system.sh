@@ -1069,3 +1069,4 @@ if getprop ro.vendor.build.fingerprint | grep -iq -e motorola/liber; then
 fi
 
 mount /system/phh/empty /vendor/etc/permissions/samsung.hardware.uwb.xml
+mount /system/phh/empty /vendor/bin/install-recovery.sh
