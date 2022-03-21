@@ -346,15 +346,14 @@ if grep vendor.huawei.hardware.biometrics.fingerprint /vendor/manifest.xml; then
 fi
 
 foundFingerprint=false
-for manifest in /vendor/manifest.xml /vendor/etc/vintf/manifest.xml /odm/etc/vintf/manifest.xml /odm/etc/vintf/manifest/manifest_oplus_fingerprint.xml;do
-    if grep -q \
-            -e android.hardware.biometrics.fingerprint \
-            -e vendor.oppo.hardware.biometrics.fingerprint \
-            -e vendor.oplus.hardware.biometrics.fingerprint \
-            $manifest;
-        then
-        foundFingerprint=true
-    fi
+for manifest in /vendor/manifest.xml /vendor/etc/vintf /odm/etc/vintf;do
+	if grep -q \
+		-e android.hardware.biometrics.fingerprint \
+		-e vendor.oppo.hardware.biometrics.fingerprint \
+		-e vendor.oplus.hardware.biometrics.fingerprint \
+		-r $manifest;then
+			foundFingerprint=true
+	fi
 done
 
 if [ "$foundFingerprint" = false ];then
