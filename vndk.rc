@@ -79,3 +79,7 @@ on property:vendor.debug.sf.latch_unsignaled=1
 
 on property:sys.phh.uninstall-ota=true
     exec u:r:phhsu_daemon:s0 root -- /system/bin/rm /metadata/phh/img
+
+on property:ro.vendor.radio.default_network=*
+    setprop ro.telephony.default_network ${ro.vendor.radio.default_network}
+
