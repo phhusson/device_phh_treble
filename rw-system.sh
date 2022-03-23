@@ -1069,3 +1069,7 @@ fi
 
 mount /system/phh/empty /vendor/etc/permissions/samsung.hardware.uwb.xml
 mount /system/phh/empty /vendor/bin/install-recovery.sh
+
+if getprop ro.vendor.radio.default_network |grep -qE '[0-9]';then
+  setprop ro.telephony.default_network $(getprop ro.vendor.radio.default_network)
+fi
