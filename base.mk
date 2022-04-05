@@ -225,4 +225,8 @@ PRODUCT_PACKAGES += phh-ota
 PRODUCT_PACKAGES += \
     xiaomi-touch
 
+PRODUCT_COPY_FILES += \
+	frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration_7_0.xml:system/etc/a2dp_audio_policy_configuration_7_0.xml \
+	frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:system/etc/a2dp_audio_policy_configuration.xml \
+
 include build/make/target/product/gsi_release.mk
