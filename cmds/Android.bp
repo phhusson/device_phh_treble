@@ -189,6 +189,7 @@ cc_binary {
 		"sec-camera-list.cpp",
 	],
 	shared_libs: [
+		"vendor.samsung.hardware.camera.provider@4.0",
 		"vendor.samsung.hardware.camera.provider@3.0",
 		"libutils",
 		"libhidlbase",
@@ -209,5 +210,34 @@ cc_binary {
 	name: "xiaomi-touch",
 	srcs: [
 		"xiaomi-touch.cpp",
+	],
+}
+
+cc_binary {
+	name: "sec-ril",
+	srcs: [
+		"sec-ril.cpp",
+	],
+	shared_libs: [
+		"android.hardware.radio@1.6",
+		"vendor.samsung.hardware.radio@2.0",
+		"vendor.samsung.hardware.radio@2.1",
+		"vendor.samsung.hardware.radio@2.2",
+		"libutils",
+		"libhidlbase",
+	],
+}
+
+cc_binary {
+	name: "sec-torch",
+	srcs: [
+		"sec-torch.cpp",
+	],
+	shared_libs: [
+		"vendor.samsung.hardware.camera.provider@4.0",
+		"vendor.samsung.hardware.camera.provider@3.0",
+		"vendor.samsung.hardware.camera.device@5.0",
+		"libutils",
+		"libhidlbase",
 	],
 }

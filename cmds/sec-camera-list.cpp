@@ -1,7 +1,7 @@
 #include <iostream>
-#include <vendor/samsung/hardware/camera/provider/3.0/ISehCameraProvider.h>
+#include <vendor/samsung/hardware/camera/provider/4.0/ISehCameraProvider.h>
 
-using ::vendor::samsung::hardware::camera::provider::V3_0::ISehCameraProvider;
+using ::vendor::samsung::hardware::camera::provider::V4_0::ISehCameraProvider;
 using ::android::sp;
 
 int main(int argc, char **argv) {
