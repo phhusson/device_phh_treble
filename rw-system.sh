@@ -282,6 +282,9 @@ changeKeylayout() {
     fi
 
     if getprop ro.vendor.build.fingerprint | grep -iq -e motorola/liber; then
+        cp /system/phh/moto-liber-gpio-keys.kl /mnt/phh/keylayout/gpio-keys.kl
+        chmod 0644 /mnt/phh/keylayout/gpio-keys.kl
+
         cp /system/phh/empty /mnt/phh/keylayout/uinput_nav.kl
         chmod 0644 /mnt/phh/keylayout/uinput_nav.kl
         changed=true
