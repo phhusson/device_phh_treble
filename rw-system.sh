@@ -1016,11 +1016,6 @@ if [ "$vndk" -le 30 ];then
 	setprop ro.surface_flinger.use_color_management false
 fi
 
-# Disable ODM display overlay for some OPlus devices, which is annoyingly hard to override
-if getprop ro.boot.prjname |grep -qi -e 20846 -e 20847 -e 2084A -e 21615;then
-    mount -o bind /system/phh/empty /odm/overlay/android_framework_res_overlay.display.product.*.apk
-fi
-
 if [ "$(stat -c '%U'  /dev/nxp_smartpa_dev)" == "root" ] &&
 	[ "$(stat -c '%G' /dev/nxp_smartpa_dev)" == "root" ];then
     chown root:audio /dev/nxp_smartpa_dev
