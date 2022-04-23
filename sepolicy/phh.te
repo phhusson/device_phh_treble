@@ -12,6 +12,6 @@ allow phhsu_daemon loop_device:blk_file ioctl;
 allowxperm phhsu_daemon loop_device:blk_file ioctl { 0x4c00 };
 
 allow phhsu_daemon userdata_block_device:blk_file ioctl;
-allowxperm phhsu_daemon userdata_block_device:blk_file ioctl { 0x1278 };
+allowxperm phhsu_daemon userdata_block_device:blk_file ioctl { 0x1278 0x127a };
 
 allow kernel gsi_data_file:file rw_file_perms;
