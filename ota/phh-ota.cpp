@@ -67,7 +67,10 @@ int main(int argc, char **argv) {
 		printf("%s\n", blockDev.c_str());
 
 		struct stat sb;
-		stat(blockDev.c_str(), &sb);
+		for(int i=0; i<10; i++) {
+			if(!stat(blockDev.c_str(), &sb)) break;
+			sleep(1);
+		}
 
 		if(!S_ISBLK(sb.st_mode)) {
 			fprintf(stderr, "blockDev wasn't block dev\n");
