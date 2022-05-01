@@ -1010,6 +1010,10 @@ fi
 # Disable secondary watchdogs
 echo -n V > /dev/watchdog1
 
+if getprop ro.vendor.build.fingerprint | grep -iq samsung/a11que;then
+	echo -n V > /dev/watchdog0
+fi
+	
 if [ "$vndk" -le 30 ];then
 	# On older vendor the default behavior was to disable color management
 	# Don't override vendor value, merely add a fallback
