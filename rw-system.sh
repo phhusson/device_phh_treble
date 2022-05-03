@@ -573,6 +573,12 @@ if getprop ro.vendor.build.fingerprint | grep -iq -e Redmi/merlin; then
     setprop debug.sf.enable_hwc_vds 0
 fi
 
+if getprop ro.vendor.build.fingerprint | grep -iq -e Redmi/rosemary \
+    -e Redmi/secret -e Redmi/maltose; then
+    setprop debug.sf.latch_unsignaled 1
+    setprop debug.sf.enable_hwc_vds 0
+fi
+
 if getprop ro.vendor.build.fingerprint | grep -iq -E -e 'huawei|honor' || getprop persist.sys.overlay.huawei | grep -iq -E -e 'true'; then
     p=/product/etc/nfc/libnfc_nxp_*_*.conf
     mount -o bind "$p" /system/etc/libnfc-nxp.conf ||
