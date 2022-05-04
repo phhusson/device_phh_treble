@@ -241,3 +241,16 @@ cc_binary {
 		"libhidlbase",
 	],
 }
+
+cc_binary {
+	name: "lightsctl-aidl",
+	srcs: [
+		"lightsctl-aidl.cpp",
+	],
+	shared_libs: [
+		"android.hardware.light-V1-cpp",
+		"libutils",
+		"libhidlbase",
+		"libbinder",
+	],
+}
