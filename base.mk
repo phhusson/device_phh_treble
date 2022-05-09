@@ -142,6 +142,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     lightsctl \
+    lightsctl-aidl \
     uevent
 
 PRODUCT_COPY_FILES += \
