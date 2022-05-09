@@ -4,4 +4,9 @@
 	<string name="config_defaultAccessibilityService">com.google.android.marvin.talkback/.TalkBackService</string>
 	<string name="config_persistentDataPackageName">com.google.android.gms</string>
 	<string name="config_defaultNetworkRecommendationProviderPackage">com.google.android.gms</string>
+	<string-array name="config_packagesExemptFromSuspension" translatable="false">
+		<item>com.google.android.apps.wellbeing</item>
+		<item>me.phh.treble.app</item>
+	</string-array>
+
 </resources>

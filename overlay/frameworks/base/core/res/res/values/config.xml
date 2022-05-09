@@ -52,4 +52,9 @@
     </array>
 
     <bool name="config_supportAudioSourceUnprocessed">true</bool>
+
+    <string-array name="config_packagesExemptFromSuspension" translatable="false">
+	    <item>me.phh.treble.app</item>
+    </string-array>
+
 </resources>
