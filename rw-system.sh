@@ -1081,3 +1081,7 @@ mount /system/phh/empty /vendor/bin/install-recovery.sh
 if getprop ro.vendor.radio.default_network |grep -qE '[0-9]';then
   setprop ro.telephony.default_network $(getprop ro.vendor.radio.default_network)
 fi
+
+if getprop ro.vendor.build.fingerprint |grep -iq redmi/camellia;then
+	setprop persist.sys.qcom-brightness 4095
+fi
