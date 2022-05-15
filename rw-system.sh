@@ -1016,6 +1016,11 @@ fi
 # Disable secondary watchdogs
 echo -n V > /dev/watchdog1
 
+# Fix watchdog issue on Samsung Galaxy A20s
+if getprop ro.vendor.build.fingerprint | grep -iq samsung/a20sub/a20s; then
+    echo -n V > /dev/watchdog0
+fi
+
 if getprop ro.vendor.build.fingerprint | grep -iq samsung/a11que;then
 	echo -n V > /dev/watchdog0
 fi
