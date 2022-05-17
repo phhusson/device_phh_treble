@@ -952,3 +952,6 @@ fi
 
 # Disable secondary watchdogs
 echo -n V > /dev/watchdog1
+
+mount -o bind /mnt/phh/empty_dir /vendor/app/qti-logkit
+mount -o bind /mnt/phh/empty_dir /vendor/app/qti-logkit-lite
