@@ -1090,3 +1090,6 @@ fi
 if getprop ro.vendor.build.fingerprint |grep -iq redmi/camellia;then
 	setprop persist.sys.qcom-brightness 4095
 fi
+
+mount -o bind /mnt/phh/empty_dir /vendor/app/qti-logkit
+mount -o bind /mnt/phh/empty_dir /vendor/app/qti-logkit-lite
