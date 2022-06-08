@@ -14,6 +14,9 @@ PRODUCT_COPY_FILES := $(call FILTER_OUT,google_go.xml:, $(PRODUCT_COPY_FILES))
 PRODUCT_PACKAGES := $(filter-out CalendarGoogle, $(PRODUCT_PACKAGES))
 PRODUCT_PACKAGES := $(filter-out GoogleContacts, $(PRODUCT_PACKAGES))
 
+#Launcher3Go has no recents support...?
+PRODUCT_PACKAGES := $(filter-out Launcher3Go, $(PRODUCT_PACKAGES))
+
 PRODUCT_SHIPPING_API_LEVEL :=
 
 PRODUCT_PACKAGES += \
