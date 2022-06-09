@@ -11,3 +11,6 @@ persist.sys.phh.mainkeys=0
 fw.max_users=10
 persist.sys.max_profiles=10
 ro.boot.realme.lockstate=0
+
+#Fixes fingerprint unlock delay
+persist.wm.enable_remote_keyguard_animation=0
