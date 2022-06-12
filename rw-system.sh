@@ -971,6 +971,10 @@ if getprop ro.vendor.build.fingerprint |grep -iq xiaomi/cepheus -e xiaomi/nabu;t
     setprop ro.netflix.bsp_rev Q855-16947-1
 fi
 
+if getprop ro.vendor.build.fingerprint |grep -iq xiaomi/elish;then
+    setprop ro.netflix.bsp_rev Q8250-19134-1
+fi
+
 if getprop ro.vendor.build.fingerprint |grep -qi redmi/curtana;then
     setprop ro.netflix.bsp_rev Q6250-19132-1
 fi
