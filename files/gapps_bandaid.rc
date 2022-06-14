@@ -1,0 +1,19 @@
+on zygote-start
+    start gapps_bandaid_mask_sw
+
+on property:sys.boot_completed=1
+    start gapps_bandaid_set_sw_completed
+
+service gapps_bandaid_mask_sw /system/bin/gapps_bandaid mask_sw
+    disabled
+    oneshot  
+    user root 
+    group root
+    seclabel u:r:su:s0
+
+service gapps_bandaid_set_sw_completed /system/bin/gapps_bandaid set_sw_completed
+    disabled
+    oneshot  
+    user root 
+    group root
+    seclabel u:r:su:s0

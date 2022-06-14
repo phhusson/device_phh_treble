@@ -50,3 +50,8 @@ PRODUCT_PACKAGES += \
 	   com.simplemobiletools.gallery.pro \
 
 endif
+
+# Disable SetupWizard, until working SetupWizard that does not break fingerprint enrollment introduction is found
+PRODUCT_COPY_FILES += \
+	device/phh/treble/files/gapps_bandaid.rc:system/etc/init/gapps_bandaid.rc \
+	device/phh/treble/files/gapps_bandaid:system/bin/gapps_bandaid

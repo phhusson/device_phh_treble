@@ -1,0 +1,19 @@
+#!/system/bin/sh
+
+# hide setup wizard from system
+if [ "$1" == "mask_sw" ] && [ "$(getprop persist.sys.phh.mask_sw)" != "0" ]
+then
+	mount -t tmpfs -o ro none /system/system_ext/priv-app/SetupWizard/
+fi
+
+# set setup wizard to completed
+if [ "$1" == "set_sw_completed" ] && [ "$(getprop persist.sys.phh.set_sw_compelted)" != "0" ]
+then
+	settings put global setup_wizard_has_run 1
+	settings put secure user_setup_complete 1
+	settings put global device_provisioned 1
+	setprop persist.sys.phh.set_sw_compelted 0
+fi
+
+
+
