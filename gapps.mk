@@ -7,6 +7,9 @@ PRODUCT_SHIPPING_API_LEVEL :=
 PRODUCT_PACKAGES := $(filter-out CalendarGoogle, $(PRODUCT_PACKAGES))
 PRODUCT_PACKAGES := $(filter-out GoogleContacts, $(PRODUCT_PACKAGES))
 
+# disable setup wizard to avoid fingerprint enrollment issues
+PRODUCT_PACKAGES := $(filter-out SetupWizard, $(PRODUCT_PACKAGES))
+
 PRODUCT_PACKAGES += \
 	phh-gapps-overrides \
 	Chrome \
