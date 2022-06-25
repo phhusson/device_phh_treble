@@ -102,6 +102,7 @@ PRODUCT_PACKAGES += \
 	vendor.huawei.hardware.tp-V1.0-java \
 	vendor.qti.hardware.radio.am-V1.0-java \
 	vendor.qti.qcril.am-V1.0-java \
+	vendor.xiaomi.hardware.displayfeature-V1.0-java
 
 PRODUCT_COPY_FILES += \
 	device/phh/treble/interfaces.xml:system/etc/permissions/interfaces.xml
