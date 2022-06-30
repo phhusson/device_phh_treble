@@ -91,6 +91,9 @@ PRODUCT_BRAND := google
 PRODUCT_SYSTEM_BRAND := google
 PRODUCT_MODEL := Phh-Treble $apps_name
 
+# Overwrite the inherited "emulator" characteristics
+PRODUCT_CHARACTERISTICS := device
+
 PRODUCT_PACKAGES += $extra_packages
 
 EOF
