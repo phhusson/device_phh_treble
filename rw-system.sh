@@ -274,6 +274,11 @@ if [ "$(getprop ro.product.vendor.manufacturer)" = motorola ] && getprop ro.vend
     setprop persist.sys.overlay.devinputjack true
 fi
 
+#experimental
+blockdev --setrw /dev/block/mapper/system
+blockdev --setrw /dev/block/by-name/system_a
+blockdev --setrw /dev/block/by-name/system_b
+
 if mount -o remount,rw /system; then
     resize2fs "$(grep ' /system ' /proc/mounts | cut -d ' ' -f 1)" || true
 else
