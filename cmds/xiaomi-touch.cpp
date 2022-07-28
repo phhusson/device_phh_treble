@@ -28,7 +28,6 @@
 #define Touch_Mode_NUM 20
 
 #define TOUCH_DEV_PATH "/dev/xiaomi-touch"
-#define TOUCH_ID 0
 #define TOUCH_MAGIC 0x5400
 #define TOUCH_IOC_SETMODE TOUCH_MAGIC + SET_CUR_VALUE
 
@@ -42,7 +41,7 @@ int main(int argc, char **argv) {
     if (mode < 0 || mode > 20) return -1;
     if (enabled != 0 && enabled != 1) return -1;
     int fd = open(TOUCH_DEV_PATH, O_RDWR);
-    int arg[3] = {TOUCH_ID, mode, enabled};
+    int arg[2] = { mode, enabled};
     ioctl(fd, TOUCH_IOC_SETMODE, &arg);
     close(fd);
 }
