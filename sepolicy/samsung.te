@@ -2,3 +2,8 @@ type boot_prop, property_type;
 
 set_prop(system_server, boot_prop);
 
+type hal_graphics_composer_default, domain;
+
+type sf_hs_mode_prop, property_type;
+
+get_prop(hal_graphics_composer_default, sf_hs_mode_prop);
