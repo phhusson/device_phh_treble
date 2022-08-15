@@ -848,6 +848,14 @@ if getprop ro.build.overlay.deviceid |grep -qE '^RMX';then
     fi
 fi
 
+# audio/call only firing fix For realme 7 pro 
+if getprop ro.vendor.build.fingerprint | grep -iq -e realme/RMX2170;then 
+   setprop ro.qc.sdk.audio.fluencetype none
+   setprop persist.audio.fluence.voicecall true
+   setprop persist.audio.fluence.voicerec false
+   setprop persist.audio.fluence.speaker true
+fi
+
 if [ "$vndk" -le 28 ] && getprop ro.hardware |grep -q -e mt6761 -e mt6763 -e mt6765 -e mt6785 -e mt8768 -e mt6779 -e mt6771 -e mt8766;then
     setprop debug.stagefright.ccodec 0
 fi
