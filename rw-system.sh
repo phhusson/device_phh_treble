@@ -987,6 +987,13 @@ if getprop ro.vendor.build.fingerprint |grep -qi redmi/curtana;then
     setprop ro.netflix.bsp_rev Q6250-19132-1
 fi
 
+if getprop ro.vendor.build.fingerprint |grep -qi Nokia/Phoenix;then
+    setprop ro.netflix.bsp_rev Q845-05000-1
+    setprop debug.sf.latch_unsignaled 1
+    setprop sys.use_fifo_ui 1
+    setprop media.settings.xml "/vendor/etc/media_profiles_vendor.xml"
+fi
+
 if getprop ro.vendor.build.fingerprint |grep -iq xiaomi/renoir;then
     setprop ro.netflix.bsp_rev Q875-32774-1
     resetprop_phh ro.config.media_vol_steps 25
