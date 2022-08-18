@@ -975,16 +975,32 @@ fi
 
 resetprop_phh ro.bluetooth.library_name libbluetooth.so
 
-if getprop ro.vendor.build.fingerprint |grep -iq xiaomi/cepheus -e xiaomi/nabu;then
-    setprop ro.netflix.bsp_rev Q855-16947-1
+board="$(getprop ro.board.platform)"
+
+if [ "$board" = atoll ] || [ "$board" = sm6250 ]; then
+	setprop ro.netflix.bsp_rev Q6250-19132-1
 fi
 
-if getprop ro.vendor.build.fingerprint |grep -iq xiaomi/elish;then
-    setprop ro.netflix.bsp_rev Q8250-19134-1
+if [ "$board" = msmnile ]; then
+	setprop ro.netflix.bsp_rev Q855-16947-1
 fi
 
-if getprop ro.vendor.build.fingerprint |grep -qi redmi/curtana;then
-    setprop ro.netflix.bsp_rev Q6250-19132-1
+if [ "$board" = sm6150 ]; then
+	setprop ro.netflix.bsp_rev Q6150-17263-1
+fi
+
+if [ "$board" = mt6768 ]; then
+	setprop ro.netflix.bsp_rev MTK6768-19055-1
+fi
+
+if [ "$board" = lahaina ]; then
+	setprop ro.netflix.bsp_rev Q875-32774-1
+	resetprop_phh ro.config.media_vol_steps 25
+	resetprop_phh ro.config.media_vol_default 15
+fi
+
+if [ "$board" = universal8825 ];then
+	setprop ro.netflix.bsp_rev EXYNOS1280-34993-1
 fi
 
 if getprop ro.vendor.build.fingerprint |grep -qi Nokia/Phoenix;then
@@ -992,12 +1008,6 @@ if getprop ro.vendor.build.fingerprint |grep -qi Nokia/Phoenix;then
     setprop debug.sf.latch_unsignaled 1
     setprop sys.use_fifo_ui 1
     setprop media.settings.xml "/vendor/etc/media_profiles_vendor.xml"
-fi
-
-if getprop ro.vendor.build.fingerprint |grep -iq xiaomi/renoir;then
-    setprop ro.netflix.bsp_rev Q875-32774-1
-    resetprop_phh ro.config.media_vol_steps 25
-    resetprop_phh ro.config.media_vol_default 15
 fi
 
 # Set props for Vsmart Live's fod
