@@ -21,3 +21,4 @@
 /efs u:object_r:efs_file:s0
 
 /dev/smcinvoke u:object_r:smcinvoke_device:s0
+/system/bin/hw/android\.hardware\.bluetooth\.audio-service-system u:object_r:hal_audio_sysbta_exec:s0

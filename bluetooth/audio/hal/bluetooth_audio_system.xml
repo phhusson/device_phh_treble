@@ -1,0 +1,12 @@
+<manifest version="1.0" type="framework">
+    <hal format="aidl">
+        <name>android.hardware.bluetooth.audio</name>
+        <version>2</version>
+        <fqname>IBluetoothAudioProviderFactory/sysbta</fqname>
+    </hal>
+    <hal>
+        <name>android.hardware.audio</name>
+        <transport>hwbinder</transport>
+        <fqname>@6.0::IDevicesFactory/sysbta</fqname>
+    </hal>
+</manifest>
