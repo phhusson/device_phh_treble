@@ -41,11 +41,9 @@ int main(int argc, char **argv) {
 	}
 	if(argc>=2 && strcmp(argv[1], "new-slot") == 0) {
 		std::string current_slot;
-		std::string next_slot;
-		if(!android::base::ReadFileToString("/metadata/phh/img", &current_slot)) {
-			next_slot = "a";
-		} else {
-			if(current_slot.c_str()[0] == 'a')
+		std::string next_slot = "a";
+		if(android::base::ReadFileToString("/metadata/phh/img", &current_slot) &&
+			current_slot.c_str()[0] == 'a') {
 				next_slot = "b";
 		}
 
