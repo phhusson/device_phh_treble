@@ -23,23 +23,13 @@
 #include <android/binder_process.h>
 #include <utils/Log.h>
 #include <hidl/HidlTransportSupport.h>
-//#include <hidl/LegacySupport.h>
 #include <hwbinder/ProcessState.h>
 #include <binder/ProcessState.h>
 
-//#include PATH(android/hardware/audio/FILE_VERSION/IDevicesFactory.h)
-
-//#include <hardware/audio.h>
-
 #include "BluetoothAudioProviderFactory.h"
-//#include "DevicesFactory.h"
 
-//using namespace android::hardware;
 using ::aidl::android::hardware::bluetooth::audio::
     BluetoothAudioProviderFactory;
-
-//using ::android::hardware::audio::CPP_VERSION::implementation::DevicesFactory;
-//using namespace ::android::hardware::audio::CPP_VERSION;
 
 #if defined(__LP64__)
 #define HAL_LIBRARY_PATH "/system/lib64/hw"
@@ -49,7 +39,12 @@ using ::aidl::android::hardware::bluetooth::audio::
 
 void registerAudioInterfaces() {
   const char *interface_libs[] = {
+    "android.hardware.audio@2.0-impl-system.so",
+    "android.hardware.audio@4.0-impl-system.so",
+    "android.hardware.audio@5.0-impl-system.so",
     "android.hardware.audio@6.0-impl-system.so",
+    "android.hardware.audio@7.0-impl-system.so",
+    "android.hardware.audio@7.1-impl-system.so",
   };
 
   for (auto& lib : interface_libs) {
@@ -88,10 +83,6 @@ int main() {
       factory->asBinder().get(), instance_name.c_str());
   ALOGW_IF(aidl_status != STATUS_OK, "Could not register %s, status=%d",
            instance_name.c_str(), aidl_status);
-
-  //::android::sp<IDevicesFactory> audio_factory = new DevicesFactory();
-  //::android::status_t hidl_status = audio_factory->registerAsService("sysbta");
-  //ALOGW_IF(hidl_status != STATUS_OK, "Could not register sysbta, status=%d", hidl_status);
 
   // We must also implement audio HAL interfaces in order to serve audio.sysbta.default.so
   // It must be served in the *same* process to access the same libbluetooth_audio_session

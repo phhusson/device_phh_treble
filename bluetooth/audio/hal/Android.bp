@@ -30,6 +30,11 @@ cc_binary {
     ],
     required: [
         // Audio HAL impls
+        "android.hardware.audio@2.0-impl-system",
+        "android.hardware.audio@4.0-impl-system",
+        "android.hardware.audio@5.0-impl-system",
         "android.hardware.audio@6.0-impl-system",
+        "android.hardware.audio@7.0-impl-system",
+        "android.hardware.audio@7.1-impl-system",
     ],
 }
