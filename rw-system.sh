@@ -392,9 +392,9 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
     setprop persist.sys.qcom-brightness -1
 fi
 
-# Lenovo Z5s brightness flickers without this setting
+# Lenovo Z5s & Xiaomi Mi10TLite brightness flickers without this setting
 if getprop ro.vendor.build.fingerprint | grep -iq \
-    -e Lenovo/jd2019; then
+    -e Lenovo/jd2019 -e Xiaomi/gauguin -e Redmi/gauguinpro; then
     setprop persist.sys.qcom-brightness -1
 fi
 
