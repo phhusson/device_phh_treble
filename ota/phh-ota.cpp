@@ -16,7 +16,7 @@ using android::fiemap::IImageManager;
 
 
 std::string getNextSlot() {
-	std::string current_slot;
+    std::string current_slot;
     std::string next_slot = "a";
     if(android::base::ReadFileToString("/metadata/phh/img", &current_slot) &&
         current_slot.c_str()[0] == 'a') {
