@@ -392,9 +392,9 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
     setprop persist.sys.qcom-brightness -1
 fi
 
-# Lenovo Z5s brightness flickers without this setting
+# Lenovo Z5s & Xiaomi Mi10TLite brightness flickers without this setting
 if getprop ro.vendor.build.fingerprint | grep -iq \
-    -e Lenovo/jd2019; then
+    -e Lenovo/jd2019 -e Xiaomi/gauguin -e Redmi/gauguin; then
     setprop persist.sys.qcom-brightness -1
 fi
 
@@ -457,7 +457,7 @@ if getprop ro.vendor.build.fingerprint | grep -iq \
     -e motorola/hannah -e motorola/james -e motorola/pettyl -e xiaomi/cepheus \
     -e xiaomi/grus -e xiaomi/cereus -e xiaomi/cactus -e xiaomi/raphael -e xiaomi/davinci \
     -e xiaomi/ginkgo -e xiaomi/willow -e xiaomi/laurel_sprout -e xiaomi/andromeda \
-    -e redmi/curtana -e redmi/picasso \
+    -e xiaomi/gauguin -e redmi/gauguin -e redmi/curtana -e redmi/picasso \
     -e bq/Aquaris_M10 ; then
     mount -o bind /mnt/phh/empty_dir /vendor/lib64/soundfx
     mount -o bind /mnt/phh/empty_dir /vendor/lib/soundfx
