@@ -581,6 +581,10 @@ if getprop ro.vendor.build.fingerprint | grep -iq -e Redmi/merlin; then
     setprop debug.sf.enable_hwc_vds 0
 fi
 
+if getprop ro.vendor.build.fingerprint | grep -iq -e Redmi/lancelot; then
+    setprop debug.sf.enable_hwc_vds 1
+fi
+
 if getprop ro.vendor.build.fingerprint | grep -iq -e Redmi/rosemary \
     -e Redmi/secret -e Redmi/maltose; then
     setprop debug.sf.latch_unsignaled 1
