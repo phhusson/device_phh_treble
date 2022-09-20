@@ -181,6 +181,12 @@ changeKeylayout() {
         changed=true
     fi
 
+    if getprop ro.vendor.build.fingerprint | grep -iq -e xiaomi/gauguin -e redmi/gauguin; then
+        cp /system/phh/daisy-buttonJack.kl ${mpk}/lito-lagoonqrd-snd-card_Button_Jack.kl
+        chmod 0644 ${mpk}/lito-lagoonqrd-snd-card_Button_Jack.kl
+        changed=true
+    fi
+
     if getprop ro.vendor.build.fingerprint | grep -qi oneplus/oneplus6/oneplus6; then
         cp /system/phh/oneplus6-synaptics_s3320.kl /mnt/phh/keylayout/synaptics_s3320.kl
         chmod 0644 /mnt/phh/keylayout/synaptics_s3320.kl
