@@ -3,7 +3,6 @@ on post-fs
 	exec - root -- /system/bin/rw-system.sh
 	mount none /system/etc/usb_audio_policy_configuration.xml /vendor/etc/usb_audio_policy_configuration.xml bind
         setprop ro.vndk.version ${persist.sys.vndk}
-	export LD_PRELOAD :
 
 on property:vold.decrypt=trigger_restart_framework
 	exec - root -- /system/bin/phh-on-data.sh
