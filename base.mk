@@ -144,6 +144,7 @@ PRODUCT_COPY_FILES += \
 	device/phh/treble/files/bv9500plus-mtk-kpd.kl:system/phh/bv9500plus-mtk-kpd.kl \
 	device/phh/treble/files/moto-liber-gpio-keys.kl:system/phh/moto-liber-gpio-keys.kl \
 	device/phh/treble/files/tecno-touchpanel.kl:system/phh/tecno-touchpanel.kl \
+	device/phh/treble/files/rosemary-excluded-input-devices.xml:system/phh/rosemary-excluded-input-devices.xml
 
 SELINUX_IGNORE_NEVERALLOWS := true
 

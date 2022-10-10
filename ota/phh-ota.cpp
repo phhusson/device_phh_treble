@@ -14,6 +14,17 @@ using namespace std::chrono_literals;
 using namespace std::string_literals;
 using android::fiemap::IImageManager;
 
+
+std::string getNextSlot() {
+    std::string current_slot;
+    std::string next_slot = "a";
+    if(android::base::ReadFileToString("/metadata/phh/img", &current_slot) &&
+        current_slot.c_str()[0] == 'a') {
+            next_slot = "b";
+    }
+    return next_slot;
+}
+
 int main(int argc, char **argv) {
 	mkdir("/metadata/gsi/phh", 0771);
 	chown("/metadata/gsi/phh", 0, 1000);
@@ -27,27 +38,13 @@ int main(int argc, char **argv) {
 		return 0;
 	}
 	if(argc>=2 && strcmp(argv[1], "switch-slot") == 0) {
-		std::string current_slot;
-		std::string next_slot;
-		if(!android::base::ReadFileToString("/metadata/phh/img", &current_slot)) {
-			next_slot = "a";
-		} else {
-			if(current_slot.c_str()[0] == 'a')
-				next_slot = "b";
-		}
+		std::string next_slot = getNextSlot();
 		mkdir("/metadata/phh", 0700);
 		android::base::WriteStringToFile(next_slot, "/metadata/phh/img");
 		return 0;
 	}
 	if(argc>=2 && strcmp(argv[1], "new-slot") == 0) {
-		std::string current_slot;
-		std::string next_slot;
-		if(!android::base::ReadFileToString("/metadata/phh/img", &current_slot)) {
-			next_slot = "a";
-		} else {
-			if(current_slot.c_str()[0] == 'a')
-				next_slot = "b";
-		}
+		std::string next_slot = getNextSlot();
 
 		std::string imageName = "system_otaphh_"s + next_slot;
 
