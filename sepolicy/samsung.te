@@ -14,3 +14,6 @@ get_prop(hal_graphics_composer_default, vendor_hwc_prop);
 
 type sysfs_vnswap, file_type;
 allow init sysfs_vnswap:{file lnk_file } r_file_perms;
+
+allow kernel { mac_perms_file hwservice_contexts_file property_contexts_file service_contexts_file seapp_contexts_file file_contexts_file }:file relabelto;
+allow kernel tmpfs:file relabelfrom;
