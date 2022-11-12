@@ -30,3 +30,8 @@ allowxperm vendor_init { teecd_data_file }:dir ioctl {
   FS_IOC_GET_ENCRYPTION_POLICY
   FS_IOC_SET_ENCRYPTION_POLICY
 };
+
+# Fixes boot issue in EMUI 9 P20 lite
+type sys_block_mmcblk0, file_type;
+allow init sys_block_mmcblk0:lnk_file read;
+allow init sysfs_zram:lnk_file read;
