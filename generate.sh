@@ -86,10 +86,10 @@ $apps_script
 $rom_script
 
 PRODUCT_NAME := $target
-PRODUCT_DEVICE := phhgsi_${arch}_$part
+PRODUCT_DEVICE := tdgsi_${arch}_$part
 PRODUCT_BRAND := google
 PRODUCT_SYSTEM_BRAND := google
-PRODUCT_MODEL := Phh-Treble $apps_name
+PRODUCT_MODEL := TrebleDroid $apps_name
 
 # Overwrite the inherited "emulator" characteristics
 PRODUCT_CHARACTERISTICS := device
