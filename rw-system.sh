@@ -423,9 +423,15 @@ if getprop ro.vendor.build.fingerprint | grep -q -i \
     -e xiaomi/clover -e xiaomi/wayne -e xiaomi/sakura \
     -e xiaomi/nitrogen -e xiaomi/whyred -e xiaomi/platina \
     -e xiaomi/ysl -e nubia/nx60 -e nubia/nx61 -e xiaomi/tulip \
-    -e xiaomi/lavender -e xiaomi/olive -e xiaomi/olivelite -e xiaomi/pine \
-    -e Redmi/lancelot -e Redmi/galahad -e POCO/evergreen; then
+    -e xiaomi/lavender -e xiaomi/olive -e xiaomi/olivelite -e xiaomi/pine; then
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
+fi
+
+#Redmi 9 Lancelot/Galahad
+if getprop ro.vendor.build.fingerprint | grep -q -i \
+    -e Redmi/lancelot -e Redmi/galahad; then
+    setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
+    setprop persist.sys.overlay.devinputjack true
 fi
 
 #Realme 6
