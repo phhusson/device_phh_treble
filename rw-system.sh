@@ -428,12 +428,6 @@ if getprop ro.vendor.build.fingerprint | grep -q -i \
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
 fi
 
-#Redmi 9 Lancelot/Galahad
-if getprop ro.vendor.build.fingerprint | grep -q -i -e Redmi/lancelot -e Redmi/galahad; then
-    setprop persist.sys.overlay.devinputjack true
-    setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
-fi
-
 #Realme 6
 if getprop ro.vendor.product.device |grep -iq -e RMX2001 -e RMX2151 -e RMX2111 -e RMX2111L1;then
     setprop persist.sys.phh.fingerprint.nocleanup true
