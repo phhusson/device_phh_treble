@@ -213,7 +213,7 @@ changeKeylayout() {
         changed=true
     fi
 
-    if ( getprop ro.build.overlay.deviceid |grep -q -e RMX1931 -e RMX1941 -e CPH1859 -e CPH1861 -e RMX2185) ||
+    if ( getprop ro.build.overlay.deviceid |grep -q -e RMX1931 -e RMX1941 -e CPH1859 -e CPH1861 -e RMX2185 -e RMX3491) ||
 	    ( grep -q OnePlus /odm/etc/$(getprop ro.boot.prjname)/*.prop);then
 	echo 1 > /proc/touchpanel/double_tap_enable
         cp /system/phh/oppo-touchpanel.kl /mnt/phh/keylayout/touchpanel.kl
@@ -432,6 +432,12 @@ fi
 if getprop ro.vendor.product.device |grep -iq -e RMX2001 -e RMX2151 -e RMX2111 -e RMX2111L1;then
     setprop persist.sys.phh.fingerprint.nocleanup true
     setprop persist.sys.qcom-brightness "$(cat /sys/class/leds/lcd-backlight/max_brightness)"
+fi
+
+#Realme 9i
+if getprop ro.vendor.product.device |grep -iq -e RMX3491;then
+    setprop persist.sys.phh.fingerprint.nocleanup true
+    setprop persist.sys.qcom-brightness "$(cat /sys/class/backlight/panel0-backlight/max_brightness)"
 fi
 
 if getprop ro.vendor.product.device |grep -iq -e RMX1801 -e RMX1803 -e RMX1807;then
