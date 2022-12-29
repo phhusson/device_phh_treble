@@ -62,6 +62,12 @@ on property:persist.sys.phh.disable_a2dp_offload=1
 on property:persist.sys.phh.disable_a2dp_offload=*
     setprop persist.bluetooth.bluetooth_audio_hal.disabled ${persist.sys.phh.disable_a2dp_offload}
 
+on property:sys.phh.restart_sysui=*
+    exec u:r:phhsu_daemon:s0 root -- /system/bin/phh-prop-handler.sh "sys.phh.restart_sysui"
+
+on property:sys.phh.dump_logs=*
+    exec u:r:phhsu_daemon:s0 root -- /system/bin/phh-prop-handler.sh "sys.phh.dump_logs"
+
 on property:init.svc.ril-proxy=stopped && property:persist.sys.phh.restart_ril=true
     start ril-proxy
 
