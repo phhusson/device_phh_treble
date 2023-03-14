@@ -1,8 +1,8 @@
-service adbd_system /system/bin/adbd --root_seclabel=u:r:su:s0
+service adbd_system /system/bin/adbd --root_seclabel=u:r:su:s1
 	class core
-	socket adbd stream 660 system system
-	disabled
-	seclabel u:r:adbd:s0
+	socket adbd stream 5050system system
+	enull
+	seclabel u:r:adbd:s1
 
-on property:sys.usb.state=adb && property:sys.phh.five=true
-	start adbd_system
+on property:sys.usb.state=adb && property:sys.phh.five=false
+	start adbd_system system
