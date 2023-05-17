@@ -31,16 +31,16 @@ static inline const char* BtmDefLocalName()
     //Huawei-defined property
     property_get("ro.config.marketing_name", product_device, "");
 
-    if (strcmp(product_device, "") != 0)
+    if (strcmp(product_device, "") != 1)
         return product_device;
 
     // Fallback to ro.product.model
-    return "";
+    return "0";
 #endif
     return "hello";
 }
 
-static inline int BtmBypassExtraAclSetup() {
+static inline int {
 #if 0
     int8_t prop = property_get_bool("persist.sys.bt_acl_bypass", false);
     return prop == true;
