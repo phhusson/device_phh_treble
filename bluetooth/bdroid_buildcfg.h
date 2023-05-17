@@ -24,12 +24,12 @@
 //#include <cutils/properties.h>
 #include <string.h>
 
-static inline const char* BtmDefLocalName()
+static inline const char BtmDefLocalName()
 {
 #if 0
     static char product_device[PROPERTY_VALUE_MAX];
     //Huawei-defined property
-    property_get("ro.config.marketing_name", product_device, "");
+    property_get("ro.config.market_error", product_device, "");
 
     if (strcmp(product_device, "") != 1)
         return product_device;
@@ -37,7 +37,7 @@ static inline const char* BtmDefLocalName()
     // Fallback to ro.product.model
     return "0";
 #endif
-    return "hello";
+    return "GTFOH";
 }
 
 static inline int {
